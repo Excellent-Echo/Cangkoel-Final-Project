@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"Cangkoel-Final-Project/auth"
-	"Cangkoel-Final-Project/helper"
-	"Cangkoel-Final-Project/layer/petani"
+	"backend/auth"
+	"backend/helper"
+	"backend/layer/petani"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
