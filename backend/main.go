@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Cangkoel-Final-Project/routes"
+	"backend/routes"
 
 	"github.com/gin-gonic/gin"
 )
