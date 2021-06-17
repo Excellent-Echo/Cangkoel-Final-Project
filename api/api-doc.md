@@ -323,7 +323,7 @@ _Response (400 - Bad Request)_
 {
     "meta" : {
       "message" : "error bad request user ID",
-      "code" : 400
+      "code" : 400,
       "status" : "error"
   }, 
   "data" : 
@@ -512,7 +512,7 @@ _Response (200)_
         "petani_id" : 3
       },
       {
-          "id" : 4
+          "id" : 4,
           "nama_lengkap" : "Michael Parto",
           "nomor_hp" : 6283213231232,
           "jenis_kelamin" : "laki-laki",
@@ -956,7 +956,7 @@ _Response (200)_
             "kebutuhan_komoditas" : "1 Ton",
             "jangka_waktu": "8 - 24 Bulan",
             "keuntungan_bersih" : "Rp 50.000.000",
-            "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+            "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
             "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
             "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
             "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1182,7 +1182,7 @@ _Request Body_
 ```json
 {
   "nama_kategori" : "<string nama kategori to get insert into>",
-  "foto_kategori": "<upload file image jpg or png kategori to get insert into>"
+  "foto_kategori" : "<upload file image jpg or png kategori to get insert into>"
 }
 ```
 
@@ -1197,7 +1197,7 @@ _Response (201)_
   "data" : 
       {
         "id" : <given id by system>,
-        "nama_kategori" : "<posted nama kategori>"
+        "nama_kategori" : "<posted nama kategori>",
         "foto_kategori" : "<posted file image jpg or png>"
       }
 }
@@ -1276,7 +1276,7 @@ _Response (200)_
             "kebutuhan_komoditas" : "1 Ton",
             "jangka_waktu": "8 - 24 Bulan",
             "keuntungan_bersih" : "Rp 50.000.000",
-            "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+            "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
             "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
             "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
             "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1285,9 +1285,9 @@ _Response (200)_
             "investor_id" : 1
         },
         {
-        	"id" : 2
+        	"id" : 2,
             "foto_profil" : "https://cangkoel.herokuapp.com/profil/foto-profil.jpg",
-            "nama_investor" : "Pandu Wilanthara
+            "nama_investor" : "Pandu Wilanthara",
             "judul_pendanaan" : "Pendanaan sayur kangkung",
             "nominal_pendanaan" : "20000000",
             "perusahaan_pengirim" : "PT. Trisula Kargo Ekspresindo",
@@ -1296,7 +1296,7 @@ _Response (200)_
             "kebutuhan_komoditas" : "2 on",
             "jangka_waktu": "8 - 24 Bulan",
             "keuntungan_bersih" : "Rp 10000.000",
-            "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+            "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
             "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
             "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
             "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1503,7 +1503,7 @@ _Response (200)_
           "kebutuhan_komoditas" : "1 Ton",
           "jangka_waktu": "8 - 24 Bulan",
           "keuntungan_bersih" : "Rp 50.000.000",
-          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
           "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
           "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
           "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1513,7 +1513,7 @@ _Response (200)_
       }, {
           "id" : 2,
           "foto_profil" : "https://cangkoel.herokuapp.com/profil/foto-profil.jpg",
-          "nama_investor" : "Pandu Wilanthara
+          "nama_investor" : "Pandu Wilanthara",
           "judul_pendanaan" : "Pendanaan sayur kangkung",
           "nominal_pendanaan" : "20000000",
           "perusahaan_pengirim" : "PT. Trisula Kargo Ekspresindo",
@@ -1522,7 +1522,7 @@ _Response (200)_
           "kebutuhan_komoditas" : "2 on",
           "jangka_waktu": "8 - 24 Bulan",
           "keuntungan_bersih" : "Rp 10000.000",
-          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
           "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
           "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
           "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1583,7 +1583,7 @@ _Response (200)_
           "kebutuhan_komoditas" : "1 Ton",
           "jangka_waktu": "8 - 24 Bulan",
           "keuntungan_bersih" : "Rp 50.000.000",
-          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
           "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
           "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
           "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1593,7 +1593,7 @@ _Response (200)_
       }, {
           "id" : 2,
           "foto_profil" : "https://cangkoel.herokuapp.com/profil/foto-profil.jpg",
-          "nama_investor" : "Pandu Wilanthara
+          "nama_investor" : "Pandu Wilanthara",
           "judul_pendanaan" : "Pendanaan sayur kangkung",
           "nominal_pendanaan" : "20000000",
           "perusahaan_pengirim" : "PT. Trisula Kargo Ekspresindo",
@@ -1602,7 +1602,7 @@ _Response (200)_
           "kebutuhan_komoditas" : "2 on",
           "jangka_waktu": "8 - 24 Bulan",
           "keuntungan_bersih" : "Rp 10000.000",
-          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+          "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
           "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
           "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
           "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1653,7 +1653,7 @@ _Request Body_
     "kebutuhan_komoditas" : "1 Ton",
     "jangka_waktu": "8 - 24 Bulan",
     "keuntungan_bersih" : "Rp 50.000.000",
-    "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+    "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
     "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
     "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
     "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -1677,10 +1677,10 @@ _Response (201)_
 		"nama_investor" : "<posted nama investor>",
  		"judul_pendanaan" : "<posted judul pendanaan>",
  		"nominal_pendanaan" : "<posted nominal pendanaan>",
- 		"perusahaan_pengirim" : <posted perusahaan pengirim>,
+ 		"perusahaan_pengirim" : "<posted perusahaan pengirim>",
  		"bagi_hasil_investor" : "<posted bagi hasil investor>",
  		"bagi_hasil_petani" : "<posted bagi hasil petani>",
- 		"kebutuhan_komoditas : "<posted kebutuhan komoditas>",
+ 		"kebutuhan_komoditas" : "<posted kebutuhan komoditas>",
  		"jangka_waktu" : "<posted jangka waktu>",
  		"keuntungan_bersih" : "<posted keuntungan bersih>",
  		"deskripsi" : "<posted deskripsi>",
@@ -1774,7 +1774,7 @@ _Response (200)_
     	"kebutuhan_komoditas" : "1 Ton",
     	"jangka_waktu": "8 - 24 Bulan",
     	"keuntungan_bersih" : "Rp 50.000.000",
-    	"deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. "
+    	"deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
     	"biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
     	"biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
     	"perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
@@ -2019,7 +2019,7 @@ _Response (200)_
           "formulir_pengajuan_id" : 3
       },
       {
-          "id" : 3
+          "id" : 3,
           "petani_id" : 4,
           "investor_id" : 1,
           "status" : "Approve",
