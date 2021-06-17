@@ -1,2 +1,2 @@
 # Cangkoel-Final-Project
-CANGKOEL adalah sebuah platform yang menyediakan solusi bagi petani/perseorangan yang mempunyai lahan/komoditas namun tidak punya biaya untuk produksi kemudian mengekspor komoditas mereka! tidak punya buyer? kami yang mencarikan!
+CANGKOEL adalah sebuah platform yang menyediakan solusi bagi petani/perseorangan yang mempunyai lahan/komoditas namun tidak punya biaya untuk produksi kemudian mengekspor komoditas mereka! tidak punya buyer? kami yang mencarikan!!
