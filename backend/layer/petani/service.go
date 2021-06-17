@@ -1,8 +1,8 @@
 package petani
 
 import (
-	"Cangkoel-Final-Project/entity"
-	"Cangkoel-Final-Project/helper"
+	"backend/entity"
+	"backend/helper"
 	"errors"
 	"fmt"
 	"time"

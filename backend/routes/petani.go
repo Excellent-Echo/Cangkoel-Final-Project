@@ -1,10 +1,10 @@
 package routes
 
 import (
-	"Cangkoel-Final-Project/auth"
-	"Cangkoel-Final-Project/config"
-	"Cangkoel-Final-Project/handler"
-	"Cangkoel-Final-Project/layer/petani"
+	"backend/auth"
+	"backend/config"
+	"backend/handler"
+	"backend/layer/petani"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
