@@ -33,14 +33,14 @@ func Middleware(petaniService petani.Service, authService auth.Service) gin.Hand
 		claim, ok := token.Claims.(jwt.MapClaims)
 
 		if !ok {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize user"})
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize userPetani"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
 		}
 
-		userID := int(claim["user_id"].(float64))
+		petaniID := int(claim["petani_id"].(float64))
 
-		c.Set("currentUser", userID)
+		c.Set("currentUser", petaniID)
 	}
 }
