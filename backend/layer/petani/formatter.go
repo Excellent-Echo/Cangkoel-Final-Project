@@ -9,6 +9,7 @@ type PetaniFormat struct {
 	ID       int    `json:"id"`
 	FullName string `json:"full_name"`
 	Email    string `json:"email"`
+	Role     string `json:"role"`
 }
 
 type PetaniDeleteFormat struct {
@@ -21,6 +22,7 @@ func Format(petani entity.Petani) PetaniFormat {
 		ID:       petani.ID,
 		FullName: petani.FullName,
 		Email:    petani.Email,
+		Role:     petani.Role,
 	}
 
 	return formatPetani
