@@ -14,6 +14,7 @@ func main() {
 
 	routes.PetaniRoute(r)
 	routes.InvestorRoute(r)
+	routes.UserRoute(r)
 
 	r.Run()
 }

@@ -16,7 +16,6 @@ type Service interface {
 	SFindInvestorByID(investorID string) (InvestorFormat, error)
 	SDeleteInvestorByID(investorID string) (interface{}, error)
 	SUpdateInvestorByID(investorID string, input entity.UpdateInvestorInput) (InvestorFormat, error)
-	SLoginInvestor(input entity.LoginInvestorInput) (entity.Investor, error)
 }
 
 type service struct {
@@ -25,26 +24,6 @@ type service struct {
 
 func NewService(repository Repository) *service {
 	return &service{repository}
-}
-
-func (s *service) SLoginInvestor(input entity.LoginInvestorInput) (entity.Investor, error) {
-	userInvestor, err := s.repository.RFindInvestorByEmail(input.Email)
-
-	if err != nil {
-		return userInvestor, err
-	}
-
-	if userInvestor.ID == 0 {
-		newError := fmt.Sprintf("userInvestor id %v not found", userInvestor.ID)
-		return userInvestor, errors.New(newError)
-	}
-
-	//ngecek password sama atau tidak
-	if err := bcrypt.CompareHashAndPassword([]byte(userInvestor.Password), []byte(input.Password)); err != nil {
-		return userInvestor, errors.New("password invalid")
-	}
-
-	return userInvestor, nil
 }
 
 func (s *service) SShowAllInvestor() ([]InvestorFormat, error) {
