@@ -10,6 +10,7 @@ import KategoriPertanian from "../../components/KategoriPertanian.jsx";
 import DataPengguna from "../../components/DataPengguna.jsx";
 import Testimoni from "../../components/Testimoni.jsx";
 import Footer from "../../components/Footer.jsx";
+import Search from "../../components/misc/Search.jsx";
 
 // assets
 import pendanaan from "../../assets/pendanaan.svg";
@@ -32,6 +33,7 @@ const Home = () => {
           </>
         }
       />
+      <Search />
       <KategoriPertanian
         heading={
           <>
