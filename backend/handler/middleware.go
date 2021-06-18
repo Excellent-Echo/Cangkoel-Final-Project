@@ -3,6 +3,7 @@ package handler
 import (
 	"backend/auth"
 	"backend/helper"
+	"backend/layer/investor"
 	"backend/layer/petani"
 
 	"github.com/dgrijalva/jwt-go"
@@ -42,6 +43,42 @@ func Middleware(petaniService petani.Service, authService auth.Service) gin.Hand
 		petaniID := int(claim["petani_id"].(float64))
 
 		c.Set("currentUser", petaniID)
+	}
+}
+
+func MiddlewareInvestor(investorService investor.Service, authService auth.Service) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		authHeader := c.GetHeader("Authorization")
+
+		if authHeader == "" || len(authHeader) == 0 {
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize userInvestor"})
+
+			c.AbortWithStatusJSON(401, errorResponse)
+			return
+		}
+
+		// eksekusi code untuk mengecek apakah token itu valid dari server kita atau tidak
+		token, err := authService.ValidateToken(authHeader)
+
+		if err != nil {
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": err.Error()})
+
+			c.AbortWithStatusJSON(401, errorResponse)
+			return
+		}
+
+		claim, ok := token.Claims.(jwt.MapClaims)
+
+		if !ok {
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize userInvestor"})
+
+			c.AbortWithStatusJSON(401, errorResponse)
+			return
+		}
+
+		investorID := int(claim["investor_id"].(float64))
+
+		c.Set("currentUser", investorID)
 	}
 }
 

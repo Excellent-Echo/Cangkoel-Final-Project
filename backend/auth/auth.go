@@ -15,6 +15,7 @@ var (
 
 type Service interface {
 	GenerateToken(PetaniID int) (string, error)
+	GenerateTokenInvestor(InvestorID int) (string, error)
 	ValidateToken(encodedToken string) (*jwt.Token, error)
 }
 

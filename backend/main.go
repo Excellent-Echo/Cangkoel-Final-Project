@@ -13,6 +13,7 @@ func main() {
 	r.Use(handler.CORSMiddleware())
 
 	routes.PetaniRoute(r)
+	routes.InvestorRoute(r)
 
 	r.Run()
 }
