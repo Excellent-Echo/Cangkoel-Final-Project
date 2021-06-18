@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"Cangkoel-Final-Project/auth"
-	"Cangkoel-Final-Project/entity"
-	"Cangkoel-Final-Project/helper"
-	"Cangkoel-Final-Project/layer/petani"
+	"backend/auth"
+	"backend/entity"
+	"backend/helper"
+	"backend/layer/petani"
 
 	"github.com/gin-gonic/gin"
 )

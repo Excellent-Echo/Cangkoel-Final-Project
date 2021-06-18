@@ -1,7 +1,7 @@
 package petani
 
 import (
-	"Cangkoel-Final-Project/entity"
+	"backend/entity"
 
 	"gorm.io/gorm"
 )
