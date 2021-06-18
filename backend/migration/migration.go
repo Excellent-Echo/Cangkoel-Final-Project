@@ -7,6 +7,7 @@ type Petani struct {
 	FullName       string
 	Email          string `gorm:"unique"`
 	Password       string
+	Role           string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
 	FormPengajuan  FormPengajuan  `gorm:"ForeignKey:PetaniID"`
@@ -18,6 +19,7 @@ type Investor struct {
 	FullName  string
 	Email     string `gorm:"unique"`
 	Password  string
+	Role      string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Pendanaan Pendanaan `gorm:"Foreignkey:InvestorID"`
