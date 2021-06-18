@@ -5,6 +5,9 @@ import tw from 'twin.macro'
 import styled from 'styled-components'
 import { css } from 'styled-components/macro' //eslint-disable-line
 
+import { useSelector, useDispatch } from 'react-redux'
+import userLoginAction from '../redux/user/login/userLoginAction'
+
 import petani from '../assets/petani-login.jpg'
 import logo from '../assets/logo.png'
 import googleIconImageSrc from '../assets/google-icon.png'
@@ -63,6 +66,16 @@ const Login = ({
 	forgotPasswordUrl = '/login',
 	signupUrl = '/choose-role'
 }) => {
+	const loginData = useSelector((state) => state.userLogin)
+	const dispatch = useDispatch()
+	const history = useHistory()
+
+	const loginHandler = (e) => {
+		e.preventDefault()
+
+		dispatch(userLoginAction.login(loginData.email, loginData.password, history))
+	}
+
 	return (
 		<div>
 			<Container>
@@ -87,9 +100,21 @@ const Login = ({
 								<DividerTextContainer>
 									<DividerText>Atau masuk lewat e-mail anda</DividerText>
 								</DividerTextContainer>
-								<Form>
-									<Input type="email" placeholder="Email" />
-									<Input type="password" placeholder="Password" />
+								<Form onSubmit={loginHandler}>
+									<Input
+										type="email"
+										placeholder="Email"
+										onChange={(e) => {
+											dispatch(userLoginAction.setEmail(e.target.value))
+										}}
+									/>
+									<Input
+										type="password"
+										placeholder="Password"
+										onChange={(e) => {
+											dispatch(userLoginAction.setPassword(e.target.value))
+										}}
+									/>
 									<SubmitButton type="submit">
 										<SubmitButtonIcon className="icon" />
 										<span className="text">{submitButtonText}</span>
