@@ -53,4 +53,5 @@ func (s *service) SLoginUser(input entity.LoginUserInput) (UserFormat, error) {
 
 	newError := fmt.Sprintf("user id %v not found", userPetani.ID)
 	return UserFormat{}, errors.New(newError)
+
 }
