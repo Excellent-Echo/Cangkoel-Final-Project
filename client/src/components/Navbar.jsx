@@ -1,10 +1,10 @@
-import React from "react";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import tw from "twin.macro";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import tw from 'twin.macro';
+import { Link } from 'react-router-dom';
 
 // assets
-import Logo from "../assets/logo.png";
+import Logo from '../assets/logo.png';
 
 // styled components with tailwind
 const Button = tw.span`rounded bg-crowde-100 hover:bg-crowde-200 py-2 px-4 text-white mx-3`;
@@ -46,15 +46,15 @@ const Navbar = () => {
               <Link to="/login">Login</Link>
             </Button>
 
-            <Button>
-              <Link to="/choose-role">Register</Link>
-            </Button>
-            <Button>Hi, Aziz</Button>
-          </nav>
-        </div>
-      </div>
-    </div>
-  );
+						<Button>
+							<Link to='/choose-role'>Register</Link>
+						</Button>
+						<Button>Hi, Aziz</Button>
+					</nav>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Navbar;

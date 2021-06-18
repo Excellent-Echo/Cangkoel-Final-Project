@@ -74,6 +74,7 @@ func (s *service) SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, 
 		FullName:  userPetani.FullName,
 		Email:     userPetani.Email,
 		Password:  string(genPassword),
+		Role:      string("petani"),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -158,6 +159,12 @@ func (s *service) SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniIn
 
 	if input.FullName != "" || len(input.FullName) != 0 {
 		dataUpdate["FullName"] = input.FullName
+	}
+	if input.Email != "" || len(input.Email) != 0 {
+		dataUpdate["Email"] = input.Email
+	}
+	if input.Password != "" || len(input.Password) != 0 {
+		dataUpdate["Passowrd"] = input.Password
 	}
 	dataUpdate["updated_at"] = time.Now()
 

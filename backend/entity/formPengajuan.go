@@ -8,7 +8,7 @@ type FormPengajuan struct {
 	NomorHP          int       `json:"nomor_hp"`
 	JenisKelamin     string    `json:"jenis_kelamin"`
 	DokumenPerizinan string    `json:"dokumen_perizinan"`
-	NomorNPWP        string    `json:"nomor_npwp"`
+	NomorNPWP        int       `json:"nomor_npwp"`
 	Ktp              string    `json:"ktp"`
 	JenisUsaha       string    `json:"jenis_usaha"`
 	TenagaKerja      string    `json:"tenaga_kerja"`
@@ -16,4 +16,5 @@ type FormPengajuan struct {
 	AlamatUsaha      string    `json:"alamat_usaha"`
 	CreatedAt        time.Time `json:"created_at"`
 	UpdatedAt        time.Time `json:"updated_at"`
+	PetaniID         int       `json:"PetaniID"`
 }
