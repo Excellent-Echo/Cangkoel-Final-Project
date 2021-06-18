@@ -71,7 +71,7 @@ func (h *petaniHandler) RegisterPetaniHandler(c *gin.Context) {
 
 // FIND PETANI BY ID
 func (h *petaniHandler) GetPetaniByIDHandler(c *gin.Context) {
-	id := c.Params.ByName("petani_id")
+	id := c.Params.ByName("id")
 
 	userPetani, err := h.petaniService.SFindPetaniByID(id)
 	if err != nil {
@@ -87,7 +87,7 @@ func (h *petaniHandler) GetPetaniByIDHandler(c *gin.Context) {
 
 // DELETE PETANI BY ID
 func (h *petaniHandler) DeletePetaniByIDHandler(c *gin.Context) {
-	id := c.Params.ByName("petani_id")
+	id := c.Params.ByName("id")
 
 	userPetani, err := h.petaniService.SDeletePetaniByID(id)
 
@@ -104,7 +104,7 @@ func (h *petaniHandler) DeletePetaniByIDHandler(c *gin.Context) {
 
 // UPDATE PETANI BY ID
 func (h *petaniHandler) UpdatePetaniByIDHandler(c *gin.Context) {
-	id := c.Params.ByName("petani_id")
+	id := c.Params.ByName("id")
 
 	var updatePetaniInput entity.UpdatePetaniInput
 
