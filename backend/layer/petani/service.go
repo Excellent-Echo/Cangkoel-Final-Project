@@ -69,12 +69,13 @@ func (s *service) SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, 
 	if err != nil {
 		return PetaniFormat{}, err
 	}
+	role := "petani"
 
 	var newPetani = entity.Petani{
 		FullName:  userPetani.FullName,
 		Email:     userPetani.Email,
 		Password:  string(genPassword),
-		Role:      string("petani"),
+		Role:      role,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
