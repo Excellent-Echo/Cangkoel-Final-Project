@@ -16,7 +16,6 @@ type Service interface {
 	SFindPetaniByID(petaniID string) (PetaniFormat, error)
 	SDeletePetaniByID(petaniID string) (interface{}, error)
 	SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniInput) (PetaniFormat, error)
-	SLoginPetani(input entity.LoginPetaniInput) (entity.Petani, error)
 }
 
 type service struct {
@@ -25,26 +24,6 @@ type service struct {
 
 func NewService(repository Repository) *service {
 	return &service{repository}
-}
-
-func (s *service) SLoginPetani(input entity.LoginPetaniInput) (entity.Petani, error) {
-	userPetani, err := s.repository.RFindPetaniByEmail(input.Email)
-
-	if err != nil {
-		return userPetani, err
-	}
-
-	if userPetani.ID == 0 {
-		newError := fmt.Sprintf("userPetani id %v not found", userPetani.ID)
-		return userPetani, errors.New(newError)
-	}
-
-	//ngecek password sama atau tidak
-	if err := bcrypt.CompareHashAndPassword([]byte(userPetani.Password), []byte(input.Password)); err != nil {
-		return userPetani, errors.New("password invalid")
-	}
-
-	return userPetani, nil
 }
 
 func (s *service) SShowAllPetani() ([]PetaniFormat, error) {

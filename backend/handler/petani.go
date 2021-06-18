@@ -139,38 +139,3 @@ func (h *petaniHandler) UpdatePetaniByIDHandler(c *gin.Context) {
 	response := helper.APIResponse("success update user Petani by ID", http.StatusOK, "success", userPetani)
 	c.JSON(http.StatusOK, response)
 }
-
-// USER PETANI LOGIN
-func (h *petaniHandler) LoginPetaniHandler(c *gin.Context) {
-	var inputLoginPetani entity.LoginPetaniInput
-
-	if err := c.ShouldBindJSON(&inputLoginPetani); err != nil {
-		//splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": err.Error()})
-
-		c.JSON(400, responseError)
-		return
-	}
-
-	petaniData, err := h.petaniService.SLoginPetani(inputLoginPetani)
-
-	if err != nil {
-		//splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 401, "bad request", gin.H{"errors": err.Error()})
-
-		c.JSON(401, responseError)
-		return
-	}
-
-	token, err := h.authService.GenerateToken(petaniData.ID)
-
-	if err != nil {
-		//splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 500, "bad request", gin.H{"errors": err.Error()})
-
-		c.JSON(500, responseError)
-		return
-	}
-	response := helper.APIResponse("success login user Petani", 200, "success", gin.H{"token": token})
-	c.JSON(200, response)
-}

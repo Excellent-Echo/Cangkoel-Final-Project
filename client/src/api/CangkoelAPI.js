@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const HospitalAPI = axios.create({
-	baseURL: 'http://localhost:8080',
-});
+const CangkoelAPI = axios.create({
+	baseURL: process.env.REACT_APP_NOT_SECRET_CODE
+})
 
-export default HospitalAPI;
+export default CangkoelAPI

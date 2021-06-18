@@ -139,38 +139,3 @@ func (h *investorHandler) UpdateInvestorByIDHandler(c *gin.Context) {
 	response := helper.APIResponse("success update user Investor by ID", http.StatusOK, "success", userInvestor)
 	c.JSON(http.StatusOK, response)
 }
-
-// USER INVESTOR LOGIN
-func (h *investorHandler) LoginInvestorHandler(c *gin.Context) {
-	var inputLoginInvestor entity.LoginInvestorInput
-
-	if err := c.ShouldBindJSON(&inputLoginInvestor); err != nil {
-		//splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": err.Error()})
-
-		c.JSON(400, responseError)
-		return
-	}
-
-	investorData, err := h.investorService.SLoginInvestor(inputLoginInvestor)
-
-	if err != nil {
-		//splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 401, "bad request", gin.H{"errors": err.Error()})
-
-		c.JSON(401, responseError)
-		return
-	}
-
-	token, err := h.authService.GenerateToken(investorData.ID)
-
-	if err != nil {
-		//splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 500, "bad request", gin.H{"errors": err.Error()})
-
-		c.JSON(500, responseError)
-		return
-	}
-	response := helper.APIResponse("success login user Investor", 200, "success", gin.H{"token": token})
-	c.JSON(200, response)
-}

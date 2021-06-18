@@ -28,6 +28,16 @@ func Format(petani entity.Petani) PetaniFormat {
 	return formatPetani
 }
 
+func FormatInvestor(petani entity.Investor) PetaniFormat {
+	var formatPetani = PetaniFormat{
+		ID:       petani.ID,
+		FullName: petani.FullName,
+		Email:    petani.Email,
+		Role:     petani.Role,
+	}
+	return formatPetani
+}
+
 func FormatDelete(msg string) PetaniDeleteFormat {
 	var deleteFormat = PetaniDeleteFormat{
 		Message:    msg,

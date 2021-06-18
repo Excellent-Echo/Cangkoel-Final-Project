@@ -14,11 +14,6 @@ type Petani struct {
 	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:PetaniID"`
 }
 
-type LoginPetaniInput struct {
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
 type PetaniInput struct {
 	FullName string `json:"full_name" binding:"required"`
 	Email    string `json:"email" binding:"required"`
