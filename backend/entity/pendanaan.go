@@ -21,4 +21,5 @@ type Pendanaan struct {
 	PerhitunganKeuntungan  string    `json:"perhitungan keuntungan"`
 	CreatedAt              time.Time `json:"created_at"`
 	UpdatedAt              time.Time `json:"updated_at"`
+	InvestorID             int       `json:"InvestorID"`
 }
