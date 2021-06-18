@@ -38,49 +38,49 @@ const KategoriPertanian = ({
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941562/sayuran_pgy0to.jpg",
         title: "Pendanaan Ekspor Tanaman Sayur",
-        url: "/details",
+        url: "/results",
       },
       {
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941563/buah_snz3r1.jpg",
         title: "Pendanaan Ekspor Tanaman Buah",
-        url: "/details",
+        url: "/results",
       },
       {
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941562/industri_kwtr3e.jpg",
         title: "Pendanaan Ekspor Tanaman Industri",
-        url: "/details",
+        url: "/results",
       },
       {
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941495/pangan_bgxoqb.jpg",
         title: "Pendanaan Ekspor Tanaman Pangan",
-        url: "/details",
+        url: "/results",
       },
       {
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941562/hias_yp2hle.jpg",
         title: "Pendanaan Ekspor Tanaman Hias",
-        url: "/details",
+        url: "/results",
       },
       {
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941563/umbi_vu2y1i.jpg",
         title: "Pendanaan Ekspor Tanaman Umbi",
-        url: "/details",
+        url: "/results",
       },
       {
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941562/sayuran_pgy0to.jpg",
         title: "Pendanaan Ekspor Tanaman Sayur",
-        url: "/details",
+        url: "/results",
       },
       {
         imageSrc:
           "https://res.cloudinary.com/cangkoel/image/upload/v1623941562/sayuran_pgy0to.jpg",
         title: "Pendanaan Ekspor Tanaman Sayur",
-        url: "/details",
+        url: "/results",
       },
     ],
   },
@@ -88,61 +88,59 @@ const KategoriPertanian = ({
   const tabsKeys = Object.keys(tabs);
 
   return (
-    <div>
-      <ContentWithPaddingXl>
-        {tabsKeys.map((tabKey, index) => (
-          <TabContent
-            key={index}
-            variants={{
-              current: {
-                opacity: 1,
-                scale: 1,
-                display: "flex",
-              },
-              hidden: {
-                opacity: 0,
-                scale: 0.8,
-                display: "none",
-              },
-            }}
-            transition={{ duration: 0.4 }}
-          >
-            {tabs[tabKey].map((card, index) => (
-              <CardContainer key={index}>
-                <Card
-                  className="group"
-                  href={card.url}
-                  initial="rest"
-                  whileHover="hover"
-                  animate="rest"
-                >
-                  <CardImageContainer imageSrc={card.imageSrc}>
-                    <CardHoverOverlay
-                      variants={{
-                        hover: {
-                          opacity: 1,
-                          height: "auto",
-                        },
-                        rest: {
-                          opacity: 0,
-                          height: 0,
-                        },
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <CardButton>Cari Pendanaan</CardButton>
-                    </CardHoverOverlay>
-                  </CardImageContainer>
-                  <CardText>
-                    <CardTitle>{card.title}</CardTitle>
-                  </CardText>
-                </Card>
-              </CardContainer>
-            ))}
-          </TabContent>
-        ))}
-      </ContentWithPaddingXl>
-    </div>
+    <ContentWithPaddingXl>
+      {tabsKeys.map((tabKey, index) => (
+        <TabContent
+          key={index}
+          variants={{
+            current: {
+              opacity: 1,
+              scale: 1,
+              display: "flex",
+            },
+            hidden: {
+              opacity: 0,
+              scale: 0.8,
+              display: "none",
+            },
+          }}
+          transition={{ duration: 0.4 }}
+        >
+          {tabs[tabKey].map((card, index) => (
+            <CardContainer key={index}>
+              <Card
+                className="group"
+                href={card.url}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+              >
+                <CardImageContainer imageSrc={card.imageSrc}>
+                  <CardHoverOverlay
+                    variants={{
+                      hover: {
+                        opacity: 1,
+                        height: "auto",
+                      },
+                      rest: {
+                        opacity: 0,
+                        height: 0,
+                      },
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <CardButton>Cari Pendanaan</CardButton>
+                  </CardHoverOverlay>
+                </CardImageContainer>
+                <CardText>
+                  <CardTitle>{card.title}</CardTitle>
+                </CardText>
+              </Card>
+            </CardContainer>
+          ))}
+        </TabContent>
+      ))}
+    </ContentWithPaddingXl>
   );
 };
 

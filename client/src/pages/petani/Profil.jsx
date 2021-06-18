@@ -6,27 +6,24 @@ const Profil = () => {
   return (
     <>
       <Navbar />
-      <body class="antialiased bg-gray-200">
-        <div class="h-screen flex overflow-hidden">
-          <div class="bg-white w-64 min-h-screen overflow-y-auto hidden md:block shadow relative z-30">
-            <div class="px-4 py-2">
+      <div className="antialiased bg-gray-200">
+        <div className="h-screen flex overflow-hidden">
+          <div className="bg-white w-64 min-h-screen overflow-y-auto hidden md:block shadow relative z-30">
+            <div className="px-4 py-2">
               <ul>
                 <li>
                   <a
                     href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
+                    className="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
+                      className="mr-4 opacity-50"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
-                      stroke-width="2"
                       stroke="currentColor"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
                     >
                       <rect
                         x="0"
@@ -47,19 +44,16 @@ const Profil = () => {
                 <li>
                   <a
                     href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
+                    className="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
+                      className="mr-4 opacity-50"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
-                      stroke-width="2"
                       stroke="currentColor"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
                     >
                       <rect
                         x="0"
@@ -78,19 +72,16 @@ const Profil = () => {
                 <li>
                   <a
                     href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
+                    className="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
+                      className="mr-4 opacity-50"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
-                      stroke-width="2"
                       stroke="currentColor"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
                     >
                       <rect
                         x="0"
@@ -112,19 +103,16 @@ const Profil = () => {
                 <li>
                   <a
                     href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
+                    className="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
+                      className="mr-4 opacity-50"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
-                      stroke-width="2"
                       stroke="currentColor"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
                     >
                       <rect
                         x="0"
@@ -143,20 +131,20 @@ const Profil = () => {
             </div>
           </div>
 
-          <div class="flex-1 flex-col relative z-0 overflow-y-auto">
-            <div class="md:max-w-6xl md:mx-auto px-4 py-8">
-              <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-bold text-gray-800">Dashboard</h2>
+          <div className="flex-1 flex-col relative z-0 overflow-y-auto">
+            <div className="md:max-w-6xl md:mx-auto px-4 py-8">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-gray-800">Dashboard</h2>
               </div>
 
-              <div class="bg-orange-200 mb-10 p-6 rounded-lg shadow">
-                <div class="md:flex">
-                  <div class="md:w-1/2">
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 leading-tight">
+              <div className="bg-orange-200 mb-10 p-6 rounded-lg shadow">
+                <div className="md:flex">
+                  <div className="md:w-1/2">
+                    <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 leading-tight">
                       Power your business with Dashing Admin.
                     </h2>
 
-                    <p class="text-gray-700 mb-4">
+                    <p className="text-gray-700 mb-4">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Autem, ipsam vero. Ut mollitia, cumque amet suscipit quas
                       error minima maiores aperiam.
@@ -167,7 +155,7 @@ const Profil = () => {
             </div>
           </div>
         </div>
-      </body>
+      </div>
       <Footer />
     </>
   );
