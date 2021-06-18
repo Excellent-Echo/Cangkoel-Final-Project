@@ -32,33 +32,32 @@ type KategoriPertanian struct {
 
 type FormPengajuan struct {
 	ID               int `gorm:"PrimaryKey"`
-	PetaniID         int
 	NamaLengkap      string
 	NomorHP          int
 	JenisKelamin     string
 	DokumenPerizinan string
-	NomorNPWP        string
+	NomorNPWP        int
 	Ktp              string
 	JenisUsaha       string
 	TenagaKerja      string
-	OmzetPerbulan    string
+	OmzetPerbulan    int
 	AlamatUsaha      string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
+	PetaniID         int
 }
 
 type HasilPengajuan struct {
 	ID         int `gorm:"PrimaryKey"`
-	PetaniID   int
 	Status     string
 	Keterangan string
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
+	PetaniID   int
 }
 
 type Pendanaan struct {
 	ID                     int `gorm:"PrimaryKey"`
-	InvestorID             int
 	FotoProfil             string
 	NamaInvestor           string
 	JudulPendanaan         string
@@ -77,4 +76,5 @@ type Pendanaan struct {
 	CreatedAt              time.Time
 	UpdatedAt              time.Time
 	KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
+	InvestorID             int
 }
