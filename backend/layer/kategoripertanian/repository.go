@@ -12,7 +12,6 @@ type Repository interface {
 	FindByID(ID string) (entity.KategoriPertanian, error)
 	DeleteByID(ID string) (string, error)
 	UpdateByID(ID string, dataUpdate map[string]interface{}) (entity.KategoriPertanian, error)
-	FindByEmail(email string) (entity.KategoriPertanian, error)
 }
 
 type repository struct {
@@ -71,16 +70,5 @@ func (r *repository) UpdateByID(ID string, dataUpdate map[string]interface{}) (e
 	if err := r.db.Where("id = ?", ID).Find(&k_petani).Error; err != nil {
 		return k_petani, err
 	}
-	return k_petani, nil
-}
-
-func (r *repository) FindByEmail(email string) (entity.KategoriPertanian, error) {
-	var k_petani entity.KategoriPertanian
-
-	err := r.db.Where("email = ?", email).Find(&k_petani).Error
-	if err != nil {
-		return k_petani, err
-	}
-
 	return k_petani, nil
 }
