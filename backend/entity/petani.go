@@ -10,8 +10,8 @@ type Petani struct {
 	Role           string         `json:"role"`
 	CreatedAt      time.Time      `json:"created_at"`
 	UpdatedAt      time.Time      `json:"updated_at"`
-	FormPengajuan  FormPengajuan  `gorm:"ForeignKey:PetaniID"`
-	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:PetaniID"`
+	FormPengajuan  FormPengajuan  `gorm:"ForeignKey:petani_id"`
+	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:petani_id"`
 }
 
 type PetaniInput struct {

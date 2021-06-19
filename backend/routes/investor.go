@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	investorService    = investor.NewService(InvestorRepository)
-	InvestorRepository = investor.NewRepository(DB)
+	investorService    = investor.NewService(investorRepository)
+	investorRepository = investor.NewRepository(DB)
 	investorHandler    = handler.NewInvestorHandler(investorService, authService)
 )
 

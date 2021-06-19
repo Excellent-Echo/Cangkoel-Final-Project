@@ -18,7 +18,6 @@ func NewUserHandler(userService user.Service, authService auth.Service) *userHan
 	return &userHandler{userService, authService}
 }
 
-// USER PETANI LOGIN
 func (h *userHandler) LoginUserHandler(c *gin.Context) {
 	var inputLoginUser entity.LoginUserInput
 
