@@ -10,7 +10,7 @@ type Investor struct {
 	Role      string      `json:"role"`
 	CreatedAt time.Time   `json:"created_at"`
 	UpdatedAt time.Time   `json:"updated_at"`
-	Pendanaan []Pendanaan `gorm:"Foreignkey:InvestorID"`
+	Pendanaan []Pendanaan `gorm:"Foreignkey:investor_id"`
 }
 
 type InvestorInput struct {
