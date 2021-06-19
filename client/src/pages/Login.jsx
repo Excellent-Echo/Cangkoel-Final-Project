@@ -46,7 +46,7 @@ const SubmitButton = styled.button`
 `
 const IllustrationContainer = tw.div`sm:rounded-r-lg flex-1 bg-purple-100 text-center hidden lg:flex justify-center`
 
-const Image = tw.img`h-full w-full rounded shadow-md object-cover bg-gradient-to-l filter blur-xs`
+const Image = tw.img`h-full w-full rounded shadow-md object-cover bg-gradient-to-l `
 
 const Login = ({
 	logoLinkUrl = '/',
