@@ -3,14 +3,15 @@ package entity
 import "time"
 
 type Investor struct {
-	ID        int         `gorm:"primaryKey" json:"id"`
-	FullName  string      `json:"full_name"`
-	Email     string      `json:"email"`
-	Password  string      `json:"-"`
-	Role      string      `json:"role"`
-	CreatedAt time.Time   `json:"created_at"`
-	UpdatedAt time.Time   `json:"updated_at"`
-	Pendanaan []Pendanaan `gorm:"Foreignkey:investor_id"`
+	ID             int            `gorm:"primaryKey" json:"id"`
+	FullName       string         `json:"full_name"`
+	Email          string         `json:"email"`
+	Password       string         `json:"-"`
+	Role           string         `json:"role"`
+	CreatedAt      time.Time      `json:"created_at"`
+	UpdatedAt      time.Time      `json:"updated_at"`
+	Pendanaan      Pendanaan      `gorm:"Foreignkey:InvestorID"`
+	HasilPengajuan HasilPengajuan `gorm:"Foreignkey:InvestorID"`
 }
 
 type InvestorInput struct {
