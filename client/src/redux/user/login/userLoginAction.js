@@ -1,6 +1,7 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
+import { Redirect } from 'react-router-dom'
 
-import { USER_SET_EMAIL, USER_SET_PASSWORD } from '../userActionTypes'
+import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
 
 const setEmail = (email) => {
 	return {
@@ -18,6 +19,13 @@ const setPassword = (password) => ({
 	}
 })
 
+const setAuth = (isAuth) => ({
+	type: USER_SET_AUTH,
+	payload: {
+		isAuth: isAuth
+	}
+})
+
 const login = (email, password, history) => async (dispatch) => {
 	try {
 		const loginData = {
@@ -25,28 +33,32 @@ const login = (email, password, history) => async (dispatch) => {
 			password: password
 		}
 
-		const postLoginData = await CangkoelAPI({
+		const postData = await CangkoelAPI({
 			method: 'POST',
 			url: '/users/login',
 			data: loginData
 		})
 
-		if (postLoginData.data.data.role === 'petani') {
-			history.push('/profil-petani')
-		} else {
-			history.push('/profil-investor')
-		}
+		const role = postData.data.data.role
+		const token = postData.data.data.token
 
-		console.log(postLoginData.data.data)
+		role === '' ? console.log('error') : localStorage.setItem('role', role)
+		token === '' ? console.log('error') : localStorage.setItem('token', token)
+		localStorage.setItem('isAuth', true)
 	} catch (error) {
-		console.log(error.response.data)
+		console.log(error)
 	}
+}
+
+const logout = () => {
+	localStorage.setItem('isAuth', false)
 }
 
 const userLoginAction = {
 	setEmail,
 	setPassword,
-	login
+	login,
+	logout
 }
 
 export default userLoginAction

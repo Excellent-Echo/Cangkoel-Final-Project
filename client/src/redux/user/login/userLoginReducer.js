@@ -1,8 +1,9 @@
-import { USER_SET_PASSWORD, USER_SET_EMAIL } from '../userActionTypes'
+import { USER_SET_PASSWORD, USER_SET_EMAIL, USER_SET_AUTH } from '../userActionTypes'
 
 const initialState = {
 	email: '',
-	password: ''
+	password: '',
+	isAuth: false
 }
 
 const userLoginReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const userLoginReducer = (state = initialState, action) => {
 			return {
 				...state,
 				password: action.payload.password
+			}
+		case USER_SET_AUTH:
+			return {
+				...state,
+				isAuth: action.payload.isAuth
 			}
 		default:
 			return state
