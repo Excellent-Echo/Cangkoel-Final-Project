@@ -57,6 +57,7 @@ func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, 
 		TenagaKerja:      formPengajuan.TenagaKerja,
 		OmzetPerbulan:    formPengajuan.OmzetPerbulan,
 		AlamatUsaha:      formPengajuan.AlamatUsaha,
+		PetaniID:         IDPetani,
 		CreatedAt:        time.Now(),
 		UpdatedAt:        time.Now(),
 	}
