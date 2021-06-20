@@ -9,8 +9,10 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "feather-icons": "^4.28.0",
+    "filestack-react": "^4.0.0",
     "framer-motion": "^4.1.17",
     "react": "^17.0.2",
+    "react-datepicker": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
     "react-redux": "^7.2.4",
@@ -19,6 +21,7 @@
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.0",
+    "sweetalert2": "^11.0.18",
     "twin.macro": "^2.5.0",
     "use-in-view": "^1.0.15",
     "web-vitals": "^1.0.1"
