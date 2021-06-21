@@ -15,21 +15,23 @@ type Petani struct {
 }
 
 type Investor struct {
-	ID        int `gorm:"PrimaryKey"`
-	FullName  string
-	Email     string `gorm:"unique"`
-	Password  string
-	Role      string
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	Pendanaan Pendanaan `gorm:"Foreignkey:InvestorID"`
+	ID             int `gorm:"PrimaryKey"`
+	FullName       string
+	Email          string `gorm:"unique"`
+	Password       string
+	Role           string
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
+	Pendanaan      Pendanaan      `gorm:"Foreignkey:InvestorID"`
+	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:InvestorID"`
 }
 
 type KategoriPertanian struct {
 	ID           int `gorm:"PrimaryKey"`
-	PendanaanID  int
 	NamaKategori string
 	FotoKategori string
+	Pendanaan    []Pendanaan `gorm:"ForeignKey:KategoriID"`
+	PendanaanID  int
 }
 
 type FormPengajuan struct {
@@ -46,16 +48,20 @@ type FormPengajuan struct {
 	AlamatUsaha      string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
+	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:PengajuanID"`
 	PetaniID         int
+	PendanaanID      int
 }
 
 type HasilPengajuan struct {
-	ID         int `gorm:"PrimaryKey"`
-	Status     string
-	Keterangan string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
-	PetaniID   int
+	ID          int `gorm:"PrimaryKey"`
+	Status      string
+	Keterangan  string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	PetaniID    int
+	InvestorID  int
+	PengajuanID int
 }
 
 type Pendanaan struct {
@@ -78,5 +84,7 @@ type Pendanaan struct {
 	CreatedAt              time.Time
 	UpdatedAt              time.Time
 	KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
+	FormPengajuan          []FormPengajuan   `gorm:"ForeignKey:PendanaanID"`
 	InvestorID             int
+	KategoriID             int
 }
