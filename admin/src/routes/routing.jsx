@@ -7,7 +7,6 @@ import Investor from "../views/menus/investor.jsx";
 import Bank from "../views/menus/bank.jsx";
 import TransaksiPending from "../views/menus/transaksiPending.jsx";
 import TransaksiSukses from "../views/menus/transaksiSukses.jsx";
-import PaginationComponent from "../views/menus/pagination.jsx";
 
 var ThemeRoutes = [
   {
@@ -63,12 +62,6 @@ var ThemeRoutes = [
     name: "Transaksi Sukses",
     icon: "mdi mdi-apps",
     component: TransaksiSukses,
-  },
-  {
-    path: "/komponen",
-    name: "Komponen",
-    icon: "mdi mdi-priority-high",
-    component: PaginationComponent,
   },
 
   {
