@@ -43,6 +43,10 @@ const login = (email, password, history) => async (dispatch) => {
 		const role = postData.data.data.role
 		const token = postData.data.data.token
 
+		console.log(role, token)
+
+		console.log(history)
+
 		if (postData.data.meta.code === 200) {
 			Swal.fire({
 				title: 'Success!',
@@ -51,16 +55,18 @@ const login = (email, password, history) => async (dispatch) => {
 				timer: 2000
 			})
 
-			if (role === 'petani') {
-				history.push('/profil-petani')
-			} else {
-				history.push('/profil-investor')
-			}
+			// if (role === 'petani') {
+			// history.push('/profil-petani')
+			// } else {
+			// 	history.push('/profil-investor')
+			// }
 
 			localStorage.setItem('token', token)
 			localStorage.setItem('role', role)
 			localStorage.setItem('isAuth', true)
 		}
+
+		history.push('/form-pendanaan')
 	} catch (error) {
 		let code = error.response.data.meta.code
 
