@@ -9,10 +9,10 @@ import (
 
 type Service interface {
 	SFindAllKpetani() ([]entity.KategoriPertanian, error)
-	SCreateKpetani(kpetani entity.KategoriPertanian) (KPetaniFormat, error)
+	SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error)
 	SFindByIDKpetani(ID string) (entity.KategoriPertanian, error)
-	SDeleteByIDKpetani(ID string) (string, error)
-	SUpdateByIDKpetani(ID string, dataUpdate map[string]interface{}) (entity.KategoriPertanian, error)
+	SDeleteByIDKpetani(ID string) (interface{}, error)
+	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error)
 }
 
 type service struct {
@@ -70,32 +70,52 @@ func (s *service) SFindByIDKpetani(ID string) (KPetaniFormat, error) {
 	return KPetaniFormat, nil
 }
 
-func (s *service) SDeleteByIDKpetani(ID string) (string, error) {
-	if err := helper.ValidateIDNumber(ID); err != nil {
-		return nil, err
+func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
+	msg, err := s.repository.DeleteByID(ID)
+
+	if err != nil || msg == "error" {
+		return msg, err
 	}
 
-	KPetani, err := s.repository.FindByID(ID)
+	message := fmt.Sprintf("book id %s success deleted", ID)
+
+	return message, nil
+
+}
+
+func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error) (KPetaniFormat, error){
+	var dataUpdate = map[string]interface{}{}
+
+	if err := helper.ValidateIDNumber(KategoriID); err != nil {
+		return KPetaniFormat{}, err
+	}
+
+	Kpetani, err := s.repository.SFindByIDKpetani(KategoriID)
 
 	if err != nil {
-		return nil, err
+		return KPetaniFormat{}, err
 	}
 
-	if KPetani.ID == 0 {
-		newError := fmt.Sprintf("Kategori Pertanian id %s not found", ID)
-		return nil, errors.New(newError)
+	if Kpetani.ID == 0 {
+		newError := fmt.Sprintf("id Kategori Pertanian %s not found", KategoriID)
+		return KPetaniFormat{}, errors.New(newError)
 	}
 
-	status, err := s.repository.DeleteByID(ID)
+	if input.NamaKategori != "" || len(input.NamaKategori) != 0 {
+		dataUpdate["NamaKategori"] = input.NamaKategori
+	}
+
+	if input.FotoKategori != "" || len(input.FotoKategori) != 0 {
+		dataUpdate["FotoKategori"] = input.FotoKategori
+	}
+
+	KategoriUpdate, err := s.repository.UpdateByID(KategoriID, dataUpdate)
 
 	if err != nil {
-		return nil, err
+		return KPetaniFormat{}, err
 	}
 
-	if status == "error" {
-		return nil, errors.New("error delete in internal server")
-	}
-	var formatDelete = FormatDelete(msg)
+	formatKPetani := Format(KategoriUpdate)
 
-	return formatDelete, nil
+	return formatKPetani, nil
 }
