@@ -30,6 +30,16 @@ File: scss
 @import url(all/icons/themify-icons/themify-icons.css);
 @import url(all/icons/material-design-iconic-font/css/materialdesignicons.min.css);
 
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+}
+
+.grid-container > div {
+  text-align: center;
+}
+
 .topbar {
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.05);

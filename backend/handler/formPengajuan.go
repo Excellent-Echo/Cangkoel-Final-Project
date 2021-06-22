@@ -38,12 +38,20 @@ func (h *formPengajuanHandler) ShowAllFormPengajuanHandler(c *gin.Context) {
 func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 	petaniData := int(c.MustGet("currentUser").(int))
 
+	// file, err := c.FormFile("Document")
+	// file2, err := c.FormFile("Ktp")
+
 	if petaniData == 0 {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Petani not authorize / not login"})
 
 		c.JSON(401, responseError)
 		return
 	}
+	// path := fmt.Sprintf("images/document-%d-%s", petaniData, file.Filename)
+	// path2 := fmt.Sprintf("images/ktp-%d-%s", petaniData, file2.Filename)
+
+	// err = c.SaveUploadedFile(file, path)
+	// err = c.SaveUploadedFile(file2, path2)
 
 	petaniID := strconv.Itoa(petaniData)
 
@@ -57,6 +65,9 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 		c.JSON(400, responseError)
 		return
 	}
+
+	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
+	// pathPengajuanSave2 := "https://cangkoel.herokuapp.com/" + path2
 
 	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniID)
 	if err != nil {
