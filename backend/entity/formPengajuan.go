@@ -22,14 +22,12 @@ type FormPengajuan struct {
 }
 
 type FormPengajuanInput struct {
-	NamaLengkap      string `json:"nama_lengkap" binding:"required"`
-	NomorHP          int    `json:"nomor_hp" binding:"required"`
-	JenisKelamin     string `json:"jenis_kelamin" binding:"required"`
-	DokumenPerizinan string `json:"dokumen_perizinan" binding:"required"`
-	NomorNPWP        int    `json:"nomor_npwp" binding:"required"`
-	Ktp              string `json:"ktp" binding:"required"`
-	JenisUsaha       string `json:"jenis_usaha" binding:"required"`
-	TenagaKerja      string `json:"tenaga_kerja" binding:"required"`
-	OmzetPerbulan    int    `json:"omzet_perbulan" binding:"required"`
-	AlamatUsaha      string `json:"alamat_usaha" binding:"required"`
+	NamaLengkap   string `json:"nama_lengkap" binding:"required"`
+	NomorHP       int    `json:"nomor_hp" binding:"required"`
+	JenisKelamin  string `json:"jenis_kelamin" binding:"required"`
+	NomorNPWP     int    `json:"nomor_npwp" binding:"required"`
+	JenisUsaha    string `json:"jenis_usaha" binding:"required"`
+	TenagaKerja   string `json:"tenaga_kerja" binding:"required"`
+	OmzetPerbulan int    `json:"omzet_perbulan" binding:"required"`
+	AlamatUsaha   string `json:"alamat_usaha" binding:"required"`
 }
