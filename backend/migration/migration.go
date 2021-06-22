@@ -10,7 +10,7 @@ type Petani struct {
 	Role           string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
-	FormPengajuan  FormPengajuan  `gorm:"ForeignKey:PetaniID"`
+	FormPengajuan  FormPengajuan
 	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:PetaniID"`
 }
 
@@ -30,7 +30,7 @@ type KategoriPertanian struct {
 	ID           int `gorm:"PrimaryKey"`
 	NamaKategori string
 	FotoKategori string
-	Pendanaan    []Pendanaan `gorm:"ForeignKey:KategoriID"`
+	Pendanaan    []Pendanaan
 	PendanaanID  int
 }
 
@@ -43,13 +43,13 @@ type FormPengajuan struct {
 	NomorNPWP        int
 	Ktp              string
 	JenisUsaha       string
-	TenagaKerja      string
+	TenagaKerja      int
 	OmzetPerbulan    int
 	AlamatUsaha      string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:PengajuanID"`
-	PetaniID         int
+	PetaniID         uint
 	PendanaanID      int
 }
 
@@ -85,6 +85,6 @@ type Pendanaan struct {
 	UpdatedAt              time.Time
 	KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
 	FormPengajuan          []FormPengajuan   `gorm:"ForeignKey:PendanaanID"`
-	InvestorID             int
-	KategoriID             int
+	InvestorID             uint
+	KategoriID             uint
 }
