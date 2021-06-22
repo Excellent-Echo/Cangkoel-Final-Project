@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Container as ContainerBase } from '../components/misc/Layouts.jsx'
 import tw from 'twin.macro'
 import styled from 'styled-components'

@@ -1,3 +1,4 @@
+import React, { useContext, createContext, useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import PrivateRoute from './PrivateRoute'
@@ -20,32 +21,43 @@ import Details from '../pages/petani/Detail'
 import FormPengajuan from '../pages/petani/FormPengajuan'
 import ProfilPetani from '../pages/petani/Profil'
 
+const authContext = createContext()
+
+// function ProvideAuth({ children }) {
+// 	const auth = useProvideAuth()
+// 	return <authContext.Provider value={auth}>{children}</authContext.Provider>
+// }
+
+function useAuth() {
+	return useContext(authContext)
+}
+
 const Routes = () => {
 	let getIsAuth = localStorage.getItem('isAuth')
 	let isAuth = JSON.parse(getIsAuth)
 	return (
-		<>
-			<Router>
-				<Switch>
-					{/* route each role */}
-					<Route path="/choose-role" exact component={ChooseRole} />
-					<Route path="/login" exact component={Login} />
+		// <ProvideAuth>
+		<Router>
+			<Switch>
+				{/* route each role */}
+				<Route path="/choose-role" exact component={ChooseRole} />
+				<Route path="/login" exact component={Login} />
 
-					{/* route role investor */}
-					<Route path="/register-investor" exact component={RegisterInvestor} />
-					<Route path="/form-pendanaan" exact component={FormPendanaaan} />
-					<PrivateRoute path="/profil-investor" exact component={ProfilInvestor} auth={isAuth} />
+				{/* route role investor */}
+				<Route path="/register-investor" exact component={RegisterInvestor} />
+				<Route path="/form-pendanaan" exact component={FormPendanaaan} />
+				<PrivateRoute path="/profil-investor" exact component={ProfilInvestor} auth={isAuth} />
 
-					{/* route role petani */}
-					<Route path="/register-petani" exact component={RegisterPetani} />
-					<Route path="/results" exact component={Results} />
-					<Route path="/details" exact component={Details} />
-					<Route path="/form-pengajuan" exact component={FormPengajuan} />
-					<PrivateRoute path="/profil-petani" exact component={ProfilPetani} auth={isAuth} />
-					<Route path="/" exact component={Home} />
-				</Switch>
-			</Router>
-		</>
+				{/* route role petani */}
+				<Route path="/register-petani" exact component={RegisterPetani} />
+				<Route path="/results" exact component={Results} />
+				<Route path="/details" exact component={Details} />
+				<Route path="/form-pengajuan" exact component={FormPengajuan} />
+				<PrivateRoute path="/profil-petani" exact component={ProfilPetani} auth={isAuth} />
+				<Route path="/" exact component={Home} />
+			</Switch>
+		</Router>
+		// </ProvideAuth>
 	)
 }
 

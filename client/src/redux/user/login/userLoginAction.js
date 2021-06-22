@@ -1,5 +1,6 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
-import { Redirect } from 'react-router-dom'
+import { history } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
 
@@ -42,23 +43,43 @@ const login = (email, password, history) => async (dispatch) => {
 		const role = postData.data.data.role
 		const token = postData.data.data.token
 
-		role === '' ? console.log('error') : localStorage.setItem('role', role)
-		token === '' ? console.log('error') : localStorage.setItem('token', token)
-		localStorage.setItem('isAuth', true)
-	} catch (error) {
-		console.log(error)
-	}
-}
+		if (postData.data.meta.code === 200) {
+			Swal.fire({
+				title: 'Success!',
+				text: "You've Logged In Successfully",
+				icon: 'success',
+				timer: 2000
+			})
 
-const logout = () => {
-	localStorage.setItem('isAuth', false)
+			if (role === 'petani') {
+				history.push('/profil-petani')
+			} else {
+				history.push('/profil-investor')
+			}
+
+			localStorage.setItem('token', token)
+			localStorage.setItem('role', role)
+			localStorage.setItem('isAuth', true)
+		}
+	} catch (error) {
+		let code = error.response.data.meta.code
+
+		console.log(error.response)
+
+		if (code === 401) {
+			Swal.fire({
+				title: 'Email/Password Invalid',
+				icon: 'warning',
+				timer: 2000
+			})
+		}
+	}
 }
 
 const userLoginAction = {
 	setEmail,
 	setPassword,
-	login,
-	logout
+	login
 }
 
 export default userLoginAction
