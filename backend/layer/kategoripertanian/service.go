@@ -83,7 +83,7 @@ func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
 
 }
 
-func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error) (KPetaniFormat, error){
+func (s *service) 	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error){
 	var dataUpdate = map[string]interface{}{}
 
 	if err := helper.ValidateIDNumber(KategoriID); err != nil {
