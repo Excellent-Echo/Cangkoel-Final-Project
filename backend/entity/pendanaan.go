@@ -41,5 +41,5 @@ type PendanaanInput struct {
 	BiayaEkspor            string `json:"biaya_ekspor" binding:"required"`
 	PerhitunganPenghasilan string `json:"perhitungan_penghasilan" binding:"required"`
 	PerhitunganKeuntungan  string `json:"perhitungan_keuntungan" binding:"required"`
-	KategoriID             int    `json:"kategori_id"`
+	KategoriID             int    `json:"kategori_id" binding:"required"`
 }

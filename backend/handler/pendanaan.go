@@ -50,7 +50,6 @@ func (h *pendanaanHandler) CreatePendanaanHandler(c *gin.Context) {
 	// path := fmt.Sprintf("images/profile-%d-%s", investorData, file.Filename)
 
 	// err = c.SaveUploadedFile(file, path)
-	kategoriID := c.Params.ByName("kategori_id")
 
 	var inputpendanaan entity.PendanaanInput
 
@@ -67,7 +66,7 @@ func (h *pendanaanHandler) CreatePendanaanHandler(c *gin.Context) {
 
 	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
 
-	newPendanaan, err := h.pendanaanService.SCreatePendanaan(inputpendanaan, kategoriID)
+	newPendanaan, err := h.pendanaanService.SCreatePendanaan(inputpendanaan)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 

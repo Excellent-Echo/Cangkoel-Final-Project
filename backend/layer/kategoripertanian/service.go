@@ -9,10 +9,10 @@ import (
 
 type Service interface {
 	SFindAllKpetani() ([]entity.KategoriPertanian, error)
-	SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error)
+	SCreateKpetani(kpetani entity.KategoriPertanianInput) (entity.KategoriPertanian, error)
 	SFindByIDKpetani(ID string) (entity.KategoriPertanian, error)
 	SDeleteByIDKpetani(ID string) (interface{}, error)
-	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error)
+	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error)
 }
 
 type service struct {
@@ -33,7 +33,7 @@ func (s *service) SFindAllKpetani() ([]entity.KategoriPertanian, error) {
 	return sKPetani, nil
 }
 
-func (s *service) SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error) {
+func (s *service) SCreateKpetani(kpetani entity.KategoriPertanianInput) (entity.KategoriPertanian, error) {
 
 	var newKPetani = entity.KategoriPertanian{
 		NamaKategori: kpetani.NamaKategori,
@@ -41,13 +41,12 @@ func (s *service) SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetani
 	}
 
 	createKPetani, err := s.repository.Create(newKPetani)
-	KPetaniFormat := Format(createKPetani)
 
 	if err != nil {
-		return KPetaniFormat, err
+		return createKPetani, err
 	}
 
-	return KPetaniFormat, nil
+	return createKPetani, nil
 
 }
 
@@ -99,22 +98,22 @@ func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
 	return formatDelete, nil
 }
 
-func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error) {
+func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error) {
 	var dataUpdate = map[string]interface{}{}
 
 	if err := helper.ValidateIDNumber(KategoriID); err != nil {
-		return KPetaniFormat{}, err
+		return entity.KategoriPertanian{}, err
 	}
 
 	Kpetani, err := s.repository.FindByID(KategoriID)
 
 	if err != nil {
-		return KPetaniFormat{}, err
+		return entity.KategoriPertanian{}, err
 	}
 
 	if Kpetani.ID == 0 {
 		newError := fmt.Sprintf("id Kategori Pertanian %s not found", KategoriID)
-		return KPetaniFormat{}, errors.New(newError)
+		return entity.KategoriPertanian{}, errors.New(newError)
 	}
 
 	if input.NamaKategori != "" || len(input.NamaKategori) != 0 {
@@ -128,10 +127,8 @@ func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKateg
 	KategoriUpdate, err := s.repository.UpdateByID(KategoriID, dataUpdate)
 
 	if err != nil {
-		return KPetaniFormat{}, err
+		return entity.KategoriPertanian{}, err
 	}
 
-	formatKPetani := Format(KategoriUpdate)
-
-	return formatKPetani, nil
+	return KategoriUpdate, nil
 }

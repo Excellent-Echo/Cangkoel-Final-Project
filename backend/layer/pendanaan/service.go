@@ -12,7 +12,7 @@ import (
 
 type Service interface {
 	SShowAllPendanaan() ([]entity.Pendanaan, error)
-	SCreatePendanaan(pendanaan entity.PendanaanInput, kategoriID string) (entity.Pendanaan, error)
+	SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error)
 	SFindPendanaanByKategoriID(kategoriID string) (entity.Pendanaan, error)
 }
 
@@ -35,7 +35,7 @@ func (s *service) SShowAllPendanaan() ([]entity.Pendanaan, error) {
 	return pendanaan, nil
 }
 
-func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput, kategoriID string) (entity.Pendanaan, error) {
+func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error) {
 	//IDInvestor, _ := strconv.Atoi(investorID)
 
 	//checkStatus, err := s.repository.RFindPendanaanByID(investorID)
@@ -48,7 +48,6 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput, kategoriID s
 	//	errorStatus := fmt.Sprintf("Form Pendanaan for Investor id : %s has been created", investorID)
 	//	return checkStatus, errors.New(errorStatus)
 	//}
-	checkKategori, err := s.repository2.FindByID(kategoriID)
 
 	var newPendanaan = entity.Pendanaan{
 		FotoProfil:             pendanaan.FotoProfil,
@@ -66,7 +65,7 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput, kategoriID s
 		BiayaEkspor:            pendanaan.BiayaEkspor,
 		PerhitunganPenghasilan: pendanaan.PerhitunganPenghasilan,
 		PerhitunganKeuntungan:  pendanaan.PerhitunganKeuntungan,
-		KategoriID:             checkKategori.ID,
+		KategoriID:             pendanaan.KategoriID,
 		CreatedAt:              time.Now(),
 		UpdatedAt:              time.Now(),
 	}
