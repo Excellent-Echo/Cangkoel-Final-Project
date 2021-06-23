@@ -1,4 +1,4 @@
-package kategoripertanian
+package kategoriPertanian
 
 import (
 	"backend/entity"
@@ -7,7 +7,6 @@ import (
 	"fmt"
 )
 
-
 type Service interface {
 	SFindAllKpetani() ([]entity.KategoriPertanian, error)
 	SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error)
@@ -15,7 +14,6 @@ type Service interface {
 	SDeleteByIDKpetani(ID string) (interface{}, error)
 	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error)
 }
-
 
 type service struct {
 	repository Repository
@@ -35,14 +33,12 @@ func (s *service) SFindAllKpetani() ([]entity.KategoriPertanian, error) {
 	return sKPetani, nil
 }
 
-
 func (s *service) SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error) {
 
 	var newKPetani = entity.KategoriPertanian{
 		NamaKategori: kpetani.NamaKategori,
 		FotoKategori: kpetani.FotoKategori,
 	}
-
 
 	createKPetani, err := s.repository.Create(newKPetani)
 	KPetaniFormat := Format(createKPetani)
@@ -71,7 +67,6 @@ func (s *service) SFindByIDKpetani(ID string) (KPetaniFormat, error) {
 
 	return KPetaniFormat, nil
 }
-
 
 func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
 	if err := helper.ValidateIDNumber(ID); err != nil {
@@ -106,16 +101,14 @@ func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
 	return formatDelete, nil
 }
 
-func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error){
+func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error) {
 	var dataUpdate = map[string]interface{}{}
-
 
 	if err := helper.ValidateIDNumber(KategoriID); err != nil {
 		return KPetaniFormat{}, err
 	}
 
 	Kpetani, err := s.repository.FindByID(KategoriID)
-
 
 	if err != nil {
 		return KPetaniFormat{}, err

@@ -4,6 +4,7 @@ import (
 	"backend/entity"
 	"errors"
 	"fmt"
+
 	//"strconv"
 	"time"
 )
@@ -62,9 +63,10 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pend
 		BiayaEkspor:            pendanaan.BiayaEkspor,
 		PerhitunganPenghasilan: pendanaan.PerhitunganPenghasilan,
 		PerhitunganKeuntungan:  pendanaan.PerhitunganKeuntungan,
-		//InvestorID:             IDInvestor,
+		KategoriID:             pendanaan.KategoriID,
 		CreatedAt:              time.Now(),
 		UpdatedAt:              time.Now(),
+		//InvestorID:             IDInvestor,
 	}
 
 	createPendanaan, err := s.repository.RCreatePendanaan(newPendanaan)

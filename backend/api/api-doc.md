@@ -1646,19 +1646,19 @@ _Request Body_
 	"foto_profil" : "https://cangkoel.herokuapp.com/profil/foto-profil.jpg",
     "nama_investor" : "Muhamad Aziz",
     "judul_pendanaan" : "Pendanaan sayur kangkung",
-    "nominal_pendanaan" : "100000000",
+    "nominal_pendanaan" : 100000000,
     "perusahaan_pengirim" : "PT. Trisula Kargo Ekspresindo",
     "bagi_hasil_investor" : 40,
     "bagi_hasil_petani" : 25,
     "kebutuhan_komoditas" : "1 Ton",
     "jangka_waktu": "8 - 24 Bulan",
-    "keuntungan_bersih" : "Rp 50.000.000",
+    "keuntungan_bersih" : 50000000,
     "deskripsi" : "Dibuka pendanaan untuk petani yang memiliki lahan penanaman sayur kangkung berkualitas, diutamakan daerah Jawa Barat, Jawa Tengah, dan Jawa timur. ",
     "biaya_operasional" : "Benih 5000000, Pupuk 6500000, Pestisida 759444, gaji karyawan 100000000",
     "biaya_ekspor" : "ongkos kirim 7000000, pajak 2000000, biaya kontainer 1000000, pengurusan dokumen 2000000",
     "perhitungan_penghasilan" : "1000 kg x 150000 = 150000000",
     "perhitungan_keuntungan" : "150000000 - 100000000 = 50000000",
-    "kategori_pertanian_id" : 1
+    "kategori_id" : 1
 }
 ```
 

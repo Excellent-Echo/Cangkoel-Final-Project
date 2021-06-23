@@ -7,28 +7,23 @@ import (
 
 	"backend/entity"
 	"backend/helper"
-	"backend/layer/kategoripertanian"
-
+	"backend/layer/kategoriPertanian"
 
 	"github.com/gin-gonic/gin"
 )
 
-
 type KpetaniHandler struct {
-	KpetaniService kategoripertanian.Service
-	authService     auth.Service
+	KpetaniService kategoriPertanian.Service
+	authService    auth.Service
 }
 
-
-func NewKPetaniHandler(KpetaniService kategoripertanian.Service, authService auth.Service) *KpetaniHandler {
+func NewKPetaniHandler(KpetaniService kategoriPertanian.Service, authService auth.Service) *KpetaniHandler {
 	return &KpetaniHandler{KpetaniService, authService}
 }
-
 
 // ShowAllKPetaniHandler GET all kategori pertanian
 func (h *KpetaniHandler) ShowAllKPetaniHandler(c *gin.Context) {
 	Kpetani, err := h.KpetaniService.SFindAllKpetani()
-
 
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
@@ -41,11 +36,9 @@ func (h *KpetaniHandler) ShowAllKPetaniHandler(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-
 // GetKPetaniByIDHandler GET kategori petani by ID
 func (h *KpetaniHandler) GetKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
-
 
 	Kpetani, err := h.KpetaniService.SFindByIDKpetani(id)
 	if err != nil {
@@ -59,11 +52,9 @@ func (h *KpetaniHandler) GetKPetaniByIDHandler(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-
 // CreateKategoriPertanian POST kategori pertanian
 func (h *KpetaniHandler) CreateKategoriPertanian(c *gin.Context) {
 	var InputKPetani entity.KategoriPertanianInput
-
 
 	if err := c.ShouldBindJSON(&InputKPetani); err != nil {
 
@@ -84,11 +75,9 @@ func (h *KpetaniHandler) CreateKategoriPertanian(c *gin.Context) {
 	c.JSON(201, response)
 }
 
-
 // DeleteKPetaniByIDHandler DELETE kategori pertanian by id
 func (h *KpetaniHandler) DeleteKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
-
 
 	Kpetani, err := h.KpetaniService.SDeleteByIDKpetani(id)
 
@@ -103,11 +92,9 @@ func (h *KpetaniHandler) DeleteKPetaniByIDHandler(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-
 // UpdateKPetaniByIDHandler UPDATE kategori pertanian by id
 func (h *KpetaniHandler) UpdateKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
-
 
 	var updatePetaniInput entity.UpdatePetaniInput
 

@@ -1,4 +1,4 @@
-package kategoripertanian
+package kategoriPertanian
 
 import (
 	"backend/entity"

@@ -12,3 +12,19 @@ type HasilPengajuan struct {
 	InvestorID  int       `json:"investor_id"`
 	PengajuanID int       `json:"pengajuan_id"`
 }
+
+type HasilPengajuanInput struct {
+	Status      string `json:"status" binding:"required"`
+	Keterangan  string `json:"keterangan" binding:"required"`
+	PetaniID    int    `json:"petani_id" binding:"required"`
+	InvestorID  int    `json:"investor_id" binding:"required"`
+	PengajuanID int    `json:"pengajuan_id" binding:"required"`
+}
+
+type UpdateHasilPengajuanInput struct {
+	Status      string `json:"status"`
+	Keterangan  string `json:"keterangan"`
+	PetaniID    int    `json:"petani_id"`
+	InvestorID  int    `json:"investor_id"`
+	PengajuanID int    `json:"pengajuan_id"`
+}

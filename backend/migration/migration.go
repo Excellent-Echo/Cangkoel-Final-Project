@@ -82,8 +82,8 @@ type Pendanaan struct {
 	PerhitunganKeuntungan  string
 	CreatedAt              time.Time
 	UpdatedAt              time.Time
-	KategoriPertanian      KategoriPertanian
+	// KategoriPertanian      KategoriPertanian
 	// FormPengajuans         []FormPengajuan
-	InvestorID          uint
-	KategoriPertanianID uint
+	InvestorID uint
+	KategoriID uint
 }
