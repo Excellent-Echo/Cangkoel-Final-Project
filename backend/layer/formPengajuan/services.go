@@ -47,19 +47,19 @@ func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, 
 	}
 
 	var newFormPengajuan = entity.FormPengajuan{
-		NamaLengkap:  formPengajuan.NamaLengkap,
-		NomorHP:      formPengajuan.NomorHP,
-		JenisKelamin: formPengajuan.JenisKelamin,
-		// DokumenPerizinan: pathFileDoc,
-		NomorNPWP: formPengajuan.NomorNPWP,
-		// Ktp:              pathFileKtp,
-		JenisUsaha:    formPengajuan.JenisUsaha,
-		TenagaKerja:   formPengajuan.TenagaKerja,
-		OmzetPerbulan: formPengajuan.OmzetPerbulan,
-		AlamatUsaha:   formPengajuan.AlamatUsaha,
-		PetaniID:      IDPetani,
-		CreatedAt:     time.Now(),
-		UpdatedAt:     time.Now(),
+		NamaLengkap:      formPengajuan.NamaLengkap,
+		NomorHP:          formPengajuan.NomorHP,
+		JenisKelamin:     formPengajuan.JenisKelamin,
+		DokumenPerizinan: formPengajuan.DokumenPerizinan,
+		NomorNPWP:        formPengajuan.NomorNPWP,
+		Ktp:              formPengajuan.Ktp,
+		JenisUsaha:       formPengajuan.JenisUsaha,
+		TenagaKerja:      formPengajuan.TenagaKerja,
+		OmzetPerbulan:    formPengajuan.OmzetPerbulan,
+		AlamatUsaha:      formPengajuan.AlamatUsaha,
+		PetaniID:         IDPetani,
+		CreatedAt:        time.Now(),
+		UpdatedAt:        time.Now(),
 	}
 
 	createFormPengajuan, err := s.repository.RCreateFormPengajuan(newFormPengajuan)
