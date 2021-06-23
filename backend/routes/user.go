@@ -4,7 +4,7 @@ import (
 	"backend/auth"
 	"backend/config"
 	"backend/handler"
-	"backend/layer/investor"
+	"backend/layer/admin"
 	"backend/layer/petani"
 	"backend/layer/user"
 
@@ -13,12 +13,12 @@ import (
 )
 
 var (
-	DB           *gorm.DB = config.Connection()
-	authService           = auth.NewService()
-	userService           = user.NewService(petaniRepo, investorRepo)
-	petaniRepo            = petani.NewRepository(DB)
-	investorRepo          = investor.NewRepository(DB)
-	userHandler           = handler.NewUserHandler(userService, authService)
+	DB          *gorm.DB = config.Connection()
+	authService          = auth.NewService()
+	userService          = user.NewService(petaniRepo, adminRepo)
+	petaniRepo           = petani.NewRepository(DB)
+	adminRepo            = admin.NewRepository(DB)
+	userHandler          = handler.NewUserHandler(userService, authService)
 	// petaniService    = petani.NewService(petaniRepository)
 	// petaniRepository = petani.NewRepository(DB)
 	// petaniHandler    = handler.NewPetaniHandler(petaniService, authService)
@@ -26,6 +26,6 @@ var (
 
 func UserRoute(r *gin.Engine) {
 	r.POST("users/petani/register", petaniHandler.RegisterPetaniHandler)
-	r.POST("users/investor/register", investorHandler.RegisterInvestorHandler)
+	r.POST("users/admin/register", adminHandler.RegisterAdminHandler)
 	r.POST("users/login", userHandler.LoginUserHandler)
 }

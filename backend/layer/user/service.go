@@ -2,7 +2,7 @@ package user
 
 import (
 	"backend/entity"
-	"backend/layer/investor"
+	"backend/layer/admin"
 	"backend/layer/petani"
 	"errors"
 	"fmt"
@@ -15,17 +15,17 @@ type Service interface {
 }
 
 type service struct {
-	petaniRepo   petani.Repository
-	investorRepo investor.Repository
+	petaniRepo petani.Repository
+	adminRepo  admin.Repository
 }
 
-func NewService(petaniRepo petani.Repository, investorRepo investor.Repository) *service {
-	return &service{petaniRepo, investorRepo}
+func NewService(petaniRepo petani.Repository, adminRepo admin.Repository) *service {
+	return &service{petaniRepo, adminRepo}
 }
 
 func (s *service) SLoginUser(input entity.LoginUserInput) (UserFormat, error) {
 	userPetani, err := s.petaniRepo.RFindPetaniByEmail(input.Email)
-	userInvestor, err := s.investorRepo.RFindInvestorByEmail(input.Email)
+	userAdmin, err := s.adminRepo.RFindAdminByEmail(input.Email)
 
 	if err != nil {
 		return UserFormat{}, err
@@ -41,12 +41,12 @@ func (s *service) SLoginUser(input entity.LoginUserInput) (UserFormat, error) {
 		return formatter, nil
 	}
 
-	if userInvestor.ID > 0 {
-		if err := bcrypt.CompareHashAndPassword([]byte(userInvestor.Password), []byte(input.Password)); err != nil {
+	if userAdmin.ID > 0 {
+		if err := bcrypt.CompareHashAndPassword([]byte(userAdmin.Password), []byte(input.Password)); err != nil {
 			return UserFormat{}, errors.New("password invalid")
 		}
 
-		formatter := FormatInvestor(userInvestor)
+		formatter := FormatAdmin(userAdmin)
 
 		return formatter, nil
 	}

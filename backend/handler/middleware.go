@@ -3,8 +3,9 @@ package handler
 import (
 	"backend/auth"
 	"backend/helper"
-	"backend/layer/investor"
+	"backend/layer/admin"
 	"backend/layer/petani"
+	"strconv"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -46,18 +47,17 @@ func Middleware(petaniService petani.Service, authService auth.Service) gin.Hand
 	}
 }
 
-func MiddlewareInvestor(investorService investor.Service, authService auth.Service) gin.HandlerFunc {
+func MiddlewareAdmin(adminService admin.Service, authService auth.Service) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 
 		if authHeader == "" || len(authHeader) == 0 {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize userInvestor"})
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
 		}
 
-		// eksekusi code untuk mengecek apakah token itu valid dari server kita atau tidak
 		token, err := authService.ValidateToken(authHeader)
 
 		if err != nil {
@@ -70,15 +70,23 @@ func MiddlewareInvestor(investorService investor.Service, authService auth.Servi
 		claim, ok := token.Claims.(jwt.MapClaims)
 
 		if !ok {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize userInvestor"})
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
 		}
 
-		investorID := int(claim["investor_id"].(float64))
+		adminID := int(claim["admin_id"].(float64))
+		IDAdmin := strconv.Itoa(adminID)
+		Admin, err := adminService.SFindAdminByID(IDAdmin)
+		if Admin.Role != "admin" {
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
 
-		c.Set("currentUser", investorID)
+			c.AbortWithStatusJSON(401, errorResponse)
+			return
+		}
+
+		c.Set("currentAdmin", adminID)
 	}
 }
 
