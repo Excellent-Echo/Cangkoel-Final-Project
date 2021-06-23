@@ -15,6 +15,7 @@ var (
 
 func PendanaanRoute(r *gin.Engine) {
 	r.GET("pendanaan", pendanaanHandler.ShowAllPendanaanHandler)
-	r.GET("pendanaan/:kategori-pertanian", pendanaanHandler.GetPendanaanByKategoriIDHandler)
+	// r.GET("pendanaan/:kategori-pertanian", pendanaanHandler.GetPendanaanByKategoriIDHandler)
 	r.POST("pendanaan/add", pendanaanHandler.CreatePendanaanHandler)
+	r.GET("pendanaan/:id", pendanaanHandler.GetPendanaanByIDHandler)
 }

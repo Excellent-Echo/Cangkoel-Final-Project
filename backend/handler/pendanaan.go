@@ -92,3 +92,19 @@ func (h *pendanaanHandler) GetPendanaanByKategoriIDHandler(c *gin.Context) {
 	response := helper.APIResponse("success get user Form Pengajuan by ID", 200, "success", pendanaan)
 	c.JSON(200, response)
 }
+
+// FIND PENDANAAN BY ID
+func (h *pendanaanHandler) GetPendanaanByIDHandler(c *gin.Context) {
+	id := c.Params.ByName("id")
+
+	pendanaan, err := h.pendanaanService.SFindPendanaanByID(id)
+	if err != nil {
+		responseError := helper.APIResponse("input params error", 400, "bad request", gin.H{"errors": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	response := helper.APIResponse("success get user Form Pengajuan by ID", 200, "success", pendanaan)
+	c.JSON(200, response)
+}

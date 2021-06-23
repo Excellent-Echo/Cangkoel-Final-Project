@@ -3,22 +3,21 @@ package entity
 import "time"
 
 type FormPengajuan struct {
-	ID               int            `gorm:"PrimaryKey" json:"id"`
-	NamaLengkap      string         `json:"nama_lengkap"`
-	NomorHP          int            `json:"nomor_hp"`
-	JenisKelamin     string         `json:"jenis_kelamin"`
-	DokumenPerizinan string         `json:"dokumen_perizinan"`
-	NomorNPWP        int            `json:"nomor_npwp"`
-	Ktp              string         `json:"ktp"`
-	JenisUsaha       string         `json:"jenis_usaha"`
-	TenagaKerja      int            `json:"tenaga_kerja"`
-	OmzetPerbulan    int            `json:"omzet_perbulan"`
-	AlamatUsaha      string         `json:"alamat_usaha"`
-	CreatedAt        time.Time      `json:"created_at"`
-	UpdatedAt        time.Time      `json:"updated_at"`
-	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:PengajuanID"`
-	PetaniID         int            `json:"petani_id"`
-	PendanaanID      int            `json:"pendanaan_id"`
+	ID               int       `gorm:"PrimaryKey" json:"id"`
+	NamaLengkap      string    `json:"nama_lengkap"`
+	NomorHP          int       `json:"nomor_hp"`
+	JenisKelamin     string    `json:"jenis_kelamin"`
+	DokumenPerizinan string    `json:"dokumen_perizinan"`
+	NomorNPWP        int       `json:"nomor_npwp"`
+	Ktp              string    `json:"ktp"`
+	JenisUsaha       string    `json:"jenis_usaha"`
+	TenagaKerja      int       `json:"tenaga_kerja"`
+	OmzetPerbulan    int       `json:"omzet_perbulan"`
+	AlamatUsaha      string    `json:"alamat_usaha"`
+	CreatedAt        time.Time `json:"created_at"`
+	UpdatedAt        time.Time `json:"updated_at"`
+	PetaniID         int       `json:"petani_id"`
+	PendanaanID      int       `json:"pendanaan_id"`
 }
 
 type FormPengajuanInput struct {
@@ -32,5 +31,5 @@ type FormPengajuanInput struct {
 	TenagaKerja      int    `json:"tenaga_kerja" binding:"required"`
 	OmzetPerbulan    int    `json:"omzet_perbulan" binding:"required"`
 	AlamatUsaha      string `json:"alamat_usaha" binding:"required"`
-	PetaniID         uint   `json:"petani_id" binding:"required"`
+	PendanaanID      int    `json:"pendanaan_id" binding:"required"`
 }
