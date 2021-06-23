@@ -14,6 +14,7 @@ type Service interface {
 	SShowAllPendanaan() ([]entity.Pendanaan, error)
 	SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error)
 	SFindPendanaanByKategoriID(kategoriID string) (entity.Pendanaan, error)
+	SFindPendanaanByID(pendanaanID string) (entity.Pendanaan, error)
 }
 
 type service struct {
@@ -88,6 +89,21 @@ func (s *service) SFindPendanaanByKategoriID(kategoriID string) (entity.Pendanaa
 
 	if pendanaan.ID == 0 {
 		newError := fmt.Sprintf("Form Pendanaan by Kategori id %s not found", kategoriID)
+		return pendanaan, errors.New(newError)
+	}
+
+	return pendanaan, nil
+}
+
+func (s *service) SFindPendanaanByID(pendanaanID string) (entity.Pendanaan, error) {
+	pendanaan, err := s.repository.RFindPendanaanByID(pendanaanID)
+
+	if err != nil {
+		return pendanaan, err
+	}
+
+	if pendanaan.ID == 0 {
+		newError := fmt.Sprintf("Pendanaan id %s not found", pendanaanID)
 		return pendanaan, errors.New(newError)
 	}
 

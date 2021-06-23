@@ -2,7 +2,6 @@ package formPengajuan
 
 import (
 	"backend/entity"
-	"backend/layer/pendanaan"
 	"errors"
 	"fmt"
 	"strconv"
@@ -11,17 +10,16 @@ import (
 
 type Service interface {
 	SShowAllFormPengajuan() ([]entity.FormPengajuan, error)
-	SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, petaniID string, pendanaanID string) (entity.FormPengajuan, error)
+	SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, petaniID string) (entity.FormPengajuan, error)
 	SFindFormPengajuanByID(formPengajuanID string) (entity.FormPengajuan, error)
 }
 
 type service struct {
-	repository  Repository
-	repository2 pendanaan.Repository
+	repository Repository
 }
 
-func NewService(repository Repository, repository2 pendanaan.Repository) *service {
-	return &service{repository, repository2}
+func NewService(repository Repository) *service {
+	return &service{repository}
 }
 
 func (s *service) SShowAllFormPengajuan() ([]entity.FormPengajuan, error) {
@@ -34,11 +32,11 @@ func (s *service) SShowAllFormPengajuan() ([]entity.FormPengajuan, error) {
 	return formPengajuan, nil
 }
 
-func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, petaniID string, pendanaanID string) (entity.FormPengajuan, error) {
+func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, petaniID string) (entity.FormPengajuan, error) {
 	IDPetani, _ := strconv.Atoi(petaniID)
 
 	checkStatus, err := s.repository.RFindFormPengajuanByID(petaniID)
-	checkPendanaan, err := s.repository2.RFindPendanaanByID(pendanaanID)
+	// checkPendanaan, err := s.repository2.RFindPendanaanByID(pendanaanID)
 
 	if err != nil {
 		return checkStatus, err
@@ -61,7 +59,7 @@ func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, 
 		OmzetPerbulan:    formPengajuan.OmzetPerbulan,
 		AlamatUsaha:      formPengajuan.AlamatUsaha,
 		PetaniID:         IDPetani,
-		PendanaanID:      checkPendanaan.ID,
+		PendanaanID:      formPengajuan.PendanaanID,
 		CreatedAt:        time.Now(),
 		UpdatedAt:        time.Now(),
 	}
