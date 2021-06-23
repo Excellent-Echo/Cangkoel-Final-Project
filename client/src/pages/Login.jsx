@@ -1,9 +1,13 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { Container as ContainerBase } from '../components/misc/Layouts.jsx'
 import tw from 'twin.macro'
 import styled from 'styled-components'
 import { css } from 'styled-components/macro' //eslint-disable-line
+
+import userLoginAction from '../redux/user/login/userLoginAction'
+// import { useAuth } from '../utils/auth'
 
 import petani from '../assets/petani-login.jpg'
 import logo from '../assets/logo.png'
@@ -63,6 +67,28 @@ const Login = ({
 	forgotPasswordUrl = '/login',
 	signupUrl = '/choose-role'
 }) => {
+	const loginData = useSelector((state) => state.userLogin)
+	const dispatch = useDispatch()
+	const history = useHistory()
+	let location = useLocation()
+	// let auth = useAuth()
+
+	const loginHandler = (e) => {
+		e.preventDefault()
+
+		dispatch(userLoginAction.login(loginData.email, loginData.password, history, location))
+	}
+
+	// let { from } = location.state || { from: { pathname: '/' } }
+
+	// let loginHandler = (e) => {
+	// 	e.preventDefault()
+
+	// 	auth.Signin(() => {
+	// 		history.replace(from)
+	// 	})
+	// }
+
 	return (
 		<div>
 			<Container>
@@ -87,9 +113,21 @@ const Login = ({
 								<DividerTextContainer>
 									<DividerText>Atau masuk lewat e-mail anda</DividerText>
 								</DividerTextContainer>
-								<Form>
-									<Input type="email" placeholder="Email" />
-									<Input type="password" placeholder="Password" />
+								<Form onSubmit={loginHandler}>
+									<Input
+										type="email"
+										placeholder="Email"
+										onChange={(e) => {
+											dispatch(userLoginAction.setEmail(e.target.value))
+										}}
+									/>
+									<Input
+										type="password"
+										placeholder="Password"
+										onChange={(e) => {
+											dispatch(userLoginAction.setPassword(e.target.value))
+										}}
+									/>
 									<SubmitButton type="submit">
 										<SubmitButtonIcon className="icon" />
 										<span className="text">{submitButtonText}</span>

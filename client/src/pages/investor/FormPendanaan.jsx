@@ -21,11 +21,10 @@ const FormPendanaan = () => {
 								Foto Sampul
 							</label>
 							<PickerDropPane
-								apikey={'ApW8Eq4TGSN69zPGRbKtMz'}
+								apikey="process.env.FILESTACK_KEY"
 								onSuccess={(res) => {
 									console.log(res)
 								}}
-								ewqa23d5td
 							/>
 						</div>
 						<form className="mt-6 border-t border-gray-400 pt-4">
