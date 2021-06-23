@@ -62,6 +62,7 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput, investorID s
 		BiayaEkspor:            pendanaan.BiayaEkspor,
 		PerhitunganPenghasilan: pendanaan.PerhitunganPenghasilan,
 		PerhitunganKeuntungan:  pendanaan.PerhitunganKeuntungan,
+		KategoriID:             pendanaan.KategoriID,
 		InvestorID:             IDInvestor,
 		CreatedAt:              time.Now(),
 		UpdatedAt:              time.Now(),
