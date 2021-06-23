@@ -14,7 +14,6 @@ import {
   Form,
   FormGroup,
   Label,
-  FormText,
 } from "reactstrap";
 
 const BuatPengajuan = (props) => {
@@ -90,13 +89,15 @@ const BuatPengajuan = (props) => {
               </option>
               <option>Pendanaan untuk produksi sudah cair</option>
               <option>
-                Proses Produksi sedang dilakukan pihak petani diawai oleh pihak
+                Proses Produksi sedang dilakukan pihak petani diawasi oleh pihak
                 Cangkoel
               </option>
               <option>
                 Proses pengiriman barang sedang berlangsung ke konsumen
               </option>
-              <option>Pembagian hasil</option>
+              <option>
+                Pembagian hasil antara investor, petani dan cangkoel
+              </option>
             </Input>
           </FormGroup>
 
