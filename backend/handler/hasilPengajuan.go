@@ -4,14 +4,14 @@ package handler
 // 	"backend/auth"
 // 	"backend/entity"
 // 	"backend/helper"
-// 	"backend/layer/formPengajuan"
+// 	"backend/layer/hasilPengajuan"
 // 	"strconv"
 
 // 	"github.com/gin-gonic/gin"
 // )
 
 // type hasilPengajuanHandler struct {
-// 	formPengajuanService formPengajuan.Service
+// 	hasilPengajuanService hasilPengajuan.Service
 // 	authService          auth.Service
 // }
 

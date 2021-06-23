@@ -24,7 +24,7 @@ func NewRepository(db *gorm.DB) *repository {
 
 func (r *repository) FindAll() ([]entity.KategoriPertanian, error) {
 	var k_petani []entity.KategoriPertanian
-	if err := r.db.Find(&k_petani).Error; err != nil {
+	if err := r.db.Preload("Pendanaan").Find(&k_petani).Error; err != nil {
 		return k_petani, err
 	}
 
@@ -44,7 +44,7 @@ func (r *repository) FindByID(ID string) (entity.KategoriPertanian, error) {
 
 	var k_petani entity.KategoriPertanian
 
-	err := r.db.Where("id = ?", ID).Find(&k_petani).Preload("Pendanaan").Error
+	err := r.db.Where("id = ?", ID).Preload("Pendanaan").Find(&k_petani).Error
 	if err != nil {
 		return k_petani, err
 	}

@@ -3,15 +3,14 @@ package migration
 import "time"
 
 type Petani struct {
-	ID             int `gorm:"PrimaryKey"`
-	FullName       string
-	Email          string `gorm:"unique"`
-	Password       string
-	Role           string
-	CreatedAt      time.Time
-	UpdatedAt      time.Time
-	FormPengajuan  FormPengajuan  `gorm:"ForeignKey:PetaniID"`
-	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:PetaniID"`
+	ID            int `gorm:"PrimaryKey"`
+	FullName      string
+	Email         string `gorm:"unique"`
+	Password      string
+	Role          string
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
+	FormPengajuan FormPengajuan `gorm:"ForeignKey:PetaniID"`
 }
 
 type Admin struct {
@@ -28,6 +27,7 @@ type KategoriPertanian struct {
 	ID           int `gorm:"PrimaryKey"`
 	NamaKategori string
 	FotoKategori string
+	Pendanaan    []Pendanaan `gorm:"ForeignKey:KategoriID"`
 }
 
 type FormPengajuan struct {
@@ -44,9 +44,8 @@ type FormPengajuan struct {
 	AlamatUsaha      string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
-	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:PengajuanID"`
-	PetaniID         uint
-	PendanaanID      uint
+	PetaniID         int
+	PendanaanID      int
 }
 
 type HasilPengajuan struct {
@@ -55,8 +54,8 @@ type HasilPengajuan struct {
 	Keterangan  string
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
-	PetaniID    uint
-	PengajuanID uint
+	PetaniID    int
+	PengajuanID int
 }
 
 type Pendanaan struct {
@@ -78,7 +77,7 @@ type Pendanaan struct {
 	PerhitunganKeuntungan  string
 	CreatedAt              time.Time
 	UpdatedAt              time.Time
+	FormPengajuan          []FormPengajuan `gorm:"ForeignKey:PendanaanID"`
+	KategoriID             int
 	// KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
-	FormPengajuan []FormPengajuan `gorm:"ForeignKey:PendanaanID"`
-	KategoriID    int
 }
