@@ -21,7 +21,7 @@ type Pendanaan struct {
 	PerhitunganKeuntungan  string            `json:"perhitungan keuntungan"`
 	CreatedAt              time.Time         `json:"created_at"`
 	UpdatedAt              time.Time         `json:"updated_at"`
-	KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
+	//KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
 	FormPengajuan          []FormPengajuan   `gorm:"ForeignKey:PendanaanID"`
 	InvestorID             int               `json:"investor_id"`
 	KategoriID             int               `json:"kategori_id"`

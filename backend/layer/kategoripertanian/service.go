@@ -1,121 +1,146 @@
 package kategoripertanian
 
-// import (
-// 	"backend/entity"
-// 	"backend/helper"
-// 	"errors"
-// 	"fmt"
-// )
+import (
+	"backend/entity"
+	"backend/helper"
+	"errors"
+	"fmt"
+)
 
-// type Service interface {
-// 	SFindAllKpetani() ([]entity.KategoriPertanian, error)
-// 	SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error)
-// 	SFindByIDKpetani(ID string) (entity.KategoriPertanian, error)
-// 	SDeleteByIDKpetani(ID string) (interface{}, error)
-// 	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error)
-// }
 
-// type service struct {
-// 	repository Repository
-// }
+type Service interface {
+	SFindAllKpetani() ([]entity.KategoriPertanian, error)
+	SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error)
+	SFindByIDKpetani(ID string) (KPetaniFormat, error)
+	SDeleteByIDKpetani(ID string) (interface{}, error)
+	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error)
+}
 
-// func NewService(repository Repository) *service {
-// 	return &service{repository}
-// }
 
-// func (s *service) SFindAllKpetani() ([]entity.KategoriPertanian, error) {
-// 	sKPetani, err := s.repository.FindAll()
+type service struct {
+	repository Repository
+}
 
-// 	if err != nil {
-// 		return sKPetani, err
-// 	}
+func NewService(repository Repository) *service {
+	return &service{repository}
+}
 
-// 	return sKPetani, nil
-// }
+func (s *service) SFindAllKpetani() ([]entity.KategoriPertanian, error) {
+	sKPetani, err := s.repository.FindAll()
 
-// func (s *service) SCreateKpetani(kpetani entity.KategoriPertanian) (KPetaniFormat, error) {
+	if err != nil {
+		return sKPetani, err
+	}
 
-// 	var newKPetani = entity.KategoriPertanian{
-// 		NamaKategori: kpetani.NamaKategori,
-// 		FotoKategori: kpetani.FotoKategori,
-// 		Pendanaan:    kpetani.Pendanaan,
-// 		PendanaanID:  kpetani.PendanaanID,
-// 	}
+	return sKPetani, nil
+}
 
-// 	createKPetani, err := s.repository.Create(newKPetani)
-// 	KPetaniFormat := Format(createKPetani)
 
-// 	if err != nil {
-// 		return KPetaniFormat, err
-// 	}
+func (s *service) SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error) {
 
-// 	return KPetaniFormat, nil
+	var newKPetani = entity.KategoriPertanian{
+		NamaKategori: kpetani.NamaKategori,
+		FotoKategori: kpetani.FotoKategori,
+	}
 
-// }
 
-// func (s *service) SFindByIDKpetani(ID string) (KPetaniFormat, error) {
-// 	KPetani, err := s.repository.FindByID(ID)
+	createKPetani, err := s.repository.Create(newKPetani)
+	KPetaniFormat := Format(createKPetani)
 
-// 	if err != nil {
-// 		return KPetaniFormat{}, err
-// 	}
+	if err != nil {
+		return KPetaniFormat, err
+	}
 
-// 	if KPetani.ID == 0 {
-// 		newError := fmt.Sprintf("Kategori Pertanian id %s not found", ID)
-// 		return KPetaniFormat{}, errors.New(newError)
-// 	}
+	return KPetaniFormat, nil
 
-// 	KPetaniFormat := Format(KPetani)
+}
 
-// 	return KPetaniFormat, nil
-// }
+func (s *service) SFindByIDKpetani(ID string) (KPetaniFormat, error) {
+	KPetani, err := s.repository.FindByID(ID)
 
-// func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
-// 	msg, err := s.repository.DeleteByID(ID)
+	if err != nil {
+		return KPetaniFormat{}, err
+	}
 
-// 	if err != nil || msg == "error" {
-// 		return msg, err
-// 	}
+	if KPetani.ID == 0 {
+		newError := fmt.Sprintf("Kategori Pertanian id %s not found", ID)
+		return KPetaniFormat{}, errors.New(newError)
+	}
 
-// 	message := fmt.Sprintf("book id %s success deleted", ID)
+	KPetaniFormat := Format(KPetani)
 
-// 	return message, nil
+	return KPetaniFormat, nil
+}
 
-// }
 
-// func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error) (KPetaniFormat, error){
-// 	var dataUpdate = map[string]interface{}{}
+func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
+	if err := helper.ValidateIDNumber(ID); err != nil {
+		return nil, err
+	}
 
-// 	if err := helper.ValidateIDNumber(KategoriID); err != nil {
-// 		return KPetaniFormat{}, err
-// 	}
+	kategoriPertanian, err := s.repository.FindByID(ID)
 
-// 	Kpetani, err := s.repository.SFindByIDKpetani(KategoriID)
+	if err != nil {
+		return nil, err
+	}
 
-// 	if err != nil {
-// 		return KPetaniFormat{}, err
-// 	}
+	if kategoriPertanian.ID == 0 {
+		newError := fmt.Sprintf("kategori pertanian id %s not found", ID)
+		return nil, errors.New(newError)
+	}
 
-// 	if Kpetani.ID == 0 {
-// 		newError := fmt.Sprintf("id Kategori Pertanian %s not found", KategoriID)
-// 		return KPetaniFormat{}, errors.New(newError)
-// 	}
+	status, err := s.repository.DeleteByID(ID)
 
-// 	if input.NamaKategori != "" || len(input.NamaKategori) != 0 {
-// 		dataUpdate["NamaKategori"] = input.NamaKategori
-// 	}
+	if err != nil {
+		return nil, err
+	}
 
-// 	if input.FotoKategori != "" || len(input.FotoKategori) != 0 {
-// 		dataUpdate["FotoKategori"] = input.FotoKategori
-// 	}
+	if status == "error" {
+		return nil, errors.New("error delete in internal server")
+	}
 
-// 	KategoriUpdate, err := s.repository.UpdateByID(KategoriID, dataUpdate)
+	msg := fmt.Sprintf("success delete kategori pertanian ID : %s", ID)
 
-// 	if err != nil {
-// 		return KPetaniFormat{}, err
-// 	}
+	formatDelete := FormatDelete(msg)
 
-// 	formatKPetani := Format(KategoriUpdate)
+	return formatDelete, nil
+}
 
-// 	return formatKPetani, nil
-// }
+func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error){
+	var dataUpdate = map[string]interface{}{}
+
+
+	if err := helper.ValidateIDNumber(KategoriID); err != nil {
+		return KPetaniFormat{}, err
+	}
+
+	Kpetani, err := s.repository.FindByID(KategoriID)
+
+
+	if err != nil {
+		return KPetaniFormat{}, err
+	}
+
+	if Kpetani.ID == 0 {
+		newError := fmt.Sprintf("id Kategori Pertanian %s not found", KategoriID)
+		return KPetaniFormat{}, errors.New(newError)
+	}
+
+	if input.NamaKategori != "" || len(input.NamaKategori) != 0 {
+		dataUpdate["NamaKategori"] = input.NamaKategori
+	}
+
+	if input.FotoKategori != "" || len(input.FotoKategori) != 0 {
+		dataUpdate["FotoKategori"] = input.FotoKategori
+	}
+
+	KategoriUpdate, err := s.repository.UpdateByID(KategoriID, dataUpdate)
+
+	if err != nil {
+		return KPetaniFormat{}, err
+	}
+
+	formatKPetani := Format(KategoriUpdate)
+
+	return formatKPetani, nil
+}

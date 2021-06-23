@@ -30,7 +30,7 @@ type KategoriPertanian struct {
 	ID           int `gorm:"PrimaryKey"`
 	NamaKategori string
 	FotoKategori string
-	Pendanaans   []Pendanaan
+	Pendanaan    []Pendanaan `gorm:"ForeignKey:KategoriID"`
 }
 
 type FormPengajuan struct {

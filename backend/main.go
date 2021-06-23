@@ -17,6 +17,7 @@ func main() {
 	routes.UserRoute(r)
 	routes.FormPengajuanRoute(r)
 	routes.PendanaanRoute(r)
+	routes.KategoriPertanianRoute(r)
 
 	r.Run()
 }
