@@ -2,6 +2,7 @@ package pendanaan
 
 import (
 	"backend/entity"
+	"backend/layer/kategoriPertanian"
 	"errors"
 	"fmt"
 
@@ -11,16 +12,17 @@ import (
 
 type Service interface {
 	SShowAllPendanaan() ([]entity.Pendanaan, error)
-	SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error)
+	SCreatePendanaan(pendanaan entity.PendanaanInput, kategoriID string) (entity.Pendanaan, error)
 	SFindPendanaanByKategoriID(kategoriID string) (entity.Pendanaan, error)
 }
 
 type service struct {
-	repository Repository
+	repository  Repository
+	repository2 kategoriPertanian.Repository
 }
 
-func NewService(repository Repository) *service {
-	return &service{repository}
+func NewService(repository Repository, repository2 kategoriPertanian.Repository) *service {
+	return &service{repository, repository2}
 }
 
 func (s *service) SShowAllPendanaan() ([]entity.Pendanaan, error) {
@@ -33,7 +35,7 @@ func (s *service) SShowAllPendanaan() ([]entity.Pendanaan, error) {
 	return pendanaan, nil
 }
 
-func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error) {
+func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput, kategoriID string) (entity.Pendanaan, error) {
 	//IDInvestor, _ := strconv.Atoi(investorID)
 
 	//checkStatus, err := s.repository.RFindPendanaanByID(investorID)
@@ -46,6 +48,7 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pend
 	//	errorStatus := fmt.Sprintf("Form Pendanaan for Investor id : %s has been created", investorID)
 	//	return checkStatus, errors.New(errorStatus)
 	//}
+	checkKategori, err := s.repository2.FindByID(kategoriID)
 
 	var newPendanaan = entity.Pendanaan{
 		FotoProfil:             pendanaan.FotoProfil,
@@ -63,7 +66,7 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pend
 		BiayaEkspor:            pendanaan.BiayaEkspor,
 		PerhitunganPenghasilan: pendanaan.PerhitunganPenghasilan,
 		PerhitunganKeuntungan:  pendanaan.PerhitunganKeuntungan,
-		KategoriID:             pendanaan.KategoriID,
+		KategoriID:             checkKategori.ID,
 		CreatedAt:              time.Now(),
 		UpdatedAt:              time.Now(),
 	}
