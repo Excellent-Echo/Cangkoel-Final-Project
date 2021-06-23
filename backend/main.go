@@ -13,7 +13,7 @@ func main() {
 	r.Use(handler.CORSMiddleware())
 
 	routes.PetaniRoute(r)
-	routes.InvestorRoute(r)
+	routes.AdminRoute(r)
 	routes.UserRoute(r)
 	routes.FormPengajuanRoute(r)
 	routes.PendanaanRoute(r)

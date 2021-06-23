@@ -53,7 +53,7 @@ func (s *service) SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, 
 		FullName:  userPetani.FullName,
 		Email:     userPetani.Email,
 		Password:  string(genPassword),
-		Role:      string("petani"),
+		Role:      "petani",
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}

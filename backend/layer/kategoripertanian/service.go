@@ -10,7 +10,7 @@ import (
 type Service interface {
 	SFindAllKpetani() ([]entity.KategoriPertanian, error)
 	SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error)
-	SFindByIDKpetani(ID string) (KPetaniFormat, error)
+	SFindByIDKpetani(ID string) (entity.KategoriPertanian, error)
 	SDeleteByIDKpetani(ID string) (interface{}, error)
 	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error)
 }
@@ -51,21 +51,19 @@ func (s *service) SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetani
 
 }
 
-func (s *service) SFindByIDKpetani(ID string) (KPetaniFormat, error) {
+func (s *service) SFindByIDKpetani(ID string) (entity.KategoriPertanian, error) {
 	KPetani, err := s.repository.FindByID(ID)
 
 	if err != nil {
-		return KPetaniFormat{}, err
+		return entity.KategoriPertanian{}, err
 	}
 
 	if KPetani.ID == 0 {
 		newError := fmt.Sprintf("Kategori Pertanian id %s not found", ID)
-		return KPetaniFormat{}, errors.New(newError)
+		return entity.KategoriPertanian{}, errors.New(newError)
 	}
 
-	KPetaniFormat := Format(KPetani)
-
-	return KPetaniFormat, nil
+	return KPetani, nil
 }
 
 func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {

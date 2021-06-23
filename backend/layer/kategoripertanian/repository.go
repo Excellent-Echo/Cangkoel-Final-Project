@@ -44,7 +44,7 @@ func (r *repository) FindByID(ID string) (entity.KategoriPertanian, error) {
 
 	var k_petani entity.KategoriPertanian
 
-	err := r.db.Where("id = ?", ID).Find(&k_petani).Error
+	err := r.db.Where("id = ?", ID).Find(&k_petani).Preload("Pendanaan").Error
 	if err != nil {
 		return k_petani, err
 	}

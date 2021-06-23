@@ -9,7 +9,7 @@ import (
 
 var (
 	formPengajuanRepository = formPengajuan.NewRepository(DB)
-	formPengajuanService    = formPengajuan.NewService(formPengajuanRepository)
+	formPengajuanService    = formPengajuan.NewService(formPengajuanRepository, pendanaanRepository)
 	formPengajuanHandler    = handler.NewFormPengajuanHandler(formPengajuanService, authService)
 )
 
