@@ -10,9 +10,9 @@ import (
 type Service interface {
 	SFindAllKpetani() ([]entity.KategoriPertanian, error)
 	SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error)
-	SFindByIDKpetani(ID string) (entity.KategoriPertanian, error)
+	SFindByIDKpetani(ID string) (KPetaniFormat, error)
 	SDeleteByIDKpetani(ID string) (interface{}, error)
-	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error)
+	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error)
 }
 
 type service struct {
@@ -33,13 +33,11 @@ func (s *service) SFindAllKpetani() ([]entity.KategoriPertanian, error) {
 	return sKPetani, nil
 }
 
-func (s *service) SCreateKpetani(kpetani entity.KategoriPertanian) (KPetaniFormat, error) {
+func (s *service) SCreateKpetani(kpetani entity.KategoriPertanianInput) (KPetaniFormat, error) {
 
 	var newKPetani = entity.KategoriPertanian{
 		NamaKategori: kpetani.NamaKategori,
 		FotoKategori: kpetani.FotoKategori,
-		Pendanaan:    kpetani.Pendanaan,
-		PendanaanID:  kpetani.PendanaanID,
 	}
 
 	createKPetani, err := s.repository.Create(newKPetani)
@@ -71,26 +69,46 @@ func (s *service) SFindByIDKpetani(ID string) (KPetaniFormat, error) {
 }
 
 func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
-	msg, err := s.repository.DeleteByID(ID)
-
-	if err != nil || msg == "error" {
-		return msg, err
+	if err := helper.ValidateIDNumber(ID); err != nil {
+		return nil, err
 	}
 
-	message := fmt.Sprintf("book id %s success deleted", ID)
+	kategoriPertanian, err := s.repository.FindByID(ID)
 
-	return message, nil
+	if err != nil {
+		return nil, err
+	}
 
+	if kategoriPertanian.ID == 0 {
+		newError := fmt.Sprintf("kategori pertanian id %s not found", ID)
+		return nil, errors.New(newError)
+	}
+
+	status, err := s.repository.DeleteByID(ID)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if status == "error" {
+		return nil, errors.New("error delete in internal server")
+	}
+
+	msg := fmt.Sprintf("success delete kategori pertanian ID : %s", ID)
+
+	formatDelete := FormatDelete(msg)
+
+	return formatDelete, nil
 }
 
-func (s *service) 	SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error){
+func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (KPetaniFormat, error){
 	var dataUpdate = map[string]interface{}{}
 
 	if err := helper.ValidateIDNumber(KategoriID); err != nil {
 		return KPetaniFormat{}, err
 	}
 
-	Kpetani, err := s.repository.SFindByIDKpetani(KategoriID)
+	Kpetani, err := s.repository.FindByID(KategoriID)
 
 	if err != nil {
 		return KPetaniFormat{}, err

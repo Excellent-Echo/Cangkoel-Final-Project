@@ -5,7 +5,7 @@ import (
 	"backend/entity"
 	"backend/helper"
 	"backend/layer/pendanaan"
-	"strconv"
+	//"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -36,23 +36,23 @@ func (h *pendanaanHandler) ShowAllPendanaanHandler(c *gin.Context) {
 
 // CREATE NEW PENDANAAN
 func (h *pendanaanHandler) CreatePendanaanHandler(c *gin.Context) {
-	investorData := int(c.MustGet("currentUser").(int))
+	//investorData := int(c.MustGet("currentUser").(int))
 
 	// file, err := c.FormFile("Profile")
 
-	if investorData == 0 {
-		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Investor not authorize / not login"})
-
-		c.JSON(401, responseError)
-		return
-	}
+	//if investorData == 0 {
+	//	responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Investor not authorize / not login"})
+	//
+	//	c.JSON(401, responseError)
+	//	return
+	//}
 	// path := fmt.Sprintf("images/profile-%d-%s", investorData, file.Filename)
 
 	// err = c.SaveUploadedFile(file, path)
-
-	investorID := strconv.Itoa(investorData)
-
 	var inputpendanaan entity.PendanaanInput
+
+
+	//investorID := strconv.Itoa(investorData)
 
 	if err := c.ShouldBindJSON(&inputpendanaan); err != nil {
 
@@ -65,7 +65,7 @@ func (h *pendanaanHandler) CreatePendanaanHandler(c *gin.Context) {
 
 	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
 
-	newPendanaan, err := h.pendanaanService.SCreatePendanaan(inputpendanaan, investorID)
+	newPendanaan, err := h.pendanaanService.SCreatePendanaan(inputpendanaan)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 
