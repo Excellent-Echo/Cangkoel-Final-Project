@@ -4,13 +4,13 @@ import PrivateRoute from './PrivateRoute'
 // import { ProvideAuth } from '../utils/auth'
 
 // pages each role
-import ChooseRole from '../pages/ChooseRole'
+// import ChooseRole from '../pages/ChooseRole'
 import Login from '../pages/Login'
 
 // pages role investor
-import RegisterInvestor from '../pages/investor/Register'
-import FormPendanaaan from '../pages/investor/FormPendanaan'
-import ProfilInvestor from '../pages/investor/Profil'
+// import RegisterInvestor from '../pages/investor/Register'
+// import FormPendanaaan from '../pages/investor/FormPendanaan'
+// import ProfilInvestor from '../pages/investor/Profil'
 
 //  pages role petani
 import Home from '../pages/petani/Home'
@@ -25,17 +25,17 @@ const Routes = () => {
 		<Router>
 			<Switch>
 				{/* route each role */}
-				<Route path="/choose-role" exact component={ChooseRole} />
+				{/* <Route path="/choose-role" exact component={ChooseRole} /> */}
 				<Route path="/login" exact component={Login} />
 
 				{/* route role investor */}
-				<Route path="/register-investor" exact component={RegisterInvestor} />
+				{/* <Route path="/register-investor" exact component={RegisterInvestor} />
 				<PrivateRoute path="/form-pendanaan">
 					<FormPendanaaan />
 				</PrivateRoute>
 				<PrivateRoute path="/profil-investor">
 					<ProfilInvestor />
-				</PrivateRoute>
+				</PrivateRoute> */}
 
 				{/* route role petani */}
 				<Route path="/register-petani" exact component={RegisterPetani} />
