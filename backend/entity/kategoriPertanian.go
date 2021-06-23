@@ -5,7 +5,6 @@ type KategoriPertanian struct {
 	NamaKategori string      `json:"nama_kategori"`
 	FotoKategori string      `json:"foto_kategori"`
 	Pendanaan    []Pendanaan `gorm:"ForeignKey:KategoriID"`
-	PendanaanID  int         `json:"pendanaan_id"`
 }
 
 type KategoriPertanianInput struct {
@@ -14,6 +13,6 @@ type KategoriPertanianInput struct {
 }
 
 type UpdateKategoriPertanianInput struct {
-	NamaKategori string `json:"nama_kategori" binding:"required"`
-	FotoKategori string `json:"foto_kategori" binding:"required"`
+	NamaKategori string `json:"nama_kategori"`
+	FotoKategori string `json:"foto_kategori"`
 }

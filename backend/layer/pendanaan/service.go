@@ -4,13 +4,14 @@ import (
 	"backend/entity"
 	"errors"
 	"fmt"
-	"strconv"
+
+	//"strconv"
 	"time"
 )
 
 type Service interface {
 	SShowAllPendanaan() ([]entity.Pendanaan, error)
-	SCreatePendanaan(pendanaan entity.PendanaanInput, investorID string) (entity.Pendanaan, error)
+	SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error)
 	SFindPendanaanByKategoriID(kategoriID string) (entity.Pendanaan, error)
 }
 
@@ -32,19 +33,19 @@ func (s *service) SShowAllPendanaan() ([]entity.Pendanaan, error) {
 	return pendanaan, nil
 }
 
-func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput, investorID string) (entity.Pendanaan, error) {
-	IDInvestor, _ := strconv.Atoi(investorID)
+func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error) {
+	//IDInvestor, _ := strconv.Atoi(investorID)
 
-	checkStatus, err := s.repository.RFindPendanaanByID(investorID)
+	//checkStatus, err := s.repository.RFindPendanaanByID(investorID)
 
-	if err != nil {
-		return checkStatus, err
-	}
-
-	if checkStatus.InvestorID == IDInvestor {
-		errorStatus := fmt.Sprintf("Form Pendanaan for Investor id : %s has been created", investorID)
-		return checkStatus, errors.New(errorStatus)
-	}
+	//if err != nil {
+	//	return checkStatus, err
+	//}
+	//
+	//if checkStatus.InvestorID == IDInvestor {
+	//	errorStatus := fmt.Sprintf("Form Pendanaan for Investor id : %s has been created", investorID)
+	//	return checkStatus, errors.New(errorStatus)
+	//}
 
 	var newPendanaan = entity.Pendanaan{
 		// FotoProfil: pathFileProfil,
@@ -63,9 +64,9 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput, investorID s
 		PerhitunganPenghasilan: pendanaan.PerhitunganPenghasilan,
 		PerhitunganKeuntungan:  pendanaan.PerhitunganKeuntungan,
 		KategoriID:             pendanaan.KategoriID,
-		InvestorID:             IDInvestor,
 		CreatedAt:              time.Now(),
 		UpdatedAt:              time.Now(),
+		//InvestorID:             IDInvestor,
 	}
 
 	createPendanaan, err := s.repository.RCreatePendanaan(newPendanaan)

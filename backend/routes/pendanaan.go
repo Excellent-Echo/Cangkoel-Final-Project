@@ -14,7 +14,7 @@ var (
 )
 
 func PendanaanRoute(r *gin.Engine) {
-	r.GET("pendanaan", handler.MiddlewareInvestor(investorService, authService), pendanaanHandler.ShowAllPendanaanHandler)
-	r.GET("pendanaan/:kategori-pertanian", handler.MiddlewareInvestor(investorService, authService), pendanaanHandler.GetPendanaanByKategoriIDHandler)
-	r.POST("pendanaan/add", handler.MiddlewareInvestor(investorService, authService), pendanaanHandler.CreatePendanaanHandler)
+	r.GET("pendanaan", pendanaanHandler.ShowAllPendanaanHandler)
+	r.GET("pendanaan/:kategori-pertanian", pendanaanHandler.GetPendanaanByKategoriIDHandler)
+	r.POST("pendanaan/add", pendanaanHandler.CreatePendanaanHandler)
 }

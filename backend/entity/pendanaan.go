@@ -9,8 +9,8 @@ type Pendanaan struct {
 	JudulPendanaan         string    `json:"judul_pendanaan"`
 	NominalPendanaan       int       `json:"nominal_pendanaan"`
 	PerusahaanPengirim     string    `json:"perusahaan_pengirim"`
-	BagiHasilInvestor      int       `json:"bagihasil_investor"`
-	BagiHasilPetani        int       `json:"bagihasil_petani"`
+	BagiHasilInvestor      int       `json:"bagi_hasil_investor"`
+	BagiHasilPetani        int       `json:"bagi_hasil_petani"`
 	KebutuhanKomoditas     string    `json:"kebutuhan_komoditas"`
 	JangkaWaktu            string    `json:"jangka_waktu"`
 	KeuntunganBersih       int       `json:"keuntungan_bersih"`

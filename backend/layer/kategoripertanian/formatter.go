@@ -1,4 +1,4 @@
-package kategoripertanian
+package kategoriPertanian
 
 import (
 	"backend/entity"
@@ -10,7 +10,6 @@ type KPetaniFormat struct {
 	NamaKategori string             `json:"nama_kategori"`
 	FotoKategori string             `json:"foto_kategori"`
 	Pendanaan    []entity.Pendanaan `gorm:"ForeignKey:KategoriID"`
-	PendanaanID  int                `json:"pendanaan_id"`
 }
 
 type KPetaniDeleteFormat struct {
@@ -24,7 +23,6 @@ func Format(Kpetani entity.KategoriPertanian) KPetaniFormat {
 		NamaKategori: Kpetani.NamaKategori,
 		FotoKategori: Kpetani.FotoKategori,
 		Pendanaan:    Kpetani.Pendanaan,
-		PendanaanID:  Kpetani.PendanaanID,
 	}
 
 	return formatKPetani
