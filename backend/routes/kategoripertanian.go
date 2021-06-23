@@ -1,5 +1,6 @@
 package routes
 
+
 import (
 	"backend/handler"
 	"backend/layer/kategoripertanian"
@@ -19,3 +20,4 @@ func KategoriPertanianRoute(r *gin.Engine)  {
 	r.PUT("/kategori-pertanian/:id", kategoriHandler.UpdateKPetaniByIDHandler)
 	r.DELETE("/kategori-pertanian/:id", kategoriHandler.DeleteKPetaniByIDHandler)
 }
+
