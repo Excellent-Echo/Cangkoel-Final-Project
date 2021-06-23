@@ -10,27 +10,24 @@ type Petani struct {
 	Role           string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
-	FormPengajuan  FormPengajuan
-	HasilPengajuan HasilPengajuan
+	FormPengajuan  FormPengajuan  `gorm:"ForeignKey:PetaniID"`
+	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:PetaniID"`
 }
 
-type Investor struct {
-	ID             int `gorm:"PrimaryKey"`
-	FullName       string
-	Email          string `gorm:"unique"`
-	Password       string
-	Role           string
-	CreatedAt      time.Time
-	UpdatedAt      time.Time
-	Pendanaan      Pendanaan
-	HasilPengajuan HasilPengajuan
+type Admin struct {
+	ID        int `gorm:"PrimaryKey"`
+	FullName  string
+	Email     string `gorm:"unique"`
+	Password  string
+	Role      string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type KategoriPertanian struct {
 	ID           int `gorm:"PrimaryKey"`
 	NamaKategori string
 	FotoKategori string
-	Pendanaan    []Pendanaan `gorm:"ForeignKey:KategoriID"`
 }
 
 type FormPengajuan struct {
@@ -47,20 +44,19 @@ type FormPengajuan struct {
 	AlamatUsaha      string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
-	HasilPengajuan   HasilPengajuan
+	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:PengajuanID"`
 	PetaniID         uint
 	PendanaanID      uint
 }
 
 type HasilPengajuan struct {
-	ID              int `gorm:"PrimaryKey"`
-	Status          string
-	Keterangan      string
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
-	PetaniID        uint
-	InvestorID      uint
-	FormPengajuanID uint
+	ID          int `gorm:"PrimaryKey"`
+	Status      string
+	Keterangan  string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	PetaniID    uint
+	PengajuanID uint
 }
 
 type Pendanaan struct {
@@ -82,8 +78,7 @@ type Pendanaan struct {
 	PerhitunganKeuntungan  string
 	CreatedAt              time.Time
 	UpdatedAt              time.Time
-	// KategoriPertanian      KategoriPertanian
-	// FormPengajuans         []FormPengajuan
-	InvestorID uint
-	KategoriID uint
+	// KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
+	FormPengajuan []FormPengajuan `gorm:"ForeignKey:PendanaanID"`
+	KategoriID    int
 }

@@ -20,13 +20,13 @@ func FormatPetani(petani entity.Petani) UserFormat {
 	return formatPetani
 }
 
-func FormatInvestor(investor entity.Investor) UserFormat {
-	var formatInvestor = UserFormat{
-		ID:       investor.ID,
-		FullName: investor.FullName,
-		Email:    investor.Email,
-		Role:     investor.Role,
+func FormatAdmin(admin entity.Admin) UserFormat {
+	var formatAdmin = UserFormat{
+		ID:       admin.ID,
+		FullName: admin.FullName,
+		Email:    admin.Email,
+		Role:     admin.Role,
 	}
 
-	return formatInvestor
+	return formatAdmin
 }

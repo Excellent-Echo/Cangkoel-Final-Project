@@ -2,6 +2,7 @@ package pendanaan
 
 import (
 	"backend/entity"
+	"backend/layer/kategoriPertanian"
 	"errors"
 	"fmt"
 
@@ -16,11 +17,12 @@ type Service interface {
 }
 
 type service struct {
-	repository Repository
+	repository  Repository
+	repository2 kategoriPertanian.Repository
 }
 
-func NewService(repository Repository) *service {
-	return &service{repository}
+func NewService(repository Repository, repository2 kategoriPertanian.Repository) *service {
+	return &service{repository, repository2}
 }
 
 func (s *service) SShowAllPendanaan() ([]entity.Pendanaan, error) {
@@ -48,7 +50,7 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pend
 	//}
 
 	var newPendanaan = entity.Pendanaan{
-		// FotoProfil: pathFileProfil,
+		FotoProfil:             pendanaan.FotoProfil,
 		NamaInvestor:           pendanaan.NamaInvestor,
 		JudulPendanaan:         pendanaan.JudulPendanaan,
 		NominalPendanaan:       pendanaan.NominalPendanaan,
@@ -66,7 +68,6 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pend
 		KategoriID:             pendanaan.KategoriID,
 		CreatedAt:              time.Now(),
 		UpdatedAt:              time.Now(),
-		//InvestorID:             IDInvestor,
 	}
 
 	createPendanaan, err := s.repository.RCreatePendanaan(newPendanaan)

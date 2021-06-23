@@ -27,7 +27,7 @@ func Connection() *gorm.DB {
 	}
 
 	db.AutoMigrate(&migration.Petani{})
-	db.AutoMigrate(&migration.Investor{})
+	db.AutoMigrate(&migration.Admin{})
 	db.AutoMigrate(&migration.KategoriPertanian{})
 	db.AutoMigrate(&migration.FormPengajuan{})
 	db.AutoMigrate(&migration.HasilPengajuan{})

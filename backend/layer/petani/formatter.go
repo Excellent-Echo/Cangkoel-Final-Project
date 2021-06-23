@@ -28,7 +28,7 @@ func Format(petani entity.Petani) PetaniFormat {
 	return formatPetani
 }
 
-func FormatInvestor(petani entity.Investor) PetaniFormat {
+func FormatAdmin(petani entity.Admin) PetaniFormat {
 	var formatPetani = PetaniFormat{
 		ID:       petani.ID,
 		FullName: petani.FullName,

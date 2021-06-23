@@ -40,6 +40,7 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 
 	// file, err := c.FormFile("Document")
 	// file2, err := c.FormFile("Ktp")
+	pendanaanID := c.Params.ByName("pendanaan_id")
 
 	if petaniData == 0 {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Petani not authorize / not login"})
@@ -69,7 +70,7 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
 	// pathPengajuanSave2 := "https://cangkoel.herokuapp.com/" + path2
 
-	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniID)
+	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniID, pendanaanID)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 

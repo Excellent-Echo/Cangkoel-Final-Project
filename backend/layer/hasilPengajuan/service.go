@@ -40,7 +40,6 @@ func (s *service) SCreateHasilPengajuan(hasilPengajuan entity.HasilPengajuanInpu
 		Status:      hasilPengajuan.Status,
 		Keterangan:  hasilPengajuan.Keterangan,
 		PetaniID:    hasilPengajuan.PetaniID,
-		InvestorID:  hasilPengajuan.InvestorID,
 		PengajuanID: hasilPengajuan.PengajuanID,
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
@@ -96,9 +95,6 @@ func (s *service) SUpdateHasilPengajuanByID(hasilPengajuanID string, input entit
 	}
 	if strconv.Itoa(input.PetaniID) != "" || len(strconv.Itoa(input.PetaniID)) != 0 {
 		dataUpdate["PetaniID"] = input.PetaniID
-	}
-	if strconv.Itoa(input.InvestorID) != "" || len(strconv.Itoa(input.InvestorID)) != 0 {
-		dataUpdate["InvestorID"] = input.InvestorID
 	}
 	if strconv.Itoa(input.PengajuanID) != "" || len(strconv.Itoa(input.PengajuanID)) != 0 {
 		dataUpdate["PengajuanID"] = input.PengajuanID
