@@ -17,6 +17,7 @@ type Service interface {
 	GenerateToken(PetaniID int) (string, error)
 	GenerateTokenInvestor(InvestorID int) (string, error)
 	ValidateToken(encodedToken string) (*jwt.Token, error)
+	GenerateTokenKpetani(KPetaniID int) (string, error)
 }
 
 type jwtService struct {
@@ -45,6 +46,22 @@ func (s *jwtService) GenerateToken(PetaniID int) (string, error) {
 func (s *jwtService) GenerateTokenInvestor(InvestorID int) (string, error) {
 	claim := jwt.MapClaims{
 		"investor_id": InvestorID,
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
+
+	signedToken, err := token.SignedString([]byte(key))
+
+	if err != nil {
+		return signedToken, nil
+	}
+
+	return signedToken, nil
+}
+
+func (s *jwtService) GenerateTokenKpetani(KPetaniID int) (string, error) {
+	claim := jwt.MapClaims{
+		"kpetani_id": KPetaniID,
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)

@@ -10,7 +10,7 @@ import TransaksiSukses from "../views/menus/transaksiSukses.jsx";
 
 var ThemeRoutes = [
   {
-    path: "/data-pengajuan",
+    path: "/",
     name: "Data Pengajuan",
     icon: "fa-solid fa-star",
     component: FirstDashboard,
@@ -62,13 +62,6 @@ var ThemeRoutes = [
     name: "Transaksi Sukses",
     icon: "mdi mdi-apps",
     component: TransaksiSukses,
-  },
-
-  {
-    path: "/",
-    pathTo: "/starter/starter",
-    name: "Dashboard",
-    redirect: true,
   },
 ];
 export default ThemeRoutes;

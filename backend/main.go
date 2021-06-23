@@ -16,6 +16,7 @@ func main() {
 	routes.InvestorRoute(r)
 	routes.UserRoute(r)
 	routes.FormPengajuanRoute(r)
+	routes.PendanaanRoute(r)
 
 	r.Run()
 }
