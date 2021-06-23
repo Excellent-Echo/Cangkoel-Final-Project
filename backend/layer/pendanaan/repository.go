@@ -24,7 +24,7 @@ func NewRepository(db *gorm.DB) *repository {
 func (r *repository) RShowAllPendanaan() ([]entity.Pendanaan, error) {
 	var pendanaan []entity.Pendanaan
 
-	err := r.db.Find(&pendanaan).Error
+	err := r.db.Preload("FormPengajuan").Find(&pendanaan).Error
 	if err != nil {
 		return pendanaan, err
 	}
@@ -44,7 +44,7 @@ func (r *repository) RCreatePendanaan(pendanaan entity.Pendanaan) (entity.Pendan
 func (r *repository) RFindPendanaanByID(ID string) (entity.Pendanaan, error) {
 	var pendanaan entity.Pendanaan
 
-	err := r.db.Where("id = ?", ID).Find(&pendanaan).Error
+	err := r.db.Where("id = ?", ID).Preload("FormPengajuan").Find(&pendanaan).Error
 	if err != nil {
 		return pendanaan, err
 	}
