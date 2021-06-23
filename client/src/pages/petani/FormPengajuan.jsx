@@ -2,8 +2,37 @@ import React from 'react'
 import Navbar from '../../components/Navbar.jsx'
 import Footer from '../../components/Footer.jsx'
 import { PickerDropPane } from 'filestack-react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import pengajuanAction from '../../redux/pengajuan/pengajuanAction'
 
 const FormPengajuan = () => {
+	const pengajuanData = useSelector((state) => state.pengajuan)
+	const userProfileData = useSelector((state) => state.userProfile)
+	const dispatch = useDispatch()
+
+	const token = localStorage.getItem('token')
+
+	const handlePengajuan = (e) => {
+		e.preventDefault()
+
+		dispatch(
+			pengajuanAction.pengajuan(
+				pengajuanData.nama,
+				parseInt(pengajuanData.nomorHP),
+				pengajuanData.dokumenPerizinan,
+				parseInt(pengajuanData.nomorNPWP),
+				pengajuanData.ktp,
+				pengajuanData.jenisUsaha,
+				parseInt(pengajuanData.tenagaKerja),
+				parseInt(pengajuanData.omset),
+				pengajuanData.alamat,
+				userProfileData.id,
+				token
+			)
+		)
+	}
+
 	return (
 		<>
 			<Navbar />
@@ -24,6 +53,7 @@ const FormPengajuan = () => {
 										type="text"
 										placeholder="Masukkan nama lengkap"
 										required
+										onChange={(e) => dispatch(pengajuanAction.setNama(e.target.value))}
 									/>
 								</div>
 								<div className="w-full md:w-full px-3 mb-6">
@@ -36,6 +66,7 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan nomor handphone"
 										required
+										onChange={(e) => dispatch(pengajuanAction.setNomorHP(e.target.value))}
 									/>
 								</div>
 								<div className=" w-full md:w-full px-3 mb-6">
@@ -43,12 +74,18 @@ const FormPengajuan = () => {
 										Dokumen Perizinan (Sku/ siup/ tdp/ dll)
 									</label>
 									<PickerDropPane
-										apikey={'ApW8Eq4TGSN69zPGRbKtMz'}
+										apikey={process.env.REACT_APP_FILESTACK_KEY}
 										onSuccess={(res) => {
 											console.log(res)
+											dispatch(pengajuanAction.setDokumenPerizinan(res.filesUploaded[0].url))
 										}}
-										ewqa23d5td
 									/>
+									{/* <button
+										className="appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md mr-3"
+										onClick={fileStack}
+									>
+										Upload
+									</button> */}
 								</div>
 								<div className="w-full md:w-full px-3 mb-6">
 									<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -60,6 +97,7 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan nomor npwp"
 										required
+										onChange={(e) => dispatch(pengajuanAction.setNomorNPWP(e.target.value))}
 									/>
 								</div>
 								<div className=" w-full md:w-full px-3 mb-6">
@@ -67,11 +105,10 @@ const FormPengajuan = () => {
 										Upload KTP
 									</label>
 									<PickerDropPane
-										apikey={'ApW8Eq4TGSN69zPGRbKtMz'}
+										apikey={process.env.REACT_APP_FILESTACK_KEY}
 										onSuccess={(res) => {
-											console.log(res)
+											dispatch(pengajuanAction.setKTP(res.filesUploaded[0].url))
 										}}
-										ewqa23d5td
 									/>
 								</div>
 								<div className="w-full md:w-full px-3 mb-6">
@@ -84,6 +121,7 @@ const FormPengajuan = () => {
 										type="text"
 										placeholder="Masukkan jenis usaha pertanian"
 										required
+										onChange={(e) => dispatch(pengajuanAction.setJenisUsaha(e.target.value))}
 									/>
 								</div>
 								<div className="w-full md:w-full px-3 mb-6">
@@ -96,6 +134,7 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan jumlah tenaga kerja"
 										required
+										onChange={(e) => dispatch(pengajuanAction.setTenagaKerja(e.target.value))}
 									/>
 								</div>
 								<div className="w-full md:w-full px-3 mb-6">
@@ -108,6 +147,7 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan omzet perbulan"
 										required
+										onChange={(e) => dispatch(pengajuanAction.setOmset(e.target.value))}
 									/>
 								</div>
 
@@ -119,6 +159,7 @@ const FormPengajuan = () => {
 										className="bg-gray-100 rounded-md border leading-normal resize-none w-full h-20 py-2 px-3 shadow-inner border border-gray-400 focus:outline-none focus:bg-white"
 										placeholder="Masukkan deskripsi lengkap"
 										required
+										onChange={(e) => dispatch(pengajuanAction.setAlamat(e.target.value))}
 									></textarea>
 								</div>
 
@@ -126,7 +167,8 @@ const FormPengajuan = () => {
 									<div className="flex justify-end">
 										<button
 											className="appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md mr-3"
-											type="submit"
+											// type="submit"
+											onClick={handlePengajuan}
 										>
 											Kirim Formulir
 										</button>

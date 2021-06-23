@@ -2,10 +2,14 @@ import { combineReducers } from 'redux'
 
 import userRegisterReducer from './user/register/userRegisterReducer'
 import userLoginReducer from './user/login/userLoginReducer'
+import userProfileReducer from './user/profile/userProfileReducer'
+import pengajuanReducer from './pengajuan/pengajuanReducer'
 
 const rootReducer = combineReducers({
 	userRegister: userRegisterReducer,
-	userLogin: userLoginReducer
+	userLogin: userLoginReducer,
+	userProfile: userProfileReducer,
+	pengajuan: pengajuanReducer
 })
 
 export default rootReducer

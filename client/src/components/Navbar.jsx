@@ -1,8 +1,8 @@
 import React from 'react'
-// import { useHistory } from 'react-router-dom'
 import { css } from 'styled-components/macro' //eslint-disable-line
 import tw from 'twin.macro'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // assets
 import Logo from '../assets/logo.png'
@@ -11,15 +11,36 @@ import Logo from '../assets/logo.png'
 const Button = tw.span`rounded bg-crowde-100 hover:bg-crowde-200 py-2 px-4 text-white mx-3`
 
 const Navbar = () => {
-	let getIsAuth = localStorage.getItem('isAuth')
-	let isAuth = JSON.parse(getIsAuth)
-	// const history = useHistory()
+	let token = localStorage.getItem('token')
+	const userProfileData = useSelector((state) => state.userProfile)
+
+	const user = () => {
+		if (userProfileData.role === 'petani') {
+			return (
+				<Link to="/profil-petani">
+					<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">
+						Hi, {userProfileData.full_name}
+					</p>
+				</Link>
+			)
+		} else {
+			return (
+				<Link to="/profil-investor">
+					<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">
+						Hi, {userProfileData.full_name}
+					</p>
+				</Link>
+			)
+		}
+	}
 
 	return (
 		<div className="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
 			<div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
 				<div className="p-4 flex flex-row items-center justify-between ">
-					<img src={Logo} alt="logo cangkoel" className="w-36" />
+					<Link to="/">
+						<img src={Logo} alt="logo cangkoel" className="w-36" />
+					</Link>
 					<button className="md:hidden rounded-lg focus:outline-none focus:shadow-outline">
 						<svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
 							<path
@@ -33,36 +54,36 @@ const Navbar = () => {
 						</svg>
 					</button>
 				</div>
-				{isAuth ? (
+				{token ? (
 					<nav className="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-						<a
+						<Link
+							to="/"
 							className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-							href="/"
 						>
 							Tentang
-						</a>
-						<a
+						</Link>
+						<Link
+							to="/"
 							className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-							href="/"
 						>
 							Kontak Kami
-						</a>
-						<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">Hi, Aziz</p>
+						</Link>
+						{user()}
 					</nav>
 				) : (
 					<nav className="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-						<a
+						<Link
+							to="/"
 							className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-							href="/"
 						>
 							Tentang
-						</a>
-						<a
+						</Link>
+						<Link
+							to="/"
 							className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-							href="/"
 						>
 							Kontak Kami
-						</a>
+						</Link>
 						<Button>
 							<Link to="/login">Login</Link>
 						</Button>

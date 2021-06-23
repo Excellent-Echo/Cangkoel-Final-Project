@@ -1,12 +1,13 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { Container as ContainerBase } from '../components/misc/Layouts.jsx'
 import tw from 'twin.macro'
 import styled from 'styled-components'
 import { css } from 'styled-components/macro' //eslint-disable-line
 
-import { useSelector, useDispatch } from 'react-redux'
 import userLoginAction from '../redux/user/login/userLoginAction'
+// import { useAuth } from '../utils/auth'
 
 import petani from '../assets/petani-login.jpg'
 import logo from '../assets/logo.png'
@@ -69,12 +70,24 @@ const Login = ({
 	const loginData = useSelector((state) => state.userLogin)
 	const dispatch = useDispatch()
 	const history = useHistory()
+	let location = useLocation()
+	// let auth = useAuth()
 
 	const loginHandler = (e) => {
 		e.preventDefault()
 
-		dispatch(userLoginAction.login(loginData.email, loginData.password, history))
+		dispatch(userLoginAction.login(loginData.email, loginData.password, history, location))
 	}
+
+	// let { from } = location.state || { from: { pathname: '/' } }
+
+	// let loginHandler = (e) => {
+	// 	e.preventDefault()
+
+	// 	auth.Signin(() => {
+	// 		history.replace(from)
+	// 	})
+	// }
 
 	return (
 		<div>

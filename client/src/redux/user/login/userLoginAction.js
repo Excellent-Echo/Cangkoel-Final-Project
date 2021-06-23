@@ -1,8 +1,9 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
-import { history } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
+
+import userProfileAction from '../profile/userProfileAction'
 
 const setEmail = (email) => {
 	return {
@@ -27,7 +28,7 @@ const setAuth = (isAuth) => ({
 	}
 })
 
-const login = (email, password, history) => async (dispatch) => {
+const login = (email, password, history, location) => async (dispatch) => {
 	try {
 		const loginData = {
 			email: email,
@@ -40,37 +41,55 @@ const login = (email, password, history) => async (dispatch) => {
 			data: loginData
 		})
 
-		const role = postData.data.data.role
-		const token = postData.data.data.token
+		let role = postData.data.data.role
+		let id = postData.data.data.id
+		let token = postData.data.data.token
+		localStorage.setItem('token', token)
 
-		console.log(role, token)
+		let url = ''
 
-		console.log(history)
-
-		if (postData.data.meta.code === 200) {
-			Swal.fire({
-				title: 'Success!',
-				text: "You've Logged In Successfully",
-				icon: 'success',
-				timer: 2000
-			})
-
-			// if (role === 'petani') {
-			// history.push('/profil-petani')
-			// } else {
-			// 	history.push('/profil-investor')
-			// }
-
-			localStorage.setItem('token', token)
-			localStorage.setItem('role', role)
-			localStorage.setItem('isAuth', true)
+		if (role === 'petani') {
+			url = `/users/petani/${id}`
+		} else {
+			url = `/users/investor/${id}`
 		}
 
-		history.push('/form-pendanaan')
+		const getDetailUser = await CangkoelAPI({
+			method: 'GET',
+			url: url,
+			headers: {
+				Authorization: token
+			}
+		})
+
+		dispatch(userProfileAction.setProfileData(getDetailUser.data.data))
+
+		console.log(getDetailUser.data.data)
+
+		dispatch(setAuth(true))
+
+		let { from } = location.state || { from: { pathname: '/' } }
+
+		history.replace(from)
+
+		// let role = postData.data.data.role
+		// let token = postData.data.data.token
+		// let code = postData.data.meta.code
+
+		// if (postData.data.meta.code === 200) {
+		// 	Swal.fire({
+		// 		title: 'Success!',
+		// 		text: "You've Logged In Successfully",
+		// 		icon: 'success',
+		// 		timer: 2000
+		// 	})
+
+		// 	localStorage.setItem('token', token)
+		// 	localStorage.setItem('role', role)
+		// 	localStorage.setItem('isAuth', true)
+		// }
 	} catch (error) {
 		let code = error.response.data.meta.code
-
-		console.log(error.response)
 
 		if (code === 401) {
 			Swal.fire({
@@ -85,6 +104,7 @@ const login = (email, password, history) => async (dispatch) => {
 const userLoginAction = {
 	setEmail,
 	setPassword,
+	setAuth,
 	login
 }
 

@@ -3,7 +3,8 @@ import { USER_SET_PASSWORD, USER_SET_EMAIL, USER_SET_AUTH } from '../userActionT
 const initialState = {
 	email: '',
 	password: '',
-	isAuth: false
+	isAuth: false,
+	user: ''
 }
 
 const userLoginReducer = (state = initialState, action) => {

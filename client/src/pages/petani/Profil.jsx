@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar.jsx'
 import { ContentWithPaddingXl } from '../../components/misc/Layouts'
+import { useSelector } from 'react-redux'
 
 const Profil = ({ color }) => {
 	const [openTab, setOpenTab] = useState(1)
+	const userProfileData = useSelector((state) => state.userProfile)
 
 	return (
 		<>
@@ -191,10 +193,15 @@ const Profil = ({ color }) => {
 											</div>
 										</div>
 									</div>
-
-									<div className={openTab === 2 ? 'block' : 'hidden'} id="link2"></div>
-									<div className={openTab === 3 ? 'block' : 'hidden'} id="link3"></div>
 								</div>
+
+								<div className={openTab === 2 ? 'block' : 'hidden'} id="link2">
+									<h3 className="font-semibold text-lg mb-1">
+										Name: {userProfileData.full_name} Email: {userProfileData.email}
+									</h3>
+								</div>
+
+								<div className={openTab === 3 ? 'block' : 'hidden'} id="link3"></div>
 							</div>
 						</div>
 					</div>

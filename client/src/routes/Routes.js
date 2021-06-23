@@ -1,8 +1,7 @@
-import React, { useContext, createContext, useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import PrivateRoute from './PrivateRoute'
-import Navbar from '../components/Navbar'
+// import { ProvideAuth } from '../utils/auth'
 
 // pages each role
 import ChooseRole from '../pages/ChooseRole'
@@ -21,22 +20,8 @@ import Details from '../pages/petani/Detail'
 import FormPengajuan from '../pages/petani/FormPengajuan'
 import ProfilPetani from '../pages/petani/Profil'
 
-const authContext = createContext()
-
-// function ProvideAuth({ children }) {
-// 	const auth = useProvideAuth()
-// 	return <authContext.Provider value={auth}>{children}</authContext.Provider>
-// }
-
-function useAuth() {
-	return useContext(authContext)
-}
-
 const Routes = () => {
-	let getIsAuth = localStorage.getItem('isAuth')
-	let isAuth = JSON.parse(getIsAuth)
 	return (
-		// <ProvideAuth>
 		<Router>
 			<Switch>
 				{/* route each role */}
@@ -45,19 +30,27 @@ const Routes = () => {
 
 				{/* route role investor */}
 				<Route path="/register-investor" exact component={RegisterInvestor} />
-				<Route path="/form-pendanaan" exact component={FormPendanaaan} />
-				<PrivateRoute path="/profil-investor" exact component={ProfilInvestor} auth={isAuth} />
+				<PrivateRoute path="/form-pendanaan">
+					<FormPendanaaan />
+				</PrivateRoute>
+				<PrivateRoute path="/profil-investor">
+					<ProfilInvestor />
+				</PrivateRoute>
 
 				{/* route role petani */}
 				<Route path="/register-petani" exact component={RegisterPetani} />
 				<Route path="/results" exact component={Results} />
 				<Route path="/details" exact component={Details} />
-				<Route path="/form-pengajuan" exact component={FormPengajuan} />
-				<PrivateRoute path="/profil-petani" exact component={ProfilPetani} auth={isAuth} />
+				<PrivateRoute path="/form-pengajuan">
+					<FormPengajuan />
+				</PrivateRoute>
+				<PrivateRoute path="/profil-petani">
+					<ProfilPetani />
+				</PrivateRoute>
+				{/* <PrivateRoute path="/profil-petani" exact component={ProfilPetani} auth={isAuth} /> */}
 				<Route path="/" exact component={Home} />
 			</Switch>
 		</Router>
-		// </ProvideAuth>
 	)
 }
 
