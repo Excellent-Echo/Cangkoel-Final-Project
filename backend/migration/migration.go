@@ -28,7 +28,6 @@ type KategoriPertanian struct {
 	ID           int `gorm:"PrimaryKey"`
 	NamaKategori string
 	FotoKategori string
-	Pendanaan    []Pendanaan `gorm:"ForeignKey:KategoriID"`
 }
 
 type FormPengajuan struct {
@@ -81,5 +80,5 @@ type Pendanaan struct {
 	UpdatedAt              time.Time
 	// KategoriPertanian      KategoriPertanian `gorm:"ForeignKey:PendanaanID"`
 	FormPengajuan []FormPengajuan `gorm:"ForeignKey:PendanaanID"`
-	KategoriID    uint
+	KategoriID    int
 }

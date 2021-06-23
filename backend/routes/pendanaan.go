@@ -9,7 +9,7 @@ import (
 
 var (
 	pendanaanRepository = pendanaan.NewRepository(DB)
-	pendanaanService    = pendanaan.NewService(pendanaanRepository)
+	pendanaanService    = pendanaan.NewService(pendanaanRepository, kategoriPertanianRepository)
 	pendanaanHandler    = handler.NewPendanaanHandler(pendanaanService, authService)
 )
 

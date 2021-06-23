@@ -5,6 +5,7 @@ import (
 	"backend/entity"
 	"backend/helper"
 	"backend/layer/pendanaan"
+
 	//"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -49,8 +50,8 @@ func (h *pendanaanHandler) CreatePendanaanHandler(c *gin.Context) {
 	// path := fmt.Sprintf("images/profile-%d-%s", investorData, file.Filename)
 
 	// err = c.SaveUploadedFile(file, path)
-	var inputpendanaan entity.PendanaanInput
 
+	var inputpendanaan entity.PendanaanInput
 
 	//investorID := strconv.Itoa(investorData)
 
