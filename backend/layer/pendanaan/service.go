@@ -48,7 +48,7 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pend
 	//}
 
 	var newPendanaan = entity.Pendanaan{
-		// FotoProfil: pathFileProfil,
+		FotoProfil:             pendanaan.FotoProfil,
 		NamaInvestor:           pendanaan.NamaInvestor,
 		JudulPendanaan:         pendanaan.JudulPendanaan,
 		NominalPendanaan:       pendanaan.NominalPendanaan,
@@ -66,7 +66,6 @@ func (s *service) SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pend
 		KategoriID:             pendanaan.KategoriID,
 		CreatedAt:              time.Now(),
 		UpdatedAt:              time.Now(),
-		//InvestorID:             IDInvestor,
 	}
 
 	createPendanaan, err := s.repository.RCreatePendanaan(newPendanaan)
