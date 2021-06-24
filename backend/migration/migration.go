@@ -3,7 +3,7 @@ package migration
 import "time"
 
 type Petani struct {
-	ID             int `gorm:"PrimaryKey"`
+	ID             string `gorm:"PrimaryKey"`
 	FullName       string
 	Email          string `gorm:"unique"`
 	Password       string
@@ -15,7 +15,7 @@ type Petani struct {
 }
 
 type Admin struct {
-	ID        int `gorm:"PrimaryKey"`
+	ID        string `gorm:"PrimaryKey"`
 	FullName  string
 	Email     string `gorm:"unique"`
 	Password  string
