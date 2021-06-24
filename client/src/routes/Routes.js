@@ -11,19 +11,15 @@ import Results from '../pages/petani/Results'
 import Details from '../pages/petani/Detail'
 import FormPengajuan from '../pages/petani/FormPengajuan'
 import ProfilPetani from '../pages/petani/Profil'
-import Test from '../../src/components/test'
 
 const Routes = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route path="/test" exact component={Test} />
 				<Route path="/login" exact component={Login} />
 				<Route path="/register" exact component={Register} />
-				<Route path="/results" exact component={Results} />
+				<Route path="/results/:id" exact component={Results} />
 				<Route path="/details" exact component={Details} />
-				{/* <Route path="/formulir-pengajuan" exact component={FormPengajuan}/>
-				<Route path="/ProfilPetani" exact component={ProfilPetani}/> */}
 
 				<PrivateRoute path="/formulir-pengajuan">
 					<FormPengajuan />
