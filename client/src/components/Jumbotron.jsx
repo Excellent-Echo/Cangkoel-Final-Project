@@ -31,10 +31,7 @@ const ImageContainer = tw(ColumnContainer)`mt-16 lg:mt-0 lg:ml-16 flex justify-e
 const Jumbotron = ({
 	text = 'Farmer all over the world are happily using Cangkoel.',
 	link1Text = 'Cari Dana',
-	link1Url = '/register-petani',
-
-	link2Text = 'Funding',
-	link2Url = '/register-investor',
+	link1Url = '/results',
 
 	pushDownFooter = false,
 	imageSrc = mockupImageSrc
@@ -48,9 +45,6 @@ const Jumbotron = ({
 						<LinksContainer>
 							<Link href={link1Url}>
 								<span>{link1Text}</span>
-							</Link>
-							<Link href={link2Url}>
-								<span>{link2Text}</span>
 							</Link>
 						</LinksContainer>
 					</TextContainer>

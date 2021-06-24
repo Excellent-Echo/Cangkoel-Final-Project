@@ -65,7 +65,7 @@ const Login = ({
 	submitButtonText = 'Masuk',
 	SubmitButtonIcon = LoginIcon,
 	forgotPasswordUrl = '/login',
-	signupUrl = '/choose-role'
+	signupUrl = '/register'
 }) => {
 	const loginData = useSelector((state) => state.userLogin)
 	const dispatch = useDispatch()

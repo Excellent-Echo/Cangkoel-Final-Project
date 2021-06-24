@@ -89,7 +89,7 @@ const Navbar = () => {
 						</Button>
 
 						<Button>
-							<Link to="/choose-role">Register</Link>
+							<Link to="/register">Register</Link>
 						</Button>
 					</nav>
 				)}
