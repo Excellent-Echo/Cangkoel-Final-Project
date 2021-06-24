@@ -19,7 +19,7 @@ const Routes = () => {
 				<Route path="/login" exact component={Login} />
 				<Route path="/register" exact component={Register} />
 				<Route path="/results/:id" exact component={Results} />
-				<Route path="/details" exact component={Details} />
+				<Route path="/details/:id" exact component={Details} />
 
 				<PrivateRoute path="/formulir-pengajuan">
 					<FormPengajuan />
