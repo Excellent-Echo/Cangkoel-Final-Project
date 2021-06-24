@@ -1,4 +1,4 @@
-package hasilpengajuan
+package hasilPengajuan
 
 import (
 	"backend/entity"
@@ -37,12 +37,12 @@ func (s *service) SShowAllHasilPengajuan() ([]entity.HasilPengajuan, error) {
 func (s *service) SCreateHasilPengajuan(hasilPengajuan entity.HasilPengajuanInput) (entity.HasilPengajuan, error) {
 
 	var newHasilPengajuan = entity.HasilPengajuan{
-		Status:      hasilPengajuan.Status,
-		Keterangan:  hasilPengajuan.Keterangan,
-		PetaniID:    hasilPengajuan.PetaniID,
-		PengajuanID: hasilPengajuan.PengajuanID,
-		CreatedAt:   time.Now(),
-		UpdatedAt:   time.Now(),
+		Status:          hasilPengajuan.Status,
+		Keterangan:      hasilPengajuan.Keterangan,
+		PetaniID:        hasilPengajuan.PetaniID,
+		FormPengajuanID: hasilPengajuan.FormPengajuanID,
+		CreatedAt:       time.Now(),
+		UpdatedAt:       time.Now(),
 	}
 
 	createHasilPengajuan, err := s.repository.RCreateHasilPengajuan(newHasilPengajuan)
@@ -96,8 +96,8 @@ func (s *service) SUpdateHasilPengajuanByID(hasilPengajuanID string, input entit
 	if strconv.Itoa(input.PetaniID) != "" || len(strconv.Itoa(input.PetaniID)) != 0 {
 		dataUpdate["PetaniID"] = input.PetaniID
 	}
-	if strconv.Itoa(input.PengajuanID) != "" || len(strconv.Itoa(input.PengajuanID)) != 0 {
-		dataUpdate["PengajuanID"] = input.PengajuanID
+	if strconv.Itoa(input.FormPengajuanID) != "" || len(strconv.Itoa(input.FormPengajuanID)) != 0 {
+		dataUpdate["PengajuanID"] = input.FormPengajuanID
 	}
 	dataUpdate["updated_at"] = time.Now()
 

@@ -1,97 +1,102 @@
 package handler
 
-// import (
-// 	"backend/auth"
-// 	"backend/entity"
-// 	"backend/helper"
-// 	"backend/layer/hasilPengajuan"
-// 	"strconv"
+import (
+	"backend/auth"
+	"backend/entity"
+	"backend/helper"
+	"backend/layer/hasilPengajuan"
+	"net/http"
 
-// 	"github.com/gin-gonic/gin"
-// )
+	"github.com/gin-gonic/gin"
+)
 
-// type hasilPengajuanHandler struct {
-// 	hasilPengajuanService hasilPengajuan.Service
-// 	authService          auth.Service
-// }
+type hasilPengajuanHandler struct {
+	hasilPengajuanService hasilPengajuan.Service
+	authService           auth.Service
+}
 
-// func NewFormPengajuanHandler(formPengajuanService formPengajuan.Service, authService auth.Service) *formPengajuanHandler {
-// 	return &formPengajuanHandler{formPengajuanService, authService}
-// }
+func NewHasilPengajuanHandler(hasilPengajuanService hasilPengajuan.Service, authService auth.Service) *hasilPengajuanHandler {
+	return &hasilPengajuanHandler{hasilPengajuanService, authService}
+}
 
-// // SHOW ALL FORM PENGAJUAN
-// func (h *formPengajuanHandler) ShowAllFormPengajuanHandler(c *gin.Context) {
-// 	formPengajuan, err := h.formPengajuanService.SShowAllFormPengajuan()
+// SHOW ALL HASIL PENGAJUAN
+func (h *hasilPengajuanHandler) ShowAllHasilPengajuanHandler(c *gin.Context) {
+	hasilPengajuan, err := h.hasilPengajuanService.SShowAllHasilPengajuan()
 
-// 	if err != nil {
-// 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
+	if err != nil {
+		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 
-// 		c.JSON(500, responseError)
-// 		return
-// 	}
+		c.JSON(500, responseError)
+		return
+	}
 
-// 	response := helper.APIResponse("success get all Form Pengajuan", 200, "status OK", formPengajuan)
-// 	c.JSON(200, response)
-// }
+	response := helper.APIResponse("success get all Form Pengajuan", 200, "status OK", hasilPengajuan)
+	c.JSON(200, response)
+}
 
-// // CREATE NEW FORM PENGAJUAN
-// func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
-// 	petaniData := int(c.MustGet("currentUser").(int))
+// CREATE NEW HASIL PENGAJUAN
+func (h *hasilPengajuanHandler) CreateHasilPengajuanHandler(c *gin.Context) {
 
-// 	// file, err := c.FormFile("Document")
-// 	// file2, err := c.FormFile("Ktp")
+	var inputHasilPengajuan entity.HasilPengajuanInput
 
-// 	if petaniData == 0 {
-// 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Petani not authorize / not login"})
+	if err := c.ShouldBindJSON(&inputHasilPengajuan); err != nil {
 
-// 		c.JSON(401, responseError)
-// 		return
-// 	}
-// 	// path := fmt.Sprintf("images/document-%d-%s", petaniData, file.Filename)
-// 	// path2 := fmt.Sprintf("images/ktp-%d-%s", petaniData, file2.Filename)
+		splitError := helper.SplitErrorInformation(err)
+		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
 
-// 	// err = c.SaveUploadedFile(file, path)
-// 	// err = c.SaveUploadedFile(file2, path2)
+		c.JSON(400, responseError)
+		return
+	}
 
-// 	petaniID := strconv.Itoa(petaniData)
+	newHasilPengajuan, err := h.hasilPengajuanService.SCreateHasilPengajuan(inputHasilPengajuan)
+	if err != nil {
+		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 
-// 	var inputFormPengajuan entity.FormPengajuanInput
+		c.JSON(500, responseError)
+		return
+	}
+	response := helper.APIResponse("success create new Hasil Pengajuan", 201, "Status OK", newHasilPengajuan)
+	c.JSON(201, response)
+}
 
-// 	if err := c.ShouldBindJSON(&inputFormPengajuan); err != nil {
+// FIND HASIL PENGAJUAN BY ID
+func (h *hasilPengajuanHandler) GetHasilPengajuanByIDHandler(c *gin.Context) {
+	id := c.Params.ByName("id")
 
-// 		splitError := helper.SplitErrorInformation(err)
-// 		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
+	hasilPengajuan, err := h.hasilPengajuanService.SFindHasilPengajuanByID(id)
+	if err != nil {
+		responseError := helper.APIResponse("input params error", 400, "bad request", gin.H{"errors": err.Error()})
 
-// 		c.JSON(400, responseError)
-// 		return
-// 	}
+		c.JSON(400, responseError)
+		return
+	}
 
-// 	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
-// 	// pathPengajuanSave2 := "https://cangkoel.herokuapp.com/" + path2
+	response := helper.APIResponse("success get Hasil Pengajuan by ID", 200, "success", hasilPengajuan)
+	c.JSON(200, response)
+}
 
-// 	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniID)
-// 	if err != nil {
-// 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
+// UPDATE HASIL PENGAJUAN BY ID
+func (h *hasilPengajuanHandler) UpdateHasilPengajuanByIDHandler(c *gin.Context) {
+	id := c.Params.ByName("id")
 
-// 		c.JSON(500, responseError)
-// 		return
-// 	}
-// 	response := helper.APIResponse("success create new Form Pengajuan", 201, "Status OK", newFormPengajuan)
-// 	c.JSON(201, response)
-// }
+	var updateHasilPengajuanInput entity.UpdateHasilPengajuanInput
 
-// // FIND FORM PENGAJUAN BY ID
-// func (h *formPengajuanHandler) GetFormPengajuanByIDHandler(c *gin.Context) {
-// 	id := c.Params.ByName("id")
+	if err := c.ShouldBindJSON(&updateHasilPengajuanInput); err != nil {
+		splitError := helper.SplitErrorInformation(err)
+		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
 
-// 	formPengajuan, err := h.formPengajuanService.SFindFormPengajuanByID(id)
-// 	if err != nil {
-// 		responseError := helper.APIResponse("input params error", 400, "bad request", gin.H{"errors": err.Error()})
+		c.JSON(400, responseError)
+		return
+	}
 
-// 		c.JSON(400, responseError)
-// 		return
-// 	}
+	hasilPengajuan, err := h.hasilPengajuanService.SUpdateHasilPengajuanByID(id, updateHasilPengajuanInput)
+	if err != nil {
+		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"error": err.Error()})
 
-// 	response := helper.APIResponse("success get user Form Pengajuan by ID", 200, "success", formPengajuan)
-// 	c.JSON(200, response)
-// }
+		c.JSON(500, responseError)
+		return
+	}
+
+	response := helper.APIResponse("success update HasilPengajuan by ID", http.StatusOK, "success", hasilPengajuan)
+	c.JSON(http.StatusOK, response)
+}

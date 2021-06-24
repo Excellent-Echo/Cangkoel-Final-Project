@@ -25,13 +25,13 @@ func NewService(petaniRepo petani.Repository, adminRepo admin.Repository) *servi
 
 func (s *service) SLoginUser(input entity.LoginUserInput) (UserFormat, error) {
 	userPetani, err := s.petaniRepo.RFindPetaniByEmail(input.Email)
-	userAdmin, err := s.adminRepo.RFindAdminByEmail(input.Email)
+	admin, err := s.adminRepo.RFindAdminByEmail(input.Email)
 
 	if err != nil {
 		return UserFormat{}, err
 	}
 
-	if userPetani.ID > 0 {
+	if len(userPetani.ID) == 0 { // perlu diperhatikan
 		if err := bcrypt.CompareHashAndPassword([]byte(userPetani.Password), []byte(input.Password)); err != nil {
 			return UserFormat{}, errors.New("password invalid")
 		}
@@ -41,12 +41,12 @@ func (s *service) SLoginUser(input entity.LoginUserInput) (UserFormat, error) {
 		return formatter, nil
 	}
 
-	if userAdmin.ID > 0 {
-		if err := bcrypt.CompareHashAndPassword([]byte(userAdmin.Password), []byte(input.Password)); err != nil {
+	if len(admin.ID) == 0 { // perlu diperhatikan
+		if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password)); err != nil {
 			return UserFormat{}, errors.New("password invalid")
 		}
 
-		formatter := FormatAdmin(userAdmin)
+		formatter := FormatAdmin(admin)
 
 		return formatter, nil
 	}

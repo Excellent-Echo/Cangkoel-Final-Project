@@ -14,8 +14,8 @@ var (
 )
 
 type Service interface {
-	GenerateToken(PetaniID int) (string, error)
-	GenerateTokenInvestor(InvestorID int) (string, error)
+	GenerateToken(PetaniID string) (string, error)
+	GenerateTokenInvestor(InvestorID string) (string, error)
 	ValidateToken(encodedToken string) (*jwt.Token, error)
 }
 
@@ -26,7 +26,7 @@ func NewService() *jwtService {
 	return &jwtService{}
 }
 
-func (s *jwtService) GenerateToken(PetaniID int) (string, error) {
+func (s *jwtService) GenerateToken(PetaniID string) (string, error) {
 	claim := jwt.MapClaims{
 		"petani_id": PetaniID,
 	}
@@ -42,7 +42,7 @@ func (s *jwtService) GenerateToken(PetaniID int) (string, error) {
 	return signedToken, nil
 }
 
-func (s *jwtService) GenerateTokenInvestor(InvestorID int) (string, error) {
+func (s *jwtService) GenerateTokenInvestor(InvestorID string) (string, error) {
 	claim := jwt.MapClaims{
 		"investor_id": InvestorID,
 	}

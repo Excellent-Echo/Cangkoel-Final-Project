@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type Admin struct {
-	ID        int       `gorm:"primaryKey" json:"id"`
+	ID        string    `gorm:"primaryKey" json:"id"`
 	FullName  string    `json:"full_name"`
 	Email     string    `json:"email"`
 	Password  string    `json:"-"`
@@ -13,6 +13,7 @@ type Admin struct {
 }
 
 type AdminInput struct {
+	ID       string `json:"id"`
 	FullName string `json:"full_name" binding:"required"`
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`

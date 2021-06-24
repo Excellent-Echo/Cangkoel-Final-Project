@@ -94,6 +94,6 @@ func (h *formPengajuanHandler) GetFormPengajuanByIDHandler(c *gin.Context) {
 		return
 	}
 
-	response := helper.APIResponse("success get user Form Pengajuan by ID", 200, "success", formPengajuan)
+	response := helper.APIResponse("success get Form Pengajuan by ID", 200, "success", formPengajuan)
 	c.JSON(200, response)
 }

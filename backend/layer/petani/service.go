@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"time"
 
+	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -49,7 +50,10 @@ func (s *service) SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, 
 		return PetaniFormat{}, err
 	}
 
+	petaniuuid := uuid.NewV4()
+
 	var newPetani = entity.Petani{
+		ID:        petaniuuid.String(),
 		FullName:  userPetani.FullName,
 		Email:     userPetani.Email,
 		Password:  string(genPassword),
@@ -75,7 +79,7 @@ func (s *service) SFindPetaniByID(petaniID string) (PetaniFormat, error) {
 		return PetaniFormat{}, err
 	}
 
-	if userPetani.ID == 0 {
+	if len(userPetani.ID) == 0 { // perlu diperhatikan
 		newError := fmt.Sprintf("userPetani id %s not found", petaniID)
 		return PetaniFormat{}, errors.New(newError)
 	}
@@ -96,7 +100,7 @@ func (s *service) SDeletePetaniByID(petaniID string) (interface{}, error) {
 		return nil, err
 	}
 
-	if userPetani.ID == 0 {
+	if len(userPetani.ID) == 0 {
 		newError := fmt.Sprintf("userPetani id %s not found", petaniID)
 		return nil, errors.New(newError)
 	}
@@ -131,7 +135,7 @@ func (s *service) SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniIn
 		return PetaniFormat{}, err
 	}
 
-	if userPetani.ID == 0 {
+	if len(userPetani.ID) == 0 { // perlu diperhatikan
 		newError := fmt.Sprintf("userPetani id %s not found", petaniID)
 		return PetaniFormat{}, errors.New(newError)
 	}

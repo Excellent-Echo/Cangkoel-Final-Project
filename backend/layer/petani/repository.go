@@ -26,7 +26,7 @@ func NewRepository(db *gorm.DB) *repository {
 func (r *repository) RShowAllPetani() ([]entity.Petani, error) {
 	var userPetani []entity.Petani
 
-	err := r.db.Find(&userPetani).Error
+	err := r.db.Preload("FormPengajuan").Preload("HasilPengajuan").Find(&userPetani).Error
 	if err != nil {
 		return userPetani, err
 	}
@@ -47,7 +47,7 @@ func (r *repository) RRegisterPetani(userPetani entity.Petani) (entity.Petani, e
 func (r *repository) RFindPetaniByID(ID string) (entity.Petani, error) {
 	var userPetani entity.Petani
 
-	err := r.db.Where("id = ?", ID).Find(&userPetani).Error
+	err := r.db.Where("id = ?", ID).Preload("FormPengajuan").Preload("HasilPengajuan").Find(&userPetani).Error
 	if err != nil {
 		return userPetani, err
 	}

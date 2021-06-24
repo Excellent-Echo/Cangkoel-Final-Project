@@ -23,7 +23,7 @@ func NewRepository(db *gorm.DB) *repository {
 func (r *repository) RShowAllFormPengajuan() ([]entity.FormPengajuan, error) {
 	var formPengajuan []entity.FormPengajuan
 
-	err := r.db.Find(&formPengajuan).Error
+	err := r.db.Preload("HasilPengajuan").Find(&formPengajuan).Error
 	if err != nil {
 		return formPengajuan, err
 	}
@@ -44,7 +44,7 @@ func (r *repository) RCreateFormPengajuan(formPengajuan entity.FormPengajuan) (e
 func (r *repository) RFindFormPengajuanByID(ID string) (entity.FormPengajuan, error) {
 	var formPengajuan entity.FormPengajuan
 
-	err := r.db.Where("id = ?", ID).Find(&formPengajuan).Error
+	err := r.db.Where("id = ?", ID).Preload("HasilPengajuan").Find(&formPengajuan).Error
 	if err != nil {
 		return formPengajuan, err
 	}
