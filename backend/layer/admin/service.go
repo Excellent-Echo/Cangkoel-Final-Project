@@ -2,7 +2,6 @@ package admin
 
 import (
 	"backend/entity"
-	"backend/helper"
 	"errors"
 	"fmt"
 	"time"
@@ -90,9 +89,9 @@ func (s *service) SFindAdminByID(adminID string) (AdminFormat, error) {
 }
 
 func (s *service) SDeleteAdminByID(adminID string) (interface{}, error) {
-	if err := helper.ValidateIDNumber(adminID); err != nil {
-		return nil, err
-	}
+	// if err := helper.ValidateIDNumber(adminID); err != nil {
+	// 	return nil, err
+	// }
 
 	admin, err := s.repository.RFindAdminByID(adminID)
 
@@ -125,9 +124,9 @@ func (s *service) SDeleteAdminByID(adminID string) (interface{}, error) {
 func (s *service) SUpdateAdminByID(adminID string, input entity.UpdateAdminInput) (AdminFormat, error) {
 	var dataUpdate = map[string]interface{}{}
 
-	if err := helper.ValidateIDNumber(adminID); err != nil {
-		return AdminFormat{}, err
-	}
+	// if err := helper.ValidateIDNumber(adminID); err != nil {
+	// 	return AdminFormat{}, err
+	// }
 
 	admin, err := s.repository.RFindAdminByID(adminID)
 
@@ -147,7 +146,7 @@ func (s *service) SUpdateAdminByID(adminID string, input entity.UpdateAdminInput
 		dataUpdate["Email"] = input.Email
 	}
 	if input.Password != "" || len(input.Password) != 0 {
-		dataUpdate["Passowrd"] = input.Password
+		dataUpdate["Password"] = input.Password
 	}
 	dataUpdate["updated_at"] = time.Now()
 
