@@ -93,7 +93,7 @@ func (s *service) SUpdateHasilPengajuanByID(hasilPengajuanID string, input entit
 	if input.Keterangan != "" || len(input.Keterangan) != 0 {
 		dataUpdate["Keterangan"] = input.Keterangan
 	}
-	if strconv.Itoa(input.PetaniID) != "" || len(strconv.Itoa(input.PetaniID)) != 0 {
+	if input.PetaniID != "" || len(input.PetaniID) != 0 {
 		dataUpdate["PetaniID"] = input.PetaniID
 	}
 	if strconv.Itoa(input.FormPengajuanID) != "" || len(strconv.Itoa(input.FormPengajuanID)) != 0 {

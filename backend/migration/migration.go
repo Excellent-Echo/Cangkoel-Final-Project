@@ -46,7 +46,7 @@ type FormPengajuan struct {
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:FormPengajuanID"`
-	PetaniID         int
+	PetaniID         string         //petani ID tidak bisa string, kalo int bisa kebikin migrationnya?
 	PendanaanID      int
 }
 
@@ -56,7 +56,7 @@ type HasilPengajuan struct {
 	Keterangan      string
 	CreatedAt       time.Time
 	UpdatedAt       time.Time
-	PetaniID        int
+	PetaniID        string //petani ID tidak bisa string, kalo int bisa kebikin migrationnya?
 	FormPengajuanID int
 }
 
