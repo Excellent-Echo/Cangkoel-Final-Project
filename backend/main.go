@@ -18,6 +18,7 @@ func main() {
 	routes.FormPengajuanRoute(r)
 	routes.PendanaanRoute(r)
 	routes.KategoriPertanianRoute(r)
+	routes.HasilPengajuanRoute(r)
 
 	r.Run()
 }

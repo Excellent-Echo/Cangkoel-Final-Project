@@ -1,4 +1,4 @@
-package hasilpengajuan
+package hasilPengajuan
 
 import (
 	"backend/entity"

@@ -3,14 +3,15 @@ package migration
 import "time"
 
 type Petani struct {
-	ID            int `gorm:"PrimaryKey"`
-	FullName      string
-	Email         string `gorm:"unique"`
-	Password      string
-	Role          string
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
-	FormPengajuan FormPengajuan `gorm:"ForeignKey:PetaniID"`
+	ID             int `gorm:"PrimaryKey"`
+	FullName       string
+	Email          string `gorm:"unique"`
+	Password       string
+	Role           string
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
+	FormPengajuan  FormPengajuan  `gorm:"ForeignKey:PetaniID"`
+	HasilPengajuan HasilPengajuan `gorm:"ForeignKey:PetaniID"`
 }
 
 type Admin struct {
@@ -44,18 +45,19 @@ type FormPengajuan struct {
 	AlamatUsaha      string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
+	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:FormPengajuanID"`
 	PetaniID         int
 	PendanaanID      int
 }
 
 type HasilPengajuan struct {
-	ID          int `gorm:"PrimaryKey"`
-	Status      string
-	Keterangan  string
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	PetaniID    int
-	PengajuanID int
+	ID              int `gorm:"PrimaryKey"`
+	Status          string
+	Keterangan      string
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+	PetaniID        int
+	FormPengajuanID int
 }
 
 type Pendanaan struct {

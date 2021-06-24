@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"time"
 
+	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -49,7 +50,10 @@ func (s *service) SRegisterAdmin(admin entity.AdminInput) (AdminFormat, error) {
 		return AdminFormat{}, err
 	}
 
+	adminuuid := uuid.NewV4()
+
 	var newAdmin = entity.Admin{
+		ID:        adminuuid.String(),
 		FullName:  admin.FullName,
 		Email:     admin.Email,
 		Password:  string(genPassword),
@@ -75,7 +79,7 @@ func (s *service) SFindAdminByID(adminID string) (AdminFormat, error) {
 		return AdminFormat{}, err
 	}
 
-	if admin.ID == 0 {
+	if len(admin.ID) == 0 { // perlu diperhatikan
 		newError := fmt.Sprintf("Admin id %s not found", adminID)
 		return AdminFormat{}, errors.New(newError)
 	}
@@ -96,7 +100,7 @@ func (s *service) SDeleteAdminByID(adminID string) (interface{}, error) {
 		return nil, err
 	}
 
-	if admin.ID == 0 {
+	if len(admin.ID) == 0 { // perlu diperhatikan
 		newError := fmt.Sprintf("Admin id %s not found", adminID)
 		return nil, errors.New(newError)
 	}
@@ -131,7 +135,7 @@ func (s *service) SUpdateAdminByID(adminID string, input entity.UpdateAdminInput
 		return AdminFormat{}, err
 	}
 
-	if admin.ID == 0 {
+	if len(admin.ID) == 0 { // perlu diperhatikan
 		newError := fmt.Sprintf("Admin id %s not found", adminID)
 		return AdminFormat{}, errors.New(newError)
 	}
