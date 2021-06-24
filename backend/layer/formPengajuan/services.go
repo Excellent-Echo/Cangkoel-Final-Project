@@ -4,7 +4,6 @@ import (
 	"backend/entity"
 	"errors"
 	"fmt"
-	"strconv"
 	"time"
 )
 
@@ -33,7 +32,7 @@ func (s *service) SShowAllFormPengajuan() ([]entity.FormPengajuan, error) {
 }
 
 func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, petaniID string) (entity.FormPengajuan, error) {
-	IDPetani, _ := strconv.Atoi(petaniID)
+	// IDPetani, _ := strconv.Atoi(petaniID)
 
 	checkStatus, err := s.repository.RFindFormPengajuanByID(petaniID)
 	// checkPendanaan, err := s.repository2.RFindPendanaanByID(pendanaanID)
@@ -42,7 +41,7 @@ func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, 
 		return checkStatus, err
 	}
 
-	if checkStatus.PetaniID == IDPetani {
+	if checkStatus.PetaniID == petaniID {
 		errorStatus := fmt.Sprintf("Form Pengajuan for Petani id : %s has been created", petaniID)
 		return checkStatus, errors.New(errorStatus)
 	}
@@ -58,7 +57,7 @@ func (s *service) SCreateFormPengajuan(formPengajuan entity.FormPengajuanInput, 
 		TenagaKerja:      formPengajuan.TenagaKerja,
 		OmzetPerbulan:    formPengajuan.OmzetPerbulan,
 		AlamatUsaha:      formPengajuan.AlamatUsaha,
-		PetaniID:         IDPetani,
+		PetaniID:         petaniID,
 		PendanaanID:      formPengajuan.PendanaanID,
 		CreatedAt:        time.Now(),
 		UpdatedAt:        time.Now(),
