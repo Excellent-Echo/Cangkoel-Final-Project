@@ -52,6 +52,7 @@ const Projects = (props) => {
 				<Table className="no-wrap v-middle" responsive>
 					<thead>
 						<tr className="border-0">
+							<th className="border-0">ID</th>
 							<th className="border-0">Nama Lengkap</th>
 							<th className="border-0">Nomor Hp</th>
 							<th className="border-0">Jenis Kelamin</th>
@@ -71,6 +72,7 @@ const Projects = (props) => {
 							return (
 								<tbody>
 									<tr>
+										<td>{value.id}</td>
 										<td>
 											<div className="d-flex no-block align-items-center">
 												<div className="mr-2">
