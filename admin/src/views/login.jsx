@@ -1,36 +1,63 @@
-import React from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import Logo from "../assets/images/logo-cangkoel.png";
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Button, Form, FormGroup, Label, Input, Container, Row } from 'reactstrap'
+import Logo from '../assets/images/logo-cangkoel.png'
+
+import userLoginAction from '../redux/user/login/userLoginAction'
 
 const Login = () => {
-  return (
-    <div style={{ margin: "150px" }}>
-      <img style={{ width: "200px" }} src={Logo} alt="logo cangkoel" />
-      <h2>Login Admin Cangkoel</h2>
-      <Form>
-        <FormGroup>
-          <Label for="exampleEmail">Email</Label>
-          <Input
-            type="email"
-            name="email"
-            id="exampleEmail"
-            placeholder="with a placeholder"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="examplePassword">Password</Label>
-          <Input
-            type="password"
-            name="password"
-            id="examplePassword"
-            placeholder="password placeholder"
-          />
-        </FormGroup>
+	const dispatch = useDispatch()
+	const history = useHistory()
 
-        <Button>Submit</Button>
-      </Form>
-    </div>
-  );
-};
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 
-export default Login;
+	// useEffect(() => {
+	// 	let token = localStorage.getItem('token')
+	// 	if (token && token !== 'undefined') {
+	// 		history.push('/')
+	// 	}
+	// }, [])
+
+	const loginHandler = (e) => {
+		e.preventDefault()
+
+		dispatch(userLoginAction.login(email, password, history))
+	}
+
+	return (
+		<Container>
+			<img style={{ width: '200px' }} src={Logo} alt="logo cangkoel" />
+
+			<h2>Login Admin Cangkoel</h2>
+
+			<Form onSubmit={loginHandler}>
+				<FormGroup>
+					<Label for="exampleEmail">Email</Label>
+					<Input
+						type="email"
+						name="email"
+						id="exampleEmail"
+						placeholder="with a placeholder"
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</FormGroup>
+				<FormGroup>
+					<Label for="examplePassword">Password</Label>
+					<Input
+						type="password"
+						name="password"
+						id="examplePassword"
+						placeholder="password placeholder"
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+				</FormGroup>
+
+				<Button>Submit</Button>
+			</Form>
+		</Container>
+	)
+}
+
+export default Login

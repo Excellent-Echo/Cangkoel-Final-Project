@@ -5,7 +5,7 @@ import (
 	"backend/entity"
 	"backend/helper"
 	"backend/layer/formPengajuan"
-	"strconv"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -36,7 +36,7 @@ func (h *formPengajuanHandler) ShowAllFormPengajuanHandler(c *gin.Context) {
 
 // CREATE NEW FORM PENGAJUAN
 func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
-	petaniData := int(c.MustGet("currentUser").(int))
+	petaniData := c.MustGet("currentUser")
 
 	// file, err := c.FormFile("Document")
 	// file2, err := c.FormFile("Ktp")
@@ -55,7 +55,8 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 	// err = c.SaveUploadedFile(file, path)
 	// err = c.SaveUploadedFile(file2, path2)
 
-	petaniID := strconv.Itoa(petaniData)
+	petaniID := petaniData
+	str := fmt.Sprintf("%v", petaniID)
 
 	var inputFormPengajuan entity.FormPengajuanInput
 
@@ -71,7 +72,7 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
 	// pathPengajuanSave2 := "https://cangkoel.herokuapp.com/" + path2
 
-	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniID)
+	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, str)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 

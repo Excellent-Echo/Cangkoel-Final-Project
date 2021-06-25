@@ -1,9 +1,10 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
 import Swal from 'sweetalert2'
 
-import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH, SET_USER } from '../userActionTypes'
+import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
 
 import userProfileAction from '../profile/userProfileAction'
+import pengajuanAction from '../../pengajuan/pengajuanAction'
 
 const setEmail = (email) => {
 	return {
@@ -28,14 +29,14 @@ const setAuth = (isAuth) => ({
 	}
 })
 
-const setUser = (user) => ({
-	type: SET_USER,
-	payload: {
-		user: user
-	}
-})
+// const setUser = (user) => ({
+// 	type: SET_USER,
+// 	payload: {
+// 		user: user
+// 	}
+// })
 
-const login = (email, password, history, location) => async (dispatch) => {
+const login = (email, password, history) => async (dispatch) => {
 	try {
 		const loginData = {
 			email: email,
@@ -50,14 +51,6 @@ const login = (email, password, history, location) => async (dispatch) => {
 
 		console.log(postData)
 
-		if (postData.status === 200) {
-			Swal.fire({
-				title: 'Login Success',
-				icon: 'success',
-				timer: 1500
-			})
-		}
-
 		let role = postData.data.data.role
 		let id = postData.data.data.id
 		let token = postData.data.data.token
@@ -68,7 +61,7 @@ const login = (email, password, history, location) => async (dispatch) => {
 		if (role === 'petani') {
 			url = `/users/petani/${id}`
 		} else {
-			url = `/users/investor/${id}`
+			url = `/users/admin/${id}`
 		}
 
 		const getDetailUser = await CangkoelAPI({
@@ -79,16 +72,20 @@ const login = (email, password, history, location) => async (dispatch) => {
 			}
 		})
 
+		const getPengajuanData = await CangkoelAPI({
+			method: 'GET',
+			url: '/formulir-pengajuan',
+			headers: {
+				Authorization: token
+			}
+		})
+
 		dispatch(userProfileAction.setProfileData(getDetailUser.data.data))
+		dispatch(pengajuanAction.setPengajuanData(getPengajuanData.data.data))
 		localStorage.setItem('user', JSON.stringify(getDetailUser.data.data))
 
-		dispatch(setAuth(true))
-
-		let { from } = location.state || { from: { pathname: '/' } }
-
-		history.replace(from)
+		history.push('/')
 	} catch (error) {
-		console.log(error.response)
 		let code = error.response.status
 
 		if (code === 401) {

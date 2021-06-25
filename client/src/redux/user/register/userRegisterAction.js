@@ -1,4 +1,5 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
+import Swal from 'sweetalert2'
 
 import {
 	USER_SET_ROLE,
@@ -50,7 +51,7 @@ const setRole = (role) => {
 	}
 }
 
-const register = (role, email, password, fullName) => async (dispatch) => {
+const register = (role, email, password, fullName, history) => async (dispatch) => {
 	try {
 		let url = ''
 
@@ -72,6 +73,16 @@ const register = (role, email, password, fullName) => async (dispatch) => {
 			url: url,
 			data: registerData
 		})
+
+		if (postRegisterData.status === 201) {
+			Swal.fire({
+				title: 'Register Success',
+				icon: 'success',
+				timer: 1500
+			})
+
+			history.push('/login')
+		}
 	} catch (error) {
 		console.log(error.response.data)
 	}
