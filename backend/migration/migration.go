@@ -3,7 +3,7 @@ package migration
 import "time"
 
 type Petani struct {
-	ID             int `gorm:"PrimaryKey"`
+	ID             string `gorm:"PrimaryKey"`
 	FullName       string
 	Email          string `gorm:"unique"`
 	Password       string
@@ -15,7 +15,7 @@ type Petani struct {
 }
 
 type Admin struct {
-	ID        int `gorm:"PrimaryKey"`
+	ID        string `gorm:"PrimaryKey"`
 	FullName  string
 	Email     string `gorm:"unique"`
 	Password  string
@@ -46,7 +46,7 @@ type FormPengajuan struct {
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:FormPengajuanID"`
-	PetaniID         int
+	PetaniID         string         `gorm:"index"`
 	PendanaanID      int
 }
 
@@ -56,7 +56,7 @@ type HasilPengajuan struct {
 	Keterangan      string
 	CreatedAt       time.Time
 	UpdatedAt       time.Time
-	PetaniID        int
+	PetaniID        string `gorm:"index"`
 	FormPengajuanID int
 }
 

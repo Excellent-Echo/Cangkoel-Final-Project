@@ -17,7 +17,7 @@ type FormPengajuan struct {
 	CreatedAt        time.Time      `json:"created_at"`
 	UpdatedAt        time.Time      `json:"updated_at"`
 	HasilPengajuan   HasilPengajuan `gorm:"ForeignKey:FormPengajuanID"`
-	PetaniID         int            `json:"petani_id"`
+	PetaniID         string         `json:"petani_id"`
 	PendanaanID      int            `json:"pendanaan_id"`
 }
 

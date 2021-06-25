@@ -8,20 +8,20 @@ type HasilPengajuan struct {
 	Keterangan      string    `json:"keterangan"`
 	CreatedAt       time.Time `json:"created_at"`
 	UpdatedAt       time.Time `json:"updated_at"`
-	PetaniID        int       `json:"petani_id"`
+	PetaniID        string    `json:"petani_id"`
 	FormPengajuanID int       `json:"form_pengajuan_id"`
 }
 
 type HasilPengajuanInput struct {
 	Status          string `json:"status" binding:"required"`
 	Keterangan      string `json:"keterangan" binding:"required"`
-	PetaniID        int    `json:"petani_id" binding:"required"`
+	PetaniID        string `json:"petani_id" binding:"required"`
 	FormPengajuanID int    `json:"form_pengajuan_id" binding:"required"`
 }
 
 type UpdateHasilPengajuanInput struct {
 	Status          string `json:"status"`
 	Keterangan      string `json:"keterangan"`
-	PetaniID        int    `json:"petani_id"`
+	PetaniID        string `json:"petani_id"`
 	FormPengajuanID int    `json:"form_pengajuan_id"`
 }

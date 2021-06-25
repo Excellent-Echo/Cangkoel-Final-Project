@@ -1,7 +1,7 @@
 package entity
 
 type UserFormat struct {
-	ID       int    `json:"id"`
+	ID       string `json:"id"`
 	FullName string `json:"full_name"`
 	Email    string `json:"email"`
 	Role     string `json:"role"`
