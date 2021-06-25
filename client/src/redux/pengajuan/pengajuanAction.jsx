@@ -1,4 +1,6 @@
 import CangkoelAPI from '../../api/CangkoelAPI'
+import CloudinaryAPI from '../../api/CloudinaryAPI'
+import Swal from 'sweetalert2'
 
 import {
 	SET_NAMA,
@@ -10,7 +12,9 @@ import {
 	SET_TENAGA_KERJA,
 	SET_OMSET,
 	SET_ALAMAT,
-	SET_PETANI_ID
+	SET_URL_DOKUMEN,
+	SET_URL_KTP,
+	SET_IMAGE
 } from './pengajuanActionTypes'
 
 const setNama = (nama) => {
@@ -94,33 +98,49 @@ const setAlamat = (alamat) => {
 	}
 }
 
-const setPetaniID = (petaniID) => {
+const setUrlDokumen = (urlDokumen) => {
 	return {
-		type: SET_PETANI_ID,
+		type: SET_URL_DOKUMEN,
 		payload: {
-			petaniID: petaniID
+			urlDokumen: urlDokumen
+		}
+	}
+}
+
+const setUrlKTP = (urlKTP) => {
+	return {
+		type: SET_URL_KTP,
+		payload: {
+			urlKTP: urlKTP
+		}
+	}
+}
+
+const setImage = (image) => {
+	return {
+		type: SET_IMAGE,
+		payload: {
+			image: image
 		}
 	}
 }
 
 const pengajuan =
-	(nama, nomorHP, dokumenPerizinan, nomorNPWP, ktp, jenisUsaha, tenagaKerja, omset, alamat, petaniID, token) =>
+	(nama, nomorHP, dokumenPerizinan, nomorNPWP, ktp, jenisUsaha, tenagaKerja, omset, alamat, token, history) =>
 	async (dispatch) => {
 		try {
 			const pengajuanData = {
 				nama_lengkap: nama,
-				nomor_hp: nomorHP,
+				nomor_hp: parseInt(nomorHP),
 				dokumen_perizinan: dokumenPerizinan,
-				nomor_npwp: nomorNPWP,
+				nomor_npwp: parseInt(nomorNPWP),
 				ktp: ktp,
 				jenis_usaha: jenisUsaha,
-				tenaga_kerja: tenagaKerja,
-				omzet_perbulan: omset,
+				tenaga_kerja: parseInt(tenagaKerja),
+				omzet_perbulan: parseInt(omset),
 				alamat_usaha: alamat,
-				petani_id: petaniID
+				pendanaan_id: 1
 			}
-
-			console.log(pengajuanData)
 
 			const postPengajuanData = await CangkoelAPI({
 				method: 'POST',
@@ -130,10 +150,64 @@ const pengajuan =
 					Authorization: token
 				}
 			})
+
+			if (postPengajuanData.status === 201) {
+				Swal.fire({
+					title: 'Pengajuan anda sedang diproses',
+					text: 'Anda akan dialihkan ke halaman Profil',
+					icon: 'success',
+					timer: 5000,
+					timerProgressBar: true
+				}).then(() => {
+					history.push('/profil-petani')
+				})
+			}
 		} catch (error) {
 			console.log(error.response.data)
 		}
 	}
+
+const uploadDokumen = (file) => async (dispatch) => {
+	try {
+		const data = new FormData()
+
+		console.log(file)
+
+		data.append('file', file)
+		data.append('upload_preset', 'rxra54p9')
+		data.append('cloud_name', 'cangkoel')
+
+		const postDataDokumen = await CloudinaryAPI({
+			method: 'POST',
+			url: '/image/upload',
+			data: data
+		})
+
+		dispatch(setUrlDokumen(postDataDokumen.data.url))
+	} catch (error) {
+		console.log(error.response)
+	}
+}
+
+const uploadKTP = (file) => async (dispatch) => {
+	try {
+		const data = new FormData()
+
+		data.append('file', file)
+		data.append('upload_preset', 'rxra54p9')
+		data.append('cloud_name', 'cangkoel')
+
+		const postDataKTP = await CloudinaryAPI({
+			method: 'POST',
+			url: '/image/upload',
+			data: data
+		})
+
+		dispatch(setUrlKTP(postDataKTP.data.url))
+	} catch (error) {
+		console.log(error.response)
+	}
+}
 
 const pengajuanAction = {
 	setNama,
@@ -145,8 +219,12 @@ const pengajuanAction = {
 	setTenagaKerja,
 	setOmset,
 	setAlamat,
-	setPetaniID,
-	pengajuan
+	pengajuan,
+	setUrlDokumen,
+	setUrlKTP,
+	setImage,
+	uploadDokumen,
+	uploadKTP
 }
 
 export default pengajuanAction

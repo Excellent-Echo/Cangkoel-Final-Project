@@ -8,7 +8,10 @@ import {
 	SET_TENAGA_KERJA,
 	SET_OMSET,
 	SET_ALAMAT,
-	SET_PETANI_ID
+	SET_PETANI_ID,
+	SET_URL_DOKUMEN,
+	SET_URL_KTP,
+	SET_IMAGE
 } from './pengajuanActionTypes'
 
 const inititalState = {
@@ -21,7 +24,10 @@ const inititalState = {
 	tenagaKerja: '',
 	omset: '',
 	alamat: '',
-	petaniID: ''
+	petaniID: '',
+	urlDokumen: '',
+	urlKTP: '',
+	image: ''
 }
 
 const userRegisterReducer = (state = inititalState, action) => {
@@ -75,6 +81,21 @@ const userRegisterReducer = (state = inititalState, action) => {
 			return {
 				...state,
 				petaniID: action.payload.petaniID
+			}
+		case SET_URL_DOKUMEN:
+			return {
+				...state,
+				urlDokumen: action.payload.urlDokumen
+			}
+		case SET_URL_KTP:
+			return {
+				...state,
+				urlKTP: action.payload.urlKTP
+			}
+		case SET_IMAGE:
+			return {
+				...state,
+				image: action.payload.image
 			}
 		default:
 			return state
