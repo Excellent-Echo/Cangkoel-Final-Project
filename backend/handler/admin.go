@@ -2,7 +2,6 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"backend/auth"
 	"backend/entity"
@@ -116,10 +115,10 @@ func (h *adminHandler) UpdateAdminByIDHandler(c *gin.Context) {
 		return
 	}
 
-	idParam, _ := strconv.Atoi(id)
-	adminData := int(c.MustGet("currentAdmin").(int))
+	adminData := c.MustGet("currentAdmin")
 
-	if idParam != adminData {
+	//ini perlu di investigasi?????
+	if id == adminData {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "admin ID not authorize"})
 
 		c.JSON(401, responseError)

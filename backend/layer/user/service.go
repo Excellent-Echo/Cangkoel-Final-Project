@@ -31,7 +31,7 @@ func (s *service) SLoginUser(input entity.LoginUserInput) (UserFormat, error) {
 		return UserFormat{}, err
 	}
 
-	if len(userPetani.ID) == 0 { // perlu diperhatikan
+	if len(userPetani.ID) != 0 { // perlu diperhatikan
 		if err := bcrypt.CompareHashAndPassword([]byte(userPetani.Password), []byte(input.Password)); err != nil {
 			return UserFormat{}, errors.New("password invalid")
 		}
@@ -41,7 +41,7 @@ func (s *service) SLoginUser(input entity.LoginUserInput) (UserFormat, error) {
 		return formatter, nil
 	}
 
-	if len(admin.ID) == 0 { // perlu diperhatikan
+	if len(admin.ID) != 0 { // perlu diperhatikan
 		if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password)); err != nil {
 			return UserFormat{}, errors.New("password invalid")
 		}
