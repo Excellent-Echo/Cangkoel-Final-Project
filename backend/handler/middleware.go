@@ -5,7 +5,6 @@ import (
 	"backend/helper"
 	"backend/layer/admin"
 	"backend/layer/petani"
-	"fmt"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -41,8 +40,7 @@ func Middleware(petaniService petani.Service, authService auth.Service) gin.Hand
 			return
 		}
 
-		// petaniID := int(claim["petani_id"].(float64))
-		petaniID := claim["petani_id"]
+		petaniID := claim["petani_id"].(string)
 
 		c.Set("currentUser", petaniID)
 	}
@@ -77,13 +75,13 @@ func MiddlewareAdmin(adminService admin.Service, authService auth.Service) gin.H
 			return
 		}
 
-		adminID := claim["admin_id"]
-		str := fmt.Sprintf("%v", adminID)
-		// IDAdmin = adminID
-		Admin, err := adminService.SFindAdminByID(str)
+		// adminID := int(claim["admin_id"].(int))
+		// IDAdmin := strconv.Itoa(adminID)
 
-		//ini perlu di investigasi????
-		if Admin.Role == "admin" {
+		adminID := claim["admin_id"].(string)
+
+		Admin, err := adminService.SFindAdminByID(adminID)
+		if Admin.Role != "admin" {
 			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
 
 			c.AbortWithStatusJSON(401, errorResponse)

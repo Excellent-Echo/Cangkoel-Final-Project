@@ -2,7 +2,6 @@ package kategoriPertanian
 
 import (
 	"backend/entity"
-	"backend/helper"
 	"errors"
 	"fmt"
 )
@@ -66,9 +65,9 @@ func (s *service) SFindByIDKpetani(ID string) (entity.KategoriPertanian, error) 
 }
 
 func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
-	if err := helper.ValidateIDNumber(ID); err != nil {
-		return nil, err
-	}
+	// if err := helper.ValidateIDNumber(ID); err != nil {
+	// 	return nil, err
+	// }
 
 	kategoriPertanian, err := s.repository.FindByID(ID)
 
@@ -101,9 +100,9 @@ func (s *service) SDeleteByIDKpetani(ID string) (interface{}, error) {
 func (s *service) SUpdateByIDKpetani(KategoriID string, input entity.UpdateKategoriPertanianInput) (entity.KategoriPertanian, error) {
 	var dataUpdate = map[string]interface{}{}
 
-	if err := helper.ValidateIDNumber(KategoriID); err != nil {
-		return entity.KategoriPertanian{}, err
-	}
+	// if err := helper.ValidateIDNumber(KategoriID); err != nil {
+	// 	return entity.KategoriPertanian{}, err
+	// }
 
 	Kpetani, err := s.repository.FindByID(KategoriID)
 

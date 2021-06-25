@@ -2,7 +2,6 @@ package petani
 
 import (
 	"backend/entity"
-	"backend/helper"
 	"errors"
 	"fmt"
 	"time"
@@ -90,9 +89,9 @@ func (s *service) SFindPetaniByID(petaniID string) (PetaniFormat, error) {
 }
 
 func (s *service) SDeletePetaniByID(petaniID string) (interface{}, error) {
-	if err := helper.ValidateIDNumber(petaniID); err != nil {
-		return nil, err
-	}
+	// if err := helper.ValidateIDNumber(petaniID); err != nil {
+	// 	return nil, err
+	// }
 
 	userPetani, err := s.repository.RFindPetaniByID(petaniID)
 
@@ -125,9 +124,9 @@ func (s *service) SDeletePetaniByID(petaniID string) (interface{}, error) {
 func (s *service) SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniInput) (PetaniFormat, error) {
 	var dataUpdate = map[string]interface{}{}
 
-	if err := helper.ValidateIDNumber(petaniID); err != nil {
-		return PetaniFormat{}, err
-	}
+	// if err := helper.ValidateIDNumber(petaniID); err != nil {
+	// 	return PetaniFormat{}, err
+	// }
 
 	userPetani, err := s.repository.RFindPetaniByID(petaniID)
 

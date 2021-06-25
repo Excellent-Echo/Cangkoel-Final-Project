@@ -2,8 +2,6 @@ package helper
 
 import (
 	"errors"
-	"math"
-	"strconv"
 
 	"github.com/go-playground/validator/v10"
 )
@@ -44,13 +42,13 @@ func SplitErrorInformation(err error) []string {
 	return errors
 }
 
-func ValidateIDNumber(ID string) error {
-	if num, err := strconv.Atoi(ID); err != nil || num == 0 || math.Signbit(float64(num)) == true {
-		return errors.New("input must be a valid id user")
-	}
+// func ValidateIDNumber(ID string) error {
+// 	if num, err := strconv.Atoi(ID); err != nil || num == 0 || math.Signbit(float64(num)) == true {
+// 		return errors.New("input must be a valid id user")
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
 func ValidatePassword(password string) error {
 	if len(password) < 6 {
