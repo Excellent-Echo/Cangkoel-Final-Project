@@ -17,9 +17,7 @@ const readKategori = (kategoriPertanian) => {
 const readErrorKategori = (errorMessage) => {
 	return {
 		type: READ_ERROR_KATEGORI,
-		payload: {
-			errorMessage: errorMessage
-		}
+		payload: errorMessage
 	}
 }
 

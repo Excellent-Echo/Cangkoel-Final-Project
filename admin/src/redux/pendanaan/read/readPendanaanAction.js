@@ -17,9 +17,7 @@ const readPendanaan = (pendanaan) => {
 const readErrorPendanaan = (errorMessage) => {
 	return {
 		type: READ_ERROR_PENDANAAN,
-		payload: {
-			errorMessage: errorMessage
-		}
+		payload: errorMessage
 	}
 }
 
