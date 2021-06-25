@@ -2,24 +2,32 @@ import React from 'react'
 import { css } from 'styled-components/macro' //eslint-disable-line
 import tw from 'twin.macro'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+import userProfileAction from '../redux/user/profile/userProfileAction'
 
 // assets
 import Logo from '../assets/logo.png'
+import { loadPartialConfig } from '@babel/core'
 
 // styled components with tailwind
 const Button = tw.span`rounded bg-crowde-100 hover:bg-crowde-200 py-2 px-4 text-white mx-3`
 
 const Navbar = () => {
 	let token = localStorage.getItem('token')
-	const userProfileData = useSelector((state) => state.userProfile)
+	const dispatch = useDispatch()
+	const { user, isLoading } = useSelector((state) => state.userProfile)
 
-	const user = () => {
-		if (userProfileData.role === 'petani') {
+	// if (user === null) {
+	// 	return <p>isLoading.....</p>
+	// }
+
+	const userData = () => {
+		if (user.role === 'petani') {
 			return (
 				<Link to="/profil-petani">
 					<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">
-						Hi, {userProfileData.full_name}
+						Hi, {user.full_name}
 					</p>
 				</Link>
 			)
@@ -27,7 +35,7 @@ const Navbar = () => {
 			return (
 				<Link to="/profil-investor">
 					<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">
-						Hi, {userProfileData.full_name}
+						Hi, {user.full_name}
 					</p>
 				</Link>
 			)
@@ -54,7 +62,7 @@ const Navbar = () => {
 						</svg>
 					</button>
 				</div>
-				{token ? (
+				{user ? (
 					<nav className="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
 						<Link
 							to="/"
@@ -68,7 +76,7 @@ const Navbar = () => {
 						>
 							Kontak Kami
 						</Link>
-						{user()}
+						{userData()}
 					</nav>
 				) : (
 					<nav className="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">

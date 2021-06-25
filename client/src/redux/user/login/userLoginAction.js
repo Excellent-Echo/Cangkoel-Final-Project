@@ -1,7 +1,7 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
 import Swal from 'sweetalert2'
 
-import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
+import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH, SET_USER } from '../userActionTypes'
 
 import userProfileAction from '../profile/userProfileAction'
 
@@ -28,6 +28,13 @@ const setAuth = (isAuth) => ({
 	}
 })
 
+const setUser = (user) => ({
+	type: SET_USER,
+	payload: {
+		user: user
+	}
+})
+
 const login = (email, password, history, location) => async (dispatch) => {
 	try {
 		const loginData = {
@@ -40,6 +47,16 @@ const login = (email, password, history, location) => async (dispatch) => {
 			url: '/users/login',
 			data: loginData
 		})
+
+		console.log(postData)
+
+		if (postData.status === 200) {
+			Swal.fire({
+				title: 'Login Success',
+				icon: 'success',
+				timer: 1500
+			})
+		}
 
 		let role = postData.data.data.role
 		let id = postData.data.data.id
@@ -63,39 +80,22 @@ const login = (email, password, history, location) => async (dispatch) => {
 		})
 
 		dispatch(userProfileAction.setProfileData(getDetailUser.data.data))
-
-		console.log(getDetailUser.data.data)
+		localStorage.setItem('user', JSON.stringify(getDetailUser.data.data))
 
 		dispatch(setAuth(true))
 
 		let { from } = location.state || { from: { pathname: '/' } }
 
 		history.replace(from)
-
-		// let role = postData.data.data.role
-		// let token = postData.data.data.token
-		// let code = postData.data.meta.code
-
-		// if (postData.data.meta.code === 200) {
-		// 	Swal.fire({
-		// 		title: 'Success!',
-		// 		text: "You've Logged In Successfully",
-		// 		icon: 'success',
-		// 		timer: 2000
-		// 	})
-
-		// 	localStorage.setItem('token', token)
-		// 	localStorage.setItem('role', role)
-		// 	localStorage.setItem('isAuth', true)
-		// }
 	} catch (error) {
-		let code = error.response.data.meta.code
+		console.log(error.response)
+		let code = error.response.status
 
 		if (code === 401) {
 			Swal.fire({
 				title: 'Email/Password Invalid',
 				icon: 'warning',
-				timer: 2000
+				timer: 1500
 			})
 		}
 	}

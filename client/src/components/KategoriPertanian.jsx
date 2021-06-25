@@ -39,7 +39,7 @@ const KategoriPertanian = () => {
 
 	useEffect(() => {
 		dispatch(getKategoriAction())
-	}, [dispatch])
+	}, [])
 
 	const handleClick = (id) => {
 		history.push(`/results/${id}`)

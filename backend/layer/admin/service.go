@@ -146,7 +146,7 @@ func (s *service) SUpdateAdminByID(adminID string, input entity.UpdateAdminInput
 		dataUpdate["Email"] = input.Email
 	}
 	if input.Password != "" || len(input.Password) != 0 {
-		dataUpdate["Passowrd"] = input.Password
+		dataUpdate["Password"] = input.Password
 	}
 	dataUpdate["updated_at"] = time.Now()
 
