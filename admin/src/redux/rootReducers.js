@@ -13,12 +13,16 @@ import readKategoriReducers from './kategori/read/readKategoriReducer'
 // pendanaan reducers
 import readPendanaanReducers from './pendanaan/read/readPendanaanReducer'
 
+// petani reducers
+import readPetaniReducers from './petani/read/readPetaniReducer'
+
 const rootReducers = combineReducers({
 	pengajuan: pengajuanReducer,
 	userLogin: userLoginReducer,
 	userProfile: userProfileReducer,
 	readKategori: readKategoriReducers,
-	readPendanaan: readPendanaanReducers
+	readPendanaan: readPendanaanReducers,
+	readPetani: readPetaniReducers
 })
 
 export default rootReducers
