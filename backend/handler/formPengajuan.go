@@ -5,7 +5,6 @@ import (
 	"backend/entity"
 	"backend/helper"
 	"backend/layer/formPengajuan"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -36,14 +35,14 @@ func (h *formPengajuanHandler) ShowAllFormPengajuanHandler(c *gin.Context) {
 
 // CREATE NEW FORM PENGAJUAN
 func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
-	petaniData := c.MustGet("currentUser")
+	petaniData := c.MustGet("currentUser").(string)
 
 	// file, err := c.FormFile("Document")
 	// file2, err := c.FormFile("Ktp")
 
 	// pendanaanID := c.Params.ByName("pendanaan_id")
 
-	if petaniData == 0 {
+	if len(petaniData) == 0 {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Petani not authorize / not login"})
 
 		c.JSON(401, responseError)
@@ -55,8 +54,7 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 	// err = c.SaveUploadedFile(file, path)
 	// err = c.SaveUploadedFile(file2, path2)
 
-	petaniID := petaniData
-	str := fmt.Sprintf("%v", petaniID)
+	// petaniID := strconv.Itoa(petaniData)
 
 	var inputFormPengajuan entity.FormPengajuanInput
 
@@ -72,7 +70,7 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
 	// pathPengajuanSave2 := "https://cangkoel.herokuapp.com/" + path2
 
-	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, str)
+	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniData)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 

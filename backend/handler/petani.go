@@ -2,7 +2,6 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"backend/auth"
 	"backend/entity"
@@ -116,12 +115,14 @@ func (h *petaniHandler) UpdatePetaniByIDHandler(c *gin.Context) {
 		return
 	}
 
-	idParam, _ := strconv.Atoi(id)
+	// idParam, _ := strconv.Atoi(id)
 
 	// ngecek id sama apa engga sama yang di inputin
-	petaniData := int(c.MustGet("currentUser").(int))
 
-	if idParam != petaniData {
+	// petaniData := int(c.MustGet("currentUser").(int))
+	petaniData := c.MustGet("currentUser").(string)
+
+	if id != petaniData {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Petani ID not authorize"})
 
 		c.JSON(401, responseError)

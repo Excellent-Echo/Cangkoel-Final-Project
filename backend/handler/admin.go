@@ -115,10 +115,11 @@ func (h *adminHandler) UpdateAdminByIDHandler(c *gin.Context) {
 		return
 	}
 
-	adminData := c.MustGet("currentAdmin")
+	// idParam, _ := strconv.Atoi(id)
+	// adminData := int(c.MustGet("currentAdmin").(int))
+	adminData := c.MustGet("currentAdmin").(string)
 
-	//ini perlu di investigasi?????
-	if id == adminData {
+	if id != adminData {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "admin ID not authorize"})
 
 		c.JSON(401, responseError)
