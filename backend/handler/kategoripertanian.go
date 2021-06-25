@@ -3,7 +3,6 @@ package handler
 import (
 	"backend/auth"
 	"net/http"
-	"strconv"
 
 	"backend/entity"
 	"backend/helper"
@@ -96,7 +95,7 @@ func (h *KpetaniHandler) DeleteKPetaniByIDHandler(c *gin.Context) {
 func (h *KpetaniHandler) UpdateKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
-	var updatePetaniInput entity.UpdatePetaniInput
+	var updatePetaniInput entity.UpdateKategoriPertanianInput
 
 	if err := c.ShouldBindJSON(&updatePetaniInput); err != nil {
 		splitError := helper.SplitErrorInformation(err)
@@ -106,18 +105,18 @@ func (h *KpetaniHandler) UpdateKPetaniByIDHandler(c *gin.Context) {
 		return
 	}
 
-	idParam, _ := strconv.Atoi(id)
+	// idParam, _ := strconv.Atoi(id)
 
-	KpetaniData := int(c.MustGet("currentUser").(int))
+	// KpetaniData := int(c.MustGet("currentUser").(int))
 
-	if idParam != KpetaniData {
-		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "Kategori Pertanian ID not authorize"})
+	// if idParam != KpetaniData {
+	// 	responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "Kategori Pertanian ID not authorize"})
 
-		c.JSON(401, responseError)
-		return
-	}
+	// 	c.JSON(401, responseError)
+	// 	return
+	// }
 
-	Kpetani, err := h.KpetaniService.SUpdateByIDKpetani(id, entity.UpdateKategoriPertanianInput{})
+	Kpetani, err := h.KpetaniService.SUpdateByIDKpetani(id, updatePetaniInput)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"error": err.Error()})
 

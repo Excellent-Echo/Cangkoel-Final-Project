@@ -14,7 +14,7 @@ var (
 )
 
 func AdminRoute(r *gin.Engine) {
-	r.GET("users/admin", handler.MiddlewareAdmin(adminService, authService), adminHandler.ShowAllAdminHandler)
+	r.GET("users/admin", adminHandler.ShowAllAdminHandler)
 	// r.POST("users/investor/register", investorHandler.RegisterInvestorHandler)
 	// r.POST("users/investor/login", investorHandler.LoginInvestorHandler)
 	r.GET("users/admin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.GetAdminByIDHandler)

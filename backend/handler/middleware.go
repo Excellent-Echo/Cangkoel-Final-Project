@@ -5,6 +5,7 @@ import (
 	"backend/helper"
 	"backend/layer/admin"
 	"backend/layer/petani"
+	"fmt"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -79,6 +80,7 @@ func MiddlewareAdmin(adminService admin.Service, authService auth.Service) gin.H
 		// IDAdmin := strconv.Itoa(adminID)
 
 		adminID := claim["admin_id"].(string)
+		fmt.Println(adminID)
 
 		Admin, err := adminService.SFindAdminByID(adminID)
 		if Admin.Role != "admin" {
