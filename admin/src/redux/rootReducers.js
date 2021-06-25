@@ -9,6 +9,7 @@ import userProfileReducer from './user/profile/userProfileReducer'
 
 // kategori reducers
 import readKategoriReducers from './kategori/read/readKategoriReducer'
+import createKategoriReducers from './kategori/create/createKategoriReducer'
 
 // pendanaan reducers
 import readPendanaanReducers from './pendanaan/read/readPendanaanReducer'
@@ -21,6 +22,7 @@ const rootReducers = combineReducers({
 	userLogin: userLoginReducer,
 	userProfile: userProfileReducer,
 	readKategori: readKategoriReducers,
+	createKategori: createKategoriReducers,
 	readPendanaan: readPendanaanReducers,
 	readPetani: readPetaniReducers
 })
