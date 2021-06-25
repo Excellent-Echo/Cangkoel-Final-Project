@@ -2,7 +2,6 @@ package hasilPengajuan
 
 import (
 	"backend/entity"
-	"backend/helper"
 	"errors"
 	"fmt"
 	"strconv"
@@ -72,9 +71,9 @@ func (s *service) SFindHasilPengajuanByID(hasilPengajuanID string) (entity.Hasil
 func (s *service) SUpdateHasilPengajuanByID(hasilPengajuanID string, input entity.UpdateHasilPengajuanInput) (entity.HasilPengajuan, error) {
 	var dataUpdate = map[string]interface{}{}
 
-	if err := helper.ValidateIDNumber(hasilPengajuanID); err != nil {
-		return entity.HasilPengajuan{}, err
-	}
+	// if err := helper.ValidateIDNumber(hasilPengajuanID); err != nil {
+	// 	return entity.HasilPengajuan{}, err
+	// }
 
 	hasilPengajuan, err := s.repository.RFindHasilPengajuanByID(hasilPengajuanID)
 
