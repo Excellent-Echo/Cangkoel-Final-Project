@@ -12,7 +12,9 @@ const readPetani = (petani) => {
 const readErrorPetani = (errorMessage) => {
 	return {
 		type: READ_ERROR_PETANI,
-		payload: errorMessage
+		payload: {
+			errorMessage: errorMessage
+		}
 	}
 }
 
@@ -33,9 +35,15 @@ const readPetaniActions = () => async (dispatch) => {
 		dispatch(readStartLoading())
 		dispatch(readErrorPetani(''))
 
+		const accessToken = localStorage.getItem('token')
+		console.log(accessToken)
+
 		const response = await CangkoelAPI({
 			method: 'GET',
-			url: '/users/petani'
+			url: '/users/petani',
+			headers: {
+				Authorization: accessToken
+			}
 		})
 
 		console.log('actions', response.data.data)
