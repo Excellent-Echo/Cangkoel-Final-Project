@@ -45,7 +45,7 @@ const login = (email, password, history) => async (dispatch) => {
 
 		const postData = await CangkoelAPI({
 			method: 'POST',
-			url: '/users/login',
+			url: '/admin/login',
 			data: loginData
 		})
 
