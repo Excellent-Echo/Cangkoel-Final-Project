@@ -24,5 +24,5 @@ func AdminRoute(r *gin.Engine) {
 	r.GET("admin", handler.MiddlewareAdmin(adminService, authService), adminHandler.ShowAllAdminHandler)
 	r.GET("admin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.GetAdminByIDHandler)
 	r.PUT("admin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.UpdateAdminByIDHandler)
-	r.DELETE("uadmin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.DeleteAdminByIDHandler)
+	r.DELETE("admin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.DeleteAdminByIDHandler)
 }
