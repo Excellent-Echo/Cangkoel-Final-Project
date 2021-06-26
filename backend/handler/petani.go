@@ -20,21 +20,6 @@ func NewPetaniHandler(petaniService petani.Service, authService auth.Service) *p
 	return &petaniHandler{petaniService, authService}
 }
 
-// SHOW ALL PETANI
-func (h *petaniHandler) ShowAllPetaniHandler(c *gin.Context) {
-	userPetani, err := h.petaniService.SShowAllPetani()
-
-	if err != nil {
-		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
-
-		c.JSON(500, responseError)
-		return
-	}
-
-	response := helper.APIResponse("success get all user Petani", 200, "status OK", userPetani)
-	c.JSON(200, response)
-}
-
 // CREATE NEW PETANI OR REGISTER
 func (h *petaniHandler) RegisterPetaniHandler(c *gin.Context) {
 	var inputPetani entity.PetaniInput
@@ -66,6 +51,53 @@ func (h *petaniHandler) RegisterPetaniHandler(c *gin.Context) {
 	}
 	response := helper.APIResponse("success create new user Petani", 201, "Status OK", newPetani)
 	c.JSON(201, response)
+}
+
+//LOGIN PETANI
+func (h *petaniHandler) LoginPetaniHandler(c *gin.Context) {
+	var inputLoginPetani entity.LoginPetaniInput
+
+	if err := c.ShouldBindJSON(&inputLoginPetani); err != nil {
+		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	petaniData, err := h.petaniService.SLoginPetani(inputLoginPetani)
+
+	if err != nil {
+		responseError := helper.APIResponse("input data required", 401, "bad request", gin.H{"errors": err.Error()})
+
+		c.JSON(401, responseError)
+		return
+	}
+
+	token, err := h.authService.GenerateTokenUser(petaniData.ID)
+
+	if err != nil {
+		responseError := helper.APIResponse("input data required", 500, "bad request", gin.H{"errors": err.Error()})
+
+		c.JSON(500, responseError)
+		return
+	}
+	response := helper.APIResponse("success login petani", 200, "success", gin.H{"token": token, "role": petaniData.Role, "id": petaniData.ID})
+	c.JSON(200, response)
+}
+
+// SHOW ALL PETANI
+func (h *petaniHandler) ShowAllPetaniHandler(c *gin.Context) {
+	userPetani, err := h.petaniService.SShowAllPetani()
+
+	if err != nil {
+		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
+
+		c.JSON(500, responseError)
+		return
+	}
+
+	response := helper.APIResponse("success get all user Petani", 200, "status OK", userPetani)
+	c.JSON(200, response)
 }
 
 // FIND PETANI BY ID

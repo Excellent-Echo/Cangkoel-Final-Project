@@ -14,7 +14,7 @@ var (
 )
 
 type Service interface {
-	GenerateToken(PetaniID string) (string, error)
+	GenerateTokenUser(PetaniID string) (string, error)
 	GenerateTokenAdmin(AdminID string) (string, error)
 	ValidateToken(encodedToken string) (*jwt.Token, error)
 }
@@ -26,7 +26,7 @@ func NewService() *jwtService {
 	return &jwtService{}
 }
 
-func (s *jwtService) GenerateToken(PetaniID string) (string, error) {
+func (s *jwtService) GenerateTokenUser(PetaniID string) (string, error) {
 	claim := jwt.MapClaims{
 		"petani_id": PetaniID,
 	}

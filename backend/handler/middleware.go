@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Middleware(petaniService petani.Service, authService auth.Service) gin.HandlerFunc {
+func MiddlewareUser(petaniService petani.Service, authService auth.Service) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 

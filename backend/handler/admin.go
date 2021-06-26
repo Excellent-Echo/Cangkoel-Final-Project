@@ -68,6 +68,38 @@ func (h *adminHandler) RegisterAdminHandler(c *gin.Context) {
 	c.JSON(201, response)
 }
 
+//LOGIN ADMIN
+func (h *adminHandler) LoginAdminHandler(c *gin.Context) {
+	var inputLoginAdmin entity.LoginAdminInput
+
+	if err := c.ShouldBindJSON(&inputLoginAdmin); err != nil {
+		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	adminData, err := h.adminService.SLoginAdmin(inputLoginAdmin)
+
+	if err != nil {
+		responseError := helper.APIResponse("input data required", 401, "bad request", gin.H{"errors": err.Error()})
+
+		c.JSON(401, responseError)
+		return
+	}
+
+	token, err := h.authService.GenerateTokenAdmin(adminData.ID)
+
+	if err != nil {
+		responseError := helper.APIResponse("input data required", 500, "bad request", gin.H{"errors": err.Error()})
+
+		c.JSON(500, responseError)
+		return
+	}
+	response := helper.APIResponse("success login admin", 200, "success", gin.H{"token": token, "role": adminData.Role, "id": adminData.ID})
+	c.JSON(200, response)
+}
+
 // FIND ADMIN BY ID
 func (h *adminHandler) GetAdminByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
