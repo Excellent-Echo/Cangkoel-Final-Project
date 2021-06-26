@@ -96,7 +96,7 @@ func (s *service) SUpdateHasilPengajuanByID(hasilPengajuanID string, input entit
 		dataUpdate["PetaniID"] = input.PetaniID
 	}
 	if strconv.Itoa(input.FormPengajuanID) != "" || len(strconv.Itoa(input.FormPengajuanID)) != 0 {
-		dataUpdate["PengajuanID"] = input.FormPengajuanID
+		dataUpdate["FormPengajuanID"] = input.FormPengajuanID
 	}
 	dataUpdate["updated_at"] = time.Now()
 
