@@ -1,15 +1,15 @@
-import FirstDashboard from '../views/starter/dataPengajuan.jsx'
-import BuatPengajuan from '../views/menus/buatPengajuan.jsx'
+import DataPengajuan from '../views/starter/dataPengajuan.jsx'
+import HasilPengajuan from '../views/menus/hasilPengajuan.jsx'
 import Kategori from '../views/menus/kategori.jsx'
 import Pendanaan from '../views/menus/pendanaan.jsx'
 import Petani from '../views/menus/petani.jsx'
 
 var ThemeRoutes = [
 	{
-		path: '/buat-pengajuan',
+		path: '/hasil-pengajuan',
 		name: 'Buat Pengajuan',
 		icon: 'mdi mdi-comment-processing-outline',
-		component: BuatPengajuan
+		component: HasilPengajuan
 	},
 	{
 		path: '/kategori',
@@ -34,7 +34,7 @@ var ThemeRoutes = [
 		path: '/',
 		name: 'Data Pengajuan',
 		icon: 'fa-solid fa-star',
-		component: FirstDashboard
+		component: DataPengajuan
 	}
 ]
 export default ThemeRoutes
