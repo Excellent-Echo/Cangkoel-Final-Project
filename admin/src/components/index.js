@@ -1,4 +1,4 @@
-import Header from "./header";
-import Projects from "./tabel";
+import Header from './header'
+import ReadPengajuan from './pengajuan/readPengajuan'
 
-export { Header, Projects };
+export { Header, ReadPengajuan }
