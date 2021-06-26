@@ -14,10 +14,10 @@ var (
 )
 
 func PetaniRoute(r *gin.Engine) {
-	r.GET("users/petani", handler.Middleware(petaniService, authService), petaniHandler.ShowAllPetaniHandler)
-	// r.POST("users/petani/register", petaniHandler.RegisterPetaniHandler)
-	// r.POST("users/petani/login", petaniHandler.LoginPetaniHandler)
-	r.GET("users/petani/:id", handler.Middleware(petaniService, authService), petaniHandler.GetPetaniByIDHandler)
-	r.PUT("users/petani/:id", handler.Middleware(petaniService, authService), petaniHandler.UpdatePetaniByIDHandler)
-	r.DELETE("users/petani/:id", handler.Middleware(petaniService, authService), petaniHandler.DeletePetaniByIDHandler)
+	r.POST("users/petani/register", petaniHandler.RegisterPetaniHandler)
+	r.POST("users/petani/login", petaniHandler.LoginPetaniHandler)
+	r.GET("users/petani", handler.MiddlewareUser(petaniService, authService), petaniHandler.ShowAllPetaniHandler)
+	r.GET("users/petani/:id", handler.MiddlewareUser(petaniService, authService), petaniHandler.GetPetaniByIDHandler)
+	r.PUT("users/petani/:id", handler.MiddlewareUser(petaniService, authService), petaniHandler.UpdatePetaniByIDHandler)
+	r.DELETE("users/petani/:id", handler.MiddlewareUser(petaniService, authService), petaniHandler.DeletePetaniByIDHandler)
 }

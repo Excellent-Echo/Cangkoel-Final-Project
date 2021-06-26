@@ -13,6 +13,7 @@ import (
 type Service interface {
 	SShowAllPetani() ([]PetaniFormat, error)
 	SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, error)
+	SLoginPetani(input entity.LoginPetaniInput) (PetaniFormat, error)
 	SFindPetaniByID(petaniID string) (PetaniFormat, error)
 	SDeletePetaniByID(petaniID string) (interface{}, error)
 	SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniInput) (PetaniFormat, error)
@@ -69,6 +70,38 @@ func (s *service) SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, 
 	}
 
 	return formatPetani, nil
+}
+
+func (s *service) SLoginPetani(input entity.LoginPetaniInput) (PetaniFormat, error) {
+	userPetani, err := s.repository.RFindPetaniByEmail(input.Email)
+	// admin, err := s.adminRepo.RFindAdminByEmail(input.Email)
+
+	if err != nil {
+		return PetaniFormat{}, err
+	}
+
+	if len(userPetani.ID) != 0 { // perlu diperhatikan
+		if err := bcrypt.CompareHashAndPassword([]byte(userPetani.Password), []byte(input.Password)); err != nil {
+			return PetaniFormat{}, errors.New("password invalid")
+		}
+
+		formatter := Format(userPetani)
+
+		return formatter, nil
+	}
+
+	// if len(admin.ID) != 0 { // perlu diperhatikan
+	// 	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password)); err != nil {
+	// 		return UserFormat{}, errors.New("password invalid")
+	// 	}
+
+	// 	formatter := FormatAdmin(admin)
+
+	// 	return formatter, nil
+	// }
+
+	newError := fmt.Sprintf("petani id %v not found", userPetani.ID)
+	return PetaniFormat{}, errors.New(newError)
 }
 
 func (s *service) SFindPetaniByID(petaniID string) (PetaniFormat, error) {

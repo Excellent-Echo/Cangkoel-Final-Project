@@ -11,8 +11,9 @@ import (
 )
 
 type Service interface {
-	SShowAllAdmin() ([]AdminFormat, error)
 	SRegisterAdmin(admin entity.AdminInput) (AdminFormat, error)
+	SLoginAdmin(input entity.LoginAdminInput) (AdminFormat, error)
+	SShowAllAdmin() ([]AdminFormat, error)
 	SFindAdminByID(adminID string) (AdminFormat, error)
 	SDeleteAdminByID(adminID string) (interface{}, error)
 	SUpdateAdminByID(adminID string, input entity.UpdateAdminInput) (AdminFormat, error)
@@ -69,6 +70,28 @@ func (s *service) SRegisterAdmin(admin entity.AdminInput) (AdminFormat, error) {
 	}
 
 	return formatAdmin, nil
+}
+
+func (s *service) SLoginAdmin(input entity.LoginAdminInput) (AdminFormat, error) {
+	admin, err := s.repository.RFindAdminByEmail(input.Email)
+
+	if err != nil {
+		return AdminFormat{}, err
+	}
+
+	if len(admin.ID) != 0 { // perlu diperhatikan
+		if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password)); err != nil {
+			return AdminFormat{}, errors.New("password invalid")
+		}
+
+		formatter := Format(admin)
+
+		return formatter, nil
+	}
+
+	newError := fmt.Sprintf("admin id %v not found", admin.ID)
+	return AdminFormat{}, errors.New(newError)
+
 }
 
 func (s *service) SFindAdminByID(adminID string) (AdminFormat, error) {

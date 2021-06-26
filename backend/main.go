@@ -14,7 +14,6 @@ func main() {
 
 	routes.PetaniRoute(r)
 	routes.AdminRoute(r)
-	routes.UserRoute(r)
 	routes.FormPengajuanRoute(r)
 	routes.PendanaanRoute(r)
 	routes.KategoriPertanianRoute(r)

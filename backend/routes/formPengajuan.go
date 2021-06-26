@@ -14,7 +14,7 @@ var (
 )
 
 func FormPengajuanRoute(r *gin.Engine) {
-	r.GET("formulir-pengajuan", handler.Middleware(petaniService, authService), formPengajuanHandler.ShowAllFormPengajuanHandler)
-	r.GET("formulir-pengajuan/:id", handler.Middleware(petaniService, authService), formPengajuanHandler.GetFormPengajuanByIDHandler)
-	r.POST("formulir-pengajuan", handler.Middleware(petaniService, authService), formPengajuanHandler.CreateFormPengajuanHandler)
+	r.GET("formulir-pengajuan", handler.MiddlewareUser(petaniService, authService), formPengajuanHandler.ShowAllFormPengajuanHandler)
+	r.GET("formulir-pengajuan/:id", handler.MiddlewareUser(petaniService, authService), formPengajuanHandler.GetFormPengajuanByIDHandler)
+	r.POST("formulir-pengajuan", handler.MiddlewareUser(petaniService, authService), formPengajuanHandler.CreateFormPengajuanHandler)
 }
