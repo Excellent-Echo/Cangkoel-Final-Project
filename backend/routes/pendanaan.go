@@ -16,6 +16,6 @@ var (
 func PendanaanRoute(r *gin.Engine) {
 	r.GET("pendanaan", pendanaanHandler.ShowAllPendanaanHandler)
 	// r.GET("pendanaan/:kategori-pertanian", pendanaanHandler.GetPendanaanByKategoriIDHandler)
-	r.POST("pendanaan/add", pendanaanHandler.CreatePendanaanHandler) // kasih middleware admin
+	r.POST("pendanaan/add", handler.MiddlewareAdmin(adminService, authService), pendanaanHandler.CreatePendanaanHandler) // kasih middleware admin
 	r.GET("pendanaan/:id", pendanaanHandler.GetPendanaanByIDHandler)
 }
