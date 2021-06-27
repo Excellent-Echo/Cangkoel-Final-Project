@@ -27,13 +27,16 @@ const createKategoriAction = (namaKategori, fotoKategori, token) => async (dispa
 			foto_kategori: fotoKategori
 		}
 
+		const accessToken = localStorage.getItem('token')
+		console.log(accessToken)
+
 		const response = await CangkoelAPI({
 			method: 'POST',
 			url: '/kategori-pertanian',
-			data: postDataKategori
-			// headers: {
-			// 	Authorization: token
-			// }
+			data: postDataKategori,
+			headers: {
+				Authorization: accessToken
+			}
 		})
 		window.location.reload()
 		console.log(response.data.data)
