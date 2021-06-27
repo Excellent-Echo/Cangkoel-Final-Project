@@ -49,22 +49,13 @@ const login = (email, password, history) => async (dispatch) => {
 			data: loginData
 		})
 
-		let role = postData.data.data.role
 		let id = postData.data.data.id
 		let token = postData.data.data.token
 		localStorage.setItem('token', token)
 
-		let url = ''
-
-		if (role === 'petani') {
-			url = `/users/petani/${id}`
-		} else {
-			url = `/users/admin/${id}`
-		}
-
 		const getDetailUser = await CangkoelAPI({
 			method: 'GET',
-			url: url,
+			url: `/admin/${id}`,
 			headers: {
 				Authorization: token
 			}
