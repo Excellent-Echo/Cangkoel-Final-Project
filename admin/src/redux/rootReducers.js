@@ -20,6 +20,7 @@ import createPendanaanReducers from './pendanaan/create/createPendanaanReducer'
 
 // hasil pengajuan reducers
 import readHasilPengajuanReducers from './hasilPengajuan/read/readHasilPengajuanReducer'
+import createHasilPengajuanReducers from './hasilPengajuan/create/createHasilPengajuanReducer'
 
 const rootReducers = combineReducers({
 	pengajuan: pengajuanReducer,
@@ -30,7 +31,8 @@ const rootReducers = combineReducers({
 	readPendanaan: readPendanaanReducers,
 	createPendanaan: createPendanaanReducers,
 	readPetani: readPetaniReducers,
-	readHasilPengajuan: readHasilPengajuanReducers
+	readHasilPengajuan: readHasilPengajuanReducers,
+	createHasilPengajuan: createHasilPengajuanReducers
 })
 
 export default rootReducers
