@@ -20,7 +20,7 @@ const setFotoKategori = (fotoKategori) => {
 	}
 }
 
-const createKategoriAction = (namaKategori, fotoKategori, token) => async (dispatch) => {
+const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) => {
 	try {
 		const postDataKategori = {
 			nama_kategori: namaKategori,
@@ -30,7 +30,7 @@ const createKategoriAction = (namaKategori, fotoKategori, token) => async (dispa
 		const accessToken = localStorage.getItem('token')
 		console.log(accessToken)
 
-		const response = await CangkoelAPI({
+		const postKategoriData = await CangkoelAPI({
 			method: 'POST',
 			url: '/kategori-pertanian',
 			data: postDataKategori,
@@ -39,7 +39,7 @@ const createKategoriAction = (namaKategori, fotoKategori, token) => async (dispa
 			}
 		})
 		window.location.reload()
-		console.log(response.data.data)
+		console.log('kategori data action', postKategoriData.data.data)
 	} catch (error) {
 		console.log(error.response.data)
 	}

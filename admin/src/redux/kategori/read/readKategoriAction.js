@@ -17,7 +17,9 @@ const readKategori = (kategoriPertanian) => {
 const readErrorKategori = (errorMessage) => {
 	return {
 		type: READ_ERROR_KATEGORI,
-		payload: errorMessage
+		payload: {
+			errorMessage: errorMessage
+		}
 	}
 }
 
@@ -38,17 +40,17 @@ const readKategoriActions = () => async (dispatch) => {
 		dispatch(readStartLoading())
 		dispatch(readErrorKategori(''))
 
-		const response = await CangkoelAPI({
+		const getKategoriData = await CangkoelAPI({
 			method: 'GET',
 			url: '/kategori-pertanian'
 		})
 
-		console.log('actions', response.data.data)
+		console.log('kategori data action', getKategoriData.data.data)
 
-		dispatch(readKategori(response.data.data))
+		dispatch(readKategori(getKategoriData.data.data))
 	} catch (error) {
-		console.log(error)
-		dispatch(readErrorKategori(error.response))
+		console.log(error.response.data)
+		dispatch(readErrorKategori(error.response.data))
 		dispatch(readStopLoading())
 	}
 }

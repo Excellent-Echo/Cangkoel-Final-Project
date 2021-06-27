@@ -17,7 +17,9 @@ const readPendanaan = (pendanaan) => {
 const readErrorPendanaan = (errorMessage) => {
 	return {
 		type: READ_ERROR_PENDANAAN,
-		payload: errorMessage
+		payload: {
+			errorMessage: errorMessage
+		}
 	}
 }
 
@@ -38,17 +40,16 @@ const readPendanaanActions = () => async (dispatch) => {
 		dispatch(readStartLoading())
 		dispatch(readErrorPendanaan(''))
 
-		const response = await CangkoelAPI({
+		const getPendanaanData = await CangkoelAPI({
 			method: 'GET',
 			url: '/pendanaan'
 		})
 
-		console.log('actions', response.data.data)
-
-		dispatch(readPendanaan(response.data.data))
+		console.log('actions', getPendanaanData.data.data)
+		dispatch(readPendanaan(getPendanaanData.data.data))
 	} catch (error) {
-		console.log(error)
-		dispatch(readErrorPendanaan(error.response))
+		console.log(error.response.data)
+		dispatch(readErrorPendanaan(error.response.data))
 		dispatch(readStopLoading())
 	}
 }
