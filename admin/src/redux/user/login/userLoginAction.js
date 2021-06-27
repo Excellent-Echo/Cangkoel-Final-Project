@@ -49,8 +49,6 @@ const login = (email, password, history) => async (dispatch) => {
 			data: loginData
 		})
 
-		console.log(postData)
-
 		let role = postData.data.data.role
 		let id = postData.data.data.id
 		let token = postData.data.data.token
@@ -71,6 +69,8 @@ const login = (email, password, history) => async (dispatch) => {
 				Authorization: token
 			}
 		})
+
+		console.log(getDetailUser)
 
 		const getPengajuanData = await CangkoelAPI({
 			method: 'GET',
