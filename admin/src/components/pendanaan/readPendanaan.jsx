@@ -15,6 +15,7 @@ const ReadPendanaan = () => {
 
 	useEffect(() => {
 		dispatch(pendanaanActions.readPendanaanActions())
+		// eslint-disable-next-line
 	}, [])
 
 	return (
@@ -59,6 +60,7 @@ const ReadPendanaan = () => {
 								<th className="border-0">ID Kategori Pertanian</th>
 								<th className="border-0">Terakhir Dibuat</th>
 								<th className="border-0">Terakhir Diupdate</th>
+								<th className="border-0"></th>
 							</tr>
 						</thead>
 						{readPendanaanData &&
@@ -96,14 +98,16 @@ const ReadPendanaan = () => {
 											<td>{item.kategori_id}</td>
 											<td>{item.created_at}</td>
 											<td>{item.updated_at}</td>
-											<div className="grid-container">
-												<div className="item2">
-													<EditPendanaan />
+											<td>
+												<div className="grid-container">
+													<div className="item2">
+														<EditPendanaan />
+													</div>
+													<div className="item3">
+														<DeletePendanaan />
+													</div>
 												</div>
-												<div className="item3">
-													<DeletePendanaan />
-												</div>
-											</div>
+											</td>
 										</tr>
 									</tbody>
 								)

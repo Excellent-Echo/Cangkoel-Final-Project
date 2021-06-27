@@ -19,6 +19,7 @@ const App = () => {
 			const foundUser = JSON.parse(loggedInUser)
 			dispatch(userProfileAction.setProfileData(foundUser))
 		}
+		// eslint-disable-next-line
 	}, [])
 
 	return (
