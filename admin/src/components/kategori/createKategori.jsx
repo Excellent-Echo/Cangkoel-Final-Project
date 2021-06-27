@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { Card, CardTitle, Input, Button, Form, FormGroup, Label } from 'reactstrap'
 import kategoriActions from '../../redux/kategori/create/createKategoriAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CreateKategori = () => {
+	const kategoriData = useSelector((state) => state.createKategori)
+
 	const [namaKategori, setNamaKategori] = useState('')
-	const [fotoKategori, setFotoKategori] = useState('')
+	// const [fotoKategori, setFotoKategori] = useState('')
+	const [fileFotoKategori, setFileFotoKategori] = useState('')
 	const dispatch = useDispatch()
 
 	// const token = localStorage.getItem('token')
@@ -14,7 +17,11 @@ const CreateKategori = () => {
 		e.preventDefault()
 		// console.log(namaKategori)
 		// console.log(fotoKategori)
-		dispatch(kategoriActions.createKategoriAction(namaKategori, fotoKategori))
+		dispatch(kategoriActions.createKategoriAction(namaKategori, kategoriData.urlFotoKategori))
+	}
+
+	const uploadImage = () => {
+		dispatch(kategoriActions.uploadFotoKategori(fileFotoKategori))
 	}
 
 	return (
@@ -33,15 +40,14 @@ const CreateKategori = () => {
 					/>
 				</FormGroup>
 				<FormGroup>
-					<Label>Masukkan Link gambar</Label>
+					<Label>Upload Foto Kategori</Label>
 					<Input
-						type="text"
-						name="link"
-						id="link"
-						placeholder="Link gambar"
-						required
-						onChange={(e) => setFotoKategori(e.target.value)}
+						type="file"
+						name="file"
+						id="exampleFile"
+						onChange={(e) => setFileFotoKategori(e.target.files[0])}
 					/>
+					<button onClick={uploadImage}>Upload</button>
 				</FormGroup>
 
 				<Button>Buat Kategori Pertanian</Button>

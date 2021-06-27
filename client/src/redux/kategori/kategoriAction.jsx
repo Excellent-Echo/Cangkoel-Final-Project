@@ -19,7 +19,7 @@ export const getKategoriAction = () => {
 				url: '/kategori-pertanian'
 			})
 
-			// console.log('data', response.data.data)
+			console.log('data', response.data.data)
 
 			dispatch({ type: GET_ALL_KATEGORI_SUCCESS, payload: response.data.data })
 		} catch (error) {

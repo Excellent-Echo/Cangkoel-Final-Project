@@ -18,6 +18,10 @@ import createKategoriReducers from './kategori/create/createKategoriReducer'
 import readPendanaanReducers from './pendanaan/read/readPendanaanReducer'
 import createPendanaanReducers from './pendanaan/create/createPendanaanReducer'
 
+// hasil pengajuan reducers
+import readHasilPengajuanReducers from './hasilPengajuan/read/readHasilPengajuanReducer'
+import createHasilPengajuanReducers from './hasilPengajuan/create/createHasilPengajuanReducer'
+
 const rootReducers = combineReducers({
 	pengajuan: pengajuanReducer,
 	userLogin: userLoginReducer,
@@ -25,8 +29,10 @@ const rootReducers = combineReducers({
 	readKategori: readKategoriReducers,
 	createKategori: createKategoriReducers,
 	readPendanaan: readPendanaanReducers,
+	createPendanaan: createPendanaanReducers,
 	readPetani: readPetaniReducers,
-	createPendanaan: createPendanaanReducers
+	readHasilPengajuan: readHasilPengajuanReducers,
+	createHasilPengajuan: createHasilPengajuanReducers
 })
 
 export default rootReducers

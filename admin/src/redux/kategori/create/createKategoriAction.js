@@ -1,6 +1,7 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
+import CloudinaryAPI from '../../../api/CloudinaryAPI'
 
-import { CREATE_NAME_KATEGORI, CREATE_FOTO_KATEGORI } from '../kategoryType'
+import { CREATE_NAME_KATEGORI, CREATE_FOTO_KATEGORI, CREATE_URL_FOTO_KATEGORI } from '../kategoryType'
 
 const setNamekategori = (namaKategori) => {
 	return {
@@ -20,7 +21,16 @@ const setFotoKategori = (fotoKategori) => {
 	}
 }
 
-const createKategoriAction = (namaKategori, fotoKategori, token) => async (dispatch) => {
+const setUrlFotoKategori = (urlFotoKategori) => {
+	return {
+		type: CREATE_URL_FOTO_KATEGORI,
+		payload: {
+			urlFotoKategori: urlFotoKategori
+		}
+	}
+}
+
+const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) => {
 	try {
 		const postDataKategori = {
 			nama_kategori: namaKategori,
@@ -30,7 +40,7 @@ const createKategoriAction = (namaKategori, fotoKategori, token) => async (dispa
 		const accessToken = localStorage.getItem('token')
 		console.log(accessToken)
 
-		const response = await CangkoelAPI({
+		const postKategoriData = await CangkoelAPI({
 			method: 'POST',
 			url: '/kategori-pertanian',
 			data: postDataKategori,
@@ -39,13 +49,37 @@ const createKategoriAction = (namaKategori, fotoKategori, token) => async (dispa
 			}
 		})
 		window.location.reload()
-		console.log(response.data.data)
+		console.log('kategori data action', postKategoriData.data.data)
 	} catch (error) {
 		console.log(error.response.data)
 	}
 }
 
+const uploadFotoKategori = (file) => async (dispatch) => {
+	try {
+		console.log('file', file)
+		const data = new FormData()
+		data.append('file', file)
+		data.append('upload_preset', 'rxra54p9')
+		data.append('cloud_name', 'cangkoel')
+
+		const postFotoKategori = await CloudinaryAPI({
+			method: 'POST',
+			url: '/image/upload',
+			data: data
+		})
+
+		console.log(postFotoKategori.data.url)
+
+		dispatch(setUrlFotoKategori(postFotoKategori.data.url))
+	} catch (error) {
+		console.log(error.response)
+	}
+}
+
 const kategoriActions = {
+	setUrlFotoKategori,
+	uploadFotoKategori,
 	setNamekategori,
 	setFotoKategori,
 	createKategoriAction
