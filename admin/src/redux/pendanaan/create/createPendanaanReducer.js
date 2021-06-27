@@ -1,6 +1,7 @@
 import {
 	RESET_FORM_PENDANAAN,
 	CREATE_FOTO_PROFIL,
+	CREATE_URL_FOTO_PROFIL,
 	CREATE_NAMA_INVESTOR,
 	CREATE_JUDUL_PENDANAAN,
 	CREATE_NOMINAL_PENDANAAN,
@@ -23,33 +24,23 @@ import {
 } from '../pendanaanType'
 
 const intialState = {
-	// menggunakan cloudinary
 	fotoProfil: '',
+	urlFotoProfil: '',
 	namaInvestor: '',
 	judulPendanaan: '',
 	nominalPendanaan: '',
 	perusahaanPengirim: '',
-	// handle maksimal 50%
 	bagiHasilInvestor: '',
-	// handle maksimal 50%
 	bagiHasilPetani: '',
-	// dipisah beberapa input
 	kebutuhanKomoditas: '',
-	// menggunakan react datepicker
 	jangkaWaktu: '',
 	keuntunganBersih: '',
 	deskripsi: '',
-	// dipisah beberapa input
 	biayaOperasional: '',
-	// dipisah beberapa input
 	biayaEkspor: '',
-	// dipisah beberapa input
 	perhitunganPenghasilan: '',
-	// dipisah beberapa input
 	perhitunganKeuntungan: '',
-	// di mapping
 	kategoriID: '',
-	errorMessage: '',
 	successMessage: '',
 	isLoading: false
 }
@@ -64,6 +55,11 @@ const createPendanaanReducers = (state = intialState, action) => {
 			return {
 				...state,
 				fotoProfil: action.payload.fotoProfil
+			}
+		case CREATE_URL_FOTO_PROFIL:
+			return {
+				...state,
+				urlFotoProfil: action.payload.urlFotoProfil
 			}
 		case CREATE_NAMA_INVESTOR:
 			return {

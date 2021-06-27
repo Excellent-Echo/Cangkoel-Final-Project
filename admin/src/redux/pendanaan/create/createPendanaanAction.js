@@ -1,8 +1,10 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
+import CloudinaryAPI from '../../../api/CloudinaryAPI'
 
 import {
 	RESET_FORM_PENDANAAN,
 	CREATE_FOTO_PROFIL,
+	CREATE_URL_FOTO_PROFIL,
 	CREATE_NAMA_INVESTOR,
 	CREATE_JUDUL_PENDANAAN,
 	CREATE_NOMINAL_PENDANAAN,
@@ -35,6 +37,15 @@ const setFotoProfil = (fotoProfil) => {
 		type: CREATE_FOTO_PROFIL,
 		payload: {
 			fotoProfil: fotoProfil
+		}
+	}
+}
+
+const setUrlFotoProfil = (urlFotoProfil) => {
+	return {
+		type: CREATE_URL_FOTO_PROFIL,
+		payload: {
+			urlFotoProfil: urlFotoProfil
 		}
 	}
 }
@@ -263,19 +274,43 @@ const createPendanaanActions =
 				}
 			})
 
-			console.log('pendanaan data', postPendanaanData.data.data)
+			console.log('pendanaan data action', postPendanaanData.data.data)
 			dispatch(setSuccessMessage('Success Post Pendanaan'))
 			dispatch(stopLoading())
+			window.location.reload()
 		} catch (error) {
 			console.log(error.response.data)
-			// dispatch(setErrorMessage(error.postPendanaanData.data.data.errors || ['internal server error']))
+			dispatch(setErrorMessage(error.response.data))
 			dispatch(stopLoading())
 		}
 	}
 
+const uploadFotoProfil = (file) => async (dispatch) => {
+	try {
+		console.log('file', file)
+		const data = new FormData()
+		data.append('file', file)
+		data.append('upload_preset', 'rxra54p9')
+		data.append('cloud_name', 'cangkoel')
+
+		const postDataProfil = await CloudinaryAPI({
+			method: 'POST',
+			url: '/image/upload',
+			data: data
+		})
+
+		console.log(postDataProfil.data.url)
+
+		dispatch(setUrlFotoProfil(postDataProfil.data.url))
+	} catch (error) {
+		console.log(error.response)
+	}
+}
+
 const pendanaanActions = {
 	resetForm,
 	setFotoProfil,
+	setUrlFotoProfil,
 	setNamaInvestor,
 	setJudulPendanaan,
 	setNominalPendanaan,
@@ -291,7 +326,8 @@ const pendanaanActions = {
 	setPerhitunganPenghasilan,
 	setPerhitunganKeuntungan,
 	setKategoriId,
-	createPendanaanActions
+	createPendanaanActions,
+	uploadFotoProfil
 }
 
 export default pendanaanActions
