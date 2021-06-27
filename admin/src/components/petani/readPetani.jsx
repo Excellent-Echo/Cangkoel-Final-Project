@@ -38,6 +38,7 @@ const ReadPetani = () => {
 				<Table className="no-wrap v-middle" responsive>
 					<thead>
 						<tr className="border-0">
+							<th className="border-0">ID</th>
 							<th className="border-0">Nama Lengkap</th>
 							<th className="border-0">Email</th>
 							<th className="border-0">Role</th>
@@ -48,6 +49,7 @@ const ReadPetani = () => {
 							return (
 								<tbody key={index}>
 									<tr>
+										<td>{value.id}</td>
 										<td>
 											<div className="d-flex no-block align-items-center">
 												<div className="">
