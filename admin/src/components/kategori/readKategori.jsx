@@ -9,9 +9,9 @@ const Readkategori = () => {
 	const dispatch = useDispatch()
 	const readKategoriData = useSelector((state) => state.readKategori.kategoriPertanian)
 
-	useEffect(() => {
-		console.log('selector', readKategoriData)
-	})
+	// useEffect(() => {
+	// 	console.log('selector', readKategoriData)
+	// }, [])
 
 	useEffect(() => {
 		dispatch(kategoriActions.readKategoriActions())
@@ -40,6 +40,7 @@ const Readkategori = () => {
 				<Table className="no-wrap v-middle" responsive>
 					<thead>
 						<tr className="border-0">
+							<th className="border-0">ID</th>
 							<th className="border-0">Nama Kategori</th>
 							<th className="border-0">Foto Kategori</th>
 						</tr>
@@ -50,6 +51,7 @@ const Readkategori = () => {
 							return (
 								<tbody key={index}>
 									<tr>
+										<td>{item.id}</td>
 										<td>{item.nama_kategori}</td>
 										<td>
 											<div className="d-flex no-block align-items-center">
