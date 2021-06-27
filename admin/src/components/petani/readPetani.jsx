@@ -13,6 +13,7 @@ const ReadPetani = () => {
 
 	useEffect(() => {
 		dispatch(petaniActions.readPetaniActions())
+		// eslint-disable-next-line
 	}, [])
 
 	return (

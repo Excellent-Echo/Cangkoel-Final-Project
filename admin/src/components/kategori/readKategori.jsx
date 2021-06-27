@@ -15,6 +15,7 @@ const Readkategori = () => {
 
 	useEffect(() => {
 		dispatch(kategoriActions.readKategoriActions())
+		// eslint-disable-next-line
 	}, [])
 
 	return (
