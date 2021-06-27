@@ -1,6 +1,7 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
+import CloudinaryAPI from '../../../api/CloudinaryAPI'
 
-import { CREATE_NAME_KATEGORI, CREATE_FOTO_KATEGORI } from '../kategoryType'
+import { CREATE_NAME_KATEGORI, CREATE_FOTO_KATEGORI, CREATE_URL_FOTO_KATEGORI } from '../kategoryType'
 
 const setNamekategori = (namaKategori) => {
 	return {
@@ -16,6 +17,15 @@ const setFotoKategori = (fotoKategori) => {
 		type: CREATE_FOTO_KATEGORI,
 		payload: {
 			fotoKategori: fotoKategori
+		}
+	}
+}
+
+const setUrlFotoKategori = (urlFotoKategori) => {
+	return {
+		type: CREATE_URL_FOTO_KATEGORI,
+		payload: {
+			urlFotoKategori: urlFotoKategori
 		}
 	}
 }
@@ -45,7 +55,31 @@ const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) =>
 	}
 }
 
+const uploadFotoKategori = (file) => async (dispatch) => {
+	try {
+		console.log('file', file)
+		const data = new FormData()
+		data.append('file', file)
+		data.append('upload_preset', 'rxra54p9')
+		data.append('cloud_name', 'cangkoel')
+
+		const postFotoKategori = await CloudinaryAPI({
+			method: 'POST',
+			url: '/image/upload',
+			data: data
+		})
+
+		console.log(postFotoKategori.data.url)
+
+		dispatch(setUrlFotoKategori(postFotoKategori.data.url))
+	} catch (error) {
+		console.log(error.response)
+	}
+}
+
 const kategoriActions = {
+	setUrlFotoKategori,
+	uploadFotoKategori,
 	setNamekategori,
 	setFotoKategori,
 	createKategoriAction
