@@ -166,6 +166,6 @@ func (h *adminHandler) UpdateAdminByIDHandler(c *gin.Context) {
 		return
 	}
 
-	response := helper.APIResponse("success update user Investor by ID", http.StatusOK, "success", admin)
+	response := helper.APIResponse("success update admin by ID", http.StatusOK, "success", admin)
 	c.JSON(http.StatusOK, response)
 }

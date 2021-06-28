@@ -95,9 +95,9 @@ func (h *KpetaniHandler) DeleteKPetaniByIDHandler(c *gin.Context) {
 func (h *KpetaniHandler) UpdateKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
-	var updatePetaniInput entity.UpdateKategoriPertanianInput
+	var updateKategoriPertanianInput entity.UpdateKategoriPertanianInput
 
-	if err := c.ShouldBindJSON(&updatePetaniInput); err != nil {
+	if err := c.ShouldBindJSON(&updateKategoriPertanianInput); err != nil {
 		splitError := helper.SplitErrorInformation(err)
 		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
 
@@ -116,7 +116,7 @@ func (h *KpetaniHandler) UpdateKPetaniByIDHandler(c *gin.Context) {
 	// 	return
 	// }
 
-	Kpetani, err := h.KpetaniService.SUpdateByIDKpetani(id, updatePetaniInput)
+	Kpetani, err := h.KpetaniService.SUpdateByIDKpetani(id, updateKategoriPertanianInput)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"error": err.Error()})
 

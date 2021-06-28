@@ -5,6 +5,7 @@ import (
 	"backend/entity"
 	"backend/helper"
 	"backend/layer/pendanaan"
+	"net/http"
 
 	//"strconv"
 
@@ -31,7 +32,7 @@ func (h *pendanaanHandler) ShowAllPendanaanHandler(c *gin.Context) {
 		return
 	}
 
-	response := helper.APIResponse("success get all Form Pendanaan", 200, "status OK", pendanaan)
+	response := helper.APIResponse("success get all Pendanaan", 200, "status OK", pendanaan)
 	c.JSON(200, response)
 }
 
@@ -73,7 +74,7 @@ func (h *pendanaanHandler) CreatePendanaanHandler(c *gin.Context) {
 		c.JSON(500, responseError)
 		return
 	}
-	response := helper.APIResponse("success create new Form Pengajuan", 201, "Status OK", newPendanaan)
+	response := helper.APIResponse("success create new Pendanaan", 201, "Status OK", newPendanaan)
 	c.JSON(201, response)
 }
 
@@ -89,7 +90,7 @@ func (h *pendanaanHandler) GetPendanaanByKategoriIDHandler(c *gin.Context) {
 		return
 	}
 
-	response := helper.APIResponse("success get user Form Pengajuan by ID", 200, "success", pendanaan)
+	response := helper.APIResponse("success get Pendanaan by kategori ID", 200, "success", pendanaan)
 	c.JSON(200, response)
 }
 
@@ -105,6 +106,60 @@ func (h *pendanaanHandler) GetPendanaanByIDHandler(c *gin.Context) {
 		return
 	}
 
-	response := helper.APIResponse("success get user Form Pengajuan by ID", 200, "success", pendanaan)
+	response := helper.APIResponse("success get Pendanaan by ID", 200, "success", pendanaan)
 	c.JSON(200, response)
+}
+
+// DELETE PENDANAAN BY ID
+func (h *pendanaanHandler) DeletePendanaanByIDHandler(c *gin.Context) {
+	id := c.Params.ByName("id")
+
+	pendanaan, err := h.pendanaanService.SDeletePendanaanByID(id)
+
+	if err != nil {
+		responseError := helper.APIResponse("error bad request delete Pendanaan", 400, "error", gin.H{"error": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	response := helper.APIResponse("success delete Pendanaan by ID", 200, "success", pendanaan)
+	c.JSON(200, response)
+}
+
+// UPDATE PENDANAAN BY ID
+func (h *pendanaanHandler) UpdatePendanaanByIDHandler(c *gin.Context) {
+	id := c.Params.ByName("id")
+
+	var updatePendanaanInput entity.UpdatePendanaanInput
+
+	if err := c.ShouldBindJSON(&updatePendanaanInput); err != nil {
+		splitError := helper.SplitErrorInformation(err)
+		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	// idParam, _ := strconv.Atoi(id)
+
+	// adminData := int(c.MustGet("currentUser").(int))
+
+	// if idParam != adminData {
+	// 	responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "Kategori Pertanian ID not authorize"})
+
+	// 	c.JSON(401, responseError)
+	// 	return
+	// }
+
+	pendanaan, err := h.pendanaanService.SUpdatePendanaanByID(id, updatePendanaanInput)
+	if err != nil {
+		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"error": err.Error()})
+
+		c.JSON(500, responseError)
+		return
+	}
+
+	response := helper.APIResponse("success update Kategori Pertanian by ID", http.StatusOK, "success", pendanaan)
+	c.JSON(http.StatusOK, response)
 }
