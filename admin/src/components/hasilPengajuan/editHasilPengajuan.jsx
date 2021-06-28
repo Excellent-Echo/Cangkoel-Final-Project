@@ -4,7 +4,7 @@ import editHasilPengajuanAction from '../../redux/hasilPengajuan/update/updateHa
 import { useDispatch, useSelector } from 'react-redux'
 
 const EditHasilPengajuan = (props) => {
-	const { className } = props
+	// const { className } = props
 	const [modal, setModal] = useState(false)
 	const toggle = () => setModal(!modal)
 
@@ -13,6 +13,7 @@ const EditHasilPengajuan = (props) => {
 
 	useEffect(() => {
 		console.log('selector', selector)
+		// eslint-disable-next-line
 	}, [])
 
 	useEffect(() => {
@@ -26,7 +27,7 @@ const EditHasilPengajuan = (props) => {
 				Edit
 			</Button>
 			{/* <h1>{props.valueid}</h1> */}
-			<Modal isOpen={modal} toggle={toggle} className={className}>
+			<Modal isOpen={modal} toggle={toggle}>
 				<ModalHeader toggle={toggle}>Update Hasil Pengajuan</ModalHeader>
 				<ModalBody>
 					<Form>

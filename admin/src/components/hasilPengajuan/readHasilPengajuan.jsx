@@ -73,7 +73,7 @@ const ReadHasilPengajuan = () => {
 														<EditHasilPengajuan valueid={value.id} />
 													</div>
 													<div className="item3">
-														<DeleteHasilPengajuan />
+														<DeleteHasilPengajuan hasilPengajuanID={value.id} />
 													</div>
 												</div>
 											</td>

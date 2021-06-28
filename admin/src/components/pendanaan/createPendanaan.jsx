@@ -377,7 +377,7 @@ const CreatePendanaan = () => {
 								<Input
 									type="select"
 									name="select"
-									id="satuanberat"
+									id="persatuanberat"
 									required
 									onChange={(e) => setPerSatuanBerat(e.target.value)}
 								>
