@@ -13,6 +13,7 @@ type Service interface {
 	SCreateHasilPengajuan(hasilPengajuan entity.HasilPengajuanInput) (entity.HasilPengajuan, error)
 	SFindHasilPengajuanByID(hasilPengajuanID string) (entity.HasilPengajuan, error)
 	SUpdateHasilPengajuanByID(hasilPengajuanID string, input entity.UpdateHasilPengajuanInput) (entity.HasilPengajuan, error)
+	SDeleteHasilPengajuanByID(hasilPengajuanID string) (interface{}, error)
 }
 
 type service struct {
@@ -107,4 +108,34 @@ func (s *service) SUpdateHasilPengajuanByID(hasilPengajuanID string, input entit
 	}
 
 	return hasilPengajuanUpdated, nil
+}
+
+func (s *service) SDeleteHasilPengajuanByID(hasilPengajuanID string) (interface{}, error) {
+
+	hasilPengajuan, err := s.repository.RFindHasilPengajuanByID(hasilPengajuanID)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if hasilPengajuan.ID == 0 {
+		newError := fmt.Sprintf("Hasil Pengajuan id %s not found", hasilPengajuanID)
+		return nil, errors.New(newError)
+	}
+
+	status, err := s.repository.RDeleteHasilPengajuanByID(hasilPengajuanID)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if status == "error" {
+		return nil, errors.New("error delete in internal server")
+	}
+
+	msg := fmt.Sprintf("success delete Hasil Pengajuan ID : %s", hasilPengajuanID)
+
+	formatDelete := FormatDelete(msg)
+
+	return formatDelete, nil
 }
