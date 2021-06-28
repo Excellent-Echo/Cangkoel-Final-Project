@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Card, CardTitle, Input, Button, Form, FormGroup, Label } from 'reactstrap'
 import hasilPengajuanActions from '../../redux/hasilPengajuan/create/createHasilPengajuanAction'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const CreateHasilPengajuan = () => {
-	// const hasilPengajuanData = useSelector((state) => state.createHasilPengajuan)
 	const dispatch = useDispatch()
 
 	const [status, setStatus] = useState('')
