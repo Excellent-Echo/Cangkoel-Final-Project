@@ -18,7 +18,7 @@ type Pendanaan struct {
 	BiayaOperasional       string          `json:"biaya_operasional"`
 	BiayaEkspor            string          `json:"biaya_ekspor"`
 	PerhitunganPenghasilan string          `json:"perhitungan_penghasilan"`
-	PerhitunganKeuntungan  string          `json:"perhitungan keuntungan"`
+	PerhitunganKeuntungan  string          `json:"perhitungan_keuntungan"`
 	CreatedAt              time.Time       `json:"created_at"`
 	UpdatedAt              time.Time       `json:"updated_at"`
 	FormPengajuan          []FormPengajuan `gorm:"ForeignKey:PendanaanID"`

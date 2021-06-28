@@ -1,12 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Card, CardBody, CardTitle, CardSubtitle, Input, Table } from 'reactstrap'
 import DeletePengajuan from './deletePengajuan'
 import EditPengajuan from './editPengajuan'
 
+import pengajuanAction from '../../redux/pengajuan/pengajuanAction'
+
 const ReadPengajuan = () => {
 	const { pengajuanData } = useSelector((state) => state.pengajuan)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(pengajuanAction.getPengajuanData())
+		// eslint-disable-next-line
+	}, [])
 
 	return (
 		<Card>

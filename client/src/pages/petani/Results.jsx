@@ -103,10 +103,10 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 				</div> */}
 
 				<div class="flex flex-wrap justify-center">
-					<div class="md:w-1/2 lg:w-1/3 py-4 px-4">
-						{kategoriDetail.Pendanaan &&
-							kategoriDetail.Pendanaan.map((item, index) => {
-								return (
+					{kategoriDetail.Pendanaan &&
+						kategoriDetail.Pendanaan.map((item, index) => {
+							return (
+								<div class="md:w-1/2 lg:w-1/3 py-4 px-4">
 									<div>
 										<div class="bg-white relative shadow p-2 rounded-lg text-gray-800">
 											<div
@@ -151,9 +151,9 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 											</div>
 										</div>
 									</div>
-								)
-							})}
-					</div>
+								</div>
+							)
+						})}
 				</div>
 			</div>
 
