@@ -104,7 +104,7 @@ const ReadPendanaan = () => {
 														<EditPendanaan />
 													</div>
 													<div className="item3">
-														<DeletePendanaan />
+														<DeletePendanaan pendanaanID={item.id} />
 													</div>
 												</div>
 											</td>
