@@ -19,4 +19,5 @@ func HasilPengajuanRoute(r *gin.Engine) {
 	r.GET("hasil-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), handler.MiddlewareUser(petaniService, authService), hasilPengajuanHandler.GetHasilPengajuanByIDHandler)
 	r.POST("hasil-pengajuan", handler.MiddlewareAdmin(adminService, authService), hasilPengajuanHandler.CreateHasilPengajuanHandler)
 	r.PUT("hasil-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), hasilPengajuanHandler.UpdateHasilPengajuanByIDHandler)
+	r.DELETE("hasil-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), hasilPengajuanHandler.DeleteHasilPengajuanByIDHandler)
 }
