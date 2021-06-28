@@ -18,8 +18,8 @@ const Routes = () => {
 			<Switch>
 				<Route path="/login" exact component={Login} />
 				<Route path="/register" exact component={Register} />
-				<Route path="/results/:id" exact component={Results} />
-				<Route path="/details/:id" exact component={Details} />
+				<Route path="/kategori-pertanian/:id" exact component={Results} />
+				<Route path="/detail-pendanaan/:id" exact component={Details} />
 
 				<PrivateRoute path="/formulir-pengajuan">
 					<FormPengajuan />

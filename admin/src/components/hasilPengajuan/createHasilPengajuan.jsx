@@ -24,6 +24,9 @@ const CreateHasilPengajuan = () => {
 				<FormGroup>
 					<Label>Status</Label>
 					<Input type="select" name="select" id="status" onChange={(e) => setStatus(e.target.value)}>
+						<option value="" disabled selected>
+							Select your option
+						</option>
 						<option value="Review">Review</option>
 						<option value="Survey">Survey</option>
 						<option value="Approve">Approve</option>
@@ -37,6 +40,9 @@ const CreateHasilPengajuan = () => {
 				<FormGroup>
 					<Label>Keterangan</Label>
 					<Input type="select" name="select" id="keterangan" onChange={(e) => setKeterangan(e.target.value)}>
+						<option value="" disabled selected>
+							Select your option
+						</option>
 						<option value="Pihak Cangkoel sedang mereview formulir pengajuan anda">
 							Pihak Cangkoel sedang mereview formulir pengajuan anda
 						</option>

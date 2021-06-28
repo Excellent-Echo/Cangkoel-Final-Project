@@ -14,7 +14,7 @@ const DeleteHasilPengajuan = (props) => {
 			<Modal isOpen={konfirmasi} show={show} className={className}>
 				<ModalHeader show={show}>Modal title</ModalHeader>
 				<ModalBody>
-					<h4>Apakah serius anda ingin mengapus data ini?</h4>
+					<h4>Apakah anda ingin mengapus data ini?</h4>
 					<Button style={{ margin: '5px' }} onClick={show}>
 						Delete
 					</Button>

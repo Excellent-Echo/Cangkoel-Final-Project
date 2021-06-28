@@ -1,5 +1,6 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
 import CloudinaryAPI from '../../../api/CloudinaryAPI'
+import Swal from 'sweetalert2'
 
 import { CREATE_NAME_KATEGORI, CREATE_FOTO_KATEGORI, CREATE_URL_FOTO_KATEGORI } from '../kategoryType'
 
@@ -38,7 +39,6 @@ const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) =>
 		}
 
 		const accessToken = localStorage.getItem('token')
-		console.log(accessToken)
 
 		const postKategoriData = await CangkoelAPI({
 			method: 'POST',
@@ -48,7 +48,19 @@ const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) =>
 				Authorization: accessToken
 			}
 		})
-		window.location.reload()
+
+		if (postKategoriData.status === 201) {
+			Swal.fire({
+				title: 'Kategori berhasil ditambahkan',
+				// text: 'Anda akan dialihkan ke halaman Profil',
+				icon: 'success',
+				timer: 1500,
+				timerProgressBar: true
+			}).then(() => {
+				window.location.reload()
+			})
+		}
+
 		console.log('kategori data action', postKategoriData.data.data)
 	} catch (error) {
 		console.log(error.response.data)

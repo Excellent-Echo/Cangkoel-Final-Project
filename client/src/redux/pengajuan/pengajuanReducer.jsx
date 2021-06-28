@@ -11,7 +11,8 @@ import {
 	SET_PETANI_ID,
 	SET_URL_DOKUMEN,
 	SET_URL_KTP,
-	SET_IMAGE
+	SET_IMAGE,
+	SET_IMAGE_PROGRESS
 } from './pengajuanActionTypes'
 
 const inititalState = {
@@ -27,7 +28,8 @@ const inititalState = {
 	petaniID: '',
 	urlDokumen: '',
 	urlKTP: '',
-	image: ''
+	image: '',
+	imageProgress: ''
 }
 
 const userRegisterReducer = (state = inititalState, action) => {
@@ -96,6 +98,11 @@ const userRegisterReducer = (state = inititalState, action) => {
 			return {
 				...state,
 				image: action.payload.image
+			}
+		case SET_IMAGE_PROGRESS:
+			return {
+				...state,
+				imageProgress: action.payload.imageProgress
 			}
 		default:
 			return state

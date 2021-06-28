@@ -11,8 +11,8 @@ import { getKategoriActionByID } from '../../redux/kategori/kategoriAction'
 // components
 // import { SectionHeadingtwo } from '../../components/misc/Headings.jsx'
 // import { PrimaryButton as PrimaryButtonBase } from '../../components/misc/Buttons.jsx'
-// import Navbar from '../../components/Navbar.jsx'
-// import Footer from '../../components/Footer.jsx'
+import Navbar from '../../components/Navbar.jsx'
+import Footer from '../../components/Footer.jsx'
 // import Search from '../../components/misc/Search.jsx'
 
 // styled components with tailwind
@@ -84,21 +84,81 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 	}, [kategoriDetail])
 
 	const handleClick = (id) => {
-		history.push(`/details/${id}`)
+		history.push(`/detail-pendanaan/${id}`)
 	}
 
 	return (
 		<>
-			<div>
-				{kategoriDetail.Pendanaan &&
-					kategoriDetail.Pendanaan.map((item, index) => {
-						return (
-							<div key={index}>
-								<h1 onClick={() => handleClick(item.id)}>{item.judul_pendanaan}</h1>
-							</div>
-						)
-					})}
+			<Navbar />
+			<div class="container mx-auto">
+				{/* <div>
+					{kategoriDetail.Pendanaan &&
+						kategoriDetail.Pendanaan.map((item, index) => {
+							return (
+								<div key={index}>
+									<h1 onClick={() => handleClick(item.id)}>{item.judul_pendanaan}</h1>
+								</div>
+							)
+						})}
+				</div> */}
+
+				<div class="flex flex-wrap justify-center">
+					<div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+						{kategoriDetail.Pendanaan &&
+							kategoriDetail.Pendanaan.map((item, index) => {
+								return (
+									<div>
+										<div class="bg-white relative shadow p-2 rounded-lg text-gray-800">
+											<div
+												alt={index}
+												class="right-0 mt-4 rounded-l-full absolute text-center font-bold text-xs text-white px-2 py-1 bg-yellow-500"
+											>
+												{item.bagi_hasil_petani} %
+											</div>
+											<img
+												src={item.foto_profil}
+												class="h-32 rounded-lg w-full object-cover"
+												alt={index}
+											/>
+											<div class="flex justify-center">
+												<img
+													src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1027&q=80"
+													class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16"
+													alt={index}
+												/>
+											</div>
+											<div class="py-2 px-2">
+												<div class=" font-bold font-title text-center">
+													{item.judul_pendanaan}
+												</div>
+
+												<div class="text-sm font-light text-center my-2">
+													{Intl.NumberFormat('id', {
+														style: 'currency',
+														currency: 'IDR'
+													}).format(item.nominal_pendanaan)}
+												</div>
+
+												<div class="text-sm font-light text-center my-2">
+													<button
+														type="button"
+														class="border border-yellow-500 bg-yellow-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline"
+														onClick={() => handleClick(item.id)}
+													>
+														Detail Pendanaan
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								)
+							})}
+					</div>
+				</div>
 			</div>
+
+			<Footer />
+
 			{/* <button onClick={() => console.log(GetRandomCards(kategoriDetail))}>Click</button>
 			<CardContainer>
 				<Card className="group" initial="rest" whileHover="hover" animate="rest">
