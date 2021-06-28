@@ -1,4 +1,5 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
+import Swal from 'sweetalert2'
 
 import {
 	CREATE_STATUS_HASIL_PENGAJUAN,
@@ -64,7 +65,18 @@ const createHasilPengajuanAction = (status, keterangan, petaniID, formPengajuanI
 				Authorization: accessToken
 			}
 		})
-		window.location.reload()
+
+		if (postHasilPengajuanData.status === 201) {
+			Swal.fire({
+				title: 'Hasil pengajuan berhasil dibuat',
+				icon: 'success',
+				timer: 2000,
+				timerProgressBar: true
+			}).then(() => {
+				window.location.reload()
+			})
+		}
+
 		console.log('hasil pengajuan data action', postHasilPengajuanData.data.data)
 	} catch (error) {
 		console.log(error.response.data)

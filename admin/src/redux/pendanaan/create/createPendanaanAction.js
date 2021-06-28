@@ -1,5 +1,6 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
 import CloudinaryAPI from '../../../api/CloudinaryAPI'
+import Swal from 'sweetalert2'
 
 import {
 	RESET_FORM_PENDANAAN,
@@ -274,10 +275,19 @@ const createPendanaanActions =
 				}
 			})
 
-			console.log('pendanaan data action', postPendanaanData.data.data)
-			dispatch(setSuccessMessage('Success Post Pendanaan'))
-			dispatch(stopLoading())
-			window.location.reload()
+			if (postPendanaanData.status === 201) {
+				Swal.fire({
+					title: 'Pendanaan berhasil dibuat',
+					icon: 'success',
+					timer: 2000,
+					timerProgressBar: true
+				}).then(() => {
+					console.log('pendanaan data action', postPendanaanData.data.data)
+					dispatch(setSuccessMessage('Success Post Pendanaan'))
+					dispatch(stopLoading())
+					window.location.reload()
+				})
+			}
 		} catch (error) {
 			console.log(error.response.data)
 			dispatch(setErrorMessage(error.response.data))
