@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "date-fns": "^2.22.1",
     "feather-icons": "^4.28.0",
     "filestack-react": "^4.0.0",
     "framer-motion": "^4.1.17",

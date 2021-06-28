@@ -15,6 +15,8 @@ const setLoading = () => {
 	}
 }
 
+const updateUserProfile = () => {}
+
 const userProfileAction = {
 	setProfileData,
 	setLoading

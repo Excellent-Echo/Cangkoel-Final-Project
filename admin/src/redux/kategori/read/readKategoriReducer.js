@@ -1,5 +1,6 @@
 import {
 	READ_SET_KATEGORI,
+	READ_SET_KATEGORI_BY_ID,
 	READ_ERROR_KATEGORI,
 	READ_START_LOADING_KATEGORI,
 	READ_STOP_LOADING_KATEGORI
@@ -7,6 +8,7 @@ import {
 
 const initialState = {
 	kategoriPertanian: [],
+	kategoriPertanianByID: [],
 	IsLoading: false,
 	errorMessage: ''
 }
@@ -17,6 +19,11 @@ const readKategoryReducers = (state = initialState, action) => {
 			return {
 				...state,
 				kategoriPertanian: action.payload
+			}
+		case READ_SET_KATEGORI_BY_ID:
+			return {
+				...state,
+				kategoriPertanianByID: action.payload
 			}
 		case READ_ERROR_KATEGORI:
 			return {

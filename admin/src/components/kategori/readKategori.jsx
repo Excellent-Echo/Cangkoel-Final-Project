@@ -9,8 +9,6 @@ const Readkategori = () => {
 	const dispatch = useDispatch()
 	const readKategoriData = useSelector((state) => state.readKategori.kategoriPertanian)
 
-	console.log(readKategoriData)
-
 	// useEffect(() => {
 	// 	console.log('selector', readKategoriData)
 	// }, [])
@@ -68,15 +66,19 @@ const Readkategori = () => {
 												</div>
 											</div>
 										</td>
-										<td>
-											<div className="grid-container">
-												<div className="item2">
-													<EditKategori />
-												</div>
-												<div className="item3">
-													<DeleteKategori kategoriID={item.id} />
-												</div>
+                  <td>
+										<div className="grid-container">
+											<div className="item2">
+												<EditKategori
+													kategoriID={item.id}
+													namaKategori={item.nama_kategori}
+													fotoKategori={item.foto_kategori}
+												/>
 											</div>
+											<div className="item3">
+												<DeleteKategori kategoriID={item.id} />
+											</div>
+                    </div>
 										</td>
 									</tr>
 								</tbody>
