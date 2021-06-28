@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 const Profil = ({ color }) => {
 	const [openTab, setOpenTab] = useState(1)
 	const userProfileData = useSelector((state) => state.userProfile)
+	console.log(userProfileData)
 
 	return (
 		<>

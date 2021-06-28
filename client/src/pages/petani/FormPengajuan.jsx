@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar.jsx'
 import Footer from '../../components/Footer.jsx'
-import { PickerDropPane } from 'filestack-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -9,6 +8,7 @@ import pengajuanAction from '../../redux/pengajuan/pengajuanAction'
 
 const FormPengajuan = () => {
 	const pengajuanData = useSelector((state) => state.pengajuan)
+	console.log(pengajuanData.imageProgress)
 	const dispatch = useDispatch()
 	const history = useHistory()
 
@@ -24,22 +24,13 @@ const FormPengajuan = () => {
 	const [fileKTP, setFileKTP] = useState('')
 
 	const token = localStorage.getItem('token')
+	const idPengajuan = localStorage.getItem('idPendanaan')
 
 	const handlePengajuan = (e) => {
 		e.preventDefault()
 
 		dispatch(
 			pengajuanAction.pengajuan(
-				// pengajuanData.nama,
-				// parseInt(pengajuanData.nomorHP),
-				// pengajuanData.dokumenPerizinan,
-				// parseInt(pengajuanData.nomorNPWP),
-				// pengajuanData.ktp,
-				// pengajuanData.jenisUsaha,
-				// parseInt(pengajuanData.tenagaKerja),
-				// parseInt(pengajuanData.omset),
-				// pengajuanData.alamat,
-				// token
 				nama,
 				nomorHP,
 				pengajuanData.urlDokumen,
@@ -50,25 +41,13 @@ const FormPengajuan = () => {
 				omset,
 				alamat,
 				token,
+				idPengajuan,
 				history
 			)
 		)
 	}
 
 	const uploadImage = () => {
-		// const data = new FormData()
-
-		// data.append('file', images)
-		// data.append('upload_preset', 'rxra54p9')
-		// data.append('cloud_name', 'cangkoel')
-
-		// fetch('https://api.cloudinary.com/v1_1/cangkoel/image/upload', { method: 'post', body: data })
-		// 	.then((resp) => resp.json())
-		// 	.then((data) => {
-		// 		console.log(data)
-		// 		setUrl(data.url)
-		// 	})
-		// 	.catch((err) => console.log(err))
 		dispatch(pengajuanAction.uploadDokumen(fileDokumen))
 		dispatch(pengajuanAction.uploadKTP(fileKTP))
 	}
@@ -93,7 +72,6 @@ const FormPengajuan = () => {
 										type="text"
 										placeholder="Masukkan nama lengkap"
 										required
-										// onChange={(e) => dispatch(pengajuanAction.setNama(e.target.value))}
 										onChange={(e) => setNama(e.target.value)}
 									/>
 								</div>
@@ -107,7 +85,6 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan nomor handphone"
 										required
-										// onChange={(e) => dispatch(pengajuanAction.setNomorHP(e.target.value))}
 										onChange={(e) => setNomorHP(e.target.value)}
 									/>
 								</div>
@@ -115,18 +92,6 @@ const FormPengajuan = () => {
 									<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
 										Dokumen Perizinan (Sku/ siup/ tdp/ dll)
 									</label>
-									{/* <PickerDropPane
-										apikey={process.env.REACT_APP_FILESTACK_KEY}
-										onSuccess={(res) => {
-											console.log(res)
-											dispatch(pengajuanAction.setDokumenPerizinan(res.filesUploaded[0].url))
-										}}
-									/> */}
-									{/* <input
-										type="file"
-										// onChange={(e) => dispatch(pengajuanAction.setImage(e.target.files[0]))}
-										onChange={(e) => setFileDokumen(e.target.files[0])}
-									></input> */}
 									<div class="flex flex-col w-full items-center justify-center bg-grey-lighter">
 										<label class="w-64 flex flex-col items-center px-2 py-2 my-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-600 hover:text-white">
 											<svg
@@ -151,6 +116,16 @@ const FormPengajuan = () => {
 										>
 											Upload
 										</button>
+										{/* <div class="shadow w-full bg-grey-light mt-2">
+											{pengajuanData.imageProgress && (
+												<div
+													class="bg-red text-xs leading-none py-1 text-center text-white"
+													style="width: 75%"
+												>
+													{pengajuanData.imageProgress} %
+												</div>
+											)}
+										</div> */}
 									</div>
 
 									{/* <img src={url} /> */}
@@ -165,7 +140,6 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan nomor npwp"
 										required
-										// onChange={(e) => dispatch(pengajuanAction.setNomorNPWP(e.target.value))}
 										onChange={(e) => setNomorNPWP(e.target.value)}
 									/>
 								</div>
@@ -173,24 +147,7 @@ const FormPengajuan = () => {
 									<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
 										KTP
 									</label>
-									{/* <PickerDropPane
-										apikey={process.env.REACT_APP_FILESTACK_KEY}
-										onSuccess={(res) => {
-											dispatch(pengajuanAction.setKTP(res.filesUploaded[0].url))
-										}}
-									/> */}
-									{/* <input
-										type="file"
-										// onChange={(e) => dispatch(pengajuanAction.setImage(e.target.files[0]))}
-										onChange={(e) => setFileKTP(e.target.files[0])}
-									></input>
-									<button
-										className="appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md mr-3"
-										// type="submit"
-										onClick={uploadImage}
-									>
-										Upload
-									</button> */}
+
 									<div class="flex flex-col w-full items-center justify-center bg-grey-lighter">
 										<label class="w-64 flex flex-col items-center px-2 py-2 my-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-600 hover:text-white">
 											<svg
@@ -227,7 +184,6 @@ const FormPengajuan = () => {
 										type="text"
 										placeholder="Masukkan jenis usaha pertanian"
 										required
-										// onChange={(e) => dispatch(pengajuanAction.setJenisUsaha(e.target.value))}
 										onChange={(e) => setJenisUsaha(e.target.value)}
 									/>
 								</div>
@@ -241,7 +197,6 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan jumlah tenaga kerja"
 										required
-										// onChange={(e) => dispatch(pengajuanAction.setTenagaKerja(e.target.value))}
 										onChange={(e) => setTenagaKerja(e.target.value)}
 									/>
 								</div>
@@ -255,7 +210,6 @@ const FormPengajuan = () => {
 										type="number"
 										placeholder="Masukkan omzet perbulan"
 										required
-										// onChange={(e) => dispatch(pengajuanAction.setOmset(e.target.value))}
 										onChange={(e) => setOmset(e.target.value)}
 									/>
 								</div>
@@ -268,7 +222,6 @@ const FormPengajuan = () => {
 										className="bg-gray-100 rounded-md border leading-normal resize-none w-full h-20 py-2 px-3 shadow-inner border border-gray-400 focus:outline-none focus:bg-white"
 										placeholder="Masukkan deskripsi lengkap"
 										required
-										// onChange={(e) => dispatch(pengajuanAction.setAlamat(e.target.value))}
 										onChange={(e) => setAlamat(e.target.value)}
 									></textarea>
 								</div>

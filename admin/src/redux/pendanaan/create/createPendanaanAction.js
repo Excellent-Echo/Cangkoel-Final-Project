@@ -267,7 +267,7 @@ const createPendanaanActions =
 
 			const postPendanaanData = await CangkoelAPI({
 				method: 'POST',
-				url: '/pendanaan/add',
+				url: '/pendanaan',
 				data: pendanaanData,
 				headers: {
 					Authorization: accessToken

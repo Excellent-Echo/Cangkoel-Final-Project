@@ -51,6 +51,7 @@ const createHasilPengajuanAction = (status, keterangan, petaniID, formPengajuanI
 			petani_id: petaniID,
 			form_pengajuan_id: parseInt(formPengajuanID)
 		}
+		console.log(postDataHasilPengajuan)
 
 		const accessToken = localStorage.getItem('token')
 		console.log(accessToken)
