@@ -15,6 +15,8 @@ type Service interface {
 	SCreatePendanaan(pendanaan entity.PendanaanInput) (entity.Pendanaan, error)
 	SFindPendanaanByKategoriID(kategoriID string) (entity.Pendanaan, error)
 	SFindPendanaanByID(pendanaanID string) (entity.Pendanaan, error)
+	SDeletePendanaanByID(pendanaanID string) (interface{}, error)
+	SUpdatePendanaanByID(pendanaanID string, input entity.UpdatePendanaanInput) (entity.Pendanaan, error)
 }
 
 type service struct {
@@ -88,7 +90,7 @@ func (s *service) SFindPendanaanByKategoriID(kategoriID string) (entity.Pendanaa
 	}
 
 	if pendanaan.ID == 0 {
-		newError := fmt.Sprintf("Form Pendanaan by Kategori id %s not found", kategoriID)
+		newError := fmt.Sprintf("Pendanaan by Kategori id %s not found", kategoriID)
 		return pendanaan, errors.New(newError)
 	}
 
@@ -108,4 +110,121 @@ func (s *service) SFindPendanaanByID(pendanaanID string) (entity.Pendanaan, erro
 	}
 
 	return pendanaan, nil
+}
+
+func (s *service) SDeletePendanaanByID(pendanaanID string) (interface{}, error) {
+
+	pendanaan, err := s.repository.RFindPendanaanByID(pendanaanID)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if pendanaan.ID == 0 {
+		newError := fmt.Sprintf("pendanaan id %s not found", pendanaanID)
+		return nil, errors.New(newError)
+	}
+
+	status, err := s.repository.RDeletePendanaanByID(pendanaanID)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if status == "error" {
+		return nil, errors.New("error delete in internal server")
+	}
+
+	msg := fmt.Sprintf("success delete pendanaan ID : %s", pendanaanID)
+
+	formatDelete := FormatDelete(msg)
+
+	return formatDelete, nil
+}
+
+func (s *service) SUpdatePendanaanByID(pendanaanID string, input entity.UpdatePendanaanInput) (entity.Pendanaan, error) {
+	var dataUpdate = map[string]interface{}{}
+
+	pendanaan, err := s.repository.RFindPendanaanByID(pendanaanID)
+
+	if err != nil {
+		return entity.Pendanaan{}, err
+	}
+
+	if pendanaan.ID == 0 {
+		newError := fmt.Sprintf("id Pendanaan %s not found", pendanaanID)
+		return entity.Pendanaan{}, errors.New(newError)
+	}
+
+	if input.FotoProfil != "" || len(input.FotoProfil) != 0 {
+		dataUpdate["FotoProfil"] = input.FotoProfil
+	}
+
+	if input.NamaInvestor != "" || len(input.NamaInvestor) != 0 {
+		dataUpdate["NamaInvestor"] = input.NamaInvestor
+	}
+
+	if input.JudulPendanaan != "" || len(input.JudulPendanaan) != 0 {
+		dataUpdate["JudulPendanaan"] = input.JudulPendanaan
+	}
+
+	if input.NominalPendanaan != 0 {
+		dataUpdate["NominalPendanaan"] = input.NominalPendanaan
+	}
+
+	if input.PerusahaanPengirim != "" || len(input.PerusahaanPengirim) != 0 {
+		dataUpdate["PerusahaanPengirim"] = input.PerusahaanPengirim
+	}
+
+	if input.BagiHasilInvestor != 0 {
+		dataUpdate["BagiHasilInvestor"] = input.BagiHasilInvestor
+	}
+
+	if input.BagiHasilPetani != 0 {
+		dataUpdate["BagiHasilPetani"] = input.BagiHasilPetani
+	}
+
+	if input.KebutuhanKomoditas != "" || len(input.KebutuhanKomoditas) != 0 {
+		dataUpdate["KebutuhanKomoditas"] = input.KebutuhanKomoditas
+	}
+
+	if input.JangkaWaktu != "" || len(input.JangkaWaktu) != 0 {
+		dataUpdate["JangkaWaktu"] = input.JangkaWaktu
+	}
+
+	if input.KeuntunganBersih != 0 {
+		dataUpdate["KeuntunganBersih"] = input.KeuntunganBersih
+	}
+
+	if input.Deskripsi != "" || len(input.Deskripsi) != 0 {
+		dataUpdate["Deskripsi"] = input.Deskripsi
+	}
+
+	if input.BiayaOperasional != "" || len(input.BiayaOperasional) != 0 {
+		dataUpdate["BiayaOperasional"] = input.BiayaOperasional
+	}
+
+	if input.BiayaEkspor != "" || len(input.BiayaEkspor) != 0 {
+		dataUpdate["BiayaEkspor"] = input.BiayaEkspor
+	}
+
+	if input.PerhitunganPenghasilan != "" || len(input.PerhitunganPenghasilan) != 0 {
+		dataUpdate["PerhitunganPenghasilan"] = input.PerhitunganPenghasilan
+	}
+
+	if input.PerhitunganKeuntungan != "" || len(input.PerhitunganKeuntungan) != 0 {
+		dataUpdate["PerhitunganKeuntungan"] = input.PerhitunganKeuntungan
+	}
+
+	if input.KategoriID != 0 {
+		dataUpdate["KategoriID"] = input.KategoriID
+	}
+
+	pendanaanUpdate, err := s.repository.RUpdatePendanaanByID(pendanaanID, dataUpdate)
+
+	if err != nil {
+		return entity.Pendanaan{}, err
+	}
+
+	return pendanaanUpdate, nil
 }

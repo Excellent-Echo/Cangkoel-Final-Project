@@ -11,6 +11,7 @@ type Repository interface {
 	RCreateHasilPengajuan(hasilPengajuan entity.HasilPengajuan) (entity.HasilPengajuan, error)
 	RFindHasilPengajuanByID(ID string) (entity.HasilPengajuan, error)
 	RUpdateHasilPengajuanByID(ID string, dataUpdate map[string]interface{}) (entity.HasilPengajuan, error)
+	RDeleteHasilPengajuanByID(ID string) (string, error)
 }
 
 type repository struct {
@@ -66,4 +67,12 @@ func (r *repository) RUpdateHasilPengajuanByID(ID string, dataUpdate map[string]
 	}
 
 	return hasilPengajuan, nil
+}
+
+func (r *repository) RDeleteHasilPengajuanByID(ID string) (string, error) {
+	if err := r.db.Where("id = ?", ID).Delete(&entity.HasilPengajuan{}).Error; err != nil {
+		return "error", err
+	}
+
+	return "success", nil
 }

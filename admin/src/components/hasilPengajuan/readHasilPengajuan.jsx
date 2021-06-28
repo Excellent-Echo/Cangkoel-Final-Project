@@ -9,8 +9,6 @@ const ReadHasilPengajuan = () => {
 	const dispatch = useDispatch()
 	const readHasilPengajuanData = useSelector((state) => state.readHasilPengajuan.hasilPengajuan)
 
-	console.log(readHasilPengajuanData)
-
 	// useEffect(() => {
 	// 	console.log('hasil pengajuan data', readHasilPengajuanData)
 	// }, [])
@@ -70,10 +68,10 @@ const ReadHasilPengajuan = () => {
 											<td>
 												<div className="grid-container">
 													<div className="item2">
-														<EditHasilPengajuan />
+														<EditHasilPengajuan hasilPengajuanID={value.id} />
 													</div>
 													<div className="item3">
-														<DeleteHasilPengajuan />
+														<DeleteHasilPengajuan hasilPengajuanID={value.id} />
 													</div>
 												</div>
 											</td>

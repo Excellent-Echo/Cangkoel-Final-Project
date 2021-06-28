@@ -30,7 +30,7 @@ func (h *hasilPengajuanHandler) ShowAllHasilPengajuanHandler(c *gin.Context) {
 		return
 	}
 
-	response := helper.APIResponse("success get all Form Pengajuan", 200, "status OK", hasilPengajuan)
+	response := helper.APIResponse("success get all Hasil Pengajuan", 200, "status OK", hasilPengajuan)
 	c.JSON(200, response)
 }
 
@@ -99,4 +99,21 @@ func (h *hasilPengajuanHandler) UpdateHasilPengajuanByIDHandler(c *gin.Context) 
 
 	response := helper.APIResponse("success update HasilPengajuan by ID", http.StatusOK, "success", hasilPengajuan)
 	c.JSON(http.StatusOK, response)
+}
+
+// DELETE HASIL PENGAJUAN BY ID
+func (h *hasilPengajuanHandler) DeleteHasilPengajuanByIDHandler(c *gin.Context) {
+	id := c.Params.ByName("id")
+
+	hasilPengajuan, err := h.hasilPengajuanService.SDeleteHasilPengajuanByID(id)
+
+	if err != nil {
+		responseError := helper.APIResponse("error bad request delete Hasil Pengajuan", 400, "error", gin.H{"error": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	response := helper.APIResponse("success delete Hasil Pengajuan by ID", 200, "success", hasilPengajuan)
+	c.JSON(200, response)
 }

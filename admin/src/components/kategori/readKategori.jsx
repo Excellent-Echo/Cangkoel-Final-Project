@@ -43,6 +43,7 @@ const Readkategori = () => {
 							<th className="border-0">ID</th>
 							<th className="border-0">Nama Kategori</th>
 							<th className="border-0">Foto Kategori</th>
+							<th></th>
 						</tr>
 					</thead>
 
@@ -65,6 +66,7 @@ const Readkategori = () => {
 												</div>
 											</div>
 										</td>
+                  <td>
 										<div className="grid-container">
 											<div className="item2">
 												<EditKategori
@@ -76,7 +78,8 @@ const Readkategori = () => {
 											<div className="item3">
 												<DeleteKategori kategoriID={item.id} />
 											</div>
-										</div>
+                    </div>
+										</td>
 									</tr>
 								</tbody>
 							)
