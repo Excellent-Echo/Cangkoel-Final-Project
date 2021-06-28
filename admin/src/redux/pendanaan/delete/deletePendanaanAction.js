@@ -1,25 +1,25 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
 import Swal from 'sweetalert2'
 
-const deleteHasilPengajuan = (id) => async () => {
+const deletePendanaan = (id) => async () => {
 	try {
 		const accessToken = localStorage.getItem('token')
 		console.log(accessToken)
 
 		// eslint-disable-next-line
-		const responseDeleteHasil = await CangkoelAPI({
+		const responseDeletePendanaan = await CangkoelAPI({
 			method: 'DELETE',
-			url: `/hasil-pengajuan/${id}`,
+			url: `/pendanaan/${id}`,
 			headers: {
 				Authorization: accessToken
 			}
 		})
 
-		console.log(responseDeleteHasil)
+		console.log(responseDeletePendanaan)
 
-		if (responseDeleteHasil.status === 200) {
+		if (responseDeletePendanaan.status === 200) {
 			Swal.fire({
-				title: 'Hasil pengajuan berhasil dihapus',
+				title: 'Pendanaan berhasil dihapus',
 				icon: 'success',
 				timer: 2000,
 				timerProgressBar: true
@@ -32,8 +32,8 @@ const deleteHasilPengajuan = (id) => async () => {
 	}
 }
 
-const hasilPengajuanActions = {
-	deleteHasilPengajuan
+const pendanaanActions = {
+	deletePendanaan
 }
 
-export default hasilPengajuanActions
+export default pendanaanActions
