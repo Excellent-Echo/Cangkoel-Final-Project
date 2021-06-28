@@ -16,10 +16,29 @@ const EditHasilPengajuan = (props) => {
 		// eslint-disable-next-line
 	}, [])
 
+	const [status, setStatus] = useState('')
+	const [keterangan, setKeterangan] = useState('')
+	const [petaniID, setPetaniID] = useState('')
+	const [formulirPengajuanID, setFormulirPengajuanID] = useState('')
+
 	useEffect(() => {
-		dispatch(editHasilPengajuanAction.getHasilPengajuanByIDAction(props.valueid))
+		dispatch(editHasilPengajuanAction.updateHasilPengajuanAction())
+		dispatch(editHasilPengajuanAction.getHasilPengajuanByIDAction(props.hasilPengajuanID))
 		// eslint-disable-next-line
 	}, [])
+
+	const handleEdit = (e) => {
+		e.preventDefault()
+		dispatch(
+			editHasilPengajuanAction.updateHasilPengajuanAction(
+				props.hasilPengajuanID,
+				status,
+				keterangan,
+				petaniID,
+				formulirPengajuanID
+			)
+		)
+	}
 
 	return (
 		<div>
@@ -30,10 +49,17 @@ const EditHasilPengajuan = (props) => {
 			<Modal isOpen={modal} toggle={toggle}>
 				<ModalHeader toggle={toggle}>Update Hasil Pengajuan</ModalHeader>
 				<ModalBody>
-					<Form>
+					<Form onSubmit={handleEdit}>
 						<FormGroup>
 							<Label>Status</Label>
-							<Input type="select" name="select" id="status">
+							<Input
+								type="select"
+								name="select"
+								id="status"
+								onChange={(e) => {
+									setStatus(e.target.value)
+								}}
+							>
 								<option value="Review">Review</option>
 								<option value="Survey">Survey</option>
 								<option value="Approve">Approve</option>
@@ -46,7 +72,14 @@ const EditHasilPengajuan = (props) => {
 						</FormGroup>
 						<FormGroup>
 							<Label>Keterangan</Label>
-							<Input type="select" name="select" id="keterangan">
+							<Input
+								type="select"
+								name="select"
+								id="keterangan"
+								onChange={(e) => {
+									setKeterangan(e.target.value)
+								}}
+							>
 								<option value="Pihak Cangkoel sedang mereview formulir pengajuan anda">
 									Pihak Cangkoel sedang mereview formulir pengajuan anda
 								</option>
@@ -76,7 +109,15 @@ const EditHasilPengajuan = (props) => {
 
 						<FormGroup>
 							<Label>Masukkan ID Petani</Label>
-							<Input type="text" name="petani" id="petani" placeholder="masukkan id petani" />
+							<Input
+								type="text"
+								name="petani"
+								id="petani"
+								placeholder="masukkan id petani"
+								onChange={(e) => {
+									setPetaniID(e.target.value)
+								}}
+							/>
 						</FormGroup>
 						<FormGroup>
 							<Label>Masukkan ID Formulir Pengajuan</Label>
@@ -85,15 +126,13 @@ const EditHasilPengajuan = (props) => {
 								name="hasilpengajuan"
 								id="hasilpengajuan"
 								placeholder="masukkan id formulir pengajuan"
+								onChange={(e) => {
+									setFormulirPengajuanID(e.target.value)
+								}}
 							/>
 						</FormGroup>
 
-						<Button style={{ margin: '5px' }} onClick={toggle}>
-							Submit
-						</Button>
-						<Button style={{ margin: '5px' }} onClick={toggle}>
-							Cancel
-						</Button>
+						<Button style={{ margin: '5px' }}>Submit</Button>
 					</Form>
 				</ModalBody>
 			</Modal>
