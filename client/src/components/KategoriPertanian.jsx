@@ -42,7 +42,7 @@ const KategoriPertanian = () => {
 	}, [])
 
 	const handleClick = (id) => {
-		history.push(`/results/${id}`)
+		history.push(`/kategori-pertanian/${id}`)
 	}
 
 	return (

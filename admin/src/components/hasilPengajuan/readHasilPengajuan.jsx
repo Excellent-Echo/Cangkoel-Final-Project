@@ -9,6 +9,8 @@ const ReadHasilPengajuan = () => {
 	const dispatch = useDispatch()
 	const readHasilPengajuanData = useSelector((state) => state.readHasilPengajuan.hasilPengajuan)
 
+	console.log(readHasilPengajuanData)
+
 	// useEffect(() => {
 	// 	console.log('hasil pengajuan data', readHasilPengajuanData)
 	// }, [])

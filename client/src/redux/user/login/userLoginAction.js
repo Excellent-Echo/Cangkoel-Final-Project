@@ -48,16 +48,6 @@ const login = (email, password, history, location) => async (dispatch) => {
 			data: loginData
 		})
 
-		console.log(postData)
-
-		if (postData.status === 200) {
-			Swal.fire({
-				title: 'Login Success',
-				icon: 'success',
-				timer: 1500
-			})
-		}
-
 		let role = postData.data.data.role
 		let id = postData.data.data.id
 		let token = postData.data.data.token

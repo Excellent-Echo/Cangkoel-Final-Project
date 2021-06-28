@@ -14,7 +14,8 @@ import {
 	SET_ALAMAT,
 	SET_URL_DOKUMEN,
 	SET_URL_KTP,
-	SET_IMAGE
+	SET_IMAGE,
+	SET_IMAGE_PROGRESS
 } from './pengajuanActionTypes'
 
 const setNama = (nama) => {
@@ -125,9 +126,31 @@ const setImage = (image) => {
 	}
 }
 
+const setImageProgress = (imageProgress) => {
+	return {
+		type: SET_IMAGE_PROGRESS,
+		payload: {
+			imageProgress: imageProgress
+		}
+	}
+}
+
 const pengajuan =
-	(nama, nomorHP, dokumenPerizinan, nomorNPWP, ktp, jenisUsaha, tenagaKerja, omset, alamat, token, history) =>
-	async (dispatch) => {
+	(
+		nama,
+		nomorHP,
+		dokumenPerizinan,
+		nomorNPWP,
+		ktp,
+		jenisUsaha,
+		tenagaKerja,
+		omset,
+		alamat,
+		token,
+		idPengajuan,
+		history
+	) =>
+	async () => {
 		try {
 			const pengajuanData = {
 				nama_lengkap: nama,
@@ -139,7 +162,7 @@ const pengajuan =
 				tenaga_kerja: parseInt(tenagaKerja),
 				omzet_perbulan: parseInt(omset),
 				alamat_usaha: alamat,
-				pendanaan_id: 1
+				pendanaan_id: parseInt(idPengajuan)
 			}
 
 			const postPengajuanData = await CangkoelAPI({
@@ -156,9 +179,10 @@ const pengajuan =
 					title: 'Pengajuan anda sedang diproses',
 					text: 'Anda akan dialihkan ke halaman Profil',
 					icon: 'success',
-					timer: 5000,
+					timer: 4000,
 					timerProgressBar: true
 				}).then(() => {
+					localStorage.removeItem('idPendanaan')
 					history.push('/profil-petani')
 				})
 			}
@@ -171,8 +195,6 @@ const uploadDokumen = (file) => async (dispatch) => {
 	try {
 		const data = new FormData()
 
-		console.log(file)
-
 		data.append('file', file)
 		data.append('upload_preset', 'rxra54p9')
 		data.append('cloud_name', 'cangkoel')
@@ -180,7 +202,11 @@ const uploadDokumen = (file) => async (dispatch) => {
 		const postDataDokumen = await CloudinaryAPI({
 			method: 'POST',
 			url: '/image/upload',
-			data: data
+			data: data,
+			onUploadProgress: (data) => {
+				let progress = Math.round((data.loaded * 100) / data.total)
+				// dispatch(setImageProgress(progress))
+			}
 		})
 
 		dispatch(setUrlDokumen(postDataDokumen.data.url))
@@ -223,6 +249,7 @@ const pengajuanAction = {
 	setUrlDokumen,
 	setUrlKTP,
 	setImage,
+	setImageProgress,
 	uploadDokumen,
 	uploadKTP
 }
