@@ -9,7 +9,7 @@ const Readkategori = () => {
 	const dispatch = useDispatch()
 	const readKategoriData = useSelector((state) => state.readKategori.kategoriPertanian)
 
-	console.log(readKategoriData)
+	// console.log(readKategoriData)
 
 	// useEffect(() => {
 	// 	console.log('selector', readKategoriData)

@@ -78,40 +78,40 @@ const updateHasilPengajuanAction = (id, status, keterangan, petaniID, formulirPe
 	}
 }
 
-const getHasilPengajuanByIDAction = (id) => async (dispatch) => {
-	try {
-		// console.log(id)
+// const getHasilPengajuanByIDAction = (id) => async (dispatch) => {
+// 	try {
+// 		// console.log(id)
 
-		const accessToken = localStorage.getItem('token')
+// 		const accessToken = localStorage.getItem('token')
 
-		console.log('updating hasil pengajuan')
-		const getHasilPengajuanByID = await CangkoelAPI({
-			method: 'GET',
-			url: `/hasil-pengajuan/${id}`,
-			headers: {
-				Authorization: accessToken
-			}
-		})
+// 		console.log('updating hasil pengajuan')
+// 		const getHasilPengajuanByID = await CangkoelAPI({
+// 			method: 'GET',
+// 			url: `/hasil-pengajuan/${id}`,
+// 			headers: {
+// 				Authorization: accessToken
+// 			}
+// 		})
 
-		console.log('actions get hasil pengajuan by id', getHasilPengajuanByID.data.data)
-		// console.log('status', getHasilPengajuanByID.data.data.status)
+// 		// console.log('actions get hasil pengajuan by id', getHasilPengajuanByID.data.data)
+// 		// console.log('status', getHasilPengajuanByID.data.data.status)
 
-		dispatch(setStatus(getHasilPengajuanByID.data.data.status))
-		dispatch(setKeterangan(getHasilPengajuanByID.data.data.keterangan))
-		dispatch(setPetaniID(getHasilPengajuanByID.data.data.petani_id))
-		dispatch(setFormulirPengajuanID(getHasilPengajuanByID.data.data.form_pengajuan_id))
-	} catch (error) {
-		console.log(error)
-	}
-}
+// 		dispatch(setStatus(getHasilPengajuanByID.data.data.status))
+// 		dispatch(setKeterangan(getHasilPengajuanByID.data.data.keterangan))
+// 		dispatch(setPetaniID(getHasilPengajuanByID.data.data.petani_id))
+// 		dispatch(setFormulirPengajuanID(getHasilPengajuanByID.data.data.form_pengajuan_id))
+// 	} catch (error) {
+// 		console.log(error)
+// 	}
+// }
 
 const editHasilPengajuanAction = {
 	setStatus,
 	setKeterangan,
 	setPetaniID,
 	setFormulirPengajuanID,
-	updateHasilPengajuanAction,
-	getHasilPengajuanByIDAction
+	updateHasilPengajuanAction
+	// getHasilPengajuanByIDAction
 }
 
 export default editHasilPengajuanAction

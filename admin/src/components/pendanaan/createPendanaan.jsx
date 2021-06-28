@@ -52,7 +52,6 @@ const CreatePendanaan = () => {
 	const [dateRange, setDateRange] = useState('')
 	const [startDate, endDate] = dateRange
 	const jangkaWaktu = 'Dari tanggal: ' + startDate + ' sampai tanggal ' + endDate
-	console.log(jangkaWaktu)
 
 	const [keuntunganBersih, setKeuntunganBersih] = useState('')
 	const [deskripsi, setDiskripsi] = useState('')

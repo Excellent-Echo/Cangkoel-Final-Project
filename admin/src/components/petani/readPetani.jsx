@@ -7,9 +7,9 @@ const ReadPetani = () => {
 	const dispatch = useDispatch()
 	const readPetaniData = useSelector((state) => state.readPetani.petani)
 
-	useEffect(() => {
-		console.log('selector', readPetaniData)
-	})
+	// useEffect(() => {
+	// 	console.log('selector', readPetaniData)
+	// },[])
 
 	useEffect(() => {
 		dispatch(petaniActions.readPetaniActions())

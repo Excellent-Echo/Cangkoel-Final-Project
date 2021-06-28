@@ -36,7 +36,7 @@ const readPetaniActions = () => async (dispatch) => {
 		dispatch(readErrorPetani(''))
 
 		const accessToken = localStorage.getItem('token')
-		console.log(accessToken)
+		// console.log(accessToken)
 
 		const response = await CangkoelAPI({
 			method: 'GET',
@@ -46,7 +46,7 @@ const readPetaniActions = () => async (dispatch) => {
 			}
 		})
 
-		console.log('actions', response.data.data)
+		// console.log('actions', response.data.data)
 
 		dispatch(readPetani(response.data.data))
 	} catch (error) {

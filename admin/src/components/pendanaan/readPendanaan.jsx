@@ -9,9 +9,9 @@ const ReadPendanaan = () => {
 	const dispatch = useDispatch()
 	const readPendanaanData = useSelector((state) => state.readPendanaan.pendanaan)
 
-	useEffect(() => {
-		console.log('selector', readPendanaanData)
-	})
+	// useEffect(() => {
+	// 	console.log('selector', readPendanaanData)
+	// },[])
 
 	useEffect(() => {
 		dispatch(pendanaanActions.readPendanaanActions())
