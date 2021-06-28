@@ -1,4 +1,5 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
+import Swal from 'sweetalert2'
 
 import {
 	UPDATE_HASIL_PENGAJUAN_STATUS,
@@ -45,7 +46,7 @@ const setFormulirPengajuanID = (formulirPengajuanID) => {
 
 const updateHasilPengajuanAction = (id, status, keterangan, petaniID, formulirPengajuanID) => async (dispatch) => {
 	try {
-		console.log(id)
+		// console.log(id)
 
 		const updateDataHasilPengajuan = {
 			status: status,
@@ -60,9 +61,18 @@ const updateHasilPengajuanAction = (id, status, keterangan, petaniID, formulirPe
 			data: updateDataHasilPengajuan
 		})
 
-		console.log('data update', response.data.data)
+		if (response.status === 200) {
+			Swal.fire({
+				title: 'Hasil Pengajuan berhasil di update',
+				icon: 'success',
+				timer: 1500,
+				timerProgressBar: true
+			}).then(() => {
+				window.location.reload()
+			})
+		}
 
-		console.log('update data success')
+		console.log('data update', response.data.data)
 	} catch (error) {
 		console.log(error)
 	}
@@ -72,20 +82,24 @@ const getHasilPengajuanByIDAction = (id) => async (dispatch) => {
 	try {
 		// console.log(id)
 
+		const accessToken = localStorage.getItem('token')
+
 		console.log('updating hasil pengajuan')
 		const getHasilPengajuanByID = await CangkoelAPI({
 			method: 'GET',
-			url: `/hasil-pengajuan/${id}`
+			url: `/hasil-pengajuan/${id}`,
+			headers: {
+				Authorization: accessToken
+			}
 		})
 
-		console.log('actions', getHasilPengajuanByID.data.data)
+		console.log('actions get hasil pengajuan by id', getHasilPengajuanByID.data.data)
 		// console.log('status', getHasilPengajuanByID.data.data.status)
 
 		dispatch(setStatus(getHasilPengajuanByID.data.data.status))
 		dispatch(setKeterangan(getHasilPengajuanByID.data.data.keterangan))
 		dispatch(setPetaniID(getHasilPengajuanByID.data.data.petani_id))
 		dispatch(setFormulirPengajuanID(getHasilPengajuanByID.data.data.form_pengajuan_id))
-		console.log('updating hasil pengajuan success')
 	} catch (error) {
 		console.log(error)
 	}

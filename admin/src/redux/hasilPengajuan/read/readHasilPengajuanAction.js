@@ -41,7 +41,7 @@ const readHasilPengajuanActions = () => async (dispatch) => {
 		dispatch(readErrorHasilPengajuan(''))
 
 		const accessToken = localStorage.getItem('token')
-		console.log(accessToken)
+		// console.log(accessToken)
 
 		const getHasilPengajuanData = await CangkoelAPI({
 			method: 'GET',
@@ -51,7 +51,7 @@ const readHasilPengajuanActions = () => async (dispatch) => {
 			}
 		})
 
-		console.log('hasil pengajuan data action', getHasilPengajuanData.data.data)
+		// console.log('hasil pengajuan data action', getHasilPengajuanData.data.data)
 
 		dispatch(readHasilPengajuan(getHasilPengajuanData.data.data))
 	} catch (error) {

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap'
+import { Button, Modal, ModalBody } from 'reactstrap'
 import { useDispatch } from 'react-redux'
 import hasilPengajuanActions from '../../redux/hasilPengajuan/delete/deleteHasilPengajuanAction'
 
 const DeleteHasilPengajuan = (props) => {
 	// const { className } = props
-	console.log(props)
+	// console.log(props)
 	const [konfirmasi, setKonfirmasi] = useState(false)
 	const show = () => setKonfirmasi(!konfirmasi)
 
@@ -21,9 +21,8 @@ const DeleteHasilPengajuan = (props) => {
 			</Button>
 
 			<Modal isOpen={konfirmasi} show={show}>
-				<ModalHeader show={show}>Modal title</ModalHeader>
 				<ModalBody>
-					<h4>Apakah ingin mengapus data ini?</h4>
+					<h4>Apakah anda ingin mengapus data ini?</h4>
 					<Button style={{ margin: '5px' }} onClick={handleDelete}>
 						Delete
 					</Button>
