@@ -15,9 +15,8 @@ var (
 
 func PendanaanRoute(r *gin.Engine) {
 	r.GET("pendanaan", pendanaanHandler.ShowAllPendanaanHandler)
-	// r.GET("pendanaan/:kategori-pertanian", pendanaanHandler.GetPendanaanByKategoriIDHandler)
-	r.POST("pendanaan", handler.MiddlewareAdmin(adminService, authService), pendanaanHandler.CreatePendanaanHandler)
+	r.POST("pendanaan", handler.Middleware(petaniService, adminService, authService), pendanaanHandler.CreatePendanaanHandler) // admin
 	r.GET("pendanaan/:id", pendanaanHandler.GetPendanaanByIDHandler)
-	r.PUT("pendanaan/:id", handler.MiddlewareAdmin(adminService, authService), pendanaanHandler.UpdatePendanaanByIDHandler) // kasih admin middleware
-	r.DELETE("pendanaan/:id", handler.MiddlewareAdmin(adminService, authService), pendanaanHandler.DeletePendanaanByIDHandler)
+	r.PUT("pendanaan/:id", handler.Middleware(petaniService, adminService, authService), pendanaanHandler.UpdatePendanaanByIDHandler)    // admin
+	r.DELETE("pendanaan/:id", handler.Middleware(petaniService, adminService, authService), pendanaanHandler.DeletePendanaanByIDHandler) // admin
 }

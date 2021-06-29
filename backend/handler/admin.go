@@ -22,6 +22,18 @@ func NewAdminHandler(adminService admin.Service, authService auth.Service) *admi
 
 // SHOW ALL ADMIN
 func (h *adminHandler) ShowAllAdminHandler(c *gin.Context) {
+
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	admin, err := h.adminService.SShowAllAdmin()
 
 	if err != nil {
@@ -104,6 +116,17 @@ func (h *adminHandler) LoginAdminHandler(c *gin.Context) {
 func (h *adminHandler) GetAdminByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	admin, err := h.adminService.SFindAdminByID(id)
 	if err != nil {
 		responseError := helper.APIResponse("input params error", 400, "bad request", gin.H{"errors": err.Error()})
@@ -119,6 +142,17 @@ func (h *adminHandler) GetAdminByIDHandler(c *gin.Context) {
 // DELETE ADMIN BY ID
 func (h *adminHandler) DeleteAdminByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
+
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
 
 	admin, err := h.adminService.SDeleteAdminByID(id)
 
@@ -137,6 +171,17 @@ func (h *adminHandler) DeleteAdminByIDHandler(c *gin.Context) {
 func (h *adminHandler) UpdateAdminByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	var updateAdminInput entity.UpdateAdminInput
 
 	if err := c.ShouldBindJSON(&updateAdminInput); err != nil {
@@ -149,9 +194,10 @@ func (h *adminHandler) UpdateAdminByIDHandler(c *gin.Context) {
 
 	// idParam, _ := strconv.Atoi(id)
 	// adminData := int(c.MustGet("currentAdmin").(int))
-	adminData := c.MustGet("currentAdmin").(string)
+	adminData := c.MustGet("currentUser").(gin.H)
+	adminID := adminData["admin_id"].(string)
 
-	if id != adminData {
+	if id != adminID {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "admin ID not authorize"})
 
 		c.JSON(401, responseError)

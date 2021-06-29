@@ -14,9 +14,7 @@ var (
 )
 
 func FormPengajuanRoute(r *gin.Engine) {
-	// r.GET("formulir-pengajuan", handler.MiddlewareAdmin(adminService, authService), handler.MiddlewareUser(petaniService, authService), formPengajuanHandler.ShowAllFormPengajuanHandler)
-	r.GET("formulir-pengajuan", handler.MiddlewareAdmin(adminService, authService), formPengajuanHandler.ShowAllFormPengajuanHandler)
-	// r.GET("formulir-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), handler.MiddlewareUser(petaniService, authService), formPengajuanHandler.GetFormPengajuanByIDHandler)
-	r.GET("formulir-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), formPengajuanHandler.GetFormPengajuanByIDHandler)
-	r.POST("formulir-pengajuan", handler.MiddlewareUser(petaniService, authService), formPengajuanHandler.CreateFormPengajuanHandler)
+	r.GET("formulir-pengajuan", handler.Middleware(petaniService, adminService, authService), formPengajuanHandler.ShowAllFormPengajuanHandler)     // admin dan petani
+	r.GET("formulir-pengajuan/:id", handler.Middleware(petaniService, adminService, authService), formPengajuanHandler.GetFormPengajuanByIDHandler) // admin dan petani
+	r.POST("formulir-pengajuan", handler.Middleware(petaniService, adminService, authService), formPengajuanHandler.CreateFormPengajuanHandler)     // admin
 }

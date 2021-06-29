@@ -20,8 +20,9 @@ func NewKPetaniHandler(KpetaniService kategoriPertanian.Service, authService aut
 	return &KpetaniHandler{KpetaniService, authService}
 }
 
-// ShowAllKPetaniHandler GET all kategori pertanian
+// SHOW ALL KATEGORI PERTANIAN
 func (h *KpetaniHandler) ShowAllKPetaniHandler(c *gin.Context) {
+
 	Kpetani, err := h.KpetaniService.SFindAllKpetani()
 
 	if err != nil {
@@ -35,7 +36,7 @@ func (h *KpetaniHandler) ShowAllKPetaniHandler(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-// GetKPetaniByIDHandler GET kategori petani by ID
+// GET KATEGORI PERTANIAN BY ID
 func (h *KpetaniHandler) GetKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
@@ -51,8 +52,20 @@ func (h *KpetaniHandler) GetKPetaniByIDHandler(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-// CreateKategoriPertanian POST kategori pertanian
+// CREATE KATEGORI PERTANIAN
 func (h *KpetaniHandler) CreateKategoriPertanian(c *gin.Context) {
+
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	var InputKPetani entity.KategoriPertanianInput
 
 	if err := c.ShouldBindJSON(&InputKPetani); err != nil {
@@ -74,9 +87,20 @@ func (h *KpetaniHandler) CreateKategoriPertanian(c *gin.Context) {
 	c.JSON(201, response)
 }
 
-// DeleteKPetaniByIDHandler DELETE kategori pertanian by id
+// DELETE KATEGORI PERTANIAN BY ID
 func (h *KpetaniHandler) DeleteKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
+
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
 
 	Kpetani, err := h.KpetaniService.SDeleteByIDKpetani(id)
 
@@ -91,9 +115,20 @@ func (h *KpetaniHandler) DeleteKPetaniByIDHandler(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-// UpdateKPetaniByIDHandler UPDATE kategori pertanian by id
+// UPDATE KATEGORI PERTANIAN BY ID
 func (h *KpetaniHandler) UpdateKPetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
+
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
 
 	var updateKategoriPertanianInput entity.UpdateKategoriPertanianInput
 
@@ -104,17 +139,6 @@ func (h *KpetaniHandler) UpdateKPetaniByIDHandler(c *gin.Context) {
 		c.JSON(400, responseError)
 		return
 	}
-
-	// idParam, _ := strconv.Atoi(id)
-
-	// KpetaniData := int(c.MustGet("currentUser").(int))
-
-	// if idParam != KpetaniData {
-	// 	responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "Kategori Pertanian ID not authorize"})
-
-	// 	c.JSON(401, responseError)
-	// 	return
-	// }
 
 	Kpetani, err := h.KpetaniService.SUpdateByIDKpetani(id, updateKategoriPertanianInput)
 	if err != nil {

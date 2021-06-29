@@ -23,6 +23,7 @@ func NewPendanaanHandler(pendanaanService pendanaan.Service, authService auth.Se
 
 // SHOW ALL PENDANAAN
 func (h *pendanaanHandler) ShowAllPendanaanHandler(c *gin.Context) {
+
 	pendanaan, err := h.pendanaanService.SShowAllPendanaan()
 
 	if err != nil {
@@ -38,19 +39,25 @@ func (h *pendanaanHandler) ShowAllPendanaanHandler(c *gin.Context) {
 
 // CREATE NEW PENDANAAN
 func (h *pendanaanHandler) CreatePendanaanHandler(c *gin.Context) {
+	// jika int
 	//investorData := int(c.MustGet("currentUser").(int))
 
 	// file, err := c.FormFile("Profile")
 
-	//if investorData == 0 {
-	//	responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Investor not authorize / not login"})
-	//
-	//	c.JSON(401, responseError)
-	//	return
-	//}
 	// path := fmt.Sprintf("images/profile-%d-%s", investorData, file.Filename)
 
 	// err = c.SaveUploadedFile(file, path)
+
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
 
 	var inputpendanaan entity.PendanaanInput
 
@@ -114,6 +121,17 @@ func (h *pendanaanHandler) GetPendanaanByIDHandler(c *gin.Context) {
 func (h *pendanaanHandler) DeletePendanaanByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	pendanaan, err := h.pendanaanService.SDeletePendanaanByID(id)
 
 	if err != nil {
@@ -131,6 +149,17 @@ func (h *pendanaanHandler) DeletePendanaanByIDHandler(c *gin.Context) {
 func (h *pendanaanHandler) UpdatePendanaanByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	var updatePendanaanInput entity.UpdatePendanaanInput
 
 	if err := c.ShouldBindJSON(&updatePendanaanInput); err != nil {
@@ -140,17 +169,6 @@ func (h *pendanaanHandler) UpdatePendanaanByIDHandler(c *gin.Context) {
 		c.JSON(400, responseError)
 		return
 	}
-
-	// idParam, _ := strconv.Atoi(id)
-
-	// adminData := int(c.MustGet("currentUser").(int))
-
-	// if idParam != adminData {
-	// 	responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "Kategori Pertanian ID not authorize"})
-
-	// 	c.JSON(401, responseError)
-	// 	return
-	// }
 
 	pendanaan, err := h.pendanaanService.SUpdatePendanaanByID(id, updatePendanaanInput)
 	if err != nil {

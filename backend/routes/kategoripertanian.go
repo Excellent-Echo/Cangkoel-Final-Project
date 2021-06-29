@@ -15,8 +15,8 @@ var (
 
 func KategoriPertanianRoute(r *gin.Engine) {
 	r.GET("/kategori-pertanian", kategoriHandler.ShowAllKPetaniHandler)
-	r.POST("/kategori-pertanian", handler.MiddlewareAdmin(adminService, authService), kategoriHandler.CreateKategoriPertanian) // kasih admin middleware
+	r.POST("/kategori-pertanian", handler.Middleware(petaniService, adminService, authService), kategoriHandler.CreateKategoriPertanian) // admin
 	r.GET("/kategori-pertanian/:id", kategoriHandler.GetKPetaniByIDHandler)
-	r.PUT("/kategori-pertanian/:id", handler.MiddlewareAdmin(adminService, authService), kategoriHandler.UpdateKPetaniByIDHandler)    // kasih admin middleware
-	r.DELETE("/kategori-pertanian/:id", handler.MiddlewareAdmin(adminService, authService), kategoriHandler.DeleteKPetaniByIDHandler) // kasih admin middleware
+	r.PUT("/kategori-pertanian/:id", handler.Middleware(petaniService, adminService, authService), kategoriHandler.UpdateKPetaniByIDHandler)    // admin
+	r.DELETE("/kategori-pertanian/:id", handler.Middleware(petaniService, adminService, authService), kategoriHandler.DeleteKPetaniByIDHandler) // admin
 }

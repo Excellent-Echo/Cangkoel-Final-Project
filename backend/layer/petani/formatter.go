@@ -6,12 +6,12 @@ import (
 )
 
 type PetaniFormat struct {
-	ID       string `json:"id"`
-	FullName string `json:"full_name"`
-	Email    string `json:"email"`
-	Role     string `json:"role"`
-	// FormPengajuan  FormPengajuan
-	// HasilPengajuan HasilPengajuan
+	ID             string `json:"id"`
+	FullName       string `json:"full_name"`
+	Email          string `json:"email"`
+	Role           string `json:"role"`
+	FormPengajuan  entity.FormPengajuan
+	HasilPengajuan entity.HasilPengajuan
 }
 
 type PetaniDeleteFormat struct {
@@ -21,12 +21,12 @@ type PetaniDeleteFormat struct {
 
 func Format(petani entity.Petani) PetaniFormat {
 	var formatPetani = PetaniFormat{
-		ID:       petani.ID,
-		FullName: petani.FullName,
-		Email:    petani.Email,
-		Role:     petani.Role,
-		// FormPengajuan:  petani.FormPengajuan,
-		// HasilPengajuan: petani.HasilPengajuan,
+		ID:             petani.ID,
+		FullName:       petani.FullName,
+		Email:          petani.Email,
+		Role:           petani.Role,
+		FormPengajuan:  petani.FormPengajuan,
+		HasilPengajuan: petani.HasilPengajuan,
 	}
 
 	return formatPetani

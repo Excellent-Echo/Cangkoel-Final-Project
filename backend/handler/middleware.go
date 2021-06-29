@@ -5,24 +5,23 @@ import (
 	"backend/helper"
 	"backend/layer/admin"
 	"backend/layer/petani"
-	"fmt"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
 
-func MiddlewareUser(petaniService petani.Service, authService auth.Service) gin.HandlerFunc {
+func Middleware(petaniService petani.Service, adminService admin.Service, authService auth.Service) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
 
 		if authHeader == "" || len(authHeader) == 0 {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize userPetani"})
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
 		}
 
-		// eksekusi code untuk mengecek apakah token itu valid dari server kita atau tidak
+		// mengecek apakah token itu valid atau tidak
 		token, err := authService.ValidateToken(authHeader)
 
 		if err != nil {
@@ -35,64 +34,84 @@ func MiddlewareUser(petaniService petani.Service, authService auth.Service) gin.
 		claim, ok := token.Claims.(jwt.MapClaims)
 
 		if !ok {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize userPetani"})
+			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
 		}
 
-		petaniID := claim["petani_id"].(string)
+		petaniID := ""
+		adminID := ""
 
-		c.Set("currentUser", petaniID)
+		if claim["petani_id"] != nil {
+			petaniID = claim["petani_id"].(string)
+		}
+
+		if claim["admin_id"] != nil {
+			adminID = claim["admin_id"].(string)
+		}
+
+		// Admin, err := adminService.SFindAdminByID(adminID)
+		// if Admin.Role != "admin" {
+		// 	errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
+
+		// 	c.AbortWithStatusJSON(401, errorResponse)
+		// 	return
+		// }
+
+		c.Set("currentUser", gin.H{
+			"petani_id": petaniID,
+			"admin_id":  adminID,
+		})
 	}
 }
 
-func MiddlewareAdmin(adminService admin.Service, authService auth.Service) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		authHeader := c.GetHeader("Authorization")
+// func MiddlewareAdmin(adminService admin.Service, authService auth.Service) gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		authHeader := c.GetHeader("Authorization")
 
-		if authHeader == "" || len(authHeader) == 0 {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
+// 		if authHeader == "" || len(authHeader) == 0 {
+// 			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
 
-			c.AbortWithStatusJSON(401, errorResponse)
-			return
-		}
+// 			c.AbortWithStatusJSON(401, errorResponse)
+// 			return
+// 		}
 
-		token, err := authService.ValidateToken(authHeader)
+// 		token, err := authService.ValidateToken(authHeader)
 
-		if err != nil {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": err.Error()})
+// 		if err != nil {
+// 			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": err.Error()})
 
-			c.AbortWithStatusJSON(401, errorResponse)
-			return
-		}
+// 			c.AbortWithStatusJSON(401, errorResponse)
+// 			return
+// 		}
 
-		claim, ok := token.Claims.(jwt.MapClaims)
+// 		claim, ok := token.Claims.(jwt.MapClaims)
 
-		if !ok {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
+// 		if !ok {
+// 			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
 
-			c.AbortWithStatusJSON(401, errorResponse)
-			return
-		}
+// 			c.AbortWithStatusJSON(401, errorResponse)
+// 			return
+// 		}
 
-		// adminID := int(claim["admin_id"].(int))
-		// IDAdmin := strconv.Itoa(adminID)
+// 		// adminID := int(claim["admin_id"].(int))
+// 		// IDAdmin := strconv.Itoa(adminID)
 
-		adminID := claim["admin_id"].(string)
-		fmt.Println(adminID)
+// 		adminID := claim["admin_id"].(string)
+// 		fmt.Println(adminID)
 
-		Admin, err := adminService.SFindAdminByID(adminID)
-		if Admin.Role != "admin" {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
+// 		Admin, err := adminService.SFindAdminByID(adminID)
+// 		if Admin.Role != "admin" {
+// 			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize Admin"})
 
-			c.AbortWithStatusJSON(401, errorResponse)
-			return
-		}
+// 			c.AbortWithStatusJSON(401, errorResponse)
+// 			return
+// 		}
 
-		c.Set("currentAdmin", adminID)
-	}
-}
+// 		c.Set("currentAdmin", adminID)
+// 	}
+// }
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {

@@ -14,10 +14,9 @@ var (
 )
 
 func HasilPengajuanRoute(r *gin.Engine) {
-	// r.GET("hasil-pengajuan", handler.MiddlewareAdmin(adminService, authService), handler.MiddlewareUser(petaniService, authService), hasilPengajuanHandler.ShowAllHasilPengajuanHandler)
-	r.GET("hasil-pengajuan", handler.MiddlewareAdmin(adminService, authService), hasilPengajuanHandler.ShowAllHasilPengajuanHandler)
-	r.GET("hasil-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), handler.MiddlewareUser(petaniService, authService), hasilPengajuanHandler.GetHasilPengajuanByIDHandler)
-	r.POST("hasil-pengajuan", handler.MiddlewareAdmin(adminService, authService), hasilPengajuanHandler.CreateHasilPengajuanHandler)
-	r.PUT("hasil-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), hasilPengajuanHandler.UpdateHasilPengajuanByIDHandler)
-	r.DELETE("hasil-pengajuan/:id", handler.MiddlewareAdmin(adminService, authService), hasilPengajuanHandler.DeleteHasilPengajuanByIDHandler)
+	r.GET("hasil-pengajuan", handler.Middleware(petaniService, adminService, authService), hasilPengajuanHandler.ShowAllHasilPengajuanHandler)           // admin dan petani
+	r.GET("hasil-pengajuan/:id", handler.Middleware(petaniService, adminService, authService), hasilPengajuanHandler.GetHasilPengajuanByIDHandler)       // admin dan petani
+	r.POST("hasil-pengajuan", handler.Middleware(petaniService, adminService, authService), hasilPengajuanHandler.CreateHasilPengajuanHandler)           // admin
+	r.PUT("hasil-pengajuan/:id", handler.Middleware(petaniService, adminService, authService), hasilPengajuanHandler.UpdateHasilPengajuanByIDHandler)    // admin
+	r.DELETE("hasil-pengajuan/:id", handler.Middleware(petaniService, adminService, authService), hasilPengajuanHandler.DeleteHasilPengajuanByIDHandler) // admin
 }

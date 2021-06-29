@@ -35,14 +35,27 @@ func (h *formPengajuanHandler) ShowAllFormPengajuanHandler(c *gin.Context) {
 
 // CREATE NEW FORM PENGAJUAN
 func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
-	petaniData := c.MustGet("currentUser").(string)
+
+	//jika yang login admin akan error
+
+	adminData := c.MustGet("currentUser").(gin.H)
+	adminID := adminData["admin_id"]
+
+	if adminID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not user petani, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
 
 	// file, err := c.FormFile("Document")
 	// file2, err := c.FormFile("Ktp")
 
 	// pendanaanID := c.Params.ByName("pendanaan_id")
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"].(string)
 
-	if len(petaniData) == 0 {
+	if len(petaniID) == 0 {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Petani not authorize / not login"})
 
 		c.JSON(401, responseError)
@@ -70,7 +83,7 @@ func (h *formPengajuanHandler) CreateFormPengajuanHandler(c *gin.Context) {
 	// pathPengajuanSave := "https://cangkoel.herokuapp.com/" + path
 	// pathPengajuanSave2 := "https://cangkoel.herokuapp.com/" + path2
 
-	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniData)
+	newFormPengajuan, err := h.formPengajuanService.SCreateFormPengajuan(inputFormPengajuan, petaniID)
 	if err != nil {
 		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err.Error()})
 
