@@ -1,3 +1,4 @@
+import CangkoelAPI from '../../api/CangkoelAPI'
 import { PENGAJUAN_DATA } from './pengajuanActionTypes'
 
 const setPengajuanData = (pengajuanData) => {
@@ -15,9 +16,30 @@ const setLoading = () => {
 	}
 }
 
+const getPengajuanData = () => async (dispatch) => {
+	try {
+		let token = localStorage.getItem('token')
+
+		const getPengajuanData = await CangkoelAPI({
+			method: 'GET',
+			url: '/formulir-pengajuan',
+			headers: {
+				Authorization: token
+			}
+		})
+
+		console.log(getPengajuanData.data.data)
+
+		dispatch(setPengajuanData(getPengajuanData.data.data))
+	} catch (error) {
+		console.log(error.response)
+	}
+}
+
 const pengajuanAction = {
 	setPengajuanData,
-	setLoading
+	setLoading,
+	getPengajuanData
 }
 
 export default pengajuanAction

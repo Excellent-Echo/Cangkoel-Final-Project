@@ -2,6 +2,7 @@ import CangkoelAPI from '../../../api/CangkoelAPI'
 
 import {
 	READ_SET_KATEGORI,
+	READ_SET_KATEGORI_BY_ID,
 	READ_ERROR_KATEGORI,
 	READ_START_LOADING_KATEGORI,
 	READ_STOP_LOADING_KATEGORI
@@ -11,6 +12,13 @@ const readKategori = (kategoriPertanian) => {
 	return {
 		type: READ_SET_KATEGORI,
 		payload: kategoriPertanian
+	}
+}
+
+const readKategoriByID = (kategoriPertanianByID) => {
+	return {
+		type: READ_SET_KATEGORI_BY_ID,
+		payload: kategoriPertanianByID
 	}
 }
 

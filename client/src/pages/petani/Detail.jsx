@@ -44,6 +44,44 @@ const Detail = () => {
 		localStorage.setItem('idPendanaan', id)
 	}
 
+	//
+	let jangkaWaktuArr = []
+	if (detailPendanaan.jangka_waktu) {
+		jangkaWaktuArr = detailPendanaan.jangka_waktu.split(',')
+	}
+
+	const convertDate = (date) => {
+		var dateString = date
+		dateString = new Date(dateString).toUTCString()
+		dateString = dateString.split(' ').slice(1, 4).join(' ')
+
+		return dateString
+	}
+
+	//
+	let biayaOperasionalArr = []
+	if (detailPendanaan.biaya_operasional) {
+		biayaOperasionalArr = detailPendanaan.biaya_operasional.split(',')
+	}
+
+	//
+	let biayaEksporArr = []
+	if (detailPendanaan.biaya_ekspor) {
+		biayaEksporArr = detailPendanaan.biaya_ekspor.split(',')
+	}
+
+	//
+	let perhitunganPenghasilanArr = []
+	if (detailPendanaan.perhitungan_penghasilan) {
+		perhitunganPenghasilanArr = detailPendanaan.perhitungan_penghasilan.split(',')
+	}
+
+	//
+	let perhitunganKeuntunganArr = []
+	if (detailPendanaan.perhitungan_keuntungan) {
+		perhitunganKeuntunganArr = detailPendanaan.perhitungan_keuntungan.split(',')
+	}
+
 	return (
 		<>
 			<Navbar />
@@ -105,14 +143,136 @@ const Detail = () => {
 							class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4"
 						/>
 						<p class="text-gray-500 mb-4 text-justify">{detailPendanaan.deskripsi}</p>
-						<p class="text-gray-800 font-semibold text-lg  mb-4">{detailPendanaan.biaya_operasional}</p>
-						<p class="text-gray-800 font-semibold text-lg  mb-4">{detailPendanaan.biaya_ekspor}</p>
-						<p class="text-gray-800 font-semibold text-lg  mb-4">
-							{detailPendanaan.perhitungan_penghasilan}
-						</p>
-						<p class="text-gray-800 font-semibold text-lg  mb-4">
-							{detailPendanaan.perhitungan_keuntungan}
-						</p>
+						<div>
+							<p class="text-gray-500 font-bold text-xl">Biaya Operasional</p>
+							<table class="rounded-t-lg my-4 w-6/6 bg-gray-200 text-gray-800">
+								<tr class="text-left border-b-2 border-gray-300">
+									<th class="px-4 py-3">Biaya Bahan Baku</th>
+									<th class="px-4 py-3">Biaya Sewa Mesin</th>
+								</tr>
+
+								<tr class="bg-gray-100 border-b border-gray-200">
+									<td class="px-4 py-3">
+										{Intl.NumberFormat('id', {
+											style: 'currency',
+											currency: 'IDR'
+										}).format(biayaOperasionalArr[0])}
+									</td>
+									<td class="px-4 py-3">
+										{Intl.NumberFormat('id', {
+											style: 'currency',
+											currency: 'IDR'
+										}).format(biayaOperasionalArr[1])}
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<div>
+							<p class="text-gray-500 font-bold text-xl">Biaya Ekspor</p>
+							<table class="rounded-t-lg my-4 w-6/6 bg-gray-200 text-gray-800">
+								<tr class="text-left border-b-2 border-gray-300">
+									<th class="px-4 py-3">Biaya Ongkos Kirim</th>
+									<th class="px-4 py-3">Biaya Pajak</th>
+									<th class="px-4 py-3">Biaya Kontainer</th>
+									<th class="px-4 py-3">Biaya Dokumen</th>
+								</tr>
+
+								<tr class="bg-gray-100 border-b border-gray-200">
+									<td class="px-4 py-3">
+										{Intl.NumberFormat('id', {
+											style: 'currency',
+											currency: 'IDR'
+										}).format(biayaEksporArr[0])}
+									</td>
+									<td class="px-4 py-3">
+										{Intl.NumberFormat('id', {
+											style: 'currency',
+											currency: 'IDR'
+										}).format(biayaEksporArr[1])}
+									</td>
+									<td class="px-4 py-3">
+										{Intl.NumberFormat('id', {
+											style: 'currency',
+											currency: 'IDR'
+										}).format(biayaEksporArr[2])}
+									</td>
+									<td class="px-4 py-3">
+										{Intl.NumberFormat('id', {
+											style: 'currency',
+											currency: 'IDR'
+										}).format(biayaEksporArr[3])}
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="my-4">
+							<p class="text-gray-500 font-bold text-xl">Perhitungan Penghasilan</p>
+							<p class="text-gray-800 font-semibold text-md">
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(perhitunganPenghasilanArr[1])}
+								/{perhitunganPenghasilanArr[0]}
+							</p>
+						</div>
+						<div class="my-4">
+							<p class="text-gray-500 font-bold text-xl">Perhitungan Keuntungan</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Total Pendapatan:{' '}
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(perhitunganKeuntunganArr[0])}
+							</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Modal:{' '}
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(perhitunganKeuntunganArr[1])}
+							</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Keuntungan:{' '}
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(perhitunganKeuntunganArr[0] - perhitunganKeuntunganArr[1])}
+							</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Investor ({detailPendanaan.bagi_hasil_investor} %):{' '}
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(
+									(perhitunganKeuntunganArr[0] - perhitunganKeuntunganArr[1]) *
+										(detailPendanaan.bagi_hasil_investor / 100)
+								)}
+							</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Petani ({detailPendanaan.bagi_hasil_petani} %):{' '}
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(
+									(perhitunganKeuntunganArr[0] - perhitunganKeuntunganArr[1]) *
+										(detailPendanaan.bagi_hasil_petani / 100)
+								)}
+							</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Cangkoel (
+								{100 - (detailPendanaan.bagi_hasil_petani + detailPendanaan.bagi_hasil_investor)} %):{' '}
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(
+									(perhitunganKeuntunganArr[0] - perhitunganKeuntunganArr[1]) *
+										((100 -
+											(detailPendanaan.bagi_hasil_petani + detailPendanaan.bagi_hasil_investor)) /
+											100)
+								)}
+							</p>
+						</div>
 					</div>
 					<div class="md:flex-1 px-4">
 						<h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
@@ -145,6 +305,38 @@ const Detail = () => {
 
 						<div class="my-4">
 							<p class="text-gray-800 font-semibold text-lg">{detailPendanaan.nama_investor}</p>
+						</div>
+						<div class="my-8">
+							<p class="text-gray-500 font-bold text-xl">Perusahaan Pengirim</p>
+							<p class="text-gray-800 font-semibold text-md">{detailPendanaan.perusahaan_pengirim}</p>
+						</div>
+						<div class="my-8">
+							<p class="text-gray-500 font-bold text-xl">Bagi Hasil</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Investor: {detailPendanaan.bagi_hasil_investor} %
+							</p>
+							<p class="text-gray-800 font-semibold text-md">
+								Petani: {detailPendanaan.bagi_hasil_petani} %
+							</p>
+						</div>
+						<div class="my-8">
+							<p class="text-gray-500 font-bold text-xl">Kebutuhan Komoditas</p>
+							<p class="text-gray-800 font-semibold text-md">{detailPendanaan.kebutuhan_komoditas}</p>
+						</div>
+						<div class="my-8">
+							<p class="text-gray-500 font-bold text-xl">Jangka Waktu</p>
+							<p class="text-gray-800 font-semibold text-md">
+								{convertDate(jangkaWaktuArr[0])} - {convertDate(jangkaWaktuArr[1])}
+							</p>
+						</div>
+						<div class="my-8">
+							<p class="text-gray-500 font-bold text-xl">Keuntungan Bersih</p>
+							<p class="text-gray-800 font-semibold text-md">
+								{Intl.NumberFormat('id', {
+									style: 'currency',
+									currency: 'IDR'
+								}).format(detailPendanaan.keuntungan_bersih)}
+							</p>
 						</div>
 					</div>
 				</div>

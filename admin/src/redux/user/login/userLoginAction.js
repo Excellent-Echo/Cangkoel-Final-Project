@@ -61,18 +61,7 @@ const login = (email, password, history) => async (dispatch) => {
 			}
 		})
 
-		console.log(getDetailUser)
-
-		const getPengajuanData = await CangkoelAPI({
-			method: 'GET',
-			url: '/formulir-pengajuan',
-			headers: {
-				Authorization: token
-			}
-		})
-
 		dispatch(userProfileAction.setProfileData(getDetailUser.data.data))
-		dispatch(pengajuanAction.setPengajuanData(getPengajuanData.data.data))
 		localStorage.setItem('user', JSON.stringify(getDetailUser.data.data))
 
 		history.push('/')
