@@ -28,8 +28,6 @@ const getPengajuanData = () => async (dispatch) => {
 			}
 		})
 
-		console.log(getPengajuanData.data.data)
-
 		dispatch(setPengajuanData(getPengajuanData.data.data))
 	} catch (error) {
 		console.log(error.response)

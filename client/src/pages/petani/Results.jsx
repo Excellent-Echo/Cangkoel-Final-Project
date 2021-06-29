@@ -106,7 +106,7 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 					{kategoriDetail.Pendanaan &&
 						kategoriDetail.Pendanaan.map((item, index) => {
 							return (
-								<div class="md:w-1/2 lg:w-1/3 py-4 px-4">
+								<div class="md:w-1/3 lg:w-1/4 py-4 px-4">
 									<div>
 										<div class="bg-white relative shadow p-2 rounded-lg text-gray-800">
 											<div
@@ -117,16 +117,9 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 											</div>
 											<img
 												src={item.foto_profil}
-												class="h-32 rounded-lg w-full object-cover"
+												class="h-32 rounded-lg w-full object-cover border-2 border-yellow-500"
 												alt={index}
 											/>
-											<div class="flex justify-center">
-												<img
-													src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1027&q=80"
-													class="rounded-full -mt-6 border-4 object-center object-cover border-white mr-2 h-16 w-16"
-													alt={index}
-												/>
-											</div>
 											<div class="py-2 px-2">
 												<div class=" font-bold font-title text-center">
 													{item.judul_pendanaan}

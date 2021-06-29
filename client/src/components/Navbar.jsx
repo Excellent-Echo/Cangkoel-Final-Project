@@ -18,8 +18,6 @@ const Navbar = () => {
 	const history = useHistory()
 	const { user } = useSelector((state) => state.userProfile)
 
-	console.log(user)
-
 	const logout = () => {
 		localStorage.clear()
 		history.push('/')

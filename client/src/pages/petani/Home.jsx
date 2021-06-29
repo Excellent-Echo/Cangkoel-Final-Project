@@ -37,7 +37,7 @@ const Home = () => {
 			<KategoriPertanian
 				heading={
 					<>
-						<Link to="/kategori-pertanian">
+						<Link to="#">
 							Cari pendanaan <HighlightedText>pertanian.</HighlightedText>
 						</Link>
 					</>
