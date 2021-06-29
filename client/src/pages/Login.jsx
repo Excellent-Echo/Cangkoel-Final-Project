@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container as ContainerBase } from '../components/misc/Layouts.jsx'
 import tw from 'twin.macro'
@@ -136,9 +136,9 @@ const Login = ({
 								</p>
 								<p tw="mt-8 text-sm text-gray-600 text-center">
 									Tidak mempunyai akun?{' '}
-									<a href={signupUrl} tw="border-b border-gray-500 border-dotted">
+									<Link to={signupUrl} tw="border-b border-gray-500 border-dotted">
 										Daftar
-									</a>
+									</Link>
 								</p>
 							</FormContainer>
 						</MainContent>

@@ -202,6 +202,8 @@ const CreatePendanaan = () => {
 						name="bagihasilinvestor"
 						id="bagihasilinvestor"
 						placeholder="masukkan bagi hasil investor max 50%"
+						min="1"
+						max="50"
 						required
 						onChange={(e) => setBagiHasilInvestor(e.target.value)}
 					/>
@@ -213,6 +215,8 @@ const CreatePendanaan = () => {
 						name="bagihasilpetani"
 						id="bagihasilpetani"
 						placeholder="masukkan bagi hasil petani max 50%"
+						min="1"
+						max="50"
 						required
 						onChange={(e) => setBagiHasilPetani(e.target.value)}
 					/>
@@ -242,6 +246,9 @@ const CreatePendanaan = () => {
 									required
 									onChange={(e) => setSatuanBerat(e.target.value)}
 								>
+									<option value="" disabled selected>
+										Select your option
+									</option>
 									<option value="Ton">Ton</option>
 									<option value="Kilogram">Kilogram</option>
 									<option value="Gram">Gram</option>
@@ -395,6 +402,9 @@ const CreatePendanaan = () => {
 									required
 									onChange={(e) => setPerSatuanBerat(e.target.value)}
 								>
+									<option value="" disabled selected>
+										Select your option
+									</option>
 									<option value="Ton">1 Ton</option>
 									<option value="Kilogram">1 Kilogram</option>
 									<option value="Gram">1 Gram</option>
