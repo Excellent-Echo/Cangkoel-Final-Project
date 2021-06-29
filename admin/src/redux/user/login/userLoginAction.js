@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
 
 import userProfileAction from '../profile/userProfileAction'
-import pengajuanAction from '../../pengajuan/pengajuanAction'
+// import pengajuanAction from '../../pengajuan/pengajuanAction'
 
 const setEmail = (email) => {
 	return {

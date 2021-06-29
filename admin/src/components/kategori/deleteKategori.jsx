@@ -21,7 +21,7 @@ const DeleteKategori = (props) => {
 			</Button>
 
 			<Modal isOpen={konfirmasi} show={show}>
-				<ModalHeader show={show}>Modal title</ModalHeader>
+				<ModalHeader show={show}>Hapus Kategori</ModalHeader>
 				<ModalBody>
 					<h4>Apakah anda ingin mengapus kategori ini?</h4>
 					<Button style={{ margin: '5px' }} onClick={handleDelete}>

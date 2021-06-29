@@ -282,7 +282,7 @@ const createPendanaanActions =
 					timer: 2000,
 					timerProgressBar: true
 				}).then(() => {
-					console.log('pendanaan data action', postPendanaanData.data.data)
+					// console.log('pendanaan data action', postPendanaanData.data.data)
 					dispatch(setSuccessMessage('Success Post Pendanaan'))
 					dispatch(stopLoading())
 					window.location.reload()
@@ -297,7 +297,7 @@ const createPendanaanActions =
 
 const uploadFotoProfil = (file) => async (dispatch) => {
 	try {
-		console.log('file', file)
+		// console.log('file', file)
 		const data = new FormData()
 		data.append('file', file)
 		data.append('upload_preset', 'rxra54p9')
