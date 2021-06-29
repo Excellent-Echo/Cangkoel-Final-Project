@@ -68,7 +68,13 @@ const ReadHasilPengajuan = () => {
 											<td>
 												<div className="grid-container">
 													<div className="item2">
-														<EditHasilPengajuan hasilPengajuanID={value.id} />
+														<EditHasilPengajuan
+															hasilPengajuanID={value.id}
+															status={value.status}
+															keterangan={value.keterangan}
+															petaniID={value.petani_id}
+															formPengajuanID={value.form_pengajuan_id}
+														/>
 													</div>
 													<div className="item3">
 														<DeleteHasilPengajuan hasilPengajuanID={value.id} />
