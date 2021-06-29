@@ -96,7 +96,7 @@ const Login = ({
 						<MainContent>
 							<Heading>{headingText}</Heading>
 							<FormContainer>
-								<SocialButtonsContainer>
+								{/* <SocialButtonsContainer>
 									{socialButtons.map((socialButton, index) => (
 										<SocialButton key={index} href={socialButton.url}>
 											<span className="iconContainer">
@@ -105,7 +105,7 @@ const Login = ({
 											<span className="text">{socialButton.text}</span>
 										</SocialButton>
 									))}
-								</SocialButtonsContainer>
+								</SocialButtonsContainer> */}
 								<DividerTextContainer>
 									<DividerText>Atau masuk lewat e-mail anda</DividerText>
 								</DividerTextContainer>
