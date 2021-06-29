@@ -38,7 +38,7 @@ const Login = () => {
 						type="email"
 						name="email"
 						id="exampleEmail"
-						placeholder="with a placeholder"
+						placeholder="Your email"
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</FormGroup>
@@ -48,7 +48,7 @@ const Login = () => {
 						type="password"
 						name="password"
 						id="examplePassword"
-						placeholder="password placeholder"
+						placeholder="Your password"
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</FormGroup>

@@ -1,15 +1,13 @@
-import React from "react";
+import React from 'react'
 
 const Search = () => {
-  return (
-    <div className="max-w-screen-xl mx-auto py-8 lg:py-8 bg-crowde-100">
-      <div className="hero-headline flex flex-col items-center justify-center text-center">
-        <h1 className="font-bold text-3xl text-crowde-100">
-          Cari Pendanaan Terbaik Untuk Kamu
-        </h1>
-      </div>
+	return (
+		<div className="max-w-screen-xl mx-auto py-8 lg:py-8 bg-crowde-100">
+			<div className="hero-headline flex flex-col items-center justify-center text-center">
+				<h1 className="font-bold text-3xl text-crowde-100">Cari Pendanaan Terbaik Untuk Kamu</h1>
+			</div>
 
-      <div className="box pt-6">
+			{/* <div className="box pt-6">
         <div className="box-wrapper">
           <div className=" bg-white rounded flex items-center w-full p-3 shadow-sm border border-gray-200">
             <button className="outline-none focus:outline-none">
@@ -29,9 +27,9 @@ const Search = () => {
             />
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
+      </div> */}
+		</div>
+	)
+}
 
-export default Search;
+export default Search

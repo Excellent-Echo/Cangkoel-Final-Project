@@ -103,29 +103,72 @@ const ReadPendanaan = () => {
 											</td>
 											<td>{item.nama_investor}</td>
 											<td>{item.judul_pendanaan}</td>
-											<td>{item.nominal_pendanaan}</td>
+											<td>
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(item.nominal_pendanaan)}
+											</td>
 											<td>{item.perusahaan_pengirim}</td>
 											<td>{item.bagi_hasil_investor} %</td>
 											<td>{item.bagi_hasil_petani} %</td>
 											<td>{item.kebutuhan_komoditas}</td>
 											<td>{item.jangka_waktu}</td>
-											<td>{item.keuntungan_bersih}</td>
+											<td>
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(item.keuntungan_bersih)}
+											</td>
 											<td>{item.deskripsi}</td>
 											<td>
-												Bahan Baku: {biayaOperasionalArr[0]} <br /> Sewa Mesin:{' '}
-												{biayaOperasionalArr[1]}
+												Bahan Baku:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(biayaOperasionalArr[0])}{' '}
+												<br /> Sewa Mesin:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(biayaOperasionalArr[1])}
 											</td>
 											<td>
-												Ongkos Kirim: {biayaEksporArr[0]} <br /> Pajak: {biayaEksporArr[1]}{' '}
-												<br /> Kontainer: {biayaEksporArr[2]} <br /> Dokumen:{' '}
-												{biayaEksporArr[3]}
+												Ongkos Kirim:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(biayaEksporArr[0])}{' '}
+												<br /> Pajak:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(biayaEksporArr[1])}
+												<br /> Kontainer:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(biayaEksporArr[2])}{' '}
+												<br /> Dokumen:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(biayaEksporArr[3])}
 											</td>
 											<td>
 												{perhitunganPenghasilanArr[1]}/{perhitunganPenghasilanArr[0]}
 											</td>
 											<td>
-												Pendapatan: {perhitunganKeuntunganArr[0]} <br /> Modal Awal:{' '}
-												{perhitunganKeuntunganArr[1]}
+												Pendapatan:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(perhitunganKeuntunganArr[0])}{' '}
+												<br /> Modal Awal:{' '}
+												{Intl.NumberFormat('id', {
+													style: 'currency',
+													currency: 'IDR'
+												}).format(perhitunganKeuntunganArr[1])}
 											</td>
 											<td>{item.kategori_id}</td>
 											<td>{item.created_at}</td>

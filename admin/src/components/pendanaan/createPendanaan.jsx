@@ -462,7 +462,7 @@ const CreatePendanaan = () => {
 					</Row>
 					<h5>
 						Profit :{' '}
-						{new Intl.NumberFormat('en-ID', {
+						{Intl.NumberFormat('id', {
 							style: 'currency',
 							currency: 'IDR'
 						}).format(dikurangi)}

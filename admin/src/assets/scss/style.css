@@ -2182,11 +2182,6 @@ pre code {
 	.table-responsive-md > .table-bordered {
 		border: 0;
 	}
-
-	.section-logina {
-		padding: 0px;
-		padding-bottom: 0px;
-	}
 }
 
 @media (max-width: 991.98px) {
@@ -4650,6 +4645,13 @@ input[type='button'].btn-block {
 	content: '';
 	background: no-repeat center center;
 	background-size: 100% 100%;
+}
+
+@media (max-width: 0px) {
+	.section-logina {
+		padding: 0px;
+		padding-bottom: 0px;
+	}
 }
 
 @media (max-width: 575.98px) {
