@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 const deletePendanaan = (id) => async () => {
 	try {
 		const accessToken = localStorage.getItem('token')
-		console.log(accessToken)
+		// console.log(accessToken)
 
 		// eslint-disable-next-line
 		const responseDeletePendanaan = await CangkoelAPI({
@@ -15,7 +15,7 @@ const deletePendanaan = (id) => async () => {
 			}
 		})
 
-		console.log(responseDeletePendanaan)
+		// console.log(responseDeletePendanaan)
 
 		if (responseDeletePendanaan.status === 200) {
 			Swal.fire({

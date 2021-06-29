@@ -261,10 +261,10 @@ const createPendanaanActions =
 				kategori_id: parseInt(kategoriID)
 			}
 
-			console.log(pendanaanData)
+			// console.log(pendanaanData)
 
 			const accessToken = localStorage.getItem('token')
-			console.log(accessToken)
+			// console.log(accessToken)
 
 			const postPendanaanData = await CangkoelAPI({
 				method: 'POST',
@@ -309,7 +309,7 @@ const uploadFotoProfil = (file) => async (dispatch) => {
 			data: data
 		})
 
-		console.log(postDataProfil.data.url)
+		// console.log(postDataProfil.data.url)
 
 		dispatch(setUrlFotoProfil(postDataProfil.data.url))
 	} catch (error) {

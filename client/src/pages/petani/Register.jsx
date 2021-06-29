@@ -11,7 +11,7 @@ import userRegisterAction from '../../redux/user/register/userRegisterAction'
 
 // assets
 import farmer from '../../assets/petani-register.jpg'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo-cangkoel.png'
 import googleIconImageSrc from '../../assets/google-icon.png'
 import { ReactComponent as SignUpIcon } from 'feather-icons/dist/icons/user-plus.svg'
 

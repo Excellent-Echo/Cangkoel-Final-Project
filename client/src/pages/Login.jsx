@@ -10,7 +10,7 @@ import userLoginAction from '../redux/user/login/userLoginAction'
 // import { useAuth } from '../utils/auth'
 
 import petani from '../assets/petani-login.jpg'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo-cangkoel.png'
 import googleIconImageSrc from '../assets/google-icon.png'
 import { ReactComponent as LoginIcon } from 'feather-icons/dist/icons/log-in.svg'
 

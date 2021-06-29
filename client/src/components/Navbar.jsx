@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import userProfileAction from '../redux/user/profile/userProfileAction'
 
 // assets
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo-cangkoel.png'
 import { loadPartialConfig } from '@babel/core'
 
 // styled components with tailwind
