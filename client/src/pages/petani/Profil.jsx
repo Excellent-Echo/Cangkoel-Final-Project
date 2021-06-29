@@ -13,8 +13,9 @@ const Profil = ({ color }) => {
 		const loggedInUser = localStorage.getItem('user')
 
 		if (loggedInUser) {
-			const foundUser = JSON.parse(loggedInUser)
-			dispatch(userProfileAction.setProfileData(foundUser))
+			// const foundUser = JSON.parse(loggedInUser)
+			// dispatch(userProfileAction.setProfileData(foundUser))
+			dispatch(userProfileAction.fetchProfile())
 		}
 	}, [])
 
@@ -25,11 +26,10 @@ const Profil = ({ color }) => {
 	let [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	console.log(name)
-
-	// {
-	// 	user ? (name = user.full_name) : <p>loading</p>
-	// }
+	const handleSubmit = () => {
+		dispatch(userProfileAction.updateUserProfile(user.id, name, email, password))
+		dispatch(userProfileAction.fetchProfile())
+	}
 
 	const handleEdit = () => {
 		setDisabled(!disabled)
@@ -292,7 +292,7 @@ const Profil = ({ color }) => {
 																	<button
 																		href="#"
 																		class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
-																		onClick={handleEdit}
+																		onClick={handleSubmit}
 																	>
 																		Submit
 																	</button>
