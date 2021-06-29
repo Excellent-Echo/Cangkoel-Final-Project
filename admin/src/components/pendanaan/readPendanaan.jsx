@@ -52,7 +52,7 @@ const ReadPendanaan = () => {
 								<th className="border-0">Kebutuhan Komoditas</th>
 								<th className="border-0">Jangka Waktu</th>
 								<th className="border-0">Keuntungan Bersih</th>
-								<th className="border-0">Deskprisi</th>
+								<th className="border-0">Deskripsi</th>
 								<th className="border-0">Biaya Operasional</th>
 								<th className="border-0">Biaya Ekspor</th>
 								<th className="border-0">Perhitungan Penghasilan</th>
@@ -65,6 +65,26 @@ const ReadPendanaan = () => {
 						</thead>
 						{readPendanaanData &&
 							readPendanaanData.map((item, index) => {
+								let biayaOperasionalArr = []
+								if (item.biaya_operasional) {
+									biayaOperasionalArr = item.biaya_operasional.split(',')
+								}
+
+								let biayaEksporArr = []
+								if (item.biaya_ekspor) {
+									biayaEksporArr = item.biaya_ekspor.split(',')
+								}
+
+								let perhitunganPenghasilanArr = []
+								if (item.perhitungan_penghasilan) {
+									perhitunganPenghasilanArr = item.perhitungan_penghasilan.split(',')
+								}
+
+								let perhitunganKeuntunganArr = []
+								if (item.perhitungan_keuntungan) {
+									perhitunganKeuntunganArr = item.perhitungan_keuntungan.split(',')
+								}
+
 								return (
 									<tbody key={index}>
 										<tr>
@@ -91,10 +111,22 @@ const ReadPendanaan = () => {
 											<td>{item.jangka_waktu}</td>
 											<td>{item.keuntungan_bersih}</td>
 											<td>{item.deskripsi}</td>
-											<td>{item.biaya_operasional}</td>
-											<td>{item.biaya_ekspor}</td>
-											<td>{item.perhitungan_penghasilan}</td>
-											<td>{item.perhitungan_keuntungan}</td>
+											<td>
+												Bahan Baku: {biayaOperasionalArr[0]} <br /> Sewa Mesin:{' '}
+												{biayaOperasionalArr[1]}
+											</td>
+											<td>
+												Ongkos Kirim: {biayaEksporArr[0]} <br /> Pajak: {biayaEksporArr[1]}{' '}
+												<br /> Kontainer: {biayaEksporArr[2]} <br /> Dokumen:{' '}
+												{biayaEksporArr[3]}
+											</td>
+											<td>
+												{perhitunganPenghasilanArr[1]}/{perhitunganPenghasilanArr[0]}
+											</td>
+											<td>
+												Pendapatan: {perhitunganKeuntunganArr[0]} <br /> Modal Awal:{' '}
+												{perhitunganKeuntunganArr[1]}
+											</td>
 											<td>{item.kategori_id}</td>
 											<td>{item.created_at}</td>
 											<td>{item.updated_at}</td>
