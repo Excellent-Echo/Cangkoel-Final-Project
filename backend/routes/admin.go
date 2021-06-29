@@ -21,8 +21,8 @@ var (
 func AdminRoute(r *gin.Engine) {
 	r.POST("admin/register", adminHandler.RegisterAdminHandler)
 	r.POST("admin/login", adminHandler.LoginAdminHandler)
-	r.GET("admin", handler.MiddlewareAdmin(adminService, authService), adminHandler.ShowAllAdminHandler)
-	r.GET("admin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.GetAdminByIDHandler)
-	r.PUT("admin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.UpdateAdminByIDHandler)
-	r.DELETE("admin/:id", handler.MiddlewareAdmin(adminService, authService), adminHandler.DeleteAdminByIDHandler)
+	r.GET("admin", handler.Middleware(petaniService, adminService, authService), adminHandler.ShowAllAdminHandler)           // admin
+	r.GET("admin/:id", handler.Middleware(petaniService, adminService, authService), adminHandler.GetAdminByIDHandler)       // admin
+	r.PUT("admin/:id", handler.Middleware(petaniService, adminService, authService), adminHandler.UpdateAdminByIDHandler)    // admin
+	r.DELETE("admin/:id", handler.Middleware(petaniService, adminService, authService), adminHandler.DeleteAdminByIDHandler) // admin
 }

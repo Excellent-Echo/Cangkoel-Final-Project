@@ -120,6 +120,16 @@ func (h *petaniHandler) GetPetaniByIDHandler(c *gin.Context) {
 func (h *petaniHandler) DeletePetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
+	adminData := c.MustGet("currentUser").(gin.H)
+	adminID := adminData["admin_id"]
+
+	if adminID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not user petani, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	userPetani, err := h.petaniService.SDeletePetaniByID(id)
 
 	if err != nil {
@@ -137,6 +147,16 @@ func (h *petaniHandler) DeletePetaniByIDHandler(c *gin.Context) {
 func (h *petaniHandler) UpdatePetaniByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
+	adminData := c.MustGet("currentUser").(gin.H)
+	adminID := adminData["admin_id"]
+
+	if adminID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not user petani, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	var updatePetaniInput entity.UpdatePetaniInput
 
 	if err := c.ShouldBindJSON(&updatePetaniInput); err != nil {
@@ -152,9 +172,10 @@ func (h *petaniHandler) UpdatePetaniByIDHandler(c *gin.Context) {
 	// ngecek id sama apa engga sama yang di inputin
 
 	// petaniData := int(c.MustGet("currentUser").(int))
-	petaniData := c.MustGet("currentUser").(string)
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
 
-	if id != petaniData {
+	if id != petaniID {
 		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user Petani ID not authorize"})
 
 		c.JSON(401, responseError)

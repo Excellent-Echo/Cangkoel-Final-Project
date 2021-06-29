@@ -37,6 +37,17 @@ func (h *hasilPengajuanHandler) ShowAllHasilPengajuanHandler(c *gin.Context) {
 // CREATE NEW HASIL PENGAJUAN
 func (h *hasilPengajuanHandler) CreateHasilPengajuanHandler(c *gin.Context) {
 
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	var inputHasilPengajuan entity.HasilPengajuanInput
 
 	if err := c.ShouldBindJSON(&inputHasilPengajuan); err != nil {
@@ -79,6 +90,17 @@ func (h *hasilPengajuanHandler) GetHasilPengajuanByIDHandler(c *gin.Context) {
 func (h *hasilPengajuanHandler) UpdateHasilPengajuanByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
+
 	var updateHasilPengajuanInput entity.UpdateHasilPengajuanInput
 
 	if err := c.ShouldBindJSON(&updateHasilPengajuanInput); err != nil {
@@ -104,6 +126,17 @@ func (h *hasilPengajuanHandler) UpdateHasilPengajuanByIDHandler(c *gin.Context) 
 // DELETE HASIL PENGAJUAN BY ID
 func (h *hasilPengajuanHandler) DeleteHasilPengajuanByIDHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
+
+	// jika yang login petani akan error
+	petaniData := c.MustGet("currentUser").(gin.H)
+	petaniID := petaniData["petani_id"]
+
+	if petaniID != "" {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "you are not admin, not authorize"})
+
+		c.JSON(401, responseError)
+		return
+	}
 
 	hasilPengajuan, err := h.hasilPengajuanService.SDeleteHasilPengajuanByID(id)
 
