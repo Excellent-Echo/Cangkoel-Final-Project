@@ -53,7 +53,7 @@ const readKategoriActions = () => async (dispatch) => {
 			url: '/kategori-pertanian'
 		})
 
-		console.log('kategori data action', getKategoriData.data.data)
+		// console.log('kategori data action', getKategoriData.data.data)
 
 		dispatch(readKategori(getKategoriData.data.data))
 	} catch (error) {

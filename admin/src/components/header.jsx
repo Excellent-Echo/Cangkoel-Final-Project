@@ -3,16 +3,13 @@ import { useHistory } from 'react-router-dom'
 import {
 	Nav,
 	NavItem,
-	NavLink,
 	Navbar,
 	NavbarBrand,
 	Collapse,
 	UncontrolledDropdown,
 	DropdownToggle,
 	DropdownMenu,
-	DropdownItem,
-	Form,
-	Input
+	DropdownItem
 } from 'reactstrap'
 
 import logolighttext from '../assets/images/logo-cangkoel.png'
@@ -23,9 +20,9 @@ const Header = () => {
 		document.getElementById('main-wrapper').classList.toggle('show-sidebar')
 	}
 
-	const toggleMenu = () => {
-		document.getElementById('search').classList.toggle('show-search')
-	}
+	// const toggleMenu = () => {
+	// 	document.getElementById('search').classList.toggle('show-search')
+	// }
 
 	const history = useHistory()
 
@@ -60,15 +57,15 @@ const Header = () => {
 				<Collapse className="navbarbg" navbar data-navbarbg="skin4">
 					<Nav className="float-left" navbar>
 						<NavItem className="hidden-sm-down search-box">
-							<NavLink href="#" className="hidden-sm-down" onClick={toggleMenu.bind(null)}>
+							{/* <NavLink href="#" className="hidden-sm-down" onClick={toggleMenu.bind(null)}>
 								<i className="ti-search" />
-							</NavLink>
-							<Form className="app-search" id="search">
+							</NavLink> */}
+							{/* <Form className="app-search" id="search">
 								<Input type="text" placeholder="Search & enter" />
 								<button className="btn-link srh-btn" onClick={toggleMenu.bind(null)}>
 									<i className="ti-close" />
 								</button>
-							</Form>
+							</Form> */}
 						</NavItem>
 					</Nav>
 					<Nav className="ml-auto float-right" navbar>
@@ -77,7 +74,7 @@ const Header = () => {
 								<img src={profilephoto} alt="user" className="rounded-circle" width="31" />
 							</DropdownToggle>
 							<DropdownMenu right className="user-dd">
-								<DropdownItem>
+								{/* <DropdownItem>
 									<i className="ti-user mr-1 ml-1" /> My Account
 								</DropdownItem>
 								<DropdownItem>
@@ -88,7 +85,7 @@ const Header = () => {
 								</DropdownItem>
 								<DropdownItem className="border-bottom">
 									<i className="ti-settings mr-1 ml-1" /> Account Settings
-								</DropdownItem>
+								</DropdownItem> */}
 								<DropdownItem onClick={logout}>
 									<i className="fa fa-power-off mr-1 ml-1" /> Logout
 								</DropdownItem>

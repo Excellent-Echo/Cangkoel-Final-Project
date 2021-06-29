@@ -66,19 +66,19 @@ const Readkategori = () => {
 												</div>
 											</div>
 										</td>
-                  <td>
-										<div className="grid-container">
-											<div className="item2">
-												<EditKategori
-													kategoriID={item.id}
-													namaKategori={item.nama_kategori}
-													fotoKategori={item.foto_kategori}
-												/>
+										<td>
+											<div className="grid-container">
+												<div className="item2">
+													<EditKategori
+														kategoriID={item.id}
+														namaKategori={item.nama_kategori}
+														fotoKategori={item.foto_kategori}
+													/>
+												</div>
+												<div className="item3">
+													<DeleteKategori kategoriID={item.id} />
+												</div>
 											</div>
-											<div className="item3">
-												<DeleteKategori kategoriID={item.id} />
-											</div>
-                    </div>
 										</td>
 									</tr>
 								</tbody>

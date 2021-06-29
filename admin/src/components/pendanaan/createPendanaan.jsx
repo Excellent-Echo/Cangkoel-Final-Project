@@ -51,6 +51,7 @@ const CreatePendanaan = () => {
 	// react date picker
 	const [dateRange, setDateRange] = useState('')
 	const [startDate, endDate] = dateRange
+	// const jangkaWaktu = 'Dari tanggal: ' + startDate + ' sampai tanggal ' + endDate
 	let jangkaWaktu = ''
 
 	if (dateRange) {
@@ -461,7 +462,7 @@ const CreatePendanaan = () => {
 					</Row>
 					<h5>
 						Profit :{' '}
-						{new Intl.NumberFormat('en-ID', {
+						{Intl.NumberFormat('id', {
 							style: 'currency',
 							currency: 'IDR'
 						}).format(dikurangi)}

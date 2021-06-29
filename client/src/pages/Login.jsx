@@ -10,7 +10,7 @@ import userLoginAction from '../redux/user/login/userLoginAction'
 // import { useAuth } from '../utils/auth'
 
 import petani from '../assets/petani-login.jpg'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo-cangkoel.png'
 import googleIconImageSrc from '../assets/google-icon.png'
 import { ReactComponent as LoginIcon } from 'feather-icons/dist/icons/log-in.svg'
 
@@ -96,7 +96,7 @@ const Login = ({
 						<MainContent>
 							<Heading>{headingText}</Heading>
 							<FormContainer>
-								<SocialButtonsContainer>
+								{/* <SocialButtonsContainer>
 									{socialButtons.map((socialButton, index) => (
 										<SocialButton key={index} href={socialButton.url}>
 											<span className="iconContainer">
@@ -105,7 +105,7 @@ const Login = ({
 											<span className="text">{socialButton.text}</span>
 										</SocialButton>
 									))}
-								</SocialButtonsContainer>
+								</SocialButtonsContainer> */}
 								<DividerTextContainer>
 									<DividerText>Atau masuk lewat e-mail anda</DividerText>
 								</DividerTextContainer>

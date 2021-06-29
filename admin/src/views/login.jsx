@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap'
-import Logo from '../assets/images/logo-cangkoel.png'
-
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import Logo from '../assets/images/logo.png'
 import userLoginAction from '../redux/user/login/userLoginAction'
 
 const Login = () => {
@@ -27,10 +26,10 @@ const Login = () => {
 	}
 
 	return (
-		<Container>
+		<div className="section-logina">
 			<img style={{ width: '200px' }} src={Logo} alt="logo cangkoel" />
 
-			<h2>Login Admin Cangkoel</h2>
+			<h2 style={{ marginTop: '20px', marginBottom: '20px' }}>Login Admin Cangkoel</h2>
 
 			<Form onSubmit={loginHandler}>
 				<FormGroup>
@@ -39,7 +38,7 @@ const Login = () => {
 						type="email"
 						name="email"
 						id="exampleEmail"
-						placeholder="with a placeholder"
+						placeholder="Your email"
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</FormGroup>
@@ -49,14 +48,14 @@ const Login = () => {
 						type="password"
 						name="password"
 						id="examplePassword"
-						placeholder="password placeholder"
+						placeholder="Your password"
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</FormGroup>
 
-				<Button>Submit</Button>
+				<Button>Login</Button>
 			</Form>
-		</Container>
+		</div>
 	)
 }
 

@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { Input, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label } from 'reactstrap'
 import editHasilPengajuanAction from '../../redux/hasilPengajuan/update/updateHasilPengajuanAction'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const EditHasilPengajuan = (props) => {
 	// const { className } = props
 	const [modal, setModal] = useState(false)
 	const toggle = () => setModal(!modal)
 
-	const selector = useSelector((state) => state.updateHasilPengajuan)
+	// const selector = useSelector((state) => state.updateHasilPengajuan)
 	const dispatch = useDispatch()
-
-	useEffect(() => {
-		console.log('selector', selector)
-		// eslint-disable-next-line
-	}, [])
+	// useEffect(() => {
+	// 	console.log('selector', selector)
+	// 	// eslint-disable-next-line
+	// }, [])
 
 	const [status, setStatus] = useState('')
 	const [keterangan, setKeterangan] = useState('')
@@ -23,7 +22,7 @@ const EditHasilPengajuan = (props) => {
 
 	useEffect(() => {
 		dispatch(editHasilPengajuanAction.updateHasilPengajuanAction())
-		dispatch(editHasilPengajuanAction.getHasilPengajuanByIDAction(props.hasilPengajuanID))
+		// dispatch(editHasilPengajuanAction.getHasilPengajuanByIDAction(props.hasilPengajuanID))
 		// eslint-disable-next-line
 	}, [])
 

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import kategoriActions from '../../redux/kategori/delete/deleteKategoriAction'
 
 const DeleteKategori = (props) => {
-	console.log(props)
+	// console.log(props)
 	const [konfirmasi, setKonfirmasi] = useState(false)
 	const show = () => setKonfirmasi(!konfirmasi)
 

@@ -45,7 +45,7 @@ const readPendanaanActions = () => async (dispatch) => {
 			url: '/pendanaan'
 		})
 
-		console.log('actions', getPendanaanData.data.data)
+		// console.log('actions', getPendanaanData.data.data)
 		dispatch(readPendanaan(getPendanaanData.data.data))
 	} catch (error) {
 		console.log(error.response.data)

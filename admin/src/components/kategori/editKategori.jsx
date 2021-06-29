@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Input, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label } from 'reactstrap'
 import KategoriAction from '../../redux/kategori/update/updateKategoriAction'
 
 const EditKategori = (props) => {
-	console.log(props)
+	// console.log(props)
 	const [modal, setModal] = useState(false)
 	const toggle = () => setModal(!modal)
 
