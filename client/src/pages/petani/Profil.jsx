@@ -1,12 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Navbar.jsx'
 import { ContentWithPaddingXl } from '../../components/misc/Layouts'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import userProfileAction from '../../redux/user/profile/userProfileAction'
 
 const Profil = ({ color }) => {
 	const [openTab, setOpenTab] = useState(1)
-	const userProfileData = useSelector((state) => state.userProfile)
-	console.log(userProfileData)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		const loggedInUser = localStorage.getItem('user')
+
+		if (loggedInUser) {
+			// const foundUser = JSON.parse(loggedInUser)
+			// dispatch(userProfileAction.setProfileData(foundUser))
+			dispatch(userProfileAction.fetchProfile())
+		}
+	}, [])
+
+	const { user } = useSelector((state) => state.userProfile)
+	const [disabled, setDisabled] = useState(true)
+
+	let [name, setName] = useState('')
+	let [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+
+	const handleSubmit = () => {
+		dispatch(userProfileAction.updateUserProfile(user.id, name, email, password))
+		dispatch(userProfileAction.fetchProfile())
+	}
+
+	const handleEdit = () => {
+		setDisabled(!disabled)
+	}
 
 	return (
 		<>
@@ -197,9 +224,94 @@ const Profil = ({ color }) => {
 								</div>
 
 								<div className={openTab === 2 ? 'block' : 'hidden'} id="link2">
+									<div class="h-full">
+										<div class="block md:flex flex justify-center">
+											{user ? (
+												<div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
+													<div className="rounded  shadow p-6">
+														<div class="pb-4">
+															<label
+																htmlFor="name"
+																class="font-semibold text-gray-700 block pb-1"
+															>
+																Name
+															</label>
+															<div class="flex">
+																<input
+																	disabled={disabled}
+																	id="username"
+																	class="border-2 border-yellow-500 rounded-r px-4 py-2 w-full"
+																	type="text"
+																	placeholder={user.full_name}
+																	onChange={(e) => setName(e.target.value)}
+																/>
+															</div>
+														</div>
+														<div class="pb-4">
+															<label
+																htmlFor="about"
+																class="font-semibold text-gray-700 block pb-1"
+															>
+																Email
+															</label>
+															<input
+																disabled={disabled}
+																id="email"
+																class="border-2 border-yellow-500 rounded-r px-4 py-2 w-full"
+																type="email"
+																placeholder={user.email}
+																onChange={(e) => setEmail(e.target.value)}
+															/>
+														</div>
+														<div class="pb-4">
+															<label
+																htmlFor="name"
+																class="font-semibold text-gray-700 block pb-1"
+															>
+																Password
+															</label>
+															<div class="pb-4">
+																<input
+																	disabled={disabled}
+																	id="password"
+																	class="border-2 border-yellow-500 rounded-r px-4 py-2 w-full"
+																	type="password"
+																	onChange={(e) => setPassword(e.target.value)}
+																/>
+															</div>
+															<div class="flex justify-between">
+																{/* <span class="text-xl font-semibold block">Admin Profile</span> */}
+																<button
+																	href="#"
+																	class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
+																	onClick={handleEdit}
+																>
+																	Edit
+																</button>
+																{!disabled ? (
+																	<button
+																		href="#"
+																		class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
+																		onClick={handleSubmit}
+																	>
+																		Submit
+																	</button>
+																) : (
+																	<div></div>
+																)}
+															</div>
+														</div>
+													</div>
+												</div>
+											) : (
+												<div>loading...</div>
+											)}
+										</div>
+									</div>
+									{/* 
 									<h3 className="font-semibold text-lg mb-1">
 										Name: {userProfileData.full_name} Email: {userProfileData.email}
-									</h3>
+									</h3> */}
 								</div>
 
 								<div className={openTab === 3 ? 'block' : 'hidden'} id="link3"></div>

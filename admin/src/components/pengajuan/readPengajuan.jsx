@@ -1,12 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Card, CardBody, CardTitle, CardSubtitle, Input, Table } from 'reactstrap'
 import DeletePengajuan from './deletePengajuan'
 import EditPengajuan from './editPengajuan'
 
+import pengajuanAction from '../../redux/pengajuan/pengajuanAction'
+
 const ReadPengajuan = () => {
 	const { pengajuanData } = useSelector((state) => state.pengajuan)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(pengajuanAction.getPengajuanData())
+		// eslint-disable-next-line
+	}, [])
 
 	return (
 		<Card>
@@ -33,7 +41,7 @@ const ReadPengajuan = () => {
 							<th className="border-0">ID</th>
 							<th className="border-0">Nama Lengkap</th>
 							<th className="border-0">Nomor Hp</th>
-							<th className="border-0">Jenis Kelamin</th>
+							{/* <th className="border-0">Jenis Kelamin</th> */}
 							<th className="border-0">Dokumen Perizinan</th>
 							<th className="border-0">Nomor NPWP</th>
 							<th className="border-0">KTP</th>
@@ -59,7 +67,7 @@ const ReadPengajuan = () => {
 											</div>
 										</td>
 										<td>{value.nomor_hp}</td>
-										<td>{value.jenis_kelamin}</td>
+										{/* <td>{value.jenis_kelamin}</td> */}
 										<td>
 											<Link to={value.dokumen_perizinan}>Dokumen Perizinan</Link>
 										</td>
@@ -69,19 +77,27 @@ const ReadPengajuan = () => {
 										</td>
 										<td>{value.jenis_usaha}</td>
 										<td>{value.tenaga_kerja}</td>
-										<td>{value.omzet_perbulan}</td>
+										<td>
+											{' '}
+											{Intl.NumberFormat('id', {
+												style: 'currency',
+												currency: 'IDR'
+											}).format(value.omzet_perbulan)}
+										</td>
 										<td>{value.alamat_usaha}</td>
 										<td>{value.pendanaan_id}</td>
 										<td>{value.petani_id}</td>
 
-										<div className="grid-container">
-											<div className="item2">
-												<EditPengajuan />
+										<td>
+											<div className="grid-container">
+												<div className="item2">
+													<EditPengajuan />
+												</div>
+												<div className="item3">
+													<DeletePengajuan />
+												</div>
 											</div>
-											<div className="item3">
-												<DeletePengajuan />
-											</div>
-										</div>
+										</td>
 									</tr>
 								</tbody>
 							)

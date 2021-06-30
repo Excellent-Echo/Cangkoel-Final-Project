@@ -51,8 +51,12 @@ const CreatePendanaan = () => {
 	// react date picker
 	const [dateRange, setDateRange] = useState('')
 	const [startDate, endDate] = dateRange
-	const jangkaWaktu = 'Dari tanggal: ' + startDate + ' sampai tanggal ' + endDate
-	console.log(jangkaWaktu)
+	// const jangkaWaktu = 'Dari tanggal: ' + startDate + ' sampai tanggal ' + endDate
+	let jangkaWaktu = ''
+
+	if (dateRange) {
+		jangkaWaktu = dateRange.join()
+	}
 
 	const [keuntunganBersih, setKeuntunganBersih] = useState('')
 	const [deskripsi, setDiskripsi] = useState('')
@@ -60,37 +64,47 @@ const CreatePendanaan = () => {
 	// biaya operasional
 	const [biayaBahanBaku, setBiayaBahanBaku] = useState('')
 	const [biayaSewaMesin, setBiayaSewaMesin] = useState('')
-	const biayaOperasional =
-		'Total biaya bahan baku sebesar ' +
-		biayaBahanBaku +
-		' dan total biaya biaya sewa mesin sebesar ' +
-		biayaSewaMesin
+	let biayaOperasionalArray = [biayaBahanBaku, biayaSewaMesin]
+	let biayaOperasional = ''
+
+	if (biayaOperasionalArray) {
+		biayaOperasional = biayaOperasionalArray.join()
+	}
 
 	// biaya ekspor
 	const [biayaOngkosKirim, setBiayaOngkosKirim] = useState('')
 	const [biayaPajak, setBiayaPajak] = useState('')
 	const [biayaKontainer, setBiayaKontainer] = useState('')
 	const [biayaDokumen, setBiayaDokumen] = useState('')
-	const biayaEkspor =
-		'Biaya Ongkos kirim: ' +
-		biayaOngkosKirim +
-		', Biaya Pajak: ' +
-		biayaPajak +
-		', Biaya Kontainer: ' +
-		biayaKontainer +
-		', Biaya Dokumen: ' +
-		biayaDokumen
+	let biayaEksporArray = [biayaOngkosKirim, biayaPajak, biayaKontainer, biayaDokumen]
+	let biayaEkspor = ''
+
+	if (biayaOperasionalArray) {
+		biayaEkspor = biayaEksporArray.join()
+	}
 
 	// perhitungan penghasilan
 	const [perSatuanBerat, setPerSatuanBerat] = useState('')
 	const [hargaSatuanBerat, setHargaSatuanBerat] = useState('')
-	const perhitunganPenghasilan = 'Satuan Berat ' + perSatuanBerat + ' x ' + hargaSatuanBerat
+	// const perhitunganPenghasilan = 'Satuan Berat ' + perSatuanBerat + ' x ' + hargaSatuanBerat
+	let perhitunganPenghasilanArray = [perSatuanBerat, hargaSatuanBerat]
+	let perhitunganPenghasilan = ''
+
+	if (perhitunganPenghasilanArray) {
+		perhitunganPenghasilan = perhitunganPenghasilanArray.join()
+	}
 
 	// perhitungan keuntungan
 	const [totalPendapatan, setTotalPendapatan] = useState('')
 	const [modalAwal, setModalAwal] = useState('')
 	const dikurangi = parseInt(totalPendapatan) - parseInt(modalAwal)
-	const perhitunganKeuntungan = 'Total pendapatan: ' + totalPendapatan + ' - ' + modalAwal + ' = ' + dikurangi
+	// const perhitunganKeuntungan = 'Total pendapatan: ' + totalPendapatan + ' - ' + modalAwal + ' = ' + dikurangi
+	let perhitunganKeuntunganArray = [totalPendapatan, modalAwal]
+	let perhitunganKeuntungan = ''
+
+	if (perhitunganKeuntunganArray) {
+		perhitunganKeuntungan = perhitunganKeuntunganArray.join()
+	}
 
 	// mapping
 	const [kategoriID, setKategoriID] = useState('')
@@ -188,6 +202,8 @@ const CreatePendanaan = () => {
 						name="bagihasilinvestor"
 						id="bagihasilinvestor"
 						placeholder="masukkan bagi hasil investor max 50%"
+						min="1"
+						max="50"
 						required
 						onChange={(e) => setBagiHasilInvestor(e.target.value)}
 					/>
@@ -199,6 +215,8 @@ const CreatePendanaan = () => {
 						name="bagihasilpetani"
 						id="bagihasilpetani"
 						placeholder="masukkan bagi hasil petani max 50%"
+						min="1"
+						max="50"
 						required
 						onChange={(e) => setBagiHasilPetani(e.target.value)}
 					/>
@@ -228,6 +246,9 @@ const CreatePendanaan = () => {
 									required
 									onChange={(e) => setSatuanBerat(e.target.value)}
 								>
+									<option value="" disabled selected>
+										Select your option
+									</option>
 									<option value="Ton">Ton</option>
 									<option value="Kilogram">Kilogram</option>
 									<option value="Gram">Gram</option>
@@ -381,6 +402,9 @@ const CreatePendanaan = () => {
 									required
 									onChange={(e) => setPerSatuanBerat(e.target.value)}
 								>
+									<option value="" disabled selected>
+										Select your option
+									</option>
 									<option value="Ton">1 Ton</option>
 									<option value="Kilogram">1 Kilogram</option>
 									<option value="Gram">1 Gram</option>
@@ -438,7 +462,7 @@ const CreatePendanaan = () => {
 					</Row>
 					<h5>
 						Profit :{' '}
-						{new Intl.NumberFormat('en-ID', {
+						{Intl.NumberFormat('id', {
 							style: 'currency',
 							currency: 'IDR'
 						}).format(dikurangi)}

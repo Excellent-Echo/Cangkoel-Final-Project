@@ -31,27 +31,27 @@ const setUrlFotoKategori = (urlFotoKategori) => {
 	}
 }
 
-const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) => {
+const updateKategoriAction = (id, namaKategori) => async (dispatch) => {
 	try {
-		const postDataKategori = {
-			nama_kategori: namaKategori,
-			foto_kategori: fotoKategori
+		const updateDataKategori = {
+			nama_kategori: namaKategori
+			// foto_kategori: fotoKategori
 		}
 
 		const accessToken = localStorage.getItem('token')
 
-		const postKategoriData = await CangkoelAPI({
-			method: 'POST',
-			url: '/kategori-pertanian',
-			data: postDataKategori,
+		const updateKategoriData = await CangkoelAPI({
+			method: 'PUT',
+			url: `/kategori-pertanian/${id}`,
+			data: updateDataKategori,
 			headers: {
 				Authorization: accessToken
 			}
 		})
 
-		if (postKategoriData.status === 201) {
+		if (updateKategoriData.status === 200) {
 			Swal.fire({
-				title: 'Kategori berhasil ditambahkan',
+				title: 'Kategori berhasil di update',
 				icon: 'success',
 				timer: 1500,
 				timerProgressBar: true
@@ -60,7 +60,7 @@ const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) =>
 			})
 		}
 
-		// console.log('kategori data action', postKategoriData.data.data)
+		// console.log('kategori data action', updateKategoriData.data.data)
 	} catch (error) {
 		console.log(error.response.data)
 	}
@@ -93,7 +93,7 @@ const kategoriActions = {
 	uploadFotoKategori,
 	setNamekategori,
 	setFotoKategori,
-	createKategoriAction
+	updateKategoriAction
 }
 
 export default kategoriActions

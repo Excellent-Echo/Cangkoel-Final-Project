@@ -15,7 +15,7 @@ const DeletePendanaan = (props) => {
 	const dispatch = useDispatch()
 	return (
 		<div>
-			<Button className="btn" color="secondary" onClick={handleDelete}>
+			<Button className="btn" color="secondary" onClick={show}>
 				Delete
 			</Button>
 
@@ -23,7 +23,7 @@ const DeletePendanaan = (props) => {
 				<ModalHeader show={show}>Modal title</ModalHeader>
 				<ModalBody>
 					<h4>Apakah anda ingin mengapus data ini?</h4>
-					<Button style={{ margin: '5px' }} onClick={show}>
+					<Button style={{ margin: '5px' }} onClick={handleDelete}>
 						Delete
 					</Button>
 					<Button style={{ margin: '5px' }} onClick={show}>

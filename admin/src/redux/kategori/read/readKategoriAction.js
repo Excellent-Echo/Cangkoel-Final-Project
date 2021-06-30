@@ -2,6 +2,7 @@ import CangkoelAPI from '../../../api/CangkoelAPI'
 
 import {
 	READ_SET_KATEGORI,
+	// READ_SET_KATEGORI_BY_ID,
 	READ_ERROR_KATEGORI,
 	READ_START_LOADING_KATEGORI,
 	READ_STOP_LOADING_KATEGORI
@@ -13,6 +14,13 @@ const readKategori = (kategoriPertanian) => {
 		payload: kategoriPertanian
 	}
 }
+
+// const readKategoriByID = (kategoriPertanianByID) => {
+// 	return {
+// 		type: READ_SET_KATEGORI_BY_ID,
+// 		payload: kategoriPertanianByID
+// 	}
+// }
 
 const readErrorKategori = (errorMessage) => {
 	return {
@@ -45,7 +53,7 @@ const readKategoriActions = () => async (dispatch) => {
 			url: '/kategori-pertanian'
 		})
 
-		console.log('kategori data action', getKategoriData.data.data)
+		// console.log('kategori data action', getKategoriData.data.data)
 
 		dispatch(readKategori(getKategoriData.data.data))
 	} catch (error) {

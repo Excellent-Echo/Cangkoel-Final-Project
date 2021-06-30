@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
 
 import userProfileAction from '../profile/userProfileAction'
-import pengajuanAction from '../../pengajuan/pengajuanAction'
+// import pengajuanAction from '../../pengajuan/pengajuanAction'
 
 const setEmail = (email) => {
 	return {
@@ -61,18 +61,7 @@ const login = (email, password, history) => async (dispatch) => {
 			}
 		})
 
-		console.log(getDetailUser)
-
-		const getPengajuanData = await CangkoelAPI({
-			method: 'GET',
-			url: '/formulir-pengajuan',
-			headers: {
-				Authorization: token
-			}
-		})
-
 		dispatch(userProfileAction.setProfileData(getDetailUser.data.data))
-		dispatch(pengajuanAction.setPengajuanData(getPengajuanData.data.data))
 		localStorage.setItem('user', JSON.stringify(getDetailUser.data.data))
 
 		history.push('/')

@@ -1,6 +1,9 @@
 package config
 
 import (
+
+	"backend/migration"
+
 	"fmt"
 	"os"
 

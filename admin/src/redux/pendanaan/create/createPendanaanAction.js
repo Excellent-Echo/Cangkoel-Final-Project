@@ -261,10 +261,10 @@ const createPendanaanActions =
 				kategori_id: parseInt(kategoriID)
 			}
 
-			console.log(pendanaanData)
+			// console.log(pendanaanData)
 
 			const accessToken = localStorage.getItem('token')
-			console.log(accessToken)
+			// console.log(accessToken)
 
 			const postPendanaanData = await CangkoelAPI({
 				method: 'POST',
@@ -282,7 +282,7 @@ const createPendanaanActions =
 					timer: 2000,
 					timerProgressBar: true
 				}).then(() => {
-					console.log('pendanaan data action', postPendanaanData.data.data)
+					// console.log('pendanaan data action', postPendanaanData.data.data)
 					dispatch(setSuccessMessage('Success Post Pendanaan'))
 					dispatch(stopLoading())
 					window.location.reload()
@@ -297,7 +297,7 @@ const createPendanaanActions =
 
 const uploadFotoProfil = (file) => async (dispatch) => {
 	try {
-		console.log('file', file)
+		// console.log('file', file)
 		const data = new FormData()
 		data.append('file', file)
 		data.append('upload_preset', 'rxra54p9')
@@ -309,7 +309,7 @@ const uploadFotoProfil = (file) => async (dispatch) => {
 			data: data
 		})
 
-		console.log(postDataProfil.data.url)
+		// console.log(postDataProfil.data.url)
 
 		dispatch(setUrlFotoProfil(postDataProfil.data.url))
 	} catch (error) {

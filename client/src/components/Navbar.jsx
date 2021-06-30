@@ -1,13 +1,13 @@
 import React from 'react'
 import { css } from 'styled-components/macro' //eslint-disable-line
 import tw from 'twin.macro'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import userProfileAction from '../redux/user/profile/userProfileAction'
 
 // assets
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo-cangkoel.png'
 import { loadPartialConfig } from '@babel/core'
 
 // styled components with tailwind
@@ -15,21 +15,28 @@ const Button = tw.span`rounded bg-crowde-100 hover:bg-crowde-200 py-2 px-4 text-
 
 const Navbar = () => {
 	let token = localStorage.getItem('token')
-	const dispatch = useDispatch()
-	const { user, isLoading } = useSelector((state) => state.userProfile)
+	const history = useHistory()
+	const { user } = useSelector((state) => state.userProfile)
 
-	// if (user === null) {
-	// 	return <p>isLoading.....</p>
-	// }
+	const logout = () => {
+		localStorage.clear()
+		history.push('/')
+		window.location.reload()
+	}
 
 	const userData = () => {
 		if (user.role === 'petani') {
 			return (
-				<Link to="/profil-petani">
-					<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">
-						Hi, {user.full_name}
-					</p>
-				</Link>
+				<div class="flex flex-wrap">
+					<Link to="/profil-petani">
+						<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">
+							Hi, {user.full_name}
+						</p>
+					</Link>
+					<Button onClick={logout} type="submit">
+						Logout
+					</Button>
+				</div>
 			)
 		} else {
 			return (
