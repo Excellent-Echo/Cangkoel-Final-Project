@@ -35,10 +35,10 @@ const KategoriPertanian = () => {
 	const dispatch = useDispatch()
 	const listKategori = useSelector((state) => state.kategori)
 	const { kategoriPertanian } = listKategori
-	console.log('kategori pertanian', kategoriPertanian)
 
 	useEffect(() => {
 		dispatch(getKategoriAction())
+		// eslint-disable-next-line
 	}, [])
 
 	const handleClick = (id) => {

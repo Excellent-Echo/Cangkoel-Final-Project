@@ -90,7 +90,7 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 	return (
 		<>
 			<Navbar />
-			<div class="container mx-auto">
+			<div className="container mx-auto">
 				{/* <div>
 					{kategoriDetail.Pendanaan &&
 						kategoriDetail.Pendanaan.map((item, index) => {
@@ -102,40 +102,40 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 						})}
 				</div> */}
 
-				<div class="flex flex-wrap justify-center">
+				<div className="flex flex-wrap justify-center">
 					{kategoriDetail.Pendanaan &&
 						kategoriDetail.Pendanaan.map((item, index) => {
 							return (
-								<div class="md:w-1/3 lg:w-1/4 py-4 px-4">
+								<div className="md:w-1/3 lg:w-1/4 py-4 px-4">
 									<div>
-										<div class="bg-white relative shadow p-2 rounded-lg text-gray-800">
+										<div className="bg-white relative shadow p-2 rounded-lg text-gray-800">
 											<div
 												alt={index}
-												class="right-0 mt-4 rounded-l-full absolute text-center font-bold text-xs text-white px-2 py-1 bg-yellow-500"
+												className="right-0 mt-4 rounded-l-full absolute text-center font-bold text-xs text-white px-2 py-1 bg-yellow-500"
 											>
 												{item.bagi_hasil_petani} %
 											</div>
 											<img
 												src={item.foto_profil}
-												class="h-32 rounded-lg w-full object-cover border-2 border-yellow-500"
+												className="h-32 rounded-lg w-full object-cover border-2 border-yellow-500"
 												alt={index}
 											/>
-											<div class="py-2 px-2">
-												<div class=" font-bold font-title text-center">
+											<div className="py-2 px-2">
+												<div className=" font-bold font-title text-center">
 													{item.judul_pendanaan}
 												</div>
 
-												<div class="text-sm font-light text-center my-2">
+												<div className="text-sm font-light text-center my-2">
 													{Intl.NumberFormat('id', {
 														style: 'currency',
 														currency: 'IDR'
 													}).format(item.nominal_pendanaan)}
 												</div>
 
-												<div class="text-sm font-light text-center my-2">
+												<div className="text-sm font-light text-center my-2">
 													<button
 														type="button"
-														class="border border-yellow-500 bg-yellow-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline"
+														className="border border-yellow-500 bg-yellow-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline"
 														onClick={() => handleClick(item.id)}
 													>
 														Detail Pendanaan
