@@ -134,31 +134,31 @@ const Detail = () => {
 				</Card>
 			</ContentWithPaddingXl> */}
 
-			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-				<div class="flex flex-col md:flex-row -mx-4">
-					<div class="md:flex-1 px-4">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+				<div className="flex flex-col md:flex-row -mx-4">
+					<div className="md:flex-1 px-4">
 						<img
 							src={detailPendanaan.foto_profil}
 							alt={detailPendanaan.id}
-							class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4"
+							className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4"
 						/>
-						<p class="text-gray-500 mb-4 text-justify">{detailPendanaan.deskripsi}</p>
+						<p className="text-gray-500 mb-4 text-justify">{detailPendanaan.deskripsi}</p>
 						<div>
-							<p class="text-gray-500 font-bold text-xl">Biaya Operasional</p>
-							<table class="rounded-t-lg my-4 w-6/6 bg-gray-200 text-gray-800">
-								<tr class="text-left border-b-2 border-gray-300">
-									<th class="px-4 py-3">Biaya Bahan Baku</th>
-									<th class="px-4 py-3">Biaya Sewa Mesin</th>
+							<p className="text-gray-500 font-bold text-xl">Biaya Operasional</p>
+							<table className="rounded-t-lg my-4 w-6/6 bg-gray-200 text-gray-800">
+								<tr className="text-left border-b-2 border-gray-300">
+									<th className="px-4 py-3">Biaya Bahan Baku</th>
+									<th className="px-4 py-3">Biaya Sewa Mesin</th>
 								</tr>
 
-								<tr class="bg-gray-100 border-b border-gray-200">
-									<td class="px-4 py-3">
+								<tr className="bg-gray-100 border-b border-gray-200">
+									<td className="px-4 py-3">
 										{Intl.NumberFormat('id', {
 											style: 'currency',
 											currency: 'IDR'
 										}).format(biayaOperasionalArr[0])}
 									</td>
-									<td class="px-4 py-3">
+									<td className="px-4 py-3">
 										{Intl.NumberFormat('id', {
 											style: 'currency',
 											currency: 'IDR'
@@ -169,35 +169,35 @@ const Detail = () => {
 						</div>
 
 						<div>
-							<p class="text-gray-500 font-bold text-xl">Biaya Ekspor</p>
-							<table class="rounded-t-lg my-4 w-6/6 bg-gray-200 text-gray-800">
-								<tr class="text-left border-b-2 border-gray-300">
-									<th class="px-4 py-3">Biaya Ongkos Kirim</th>
-									<th class="px-4 py-3">Biaya Pajak</th>
-									<th class="px-4 py-3">Biaya Kontainer</th>
-									<th class="px-4 py-3">Biaya Dokumen</th>
+							<p className="text-gray-500 font-bold text-xl">Biaya Ekspor</p>
+							<table className="rounded-t-lg my-4 w-6/6 bg-gray-200 text-gray-800">
+								<tr className="text-left border-b-2 border-gray-300">
+									<th className="px-4 py-3">Biaya Ongkos Kirim</th>
+									<th className="px-4 py-3">Biaya Pajak</th>
+									<th className="px-4 py-3">Biaya Kontainer</th>
+									<th className="px-4 py-3">Biaya Dokumen</th>
 								</tr>
 
-								<tr class="bg-gray-100 border-b border-gray-200">
-									<td class="px-4 py-3">
+								<tr className="bg-gray-100 border-b border-gray-200">
+									<td className="px-4 py-3">
 										{Intl.NumberFormat('id', {
 											style: 'currency',
 											currency: 'IDR'
 										}).format(biayaEksporArr[0])}
 									</td>
-									<td class="px-4 py-3">
+									<td className="px-4 py-3">
 										{Intl.NumberFormat('id', {
 											style: 'currency',
 											currency: 'IDR'
 										}).format(biayaEksporArr[1])}
 									</td>
-									<td class="px-4 py-3">
+									<td className="px-4 py-3">
 										{Intl.NumberFormat('id', {
 											style: 'currency',
 											currency: 'IDR'
 										}).format(biayaEksporArr[2])}
 									</td>
-									<td class="px-4 py-3">
+									<td className="px-4 py-3">
 										{Intl.NumberFormat('id', {
 											style: 'currency',
 											currency: 'IDR'
@@ -206,9 +206,9 @@ const Detail = () => {
 								</tr>
 							</table>
 						</div>
-						<div class="my-4">
-							<p class="text-gray-500 font-bold text-xl">Perhitungan Penghasilan</p>
-							<p class="text-gray-800 font-semibold text-md">
+						<div className="my-4">
+							<p className="text-gray-500 font-bold text-xl">Perhitungan Penghasilan</p>
+							<p className="text-gray-800 font-semibold text-md">
 								{Intl.NumberFormat('id', {
 									style: 'currency',
 									currency: 'IDR'
@@ -216,30 +216,30 @@ const Detail = () => {
 								/{perhitunganPenghasilanArr[0]}
 							</p>
 						</div>
-						<div class="my-4">
-							<p class="text-gray-500 font-bold text-xl">Perhitungan Keuntungan</p>
-							<p class="text-gray-800 font-semibold text-md">
+						<div className="my-4">
+							<p className="text-gray-500 font-bold text-xl">Perhitungan Keuntungan</p>
+							<p className="text-gray-800 font-semibold text-md">
 								Total Pendapatan:{' '}
 								{Intl.NumberFormat('id', {
 									style: 'currency',
 									currency: 'IDR'
 								}).format(perhitunganKeuntunganArr[0])}
 							</p>
-							<p class="text-gray-800 font-semibold text-md">
+							<p className="text-gray-800 font-semibold text-md">
 								Modal:{' '}
 								{Intl.NumberFormat('id', {
 									style: 'currency',
 									currency: 'IDR'
 								}).format(perhitunganKeuntunganArr[1])}
 							</p>
-							<p class="text-gray-800 font-semibold text-md">
+							<p className="text-gray-800 font-semibold text-md">
 								Keuntungan:{' '}
 								{Intl.NumberFormat('id', {
 									style: 'currency',
 									currency: 'IDR'
 								}).format(perhitunganKeuntunganArr[0] - perhitunganKeuntunganArr[1])}
 							</p>
-							<p class="text-gray-800 font-semibold text-md">
+							<p className="text-gray-800 font-semibold text-md">
 								Investor ({detailPendanaan.bagi_hasil_investor} %):{' '}
 								{Intl.NumberFormat('id', {
 									style: 'currency',
@@ -249,7 +249,7 @@ const Detail = () => {
 										(detailPendanaan.bagi_hasil_investor / 100)
 								)}
 							</p>
-							<p class="text-gray-800 font-semibold text-md">
+							<p className="text-gray-800 font-semibold text-md">
 								Petani ({detailPendanaan.bagi_hasil_petani} %):{' '}
 								{Intl.NumberFormat('id', {
 									style: 'currency',
@@ -259,7 +259,7 @@ const Detail = () => {
 										(detailPendanaan.bagi_hasil_petani / 100)
 								)}
 							</p>
-							<p class="text-gray-800 font-semibold text-md">
+							<p className="text-gray-800 font-semibold text-md">
 								Cangkoel (
 								{100 - (detailPendanaan.bagi_hasil_petani + detailPendanaan.bagi_hasil_investor)} %):{' '}
 								{Intl.NumberFormat('id', {
@@ -274,15 +274,15 @@ const Detail = () => {
 							</p>
 						</div>
 					</div>
-					<div class="md:flex-1 px-4">
-						<h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
+					<div className="md:flex-1 px-4">
+						<h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
 							{detailPendanaan.judul_pendanaan}
 						</h2>
 
-						<div class="flex items-center space-x-4 my-4">
+						<div className="flex items-center space-x-4 my-4">
 							<div>
-								<div class="rounded-lg bg-gray-100 flex py-2 px-3">
-									<span class="font-bold text-yellow-500 text-3xl">
+								<div className="rounded-lg bg-gray-100 flex py-2 px-3">
+									<span className="font-bold text-yellow-500 text-3xl">
 										{Intl.NumberFormat('id', {
 											style: 'currency',
 											currency: 'IDR'
@@ -290,48 +290,48 @@ const Detail = () => {
 									</span>
 								</div>
 							</div>
-							<div class="flex-1">
-								{/* <p class="text-green-500 text-xl font-semibold">Save 12%</p> */}
+							<div className="flex-1">
+								{/* <p className="text-green-500 text-xl font-semibold">Save 12%</p> */}
 								<button
 									type="button"
-									class="h-14 px-6 py-2 font-semibold rounded-xl bg-yellow-500 hover:bg-yellow-400 text-white"
+									className="h-14 px-6 py-2 font-semibold rounded-xl bg-yellow-500 hover:bg-yellow-400 text-white"
 									onClick={() => buttonPengajuan(detailPendanaan.id)}
 								>
 									Apply
 								</button>
-								{/* <p class="text-gray-400 text-sm">Inclusive of all Taxes.</p> */}
+								{/* <p className="text-gray-400 text-sm">Inclusive of all Taxes.</p> */}
 							</div>
 						</div>
 
-						<div class="my-4">
-							<p class="text-gray-800 font-semibold text-lg">{detailPendanaan.nama_investor}</p>
+						<div className="my-4">
+							<p className="text-gray-800 font-semibold text-lg">{detailPendanaan.nama_investor}</p>
 						</div>
-						<div class="my-8">
-							<p class="text-gray-500 font-bold text-xl">Perusahaan Pengirim</p>
-							<p class="text-gray-800 font-semibold text-md">{detailPendanaan.perusahaan_pengirim}</p>
+						<div className="my-8">
+							<p className="text-gray-500 font-bold text-xl">Perusahaan Pengirim</p>
+							<p className="text-gray-800 font-semibold text-md">{detailPendanaan.perusahaan_pengirim}</p>
 						</div>
-						<div class="my-8">
-							<p class="text-gray-500 font-bold text-xl">Bagi Hasil</p>
-							<p class="text-gray-800 font-semibold text-md">
+						<div className="my-8">
+							<p className="text-gray-500 font-bold text-xl">Bagi Hasil</p>
+							<p className="text-gray-800 font-semibold text-md">
 								Investor: {detailPendanaan.bagi_hasil_investor} %
 							</p>
-							<p class="text-gray-800 font-semibold text-md">
+							<p className="text-gray-800 font-semibold text-md">
 								Petani: {detailPendanaan.bagi_hasil_petani} %
 							</p>
 						</div>
-						<div class="my-8">
-							<p class="text-gray-500 font-bold text-xl">Kebutuhan Komoditas</p>
-							<p class="text-gray-800 font-semibold text-md">{detailPendanaan.kebutuhan_komoditas}</p>
+						<div className="my-8">
+							<p className="text-gray-500 font-bold text-xl">Kebutuhan Komoditas</p>
+							<p className="text-gray-800 font-semibold text-md">{detailPendanaan.kebutuhan_komoditas}</p>
 						</div>
-						<div class="my-8">
-							<p class="text-gray-500 font-bold text-xl">Jangka Waktu</p>
-							<p class="text-gray-800 font-semibold text-md">
+						<div className="my-8">
+							<p className="text-gray-500 font-bold text-xl">Jangka Waktu</p>
+							<p className="text-gray-800 font-semibold text-md">
 								{convertDate(jangkaWaktuArr[0])} - {convertDate(jangkaWaktuArr[1])}
 							</p>
 						</div>
-						<div class="my-8">
-							<p class="text-gray-500 font-bold text-xl">Keuntungan Bersih</p>
-							<p class="text-gray-800 font-semibold text-md">
+						<div className="my-8">
+							<p className="text-gray-500 font-bold text-xl">Keuntungan Bersih</p>
+							<p className="text-gray-800 font-semibold text-md">
 								{Intl.NumberFormat('id', {
 									style: 'currency',
 									currency: 'IDR'

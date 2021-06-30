@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Card, CardTitle, Input, Button, Form, FormGroup, Label } from 'reactstrap'
 import hasilPengajuanActions from '../../redux/hasilPengajuan/create/createHasilPengajuanAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CreateHasilPengajuan = () => {
 	const dispatch = useDispatch()
+
+	const { pengajuanData } = useSelector((state) => state.pengajuan)
+	console.log(pengajuanData)
 
 	const [status, setStatus] = useState('')
 	const [keterangan, setKeterangan] = useState('')
@@ -14,6 +17,13 @@ const CreateHasilPengajuan = () => {
 	const handlePostHasilPengajuan = (e) => {
 		e.preventDefault()
 		dispatch(hasilPengajuanActions.createHasilPengajuanAction(status, keterangan, petaniID, formPengajuanID))
+	}
+
+	const handleSelectIDPengajuan = (id) => {
+		var idArr = id.split(',')
+		console.log(idArr)
+		setFormPengajuanID(idArr[0])
+		setPetaniID(idArr[1])
 	}
 
 	return (
@@ -64,23 +74,40 @@ const CreateHasilPengajuan = () => {
 				</FormGroup>
 
 				<FormGroup>
-					<Label>Masukkan ID Petani</Label>
-					<Input
-						type="text"
-						name="petani"
-						id="petani"
-						placeholder="masukkan id petani"
-						onChange={(e) => setPetaniID(e.target.value)}
-					/>
-				</FormGroup>
-				<FormGroup>
-					<Label>Masukkan ID Formulir Pengajuan</Label>
-					<Input
+					<Label>ID Formulir Pengajuan</Label>
+					{/* <Input
 						type="number"
 						name="hasilpengajuan"
 						id="hasilpengajuan"
 						placeholder="masukkan id formulir pengajuan"
 						onChange={(e) => setFormPengajuanID(e.target.value)}
+					/> */}
+					{/* {pengajuanData.map((value, index) => ( */}
+					<Input
+						type="select"
+						name="select"
+						id="hasilpengajuan"
+						onChange={(e) => handleSelectIDPengajuan(e.target.value)}
+						// onChange={() => handleSelectIDPengajuan(value.id, value.petani_id)}
+					>
+						<option>Select your option</option>
+						{pengajuanData.map((value, index) => (
+							<option value={value.id + ',' + value.petani_id} key={index}>
+								{value.id}
+							</option>
+						))}
+					</Input>
+					{/* ))} */}
+				</FormGroup>
+				<FormGroup>
+					<Label>ID Petani</Label>
+					<Input
+						disabled
+						type="text"
+						name="petani"
+						id="petani"
+						value={petaniID}
+						// onChange={(e) => setPetaniID(e.target.value)}
 					/>
 				</FormGroup>
 

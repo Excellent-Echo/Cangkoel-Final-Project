@@ -1,7 +1,7 @@
 import CangkoelAPI from '../../../api/CangkoelAPI'
 import Swal from 'sweetalert2'
 
-import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH, SET_USER } from '../userActionTypes'
+import { USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_AUTH } from '../userActionTypes'
 
 import userProfileAction from '../profile/userProfileAction'
 
@@ -25,13 +25,6 @@ const setAuth = (isAuth) => ({
 	type: USER_SET_AUTH,
 	payload: {
 		isAuth: isAuth
-	}
-})
-
-const setUser = (user) => ({
-	type: SET_USER,
-	payload: {
-		user: user
 	}
 })
 

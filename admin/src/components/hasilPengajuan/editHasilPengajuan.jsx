@@ -17,8 +17,6 @@ const EditHasilPengajuan = (props) => {
 
 	const [status, setStatus] = useState('')
 	const [keterangan, setKeterangan] = useState('')
-	const [petaniID, setPetaniID] = useState('')
-	const [formulirPengajuanID, setFormulirPengajuanID] = useState('')
 
 	useEffect(() => {
 		dispatch(editHasilPengajuanAction.updateHasilPengajuanAction())
@@ -33,8 +31,10 @@ const EditHasilPengajuan = (props) => {
 				props.hasilPengajuanID,
 				status,
 				keterangan,
-				petaniID,
-				formulirPengajuanID
+				props.petaniID,
+				props.formPengajuanID
+				// petaniID,
+				// formulirPengajuanID
 			)
 		)
 	}
@@ -59,6 +59,7 @@ const EditHasilPengajuan = (props) => {
 									setStatus(e.target.value)
 								}}
 							>
+								<option>Select your option</option>
 								<option value="Review">Review</option>
 								<option value="Survey">Survey</option>
 								<option value="Approve">Approve</option>
@@ -79,6 +80,7 @@ const EditHasilPengajuan = (props) => {
 									setKeterangan(e.target.value)
 								}}
 							>
+								<option>Select your option</option>
 								<option value="Pihak Cangkoel sedang mereview formulir pengajuan anda">
 									Pihak Cangkoel sedang mereview formulir pengajuan anda
 								</option>
@@ -107,27 +109,25 @@ const EditHasilPengajuan = (props) => {
 						</FormGroup>
 
 						<FormGroup>
-							<Label>Masukkan ID Petani</Label>
+							<Label>ID Petani</Label>
 							<Input
+								disabled
 								type="text"
 								name="petani"
 								id="petani"
 								placeholder="masukkan id petani"
-								onChange={(e) => {
-									setPetaniID(e.target.value)
-								}}
+								value={props.petaniID}
 							/>
 						</FormGroup>
 						<FormGroup>
-							<Label>Masukkan ID Formulir Pengajuan</Label>
+							<Label>ID Formulir Pengajuan</Label>
 							<Input
+								disabled
 								type="number"
 								name="hasilpengajuan"
 								id="hasilpengajuan"
 								placeholder="masukkan id formulir pengajuan"
-								onChange={(e) => {
-									setFormulirPengajuanID(e.target.value)
-								}}
+								value={props.formPengajuanID}
 							/>
 						</FormGroup>
 

@@ -55,10 +55,15 @@ const updateHasilPengajuanAction = (id, status, keterangan, petaniID, formulirPe
 			form_pengajuan_id: parseInt(formulirPengajuanID)
 		}
 
+		const accessToken = localStorage.getItem('token')
+
 		const response = await CangkoelAPI({
 			method: 'PUT',
 			url: `hasil-pengajuan/${id}`,
-			data: updateDataHasilPengajuan
+			data: updateDataHasilPengajuan,
+			headers: {
+				Authorization: accessToken
+			}
 		})
 
 		if (response.status === 200) {
