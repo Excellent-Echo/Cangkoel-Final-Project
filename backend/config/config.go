@@ -1,7 +1,6 @@
 package config
 
 import (
-	"backend/migration"
 	"fmt"
 	"os"
 
@@ -27,12 +26,12 @@ func Connection() *gorm.DB {
 		panic(err.Error())
 	}
 
-	db.AutoMigrate(&migration.Petani{})
-	db.AutoMigrate(&migration.Admin{})
-	db.AutoMigrate(&migration.KategoriPertanian{})
-	db.AutoMigrate(&migration.FormPengajuan{})
-	db.AutoMigrate(&migration.HasilPengajuan{})
-	db.AutoMigrate(&migration.Pendanaan{})
+	// db.AutoMigrate(&migration.Petani{})
+	// db.AutoMigrate(&migration.Admin{})
+	// db.AutoMigrate(&migration.KategoriPertanian{})
+	// db.AutoMigrate(&migration.FormPengajuan{})
+	// db.AutoMigrate(&migration.HasilPengajuan{})
+	// db.AutoMigrate(&migration.Pendanaan{})
 
 	return db
 }
