@@ -27,34 +27,34 @@ const Login = () => {
 
 	return (
 		<div className="section-logina">
-			<img style={{ width: '200px' }} src={Logo} alt="logo cangkoel" />
+			<div className="opacity-login">
+				<img style={{ width: '200px' }} src={Logo} alt="logo cangkoel" />
+				<h2 style={{ marginTop: '20px', marginBottom: '20px' }}>Login Admin Cangkoel</h2>
+				<Form onSubmit={loginHandler}>
+					<FormGroup>
+						<Label for="exampleEmail">Email</Label>
+						<Input
+							type="email"
+							name="email"
+							id="exampleEmail"
+							placeholder="Your email"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+					</FormGroup>
+					<FormGroup>
+						<Label for="examplePassword">Password</Label>
+						<Input
+							type="password"
+							name="password"
+							id="examplePassword"
+							placeholder="Your password"
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</FormGroup>
 
-			<h2 style={{ marginTop: '20px', marginBottom: '20px' }}>Login Admin Cangkoel</h2>
-
-			<Form onSubmit={loginHandler}>
-				<FormGroup>
-					<Label for="exampleEmail">Email</Label>
-					<Input
-						type="email"
-						name="email"
-						id="exampleEmail"
-						placeholder="Your email"
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-				</FormGroup>
-				<FormGroup>
-					<Label for="examplePassword">Password</Label>
-					<Input
-						type="password"
-						name="password"
-						id="examplePassword"
-						placeholder="Your password"
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-				</FormGroup>
-
-				<Button>Login</Button>
-			</Form>
+					<Button>Login</Button>
+				</Form>
+			</div>
 		</div>
 	)
 }
