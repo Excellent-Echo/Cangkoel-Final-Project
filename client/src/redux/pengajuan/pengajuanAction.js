@@ -174,8 +174,6 @@ const pengajuan =
 				}
 			})
 
-			console.log('post pengajuan data in action', postPengajuanData)
-
 			if (postPengajuanData.status === 201) {
 				Swal.fire({
 					title: 'Pengajuan anda sedang diproses',

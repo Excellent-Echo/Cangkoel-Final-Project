@@ -18,8 +18,6 @@ export const getPendanaanById = (id) => {
 				url: `/pendanaan/${id}`
 			})
 
-			console.log(response.data.data)
-
 			dispatch({
 				type: GET_BY_ID_PENDANAAN_SUCCESS,
 				payload: response.data.data
