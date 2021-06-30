@@ -285,7 +285,8 @@ const Profil = ({ color }) => {
 																<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
 															</div>
 														</div>
-													) : user.HasilPengajuan[0].status === 'Review' ? (
+													) : user.HasilPengajuan &&
+													  user.HasilPengajuan[0].status === 'Review' ? (
 														<div className="flex flex-row-reverse md:contents">
 															<div className="bg-yellow-600 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md">
 																<h3 className="font-semibold text-lg mb-1">Review</h3>
@@ -335,7 +336,8 @@ const Profil = ({ color }) => {
 																</p>
 															</div>
 														</div>
-													) : user.HasilPengajuan[0].status === 'Survey' ? (
+													) : user.HasilPengajuan &&
+													  user.HasilPengajuan[0].status === 'Survey' ? (
 														<div className="flex md:contents">
 															<div className="col-start-5 col-end-6 mr-10 md:mx-auto relative">
 																<div className="h-full w-6 flex items-center justify-center">
@@ -408,7 +410,8 @@ const Profil = ({ color }) => {
 																<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
 															</div>
 														</div>
-													) : user.HasilPengajuan[0].status === 'Approve' ? (
+													) : user.HasilPengajuan &&
+													  user.HasilPengajuan[0].status === 'Approve' ? (
 														<div className="flex flex-row-reverse md:contents">
 															<div className="bg-green-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md">
 																<h3 className="font-semibold text-lg mb-1">Approve</h3>
@@ -424,7 +427,8 @@ const Profil = ({ color }) => {
 																<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
 															</div>
 														</div>
-													) : user.HasilPengajuan[0].status === 'Rejects' ? (
+													) : user.HasilPengajuan &&
+													  user.HasilPengajuan[0].status === 'Rejects' ? (
 														<div className="flex flex-row-reverse md:contents">
 															<div className="bg-red-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md">
 																<h3 className="font-semibold text-lg mb-1">Reject</h3>
