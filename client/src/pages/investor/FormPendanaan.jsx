@@ -23,7 +23,7 @@ const FormPendanaan = () => {
 							<PickerDropPane
 								apikey="process.env.FILESTACK_KEY"
 								onSuccess={(res) => {
-									console.log(res)
+									alert('gambar berhasil di upload')
 								}}
 							/>
 						</div>

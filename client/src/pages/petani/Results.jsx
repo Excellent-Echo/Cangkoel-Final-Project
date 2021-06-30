@@ -60,7 +60,6 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 	const selector = useSelector((state) => state.kategori)
 
 	const { kategoriDetail } = selector
-	console.log('kategori Detail', kategoriDetail.Pendanaan)
 
 	// console.log('tabs', tabs)
 
@@ -79,7 +78,6 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 
 	useEffect(() => {
 		SetKategori(GetRandomCards(kategoriDetail))
-		console.log('card', card)
 		// eslint-disable-next-line
 	}, [kategoriDetail])
 
@@ -252,10 +250,8 @@ const Results = ({ heading = 'Pendanaan Ekspor Tanaman Sayur' }) => {
 
 const GetRandomCards = (kategori) => {
 	// const selector = useSelector((state) => state.kategori)
-	console.log('kategori', kategori)
 	// const { kategoriDetail } = selector
 	// console.log('kategori Detail', kategoriDetail.Pendanaan)
-
 	// return kategori.Pendanaan.sort(() => Math.random() - 0.5)
 }
 

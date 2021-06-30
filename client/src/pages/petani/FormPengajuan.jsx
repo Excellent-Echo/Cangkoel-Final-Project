@@ -8,7 +8,6 @@ import pengajuanAction from '../../redux/pengajuan/pengajuanAction'
 
 const FormPengajuan = () => {
 	const pengajuanData = useSelector((state) => state.pengajuan)
-	console.log(pengajuanData.imageProgress)
 	const dispatch = useDispatch()
 	const history = useHistory()
 
