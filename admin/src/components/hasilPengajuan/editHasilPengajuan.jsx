@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Input, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label } from 'reactstrap'
 import editHasilPengajuanAction from '../../redux/hasilPengajuan/update/updateHasilPengajuanAction'
 
 const EditHasilPengajuan = (props) => {
-	console.log(props)
 	const [modal, setModal] = useState(false)
 	const toggle = () => setModal(!modal)
 
-	const [status, setStatus] = useState(props.status)
-	const [keterangan, setKeterangan] = useState(props.keterangan)
-	const [petaniID, setPetaniID] = useState(props.petaniID)
-	const [formulirPengajuanID, setFormulirPengajuanID] = useState(props.formPengajuanID)
-
 	const dispatch = useDispatch()
+
+	const [status, setStatus] = useState('')
+	const [keterangan, setKeterangan] = useState('')
 
 	const handleEdit = (e) => {
 		toggle()
@@ -22,8 +19,8 @@ const EditHasilPengajuan = (props) => {
 				props.hasilPengajuanID,
 				status,
 				keterangan,
-				petaniID,
-				formulirPengajuanID
+				props.petaniID,
+				props.formPengajuanID
 			)
 		)
 	}
@@ -49,6 +46,7 @@ const EditHasilPengajuan = (props) => {
 									setStatus(e.target.value)
 								}}
 							>
+								<option>Select your option</option>
 								<option value="Review">Review</option>
 								<option value="Survey">Survey</option>
 								<option value="Approve">Approve</option>
@@ -70,6 +68,7 @@ const EditHasilPengajuan = (props) => {
 									setKeterangan(e.target.value)
 								}}
 							>
+								<option>Select your option</option>
 								<option value="Pihak Cangkoel sedang mereview formulir pengajuan anda">
 									Pihak Cangkoel sedang mereview formulir pengajuan anda
 								</option>
@@ -98,29 +97,17 @@ const EditHasilPengajuan = (props) => {
 						</FormGroup>
 
 						<FormGroup>
-							<Label>Masukkan ID Petani</Label>
-							<Input
-								type="text"
-								name="petani"
-								id="petani"
-								value={petaniID}
-								placeholder="masukkan id petani"
-								onChange={(e) => {
-									setPetaniID(e.target.value)
-								}}
-							/>
+							<Label>ID Petani</Label>
+							<Input disabled type="text" name="petani" id="petani" value={props.petaniID} />
 						</FormGroup>
 						<FormGroup>
-							<Label>Masukkan ID Formulir Pengajuan</Label>
+							<Label>ID Formulir Pengajuan</Label>
 							<Input
+								disabled
 								type="number"
 								name="hasilpengajuan"
 								id="hasilpengajuan"
-								value={formulirPengajuanID}
-								placeholder="masukkan id formulir pengajuan"
-								onChange={(e) => {
-									setFormulirPengajuanID(e.target.value)
-								}}
+								value={props.formPengajuanID}
 							/>
 						</FormGroup>
 

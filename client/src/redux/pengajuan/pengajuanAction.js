@@ -206,7 +206,7 @@ const uploadDokumen = (file) => async (dispatch) => {
 			url: '/image/upload',
 			data: data,
 			onUploadProgress: (data) => {
-				let progress = Math.round((data.loaded * 100) / data.total)
+				// let progress = Math.round((data.loaded * 100) / data.total)
 				// dispatch(setImageProgress(progress))
 			}
 		})

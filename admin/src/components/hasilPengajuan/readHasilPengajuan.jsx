@@ -70,8 +70,6 @@ const ReadHasilPengajuan = () => {
 													<div className="item2">
 														<EditHasilPengajuan
 															hasilPengajuanID={value.id}
-															status={value.status}
-															keterangan={value.keterangan}
 															petaniID={value.petani_id}
 															formPengajuanID={value.form_pengajuan_id}
 														/>

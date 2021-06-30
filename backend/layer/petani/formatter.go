@@ -10,8 +10,8 @@ type PetaniFormat struct {
 	FullName       string `json:"full_name"`
 	Email          string `json:"email"`
 	Role           string `json:"role"`
-	FormPengajuan  entity.FormPengajuan
-	HasilPengajuan entity.HasilPengajuan
+	FormPengajuan  []entity.FormPengajuan
+	HasilPengajuan []entity.HasilPengajuan
 }
 
 type PetaniDeleteFormat struct {

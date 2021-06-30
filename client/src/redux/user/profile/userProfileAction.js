@@ -36,12 +36,11 @@ const fetchProfile = () => async (dispatch) => {
 	}
 }
 
-const updateUserProfile = (id, name, email, password) => async (dispatch) => {
+const updateUserProfile = (id, name, email) => async (dispatch) => {
 	try {
 		const petaniData = {
 			full_name: name,
-			email: email,
-			password: password
+			email: email
 		}
 
 		const accessToken = localStorage.getItem('token')

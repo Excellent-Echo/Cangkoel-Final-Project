@@ -4,17 +4,14 @@ import tw from 'twin.macro'
 import { Link, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import userProfileAction from '../redux/user/profile/userProfileAction'
-
 // assets
 import Logo from '../assets/logo-cangkoel.png'
-import { loadPartialConfig } from '@babel/core'
+// import { loadPartialConfig } from '@babel/core'
 
 // styled components with tailwind
 const Button = tw.span`rounded bg-crowde-100 hover:bg-crowde-200 py-2 px-4 text-white mx-3`
 
 const Navbar = () => {
-	let token = localStorage.getItem('token')
 	const history = useHistory()
 	const { user } = useSelector((state) => state.userProfile)
 
@@ -27,7 +24,7 @@ const Navbar = () => {
 	const userData = () => {
 		if (user.role === 'petani') {
 			return (
-				<div class="flex flex-wrap">
+				<div className="flex flex-wrap">
 					<Link to="/profil-petani">
 						<p className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent md:mt-0 md:ml-4">
 							Hi, {user.full_name}
