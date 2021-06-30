@@ -1,31 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Input, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label } from 'reactstrap'
 import editHasilPengajuanAction from '../../redux/hasilPengajuan/update/updateHasilPengajuanAction'
-import { useDispatch } from 'react-redux'
 
 const EditHasilPengajuan = (props) => {
-	// const { className } = props
 	const [modal, setModal] = useState(false)
 	const toggle = () => setModal(!modal)
 
-	// const selector = useSelector((state) => state.updateHasilPengajuan)
 	const dispatch = useDispatch()
-	// useEffect(() => {
-	// 	console.log('selector', selector)
-	// 	// eslint-disable-next-line
-	// }, [])
 
 	const [status, setStatus] = useState('')
 	const [keterangan, setKeterangan] = useState('')
 
-	useEffect(() => {
-		dispatch(editHasilPengajuanAction.updateHasilPengajuanAction())
-		// dispatch(editHasilPengajuanAction.getHasilPengajuanByIDAction(props.hasilPengajuanID))
-		// eslint-disable-next-line
-	}, [])
-
 	const handleEdit = (e) => {
-		e.preventDefault()
+		toggle()
 		dispatch(
 			editHasilPengajuanAction.updateHasilPengajuanAction(
 				props.hasilPengajuanID,
@@ -33,8 +21,6 @@ const EditHasilPengajuan = (props) => {
 				keterangan,
 				props.petaniID,
 				props.formPengajuanID
-				// petaniID,
-				// formulirPengajuanID
 			)
 		)
 	}
@@ -44,17 +30,18 @@ const EditHasilPengajuan = (props) => {
 			<Button className="btn" color="primary" onClick={toggle}>
 				Edit
 			</Button>
-			{/* <h1>{props.valueid}</h1> */}
+
 			<Modal isOpen={modal} toggle={toggle}>
 				<ModalHeader toggle={toggle}>Update Hasil Pengajuan</ModalHeader>
 				<ModalBody>
-					<Form onSubmit={handleEdit}>
+					<Form>
 						<FormGroup>
 							<Label>Status</Label>
 							<Input
 								type="select"
 								name="select"
 								id="status"
+								value={status}
 								onChange={(e) => {
 									setStatus(e.target.value)
 								}}
@@ -76,6 +63,7 @@ const EditHasilPengajuan = (props) => {
 								type="select"
 								name="select"
 								id="keterangan"
+								value={keterangan}
 								onChange={(e) => {
 									setKeterangan(e.target.value)
 								}}
@@ -110,14 +98,7 @@ const EditHasilPengajuan = (props) => {
 
 						<FormGroup>
 							<Label>ID Petani</Label>
-							<Input
-								disabled
-								type="text"
-								name="petani"
-								id="petani"
-								placeholder="masukkan id petani"
-								value={props.petaniID}
-							/>
+							<Input disabled type="text" name="petani" id="petani" value={props.petaniID} />
 						</FormGroup>
 						<FormGroup>
 							<Label>ID Formulir Pengajuan</Label>
@@ -126,12 +107,16 @@ const EditHasilPengajuan = (props) => {
 								type="number"
 								name="hasilpengajuan"
 								id="hasilpengajuan"
-								placeholder="masukkan id formulir pengajuan"
 								value={props.formPengajuanID}
 							/>
 						</FormGroup>
 
-						<Button style={{ margin: '5px' }}>Submit</Button>
+						<Button style={{ margin: '5px' }} onClick={handleEdit}>
+							Submit
+						</Button>
+						<Button style={{ margin: '5px' }} onClick={toggle}>
+							Cancel
+						</Button>
 					</Form>
 				</ModalBody>
 			</Modal>

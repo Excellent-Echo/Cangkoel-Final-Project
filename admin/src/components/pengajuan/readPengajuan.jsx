@@ -88,14 +88,16 @@ const ReadPengajuan = () => {
 										<td>{value.pendanaan_id}</td>
 										<td>{value.petani_id}</td>
 
-										<div className="grid-container">
-											<div className="item2">
-												<EditPengajuan />
+										<td>
+											<div className="grid-container">
+												<div className="item2">
+													<EditPengajuan />
+												</div>
+												<div className="item3">
+													<DeletePengajuan />
+												</div>
 											</div>
-											<div className="item3">
-												<DeletePengajuan />
-											</div>
-										</div>
+										</td>
 									</tr>
 								</tbody>
 							)

@@ -60,7 +60,7 @@ const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) =>
 			})
 		}
 
-		console.log('kategori data action', postKategoriData.data.data)
+		// console.log('kategori data action', postKategoriData.data.data)
 	} catch (error) {
 		console.log(error.response.data)
 	}
@@ -68,7 +68,7 @@ const createKategoriAction = (namaKategori, fotoKategori) => async (dispatch) =>
 
 const uploadFotoKategori = (file) => async (dispatch) => {
 	try {
-		console.log('file', file)
+		// console.log('file', file)
 		const data = new FormData()
 		data.append('file', file)
 		data.append('upload_preset', 'rxra54p9')
@@ -80,7 +80,7 @@ const uploadFotoKategori = (file) => async (dispatch) => {
 			data: data
 		})
 
-		console.log(postFotoKategori.data.url)
+		// console.log(postFotoKategori.data.url)
 
 		dispatch(setUrlFotoKategori(postFotoKategori.data.url))
 	} catch (error) {
