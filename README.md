@@ -24,3 +24,6 @@ CANGKOEL adalah sebuah platform yang menyediakan solusi bagi petani/perseorangan
 
 #### 5. Tunggu proses pengajuan anda
 ![chrome_v9Z11vaG8s](https://user-images.githubusercontent.com/37678093/124356310-82c60d00-dc3f-11eb-801b-585f2854cd4d.png)
+
+Visit Here :
+https://cangkoel.netlify.app/
