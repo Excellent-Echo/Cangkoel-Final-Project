@@ -2,21 +2,21 @@ package petani
 
 import (
 	"backend/entity"
-	"backend/helper"
 	"errors"
 	"fmt"
 	"time"
 
+	uuid "github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type Service interface {
 	SShowAllPetani() ([]PetaniFormat, error)
 	SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, error)
+	SLoginPetani(input entity.LoginPetaniInput) (PetaniFormat, error)
 	SFindPetaniByID(petaniID string) (PetaniFormat, error)
 	SDeletePetaniByID(petaniID string) (interface{}, error)
 	SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniInput) (PetaniFormat, error)
-	SLoginPetani(input entity.LoginPetaniInput) (entity.Petani, error)
 }
 
 type service struct {
@@ -25,26 +25,6 @@ type service struct {
 
 func NewService(repository Repository) *service {
 	return &service{repository}
-}
-
-func (s *service) SLoginPetani(input entity.LoginPetaniInput) (entity.Petani, error) {
-	userPetani, err := s.repository.RFindPetaniByEmail(input.Email)
-
-	if err != nil {
-		return userPetani, err
-	}
-
-	if userPetani.ID == 0 {
-		newError := fmt.Sprintf("userPetani id %v not found", userPetani.ID)
-		return userPetani, errors.New(newError)
-	}
-
-	//ngecek password sama atau tidak
-	if err := bcrypt.CompareHashAndPassword([]byte(userPetani.Password), []byte(input.Password)); err != nil {
-		return userPetani, errors.New("password invalid")
-	}
-
-	return userPetani, nil
 }
 
 func (s *service) SShowAllPetani() ([]PetaniFormat, error) {
@@ -70,11 +50,14 @@ func (s *service) SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, 
 		return PetaniFormat{}, err
 	}
 
+	petaniuuid := uuid.NewV4()
+
 	var newPetani = entity.Petani{
+		ID:        petaniuuid.String(),
 		FullName:  userPetani.FullName,
 		Email:     userPetani.Email,
 		Password:  string(genPassword),
-		Role:      string("petani"),
+		Role:      "petani",
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -89,6 +72,38 @@ func (s *service) SRegisterPetani(userPetani entity.PetaniInput) (PetaniFormat, 
 	return formatPetani, nil
 }
 
+func (s *service) SLoginPetani(input entity.LoginPetaniInput) (PetaniFormat, error) {
+	userPetani, err := s.repository.RFindPetaniByEmail(input.Email)
+	// admin, err := s.adminRepo.RFindAdminByEmail(input.Email)
+
+	if err != nil {
+		return PetaniFormat{}, err
+	}
+
+	if len(userPetani.ID) != 0 { // perlu diperhatikan
+		if err := bcrypt.CompareHashAndPassword([]byte(userPetani.Password), []byte(input.Password)); err != nil {
+			return PetaniFormat{}, errors.New("password invalid")
+		}
+
+		formatter := Format(userPetani)
+
+		return formatter, nil
+	}
+
+	// if len(admin.ID) != 0 { // perlu diperhatikan
+	// 	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password)); err != nil {
+	// 		return UserFormat{}, errors.New("password invalid")
+	// 	}
+
+	// 	formatter := FormatAdmin(admin)
+
+	// 	return formatter, nil
+	// }
+
+	newError := fmt.Sprintf("petani id %v not found", userPetani.ID)
+	return PetaniFormat{}, errors.New(newError)
+}
+
 func (s *service) SFindPetaniByID(petaniID string) (PetaniFormat, error) {
 	userPetani, err := s.repository.RFindPetaniByID(petaniID)
 
@@ -96,7 +111,7 @@ func (s *service) SFindPetaniByID(petaniID string) (PetaniFormat, error) {
 		return PetaniFormat{}, err
 	}
 
-	if userPetani.ID == 0 {
+	if len(userPetani.ID) == 0 { // perlu diperhatikan
 		newError := fmt.Sprintf("userPetani id %s not found", petaniID)
 		return PetaniFormat{}, errors.New(newError)
 	}
@@ -107,9 +122,9 @@ func (s *service) SFindPetaniByID(petaniID string) (PetaniFormat, error) {
 }
 
 func (s *service) SDeletePetaniByID(petaniID string) (interface{}, error) {
-	if err := helper.ValidateIDNumber(petaniID); err != nil {
-		return nil, err
-	}
+	// if err := helper.ValidateIDNumber(petaniID); err != nil {
+	// 	return nil, err
+	// }
 
 	userPetani, err := s.repository.RFindPetaniByID(petaniID)
 
@@ -117,7 +132,7 @@ func (s *service) SDeletePetaniByID(petaniID string) (interface{}, error) {
 		return nil, err
 	}
 
-	if userPetani.ID == 0 {
+	if len(userPetani.ID) == 0 {
 		newError := fmt.Sprintf("userPetani id %s not found", petaniID)
 		return nil, errors.New(newError)
 	}
@@ -142,9 +157,9 @@ func (s *service) SDeletePetaniByID(petaniID string) (interface{}, error) {
 func (s *service) SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniInput) (PetaniFormat, error) {
 	var dataUpdate = map[string]interface{}{}
 
-	if err := helper.ValidateIDNumber(petaniID); err != nil {
-		return PetaniFormat{}, err
-	}
+	// if err := helper.ValidateIDNumber(petaniID); err != nil {
+	// 	return PetaniFormat{}, err
+	// }
 
 	userPetani, err := s.repository.RFindPetaniByID(petaniID)
 
@@ -152,7 +167,7 @@ func (s *service) SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniIn
 		return PetaniFormat{}, err
 	}
 
-	if userPetani.ID == 0 {
+	if len(userPetani.ID) == 0 { // perlu diperhatikan
 		newError := fmt.Sprintf("userPetani id %s not found", petaniID)
 		return PetaniFormat{}, errors.New(newError)
 	}
@@ -164,7 +179,7 @@ func (s *service) SUpdatePetaniByID(petaniID string, input entity.UpdatePetaniIn
 		dataUpdate["Email"] = input.Email
 	}
 	if input.Password != "" || len(input.Password) != 0 {
-		dataUpdate["Passowrd"] = input.Password
+		dataUpdate["Password"] = input.Password
 	}
 	dataUpdate["updated_at"] = time.Now()
 

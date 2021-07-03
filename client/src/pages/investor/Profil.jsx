@@ -1,176 +1,253 @@
-import React from "react";
-import Navbar from "../../components/Navbar.jsx";
-import Footer from "../../components/Footer.jsx";
+import React, { useState } from 'react'
+import Navbar from '../../components/Navbar.jsx'
+import { ContentWithPaddingXl } from '../../components/misc/Layouts'
 
-const Profil = () => {
-  return (
-    <>
-      <Navbar />
-      <body class="antialiased bg-gray-200">
-        <div class="h-screen flex overflow-hidden">
-          <div class="bg-white w-64 min-h-screen overflow-y-auto hidden md:block shadow relative z-30">
-            <div class="px-4 py-2">
-              <ul>
-                <li>
-                  <a
-                    href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect
-                        x="0"
-                        y="0"
-                        width="24"
-                        height="24"
-                        stroke="none"
-                      ></rect>
-                      <rect x="4" y="4" width="6" height="6" rx="1" />
-                      <rect x="14" y="4" width="6" height="6" rx="1" />
-                      <rect x="4" y="14" width="6" height="6" rx="1" />
-                      <rect x="14" y="14" width="6" height="6" rx="1" />
-                    </svg>
-                    Profil Saya
-                  </a>
-                </li>
+const Profil = ({ color }) => {
+	const [openTab, setOpenTab] = useState(1)
 
-                <li>
-                  <a
-                    href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect
-                        x="0"
-                        y="0"
-                        width="24"
-                        height="24"
-                        stroke="none"
-                      ></rect>
-                      <line x1="4" y1="19" x2="20" y2="19" />
-                      <polyline points="4 15 8 9 12 11 16 6 20 10" />
-                    </svg>
-                    Janji Saya
-                  </a>
-                </li>
+	return (
+		<>
+			<Navbar />
+			<ContentWithPaddingXl>
+				<div className="flex flex-wrap my-12">
+					<div className="w-full">
+						<ul className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row" role="tablist">
+							<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+								<a
+									className={
+										'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
+										(openTab === 1
+											? 'text-white bg-' + color + '-600'
+											: 'text-' + color + '-600 bg-white')
+									}
+									onClick={(e) => {
+										e.preventDefault()
+										setOpenTab(1)
+									}}
+									data-toggle="tab"
+									href="#link1"
+									role="tablist"
+								>
+									<i className="fas fa-space-shuttle text-base mr-1"></i> Pendanaan Saya
+								</a>
+							</li>
+							<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+								<a
+									className={
+										'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
+										(openTab === 2
+											? 'text-white bg-' + color + '-600'
+											: 'text-' + color + '-600 bg-white')
+									}
+									onClick={(e) => {
+										e.preventDefault()
+										setOpenTab(2)
+									}}
+									data-toggle="tab"
+									href="#link2"
+									role="tablist"
+								>
+									<i className="fas fa-cog text-base mr-1"></i> Daftar Pengajuan
+								</a>
+							</li>
+							<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+								<a
+									className={
+										'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
+										(openTab === 3
+											? 'text-white bg-' + color + '-600'
+											: 'text-' + color + '-600 bg-white')
+									}
+									onClick={(e) => {
+										e.preventDefault()
+										setOpenTab(3)
+									}}
+									data-toggle="tab"
+									href="#link3"
+									role="tablist"
+								>
+									<i className="fas fa-briefcase text-base mr-1"></i> Pesan
+								</a>
+							</li>
+						</ul>
 
-                <li>
-                  <a
-                    href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect
-                        x="0"
-                        y="0"
-                        width="24"
-                        height="24"
-                        stroke="none"
-                      ></rect>
-                      <polyline points="14 3 14 8 19 8" />
-                      <path d="M17 21H7a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                      <line x1="9" y1="9" x2="10" y2="9" />
-                      <line x1="9" y1="13" x2="15" y2="13" />
-                      <line x1="9" y1="17" x2="15" y2="17" />
-                    </svg>
-                    Diskusi Saya
-                  </a>
-                </li>
+						<div className="px-4 py-5 flex-auto">
+							<div className="tab-content tab-space">
+								<div className={openTab === 1 ? 'block' : 'hidden'} id="link1">
+									<h3 className="font-semibold text-lg mb-1">Petani terpilih: Michael Parto</h3>
+									<div className="container">
+										<div className="flex flex-col md:grid grid-cols-9 mx-auto p-2 text-blue-50">
+											<div className="flex flex-row-reverse md:contents">
+												<div className="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md">
+													<h3 className="font-semibold text-lg mb-1">Review</h3>
+													<p className="leading-tight text-justify">
+														Pihak Cangkoel dan Investor sedang mereview formulir pengajuan
+														Petani
+													</p>
+												</div>
+												<div className="col-start-5 col-end-6 md:mx-auto relative mr-10">
+													<div className="h-full w-6 flex items-center justify-center">
+														<div className="h-full w-1 bg-blue-800 pointer-events-none"></div>
+													</div>
+													<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+												</div>
+											</div>
 
-                <li>
-                  <a
-                    href="/#"
-                    class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="mr-4 opacity-50"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect
-                        x="0"
-                        y="0"
-                        width="24"
-                        height="24"
-                        stroke="none"
-                      ></rect>
-                      <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    Logout
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+											<div className="flex md:contents">
+												<div className="col-start-5 col-end-6 mr-10 md:mx-auto relative">
+													<div className="h-full w-6 flex items-center justify-center">
+														<div className="h-full w-1 bg-blue-800 pointer-events-none"></div>
+													</div>
+													<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+												</div>
+												<div className="bg-blue-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto shadow-md">
+													<h3 className="font-semibold text-lg mb-1">Survey</h3>
+													<p className="leading-tight text-justify">
+														Pihak Cangkoel dan Investor sedang mensurvei tempat usaha milik
+														petani
+													</p>
+												</div>
+											</div>
 
-          <div class="flex-1 flex-col relative z-0 overflow-y-auto">
-            <div class="md:max-w-6xl md:mx-auto px-4 py-8">
-              <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-bold text-gray-800">Dashboard</h2>
-              </div>
+											<div className="flex flex-row-reverse md:contents">
+												<div className="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md">
+													<h3 className="font-semibold text-lg mb-1">Approve / Reject</h3>
+													<p className="leading-tight text-justify">
+														Pihak Cangkoel dan Investor mensetujui formulir pengajuan Petani
+														/ Pihak Cangkoel dan Investor sedang menolak formulir pengajuan
+														Petani
+													</p>
+												</div>
+												<div className="col-start-5 col-end-6 md:mx-auto relative mr-10">
+													<div className="h-full w-6 flex items-center justify-center">
+														<div className="h-full w-1 bg-blue-800 pointer-events-none"></div>
+													</div>
+													<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+												</div>
+											</div>
 
-              <div class="bg-orange-200 mb-10 p-6 rounded-lg shadow">
-                <div class="md:flex">
-                  <div class="md:w-1/2">
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 leading-tight">
-                      Power your business with Dashing Admin.
-                    </h2>
+											<div className="flex md:contents">
+												<div className="col-start-5 col-end-6 mr-10 md:mx-auto relative">
+													<div className="h-full w-6 flex items-center justify-center">
+														<div className="h-full w-1 bg-blue-800 pointer-events-none"></div>
+													</div>
+													<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+												</div>
+												<div className="bg-blue-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto shadow-md">
+													<h3 className="font-semibold text-lg mb-1">Dana Cair</h3>
+													<p className="leading-tight text-justify">
+														Proses Produksi sedang dilakukan pihak petani diawai oleh pihak
+														Cangkoel
+													</p>
+												</div>
+											</div>
 
-                    <p class="text-gray-700 mb-4">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Autem, ipsam vero. Ut mollitia, cumque amet suscipit quas
-                      error minima maiores aperiam.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </body>
-      <Footer />
-    </>
-  );
-};
+											<div className="flex flex-row-reverse md:contents">
+												<div className="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md">
+													<h3 className="font-semibold text-lg mb-1">Produksi</h3>
+													<p className="leading-tight text-justify">
+														Proses pengiriman barang sedang berlangsung ke konsumen
+													</p>
+												</div>
+												<div className="col-start-5 col-end-6 md:mx-auto relative mr-10">
+													<div className="h-full w-6 flex items-center justify-center">
+														<div className="h-full w-1 bg-blue-800 pointer-events-none"></div>
+													</div>
+													<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+												</div>
+											</div>
 
-export default Profil;
+											<div className="flex md:contents">
+												<div className="col-start-5 col-end-6 mr-10 md:mx-auto relative">
+													<div className="h-full w-6 flex items-center justify-center">
+														<div className="h-full w-1 bg-blue-800 pointer-events-none"></div>
+													</div>
+													<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+												</div>
+												<div className="bg-blue-500 col-start-6 col-end-10 p-4 rounded-xl my-4 mr-auto shadow-md">
+													<h3 className="font-semibold text-lg mb-1">Ekspor</h3>
+													<p className="leading-tight text-justify">
+														Pembagian hasil antara investor, petani dan cangkoel
+													</p>
+												</div>
+											</div>
+
+											<div className="flex flex-row-reverse md:contents">
+												<div className="bg-blue-500 col-start-1 col-end-5 p-4 rounded-xl my-4 ml-auto shadow-md">
+													<h3 className="font-semibold text-lg mb-1">Bagi Hasil</h3>
+													<p className="leading-tight text-justify">
+														Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
+														quaerat?
+													</p>
+												</div>
+												<div className="col-start-5 col-end-6 md:mx-auto relative mr-10">
+													<div className="h-full w-6 flex items-center justify-center">
+														<div className="h-full w-1 bg-blue-800 pointer-events-none"></div>
+													</div>
+													<div className="w-6 h-6 absolute top-1/2 -mt-3 rounded-full bg-blue-500 shadow"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className={openTab === 2 ? 'block' : 'hidden'} id="link2">
+									<div>
+										<div className="shadow overflow-hidden rounded border-b border-gray-200">
+											<table className="min-w-full bg-white">
+												<thead className="bg-blue-500 text-white">
+													<tr>
+														<th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">
+															Nama Petani
+														</th>
+														<th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">
+															Formulir Pengajuan
+														</th>
+													</tr>
+												</thead>
+												<tbody className="text-gray-700">
+													<tr>
+														<td className="w-1/3 text-left py-3 px-4">Lian</td>
+														<td className="w-1/3 text-left py-3 px-4">Unduh</td>
+													</tr>
+													<tr className="bg-gray-100">
+														<td className="w-1/3 text-left py-3 px-4">Emma</td>
+														<td className="w-1/3 text-left py-3 px-4">Unduh</td>
+													</tr>
+													<tr>
+														<td className="w-1/3 text-left py-3 px-4">Oliver</td>
+														<td className="w-1/3 text-left py-3 px-4">Unduh</td>
+													</tr>
+													<tr className="bg-gray-100">
+														<td className="w-1/3 text-left py-3 px-4">Isabella</td>
+														<td className="w-1/3 text-left py-3 px-4">Unduh</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div className={openTab === 3 ? 'block' : 'hidden'} id="link3">
+									<p>
+										Efficiently unleash cross-media information without cross-media value. Quickly
+										maximize timely deliverables for real-time schemas.
+										<br />
+										<br /> Dramatically maintain clicks-and-mortar solutions without functional
+										solutions.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ContentWithPaddingXl>
+		</>
+	)
+}
+
+export default function TabsRender() {
+	return (
+		<>
+			<Profil color="blue" />;
+		</>
+	)
+}

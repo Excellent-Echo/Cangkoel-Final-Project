@@ -1,7 +1,9 @@
 package config
 
 import (
+
 	"backend/migration"
+
 	"fmt"
 	"os"
 
@@ -16,11 +18,10 @@ func Connection() *gorm.DB {
 	dbUser := os.Getenv("DB_USERNAME")
 	dbPass := os.Getenv("DB_PASSWORD")
 	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
 	dbName := os.Getenv("DB_NAME")
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbPort, dbName)
-	// dsn := "root:@tcp(localhost)/book_list?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbName)
+	// dsn := "root:@tcp(localhost)/cangkoel?charset=utf8mb4&parseTime=True&loc=Local"
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
@@ -28,12 +29,12 @@ func Connection() *gorm.DB {
 		panic(err.Error())
 	}
 
-	db.AutoMigrate(&migration.Petani{})
-	db.AutoMigrate(&migration.Investor{})
-	db.AutoMigrate(&migration.KategoriPertanian{})
-	db.AutoMigrate(&migration.FormPengajuan{})
-	db.AutoMigrate(&migration.HasilPengajuan{})
-	db.AutoMigrate(&migration.Pendanaan{})
+	// db.AutoMigrate(&migration.Petani{})
+	// db.AutoMigrate(&migration.Admin{})
+	// db.AutoMigrate(&migration.KategoriPertanian{})
+	// db.AutoMigrate(&migration.FormPengajuan{})
+	// db.AutoMigrate(&migration.HasilPengajuan{})
+	// db.AutoMigrate(&migration.Pendanaan{})
 
 	return db
 }
